@@ -1,0 +1,3073 @@
+============================================================
+MLOPS FOR SENIOR AI / SENIOR GENAI ENGINEER
+TOP 200 INTERVIEW QUESTIONS & ANSWERS
+HINGLISH COPY NOTES
+============================================================
+
+
+============================================================
+SECTION 1: MLOPS FUNDAMENTALS
+============================================================
+
+1. QUESTION:
+MLOps kya hai?
+
+ANSWER:
+MLOps ka full form Machine Learning Operations hai.
+
+MLOps ka purpose ML/AI models ko development se production tak
+reliably build, deploy, monitor aur maintain karna hai.
+
+Simple flow:
+
+Data
+ ↓
+Training
+ ↓
+Evaluation
+ ↓
+Model Registry
+ ↓
+Deployment
+ ↓
+Monitoring
+ ↓
+Retraining
+
+
+2. QUESTION:
+MLOps aur DevOps mein difference kya hai?
+
+ANSWER:
+
+DevOps mainly software applications ke lifecycle par focus karta hai.
+
+MLOps mein software ke saath additional ML concerns bhi hote hain:
+
+- Data
+- Features
+- Models
+- Experiments
+- Model drift
+- Data drift
+- Model performance
+- Retraining
+
+MLOps = DevOps + ML lifecycle management.
+
+
+3. QUESTION:
+MLOps ki need kyun hai?
+
+ANSWER:
+Notebook mein model banana easy hai.
+
+Production mein problems aati hain:
+
+- Data change
+- Model degradation
+- Dependency conflicts
+- Scaling
+- Deployment failures
+- Monitoring
+- Security
+- Reproducibility
+
+MLOps in problems ko systematically manage karta hai.
+
+
+4. QUESTION:
+ML lifecycle kya hota hai?
+
+ANSWER:
+
+Problem Definition
+ ↓
+Data Collection
+ ↓
+Data Validation
+ ↓
+Data Preparation
+ ↓
+Feature Engineering
+ ↓
+Model Training
+ ↓
+Evaluation
+ ↓
+Model Registry
+ ↓
+Deployment
+ ↓
+Monitoring
+ ↓
+Retraining
+
+
+5. QUESTION:
+AI Engineer ke liye MLOps important kyun hai?
+
+ANSWER:
+Senior AI Engineer ko sirf model banana nahi hota.
+
+Usko model ko:
+
+- Deploy
+- Scale
+- Monitor
+- Secure
+- Optimize
+- Maintain
+
+bhi karna hota hai.
+
+
+6. QUESTION:
+MLOps ke major components kya hain?
+
+ANSWER:
+
+1. Version Control
+2. Data Management
+3. Experiment Tracking
+4. Model Training
+5. Model Registry
+6. CI/CD
+7. Deployment
+8. Monitoring
+9. Retraining
+10. Governance
+11. Security
+
+
+7. QUESTION:
+Reproducibility kya hai?
+
+ANSWER:
+Same code, data, configuration aur environment ke saath same experiment
+ko repeat kar paana reproducibility hai.
+
+Important for:
+
+- Debugging
+- Auditing
+- Model comparison
+- Production reliability
+
+
+8. QUESTION:
+ML experiment reproducible kaise banayenge?
+
+ANSWER:
+
+Version:
+- Code
+- Dataset
+- Model
+- Dependencies
+- Configuration
+- Random seeds
+
+Example:
+
+Git
++
+DVC
++
+MLflow
++
+Docker
+
+
+9. QUESTION:
+Model lifecycle kya hai?
+
+ANSWER:
+
+Development
+ ↓
+Training
+ ↓
+Validation
+ ↓
+Registration
+ ↓
+Staging
+ ↓
+Production
+ ↓
+Monitoring
+ ↓
+Retirement
+
+
+10. QUESTION:
+Model promotion kya hota hai?
+
+ANSWER:
+Ek model ko lower environment se higher environment mein move karna.
+
+Example:
+
+Development
+ ↓
+Staging
+ ↓
+Production
+
+Promotion predefined quality gates ke basis par hona chahiye.
+
+
+============================================================
+SECTION 2: VERSION CONTROL
+============================================================
+
+11. QUESTION:
+Git MLOps mein kyun important hai?
+
+ANSWER:
+Git code aur configuration versioning ke liye use hota hai.
+
+Track kar sakte hain:
+
+- Code changes
+- Config changes
+- Prompt changes
+- Pipeline changes
+
+
+12. QUESTION:
+Kya Git mein large ML models store karne chahiye?
+
+ANSWER:
+Generally nahi.
+
+Large models ke liye:
+
+- Model registry
+- Object storage
+- Artifact storage
+- Git LFS
+
+use kiya ja sakta hai.
+
+
+13. QUESTION:
+Git LFS kya hai?
+
+ANSWER:
+Git Large File Storage large files ko Git repository se separately
+store/manage karne ke liye use hota hai.
+
+ML models aur large datasets ke liye useful hai.
+
+
+14. QUESTION:
+Branching strategy kya hai?
+
+ANSWER:
+Different development streams ko manage karne ka strategy.
+
+Example:
+
+main
+develop
+feature/*
+release/*
+
+Senior engineer ko team ke deployment workflow ke according strategy choose karni chahiye.
+
+
+15. QUESTION:
+Code review MLOps mein kyun important hai?
+
+ANSWER:
+Code quality, security, bugs aur production risk reduce karne ke liye.
+
+AI systems mein review hona chahiye:
+
+- Model code
+- Prompt code
+- Data pipelines
+- Infrastructure
+- Security configuration
+
+
+16. QUESTION:
+Git commit mein kya avoid karna chahiye?
+
+ANSWER:
+Secrets kabhi commit nahi karne chahiye.
+
+Avoid:
+
+- API keys
+- Passwords
+- Tokens
+- Private keys
+- Database credentials
+
+
+17. QUESTION:
+Secrets accidentally Git mein push ho jaye to?
+
+ANSWER:
+
+1. Secret immediately rotate karo.
+2. Old credential revoke karo.
+3. Git history clean karo if required.
+4. Secret manager use karo.
+5. Secret scanning enable karo.
+
+
+18. QUESTION:
+Configuration aur code separate kyun rakhte hain?
+
+ANSWER:
+Same code ko different environments mein use kar sakte hain.
+
+Example:
+
+Development:
+DB_DEV
+
+Staging:
+DB_STAGE
+
+Production:
+DB_PROD
+
+
+19. QUESTION:
+Infrastructure as Code kya hai?
+
+ANSWER:
+Infrastructure ko manually create karne ke instead code ke through define
+aur manage karna Infrastructure as Code hai.
+
+Tools:
+
+- Terraform
+- Pulumi
+- CloudFormation
+
+
+20. QUESTION:
+MLOps mein GitOps kya hai?
+
+ANSWER:
+Infrastructure aur deployment configuration ko Git as source of truth
+ke through manage karna GitOps approach hai.
+
+
+============================================================
+SECTION 3: DATA VERSIONING
+============================================================
+
+21. QUESTION:
+Data versioning kya hai?
+
+ANSWER:
+Different versions of datasets ko track karna data versioning hai.
+
+Important because model performance data par depend karti hai.
+
+
+22. QUESTION:
+Data versioning kyun important hai?
+
+ANSWER:
+Agar model performance change ho gayi to identify karna hota hai:
+
+- Code changed?
+- Data changed?
+- Feature changed?
+- Model changed?
+
+Data versioning is problem ko solve karta hai.
+
+
+23. QUESTION:
+DVC kya hai?
+
+ANSWER:
+DVC ka full form Data Version Control hai.
+
+DVC data aur ML artifacts ko version karne ke liye use ho sakta hai.
+
+
+24. QUESTION:
+Dataset lineage kya hai?
+
+ANSWER:
+Dataset kaha se aaya, kaise transform hua aur kis model mein use hua,
+iska complete history dataset lineage hai.
+
+
+25. QUESTION:
+Data validation kya hai?
+
+ANSWER:
+Training/inference se pehle data quality check karna.
+
+Checks:
+
+- Schema
+- Missing values
+- Data types
+- Range
+- Duplicates
+- Distribution
+
+
+26. QUESTION:
+Schema validation kya hai?
+
+ANSWER:
+Ensure karna ki incoming data expected structure follow kar raha hai.
+
+Example:
+
+Expected:
+
+id: int
+name: string
+age: int
+
+Agar age string aa gaya to pipeline reject kar sakti hai.
+
+
+27. QUESTION:
+Data quality dimensions kya hain?
+
+ANSWER:
+
+- Accuracy
+- Completeness
+- Consistency
+- Validity
+- Uniqueness
+- Timeliness
+
+
+28. QUESTION:
+Data drift kya hai?
+
+ANSWER:
+Production data ki distribution training data se change ho jaye,
+to data drift kehte hain.
+
+
+29. QUESTION:
+Concept drift kya hai?
+
+ANSWER:
+Input aur target ke relationship mein change aa jaye to concept drift hai.
+
+Example:
+
+Customer behavior change hone ke baad old fraud pattern kaam nahi karta.
+
+
+30. QUESTION:
+Data drift vs concept drift?
+
+ANSWER:
+
+Data Drift:
+Input distribution change.
+
+Concept Drift:
+Input-output relationship change.
+
+
+============================================================
+SECTION 4: FEATURE ENGINEERING
+============================================================
+
+31. QUESTION:
+Feature engineering kya hai?
+
+ANSWER:
+Raw data ko useful model features mein transform karna feature engineering hai.
+
+
+32. QUESTION:
+Feature store kya hai?
+
+ANSWER:
+Features ko centrally store, manage aur serve karne ka system feature store hai.
+
+Benefits:
+
+- Reuse
+- Consistency
+- Feature lineage
+- Online/offline serving
+
+
+33. QUESTION:
+Offline feature store kya hai?
+
+ANSWER:
+Historical training aur batch processing ke liye features store karta hai.
+
+
+34. QUESTION:
+Online feature store kya hai?
+
+ANSWER:
+Low-latency real-time inference ke liye latest features provide karta hai.
+
+
+35. QUESTION:
+Training-serving skew kya hai?
+
+ANSWER:
+Training aur production inference mein feature generation different hone
+par training-serving skew hota hai.
+
+Ye model performance degrade kar sakta hai.
+
+
+36. QUESTION:
+Feature leakage kya hai?
+
+ANSWER:
+Aisi information feature mein aa jaye jo prediction time par available nahi thi,
+to data leakage/feature leakage hota hai.
+
+
+37. QUESTION:
+Data leakage dangerous kyun hai?
+
+ANSWER:
+Model offline evaluation mein artificially high performance dikha sakta hai
+but production mein fail ho sakta hai.
+
+
+38. QUESTION:
+Feature pipeline production mein kaise manage karenge?
+
+ANSWER:
+
+Raw Data
+ ↓
+Validation
+ ↓
+Transformation
+ ↓
+Feature Store
+ ↓
+Training / Inference
+
+
+39. QUESTION:
+Feature freshness kya hai?
+
+ANSWER:
+Feature ka latest available data ke saath kitna updated hona feature freshness hai.
+
+Real-time fraud systems mein freshness critical ho sakti hai.
+
+
+40. QUESTION:
+Feature monitoring kya hai?
+
+ANSWER:
+Production features ki:
+
+- Distribution
+- Missingness
+- Range
+- Freshness
+- Cardinality
+
+monitor karna.
+
+
+============================================================
+SECTION 5: EXPERIMENT TRACKING
+============================================================
+
+41. QUESTION:
+Experiment tracking kya hai?
+
+ANSWER:
+ML experiments ke parameters, metrics, artifacts aur results track karna.
+
+
+42. QUESTION:
+MLflow kya hai?
+
+ANSWER:
+MLflow ML lifecycle manage karne ke liye popular platform hai.
+
+Common capabilities:
+
+- Experiment tracking
+- Model registry
+- Model management
+- Artifacts
+
+
+43. QUESTION:
+Experiment mein kya track karna chahiye?
+
+ANSWER:
+
+- Dataset version
+- Hyperparameters
+- Model version
+- Metrics
+- Code version
+- Environment
+- Artifacts
+
+
+44. QUESTION:
+Hyperparameter kya hai?
+
+ANSWER:
+Training se pehle set ki jaane wali configuration.
+
+Examples:
+
+- Learning rate
+- Batch size
+- Number of layers
+- Epochs
+
+
+45. QUESTION:
+Parameter aur Hyperparameter mein difference?
+
+ANSWER:
+
+Parameter:
+Model training ke during learn hota hai.
+
+Hyperparameter:
+Training se pehle configure kiya jaata hai.
+
+
+46. QUESTION:
+Experiment reproducibility kaise improve karenge?
+
+ANSWER:
+
+- Seed fix
+- Data version
+- Code version
+- Dependency version
+- Config version
+- Model version
+
+
+47. QUESTION:
+Random seed kyun use karte hain?
+
+ANSWER:
+Random operations ko reproducible banane ke liye.
+
+But complete ML reproducibility ke liye seed alone enough nahi hota.
+
+
+48. QUESTION:
+Model comparison kaise karenge?
+
+ANSWER:
+Same evaluation dataset aur same metrics par models compare karenge.
+
+Example:
+
+Model A:
+Accuracy = 92%
+
+Model B:
+Accuracy = 94%
+
+
+49. QUESTION:
+Champion model kya hai?
+
+ANSWER:
+Currently production ya benchmark mein best approved model ko champion model
+kehte hain.
+
+
+50. QUESTION:
+Challenger model kya hai?
+
+ANSWER:
+Existing champion ko replace karne ke liye candidate model challenger hai.
+
+
+============================================================
+SECTION 6: MODEL REGISTRY
+============================================================
+
+51. QUESTION:
+Model Registry kya hai?
+
+ANSWER:
+Models ke versions aur lifecycle ko centrally manage karne ka system.
+
+Example:
+
+Model v1
+Model v2
+Model v3
+
+
+52. QUESTION:
+Model registry mein kya store hota hai?
+
+ANSWER:
+
+- Model artifact
+- Version
+- Metrics
+- Metadata
+- Dependencies
+- Model stage
+- Lineage
+
+
+53. QUESTION:
+Model stages kya ho sakte hain?
+
+ANSWER:
+
+Development
+ ↓
+Staging
+ ↓
+Production
+ ↓
+Archived
+
+
+54. QUESTION:
+Model approval process kya hai?
+
+ANSWER:
+
+Train
+ ↓
+Evaluate
+ ↓
+Security Check
+ ↓
+Performance Check
+ ↓
+Approval
+ ↓
+Register
+ ↓
+Deploy
+
+
+55. QUESTION:
+Model rollback kya hai?
+
+ANSWER:
+Production mein problem hone par previous stable model version par return karna.
+
+
+56. QUESTION:
+Rollback kab karenge?
+
+ANSWER:
+
+- Accuracy drop
+- Latency increase
+- Error rate increase
+- Data incompatibility
+- Security issue
+- Cost increase
+
+
+57. QUESTION:
+Canary deployment kya hai?
+
+ANSWER:
+New model ko initially small percentage traffic dena.
+
+Example:
+
+95% → Old Model
+5%  → New Model
+
+Agar new model stable hai to traffic gradually increase karenge.
+
+
+58. QUESTION:
+Blue-Green deployment kya hai?
+
+ANSWER:
+Do production environments maintain karte hain.
+
+Blue:
+Current production.
+
+Green:
+New version.
+
+Validation ke baad traffic Green par switch kar dete hain.
+
+
+59. QUESTION:
+Shadow deployment kya hai?
+
+ANSWER:
+New model ko production inputs milte hain but user ko uska response serve nahi hota.
+
+Old model actual response deta hai.
+
+New model evaluation ke liye run hota hai.
+
+
+60. QUESTION:
+A/B testing aur Canary mein difference?
+
+ANSWER:
+
+Canary:
+Gradual traffic rollout.
+
+A/B:
+Different users/groups ko different versions dekar compare karna.
+
+
+============================================================
+SECTION 7: CI/CD
+============================================================
+
+61. QUESTION:
+CI kya hai?
+
+ANSWER:
+CI ka full form Continuous Integration hai.
+
+Code changes ko automatically build aur test karna.
+
+
+62. QUESTION:
+CD kya hai?
+
+ANSWER:
+CD generally Continuous Delivery/Deployment ko refer karta hai.
+
+Validated changes ko environments mein automatically deliver/deploy karna.
+
+
+63. QUESTION:
+ML CI pipeline mein kya checks honge?
+
+ANSWER:
+
+- Unit tests
+- Data validation
+- Code linting
+- Security scanning
+- Model tests
+- Build test
+
+
+64. QUESTION:
+CD pipeline mein kya hoga?
+
+ANSWER:
+
+Build
+ ↓
+Test
+ ↓
+Package
+ ↓
+Deploy
+ ↓
+Health Check
+ ↓
+Monitor
+
+
+65. QUESTION:
+ML pipeline aur CI/CD pipeline mein difference?
+
+ANSWER:
+
+ML Pipeline:
+Data → Training → Evaluation → Model
+
+CI/CD:
+Code → Test → Build → Deploy
+
+
+66. QUESTION:
+CI/CD mein model validation kaise karenge?
+
+ANSWER:
+Deployment se pehle quality gates use karenge.
+
+Example:
+
+Accuracy > threshold
+Latency < threshold
+Error rate < threshold
+
+
+67. QUESTION:
+Quality gate kya hai?
+
+ANSWER:
+Deployment ko allow/block karne ke predefined criteria quality gates hain.
+
+
+68. QUESTION:
+Automated testing MLOps mein kya hai?
+
+ANSWER:
+
+- Unit testing
+- Integration testing
+- Data testing
+- Model testing
+- API testing
+- Security testing
+
+
+69. QUESTION:
+Unit test kya hai?
+
+ANSWER:
+Small individual function/component ko test karna.
+
+Example:
+
+def calculate_score():
+
+Is function ke expected outputs test karna.
+
+
+70. QUESTION:
+Integration test kya hai?
+
+ANSWER:
+Multiple components ke interaction ko test karna.
+
+Example:
+
+API
+ ↓
+Model
+ ↓
+Database
+
+
+============================================================
+SECTION 8: DOCKER
+============================================================
+
+71. QUESTION:
+Docker kya hai?
+
+ANSWER:
+Docker application aur dependencies ko container ke andar package karta hai.
+
+Benefits:
+
+- Consistency
+- Portability
+- Isolation
+- Reproducibility
+
+
+72. QUESTION:
+Container kya hai?
+
+ANSWER:
+Application ka isolated runtime environment container hota hai.
+
+
+73. QUESTION:
+Docker Image kya hai?
+
+ANSWER:
+Application ke code, dependencies aur configuration ka packaged template
+Docker image hota hai.
+
+
+74. QUESTION:
+Docker Container kya hai?
+
+ANSWER:
+Docker image ka running instance container hota hai.
+
+
+75. QUESTION:
+Dockerfile kya hai?
+
+ANSWER:
+Docker image build karne ke instructions Dockerfile mein define hote hain.
+
+
+76. QUESTION:
+AI model ko Docker mein kyun package karenge?
+
+ANSWER:
+Because:
+
+- Same environment
+- Dependency consistency
+- Easy deployment
+- Scaling
+- Portability
+
+
+77. QUESTION:
+Docker image optimize kaise karenge?
+
+ANSWER:
+
+- Smaller base image
+- Multi-stage builds
+- Remove unnecessary dependencies
+- Cache layers
+- Avoid secrets
+
+
+78. QUESTION:
+Docker mein secrets kaise handle karenge?
+
+ANSWER:
+Dockerfile mein secrets hardcode nahi karenge.
+
+Use:
+
+- Environment variables
+- Secret manager
+- Runtime injection
+
+
+79. QUESTION:
+Container health check kya hai?
+
+ANSWER:
+Container/application healthy hai ya nahi check karne ka mechanism.
+
+Example:
+
+/health
+
+
+80. QUESTION:
+AI inference container mein kya expose karenge?
+
+ANSWER:
+Usually API endpoint.
+
+Example:
+
+POST /predict
+
+or
+
+POST /generate
+
+
+============================================================
+SECTION 9: KUBERNETES
+============================================================
+
+81. QUESTION:
+Kubernetes kya hai?
+
+ANSWER:
+Kubernetes containerized applications ko deploy, scale aur manage karne ka
+container orchestration platform hai.
+
+
+82. QUESTION:
+Kubernetes AI systems mein kyun useful hai?
+
+ANSWER:
+
+- Scaling
+- Self-healing
+- Service discovery
+- Load balancing
+- Rolling deployment
+- Resource management
+
+
+83. QUESTION:
+Pod kya hai?
+
+ANSWER:
+Kubernetes mein Pod smallest deployable unit hai.
+
+Usually ek ya multiple closely related containers contain kar sakta hai.
+
+
+84. QUESTION:
+Deployment kya hai?
+
+ANSWER:
+Kubernetes Deployment desired number of pod replicas aur rollout management
+handle karta hai.
+
+
+85. QUESTION:
+Service kya hai?
+
+ANSWER:
+Kubernetes Service pods ko stable network endpoint provide karta hai.
+
+
+86. QUESTION:
+Horizontal Scaling kya hai?
+
+ANSWER:
+Instances/replicas ki number increase karna.
+
+Example:
+
+2 pods
+ ↓
+10 pods
+
+
+87. QUESTION:
+Vertical Scaling kya hai?
+
+ANSWER:
+Existing instance ko more CPU/RAM dena.
+
+
+88. QUESTION:
+HPA kya hai?
+
+ANSWER:
+HPA = Horizontal Pod Autoscaler.
+
+CPU, memory ya custom metrics ke basis par pods automatically scale kar sakta hai.
+
+
+89. QUESTION:
+GPU scheduling Kubernetes mein kyun important hai?
+
+ANSWER:
+AI inference/training workloads GPU require kar sakte hain.
+
+Kubernetes GPU resources ko schedule/manage kar sakta hai.
+
+
+90. QUESTION:
+Kubernetes rolling deployment kya hai?
+
+ANSWER:
+Old pods ko gradually new pods se replace karna without complete downtime.
+
+
+============================================================
+SECTION 10: CLOUD MLOPS
+============================================================
+
+91. QUESTION:
+Cloud MLOps kya hai?
+
+ANSWER:
+Cloud infrastructure par ML lifecycle manage karna cloud MLOps hai.
+
+Examples:
+
+AWS
+Azure
+GCP
+
+
+92. QUESTION:
+Object storage ML mein kyun use hota hai?
+
+ANSWER:
+Large artifacts store karne ke liye.
+
+Examples:
+
+- Datasets
+- Model files
+- Logs
+- Training outputs
+- Evaluation reports
+
+
+93. QUESTION:
+Compute selection kaise karenge?
+
+ANSWER:
+
+CPU:
+Traditional ML / preprocessing / API.
+
+GPU:
+Deep Learning / LLM inference / training.
+
+High-memory:
+Large models / large datasets.
+
+
+94. QUESTION:
+GPU ka cost optimize kaise karenge?
+
+ANSWER:
+
+- Right GPU choose karo
+- Batch processing
+- Quantization
+- Caching
+- Autoscaling
+- Spot/interruptible instances where suitable
+- Scale-to-zero where practical
+
+
+95. QUESTION:
+Autoscaling kya hai?
+
+ANSWER:
+Traffic/workload ke basis par compute resources automatically increase/decrease
+karna.
+
+
+96. QUESTION:
+Scale-to-zero kya hai?
+
+ANSWER:
+Jab traffic nahi ho to service instances ko zero tak reduce karna.
+
+Serverless ya non-latency-critical workloads mein useful ho sakta hai.
+
+
+97. QUESTION:
+Inference latency kya hai?
+
+ANSWER:
+Request receive hone se response return hone tak ka time inference latency hai.
+
+
+98. QUESTION:
+Throughput kya hai?
+
+ANSWER:
+System ek unit time mein kitni requests/processes handle kar sakta hai.
+
+Example:
+
+100 requests/second.
+
+
+99. QUESTION:
+Latency vs Throughput?
+
+ANSWER:
+
+Latency:
+Ek request ko kitna time laga.
+
+Throughput:
+System kitni requests per second process kar raha hai.
+
+
+100. QUESTION:
+AI production mein cost optimization kaise karenge?
+
+ANSWER:
+
+- Model selection
+- Quantization
+- Batching
+- Caching
+- Autoscaling
+- Token optimization
+- GPU optimization
+- Smaller model
+- Request routing
+
+
+============================================================
+SECTION 11: MODEL SERVING
+============================================================
+
+101. QUESTION:
+Model serving kya hai?
+
+ANSWER:
+Trained model ko production users/applications ke liye accessible banana
+model serving hai.
+
+
+102. QUESTION:
+Online inference kya hai?
+
+ANSWER:
+Real-time request ke response mein prediction generate karna.
+
+Example:
+
+User request
+ ↓
+API
+ ↓
+Model
+ ↓
+Response
+
+
+103. QUESTION:
+Batch inference kya hai?
+
+ANSWER:
+Large number of records ko scheduled/batch process karna.
+
+Example:
+
+Nightly 10 million records prediction.
+
+
+104. QUESTION:
+Online vs Batch inference?
+
+ANSWER:
+
+Online:
+Low latency, real-time.
+
+Batch:
+High volume, scheduled processing.
+
+
+105. QUESTION:
+Model server kya hota hai?
+
+ANSWER:
+Model inference requests receive aur process karne wala service/server.
+
+Examples:
+
+- FastAPI
+- TorchServe
+- NVIDIA Triton
+- vLLM for LLM serving
+
+
+106. QUESTION:
+FastAPI AI serving mein kyun popular hai?
+
+ANSWER:
+
+- Python ecosystem
+- Async support
+- Pydantic validation
+- Easy API development
+- Good developer experience
+
+
+107. QUESTION:
+Inference optimization kya hai?
+
+ANSWER:
+Model response ko faster aur cheaper banana.
+
+Techniques:
+
+- Quantization
+- Batching
+- Caching
+- Smaller models
+- GPU optimization
+
+
+108. QUESTION:
+Dynamic batching kya hai?
+
+ANSWER:
+Multiple incoming requests ko short time window mein combine karke batch inference karna.
+
+
+109. QUESTION:
+Model warm-up kya hai?
+
+ANSWER:
+Production traffic se pehle model ko memory/GPU mein initialize karna.
+
+Cold-start latency reduce kar sakta hai.
+
+
+110. QUESTION:
+Cold start kya hai?
+
+ANSWER:
+Jab service/model pehli baar start hota hai aur initialization ki wajah se
+extra latency aati hai.
+
+
+============================================================
+SECTION 12: GENAI / LLMOPS
+============================================================
+
+111. QUESTION:
+LLMOps kya hai?
+
+ANSWER:
+LLMOps ka focus Large Language Models ke development, deployment,
+evaluation, monitoring aur lifecycle management par hota hai.
+
+
+112. QUESTION:
+MLOps aur LLMOps mein difference?
+
+ANSWER:
+
+MLOps:
+Traditional ML + Deep Learning lifecycle.
+
+LLMOps:
+LLM-specific challenges ke saath:
+
+- Prompt management
+- Token usage
+- LLM evaluation
+- RAG
+- Guardrails
+- Model routing
+- Hallucination
+- LLM observability
+
+
+113. QUESTION:
+Prompt versioning kya hai?
+
+ANSWER:
+Different prompt versions ko track aur compare karna.
+
+Example:
+
+Prompt v1
+Prompt v2
+Prompt v3
+
+
+114. QUESTION:
+Prompt drift kya hai?
+
+ANSWER:
+Prompt changes ki wajah se system behavior/performance gradually change hona.
+
+
+115. QUESTION:
+LLM evaluation kya hai?
+
+ANSWER:
+LLM ke outputs ki quality ko systematically measure karna.
+
+Metrics:
+
+- Accuracy
+- Relevance
+- Groundedness
+- Faithfulness
+- Toxicity
+- Latency
+- Cost
+
+
+116. QUESTION:
+LLM observability kya hai?
+
+ANSWER:
+LLM application ke behavior ko monitor aur debug karna.
+
+Track:
+
+- Prompt
+- Response
+- Latency
+- Tokens
+- Cost
+- Errors
+- Retrieval
+
+
+117. QUESTION:
+Token monitoring kyun important hai?
+
+ANSWER:
+LLM cost aur latency tokens se heavily impact ho sakte hain.
+
+Track:
+
+Input tokens
++
+Output tokens
+=
+Total tokens
+
+
+118. QUESTION:
+LLM cost kaise optimize karenge?
+
+ANSWER:
+
+- Short prompts
+- Context compression
+- Smaller models
+- Caching
+- Batch processing
+- Model routing
+- Output limits
+
+
+119. QUESTION:
+Model routing kya hai?
+
+ANSWER:
+Different tasks ke liye different models automatically select karna.
+
+Example:
+
+Simple task
+ → Small model
+
+Complex reasoning
+ → Large model
+
+
+120. QUESTION:
+LLM fallback strategy kya hai?
+
+ANSWER:
+Primary model fail ya unavailable ho to secondary model use karna.
+
+Example:
+
+Model A
+ ↓ failure
+Model B
+ ↓ failure
+Model C
+
+
+============================================================
+SECTION 13: RAG OPS
+============================================================
+
+121. QUESTION:
+RAGOps kya hai?
+
+ANSWER:
+RAG system ke retrieval, indexing, evaluation, deployment aur monitoring
+ko operationally manage karna RAGOps approach hai.
+
+
+122. QUESTION:
+RAG pipeline production mein kya monitor karenge?
+
+ANSWER:
+
+- Retrieval latency
+- Retrieval quality
+- Chunk quality
+- Embedding failures
+- Vector DB latency
+- Context relevance
+- Groundedness
+- Answer quality
+
+
+123. QUESTION:
+Embedding versioning kyun important hai?
+
+ANSWER:
+Agar embedding model change ho gaya to existing vectors compatible na bhi hon.
+
+Isliye embedding model version track karna important hai.
+
+
+124. QUESTION:
+Vector database migration mein kya dikkat ho sakti hai?
+
+ANSWER:
+
+- Embedding incompatibility
+- Schema changes
+- Index rebuild
+- Downtime
+- Retrieval quality changes
+
+
+125. QUESTION:
+Chunking strategy ko version kyun karna chahiye?
+
+ANSWER:
+Chunk size aur overlap retrieval quality affect karte hain.
+
+Agar chunking change hui to RAG behavior change ho sakta hai.
+
+
+126. QUESTION:
+RAG evaluation dataset kya hai?
+
+ANSWER:
+Questions + expected/reference answers/documents ka curated dataset
+jisse RAG pipeline evaluate hoti hai.
+
+
+127. QUESTION:
+Retrieval Recall kya hai?
+
+ANSWER:
+Relevant documents/chunks mein se kitne retrieve hue, usko retrieval recall
+measure karta hai.
+
+
+128. QUESTION:
+Context Precision kya hai?
+
+ANSWER:
+Retrieved context mein kitna content actually relevant hai.
+
+
+129. QUESTION:
+Groundedness kya hai?
+
+ANSWER:
+Generated answer retrieved/contextual evidence ke saath kitna supported hai.
+
+
+130. QUESTION:
+RAG hallucination reduce kaise karenge?
+
+ANSWER:
+
+- Better retrieval
+- Reranking
+- Strong prompts
+- Citation
+- Grounding checks
+- Confidence thresholds
+- Refusal strategy
+
+
+============================================================
+SECTION 14: AGENTOPS
+============================================================
+
+131. QUESTION:
+AgentOps kya hai?
+
+ANSWER:
+AI agents ke execution, tools, decisions, errors, latency aur cost ko
+monitor/manage karna AgentOps hai.
+
+
+132. QUESTION:
+Agent tracing kya hai?
+
+ANSWER:
+Agent ke complete execution steps ko trace karna.
+
+Example:
+
+User
+ ↓
+Planner
+ ↓
+Tool A
+ ↓
+Tool B
+ ↓
+LLM
+ ↓
+Final Answer
+
+
+133. QUESTION:
+Agent mein kya monitor karenge?
+
+ANSWER:
+
+- Tool calls
+- Tool failures
+- Number of steps
+- Token usage
+- Latency
+- Cost
+- Final success
+- Loops
+
+
+134. QUESTION:
+Agent infinite loop kaise prevent karenge?
+
+ANSWER:
+
+- Maximum iterations
+- Timeout
+- Tool limits
+- State validation
+- Loop detection
+
+
+135. QUESTION:
+Tool failure handling kaise karenge?
+
+ANSWER:
+
+Tool
+ ↓
+Failure
+ ↓
+Retry
+ ↓
+Fallback
+ ↓
+Alternative Tool
+ ↓
+Graceful Response
+
+
+136. QUESTION:
+Agent timeout kyun important hai?
+
+ANSWER:
+Agar agent continuously tools call karta raha to:
+
+- Cost increase
+- Latency increase
+- Resource waste
+
+ho sakta hai.
+
+
+137. QUESTION:
+Agent budget kya hai?
+
+ANSWER:
+Agent execution ke liye predefined limits.
+
+Examples:
+
+- Max tokens
+- Max tool calls
+- Max time
+- Max cost
+
+
+138. QUESTION:
+Human-in-the-loop kya hai?
+
+ANSWER:
+Critical decisions ke before human approval require karna.
+
+Example:
+
+Financial transaction
+ ↓
+AI recommendation
+ ↓
+Human approval
+ ↓
+Execution
+
+
+139. QUESTION:
+Agent audit trail kya hai?
+
+ANSWER:
+Agent ne kya decision liya, kaunsa tool use kiya aur kya output mila,
+iska traceable record.
+
+
+140. QUESTION:
+Agent production mein autonomous hona chahiye?
+
+ANSWER:
+Har situation mein nahi.
+
+Risk-based approach use karni chahiye.
+
+Low risk:
+More automation.
+
+High risk:
+Human approval.
+
+
+============================================================
+SECTION 15: MONITORING
+============================================================
+
+141. QUESTION:
+ML monitoring kya hai?
+
+ANSWER:
+Production ML system ke health aur performance ko continuously observe karna.
+
+
+142. QUESTION:
+Traditional application monitoring vs ML monitoring?
+
+ANSWER:
+
+Traditional:
+- CPU
+- Memory
+- Errors
+- Latency
+
+ML:
+Above +
+- Data drift
+- Model drift
+- Prediction distribution
+- Accuracy
+- Feature drift
+
+
+143. QUESTION:
+Model drift kya hai?
+
+ANSWER:
+Model ki production performance time ke saath degrade ho jaye.
+
+Causes:
+
+- Data changes
+- User behavior changes
+- Environment changes
+
+
+144. QUESTION:
+Data drift monitor kaise karenge?
+
+ANSWER:
+Training aur production data distributions compare karenge.
+
+Methods:
+
+- PSI
+- KS test
+- Distribution comparison
+- Statistical tests
+
+
+145. QUESTION:
+PSI kya hai?
+
+ANSWER:
+PSI = Population Stability Index.
+
+Population distribution mein change measure karne ke liye use hota hai.
+
+
+146. QUESTION:
+KS Test kya hai?
+
+ANSWER:
+Kolmogorov-Smirnov test distributions ke difference ko compare karne ke liye
+use ho sakta hai.
+
+
+147. QUESTION:
+Model performance monitoring kaise karenge?
+
+ANSWER:
+
+If labels available:
+
+- Accuracy
+- Precision
+- Recall
+- F1
+- AUC
+- RMSE
+
+Agar labels delayed hain:
+
+- Proxy metrics
+- Data drift
+- Prediction distribution
+- Business KPIs
+
+
+148. QUESTION:
+Prediction drift kya hai?
+
+ANSWER:
+Model predictions ki distribution time ke saath change ho jaye.
+
+
+149. QUESTION:
+Latency monitoring mein p95/p99 kyun important hai?
+
+ANSWER:
+Average latency tail behavior hide kar sakti hai.
+
+p95/p99 slow requests ko identify karne mein useful hain.
+
+
+150. QUESTION:
+SLI kya hai?
+
+ANSWER:
+SLI = Service Level Indicator.
+
+Actual measured service metric.
+
+Example:
+
+API latency.
+
+
+============================================================
+SECTION 16: SLO, SLA AND INCIDENTS
+============================================================
+
+151. QUESTION:
+SLO kya hai?
+
+ANSWER:
+SLO = Service Level Objective.
+
+Service ke desired performance target.
+
+Example:
+
+99.9% successful requests.
+
+
+152. QUESTION:
+SLA kya hai?
+
+ANSWER:
+SLA = Service Level Agreement.
+
+Customer/provider ke beech formal service commitment.
+
+
+153. QUESTION:
+SLA, SLO aur SLI difference?
+
+ANSWER:
+
+SLI:
+Actual measurement.
+
+SLO:
+Internal target.
+
+SLA:
+Formal commitment.
+
+
+154. QUESTION:
+Incident kya hai?
+
+ANSWER:
+Production system mein service quality ya functionality impact karne wali
+unexpected problem incident hai.
+
+
+155. QUESTION:
+AI production incident ka example?
+
+ANSWER:
+
+LLM API down
+Model latency high
+RAG retrieval broken
+Database unavailable
+Token cost suddenly high
+
+
+156. QUESTION:
+Incident response kaise karenge?
+
+ANSWER:
+
+Detect
+ ↓
+Triage
+ ↓
+Contain
+ ↓
+Mitigate
+ ↓
+Recover
+ ↓
+Root Cause Analysis
+ ↓
+Preventive Action
+
+
+157. QUESTION:
+Root Cause Analysis kya hai?
+
+ANSWER:
+Problem ka actual underlying cause identify karna RCA hai.
+
+
+158. QUESTION:
+Postmortem kya hai?
+
+ANSWER:
+Incident ke baad:
+
+- What happened?
+- Why happened?
+- Impact?
+- Timeline?
+- Fix?
+- Prevention?
+
+document karna postmortem hai.
+
+
+159. QUESTION:
+Rollback vs Roll-forward?
+
+ANSWER:
+
+Rollback:
+Previous stable version par return.
+
+Roll-forward:
+New fix deploy karke problem solve karna.
+
+
+160. QUESTION:
+Circuit breaker kya hai?
+
+ANSWER:
+Repeated failures ko detect karke temporarily downstream calls stop karna.
+
+Distributed AI systems mein cascading failures prevent karne ke liye useful.
+
+
+============================================================
+SECTION 17: SECURITY
+============================================================
+
+161. QUESTION:
+AI MLOps security mein kya important hai?
+
+ANSWER:
+
+- Secrets management
+- IAM
+- Encryption
+- Network security
+- Container security
+- Dependency scanning
+- Prompt security
+- Data privacy
+
+
+162. QUESTION:
+Secrets Manager kya hai?
+
+ANSWER:
+API keys, passwords aur credentials securely store/manage karne ka service.
+
+
+163. QUESTION:
+IAM kya hai?
+
+ANSWER:
+IAM = Identity and Access Management.
+
+Ye define karta hai:
+
+Who can access what?
+
+
+164. QUESTION:
+Least Privilege kya hai?
+
+ANSWER:
+User/service ko sirf required minimum permissions dena.
+
+
+165. QUESTION:
+Container security kya hai?
+
+ANSWER:
+
+- Minimal base image
+- Vulnerability scanning
+- Non-root user
+- Secrets externalize
+- Dependency scanning
+
+
+166. QUESTION:
+Dependency vulnerability kya hai?
+
+ANSWER:
+Third-party package mein security vulnerability present hona.
+
+MLOps CI pipeline mein dependency scanning add kar sakte hain.
+
+
+167. QUESTION:
+Prompt Injection kya hai?
+
+ANSWER:
+Attacker malicious instructions ke through LLM ko unintended behavior karne
+ki koshish karta hai.
+
+
+168. QUESTION:
+Prompt Injection ko production mein kaise reduce karenge?
+
+ANSWER:
+
+- Input validation
+- Tool permissions
+- System/user instruction separation
+- Output validation
+- Least privilege
+- Guardrails
+
+
+169. QUESTION:
+PII kya hai?
+
+ANSWER:
+PII = Personally Identifiable Information.
+
+Examples:
+
+- Name
+- Email
+- Phone
+- Address
+- Government ID
+
+
+170. QUESTION:
+AI pipeline mein PII kaise protect karenge?
+
+ANSWER:
+
+- Data minimization
+- Masking
+- Encryption
+- Access control
+- Retention policies
+- Redaction
+
+
+============================================================
+SECTION 18: TESTING
+============================================================
+
+171. QUESTION:
+ML testing kya hai?
+
+ANSWER:
+ML system ke different components ko validate karna.
+
+Types:
+
+- Unit testing
+- Data testing
+- Model testing
+- Integration testing
+- Performance testing
+- Security testing
+
+
+172. QUESTION:
+Data tests kya hain?
+
+ANSWER:
+
+- Schema
+- Null percentage
+- Range
+- Distribution
+- Duplicate
+- Referential integrity
+
+
+173. QUESTION:
+Model unit test kya ho sakta hai?
+
+ANSWER:
+Check karna ki model:
+
+- Load hota hai
+- Expected input accept karta hai
+- Expected output return karta hai
+- NaN output nahi deta
+
+
+174. QUESTION:
+Model regression test kya hai?
+
+ANSWER:
+New model version ka performance old version se unexpectedly degrade na ho,
+ye verify karna.
+
+
+175. QUESTION:
+API contract testing kya hai?
+
+ANSWER:
+API expected request/response schema follow kar rahi hai ya nahi test karna.
+
+
+176. QUESTION:
+Load testing kya hai?
+
+ANSWER:
+High traffic/load par system ka behavior test karna.
+
+
+177. QUESTION:
+Stress testing kya hai?
+
+ANSWER:
+System ki limits se beyond load dekar failure behavior evaluate karna.
+
+
+178. QUESTION:
+Performance testing AI system mein kya check karega?
+
+ANSWER:
+
+- Latency
+- Throughput
+- CPU
+- Memory
+- GPU
+- Concurrent requests
+
+
+179. QUESTION:
+Chaos testing kya hai?
+
+ANSWER:
+Intentional failures inject karke system resilience test karna.
+
+Example:
+
+Database unavailable
+LLM API timeout
+Pod failure
+
+
+180. QUESTION:
+Smoke test kya hai?
+
+ANSWER:
+Basic critical functionality quickly verify karna.
+
+Example:
+
+API starts
+Health endpoint works
+Model loads
+Basic inference works
+
+
+============================================================
+SECTION 19: OBSERVABILITY
+============================================================
+
+181. QUESTION:
+Observability kya hai?
+
+ANSWER:
+System ke internal state ko external outputs ke through understand karne ki
+capability observability hai.
+
+
+182. QUESTION:
+Observability ke three pillars kya hain?
+
+ANSWER:
+
+1. Logs
+2. Metrics
+3. Traces
+
+
+183. QUESTION:
+Logs kya hain?
+
+ANSWER:
+Discrete events ki detailed records.
+
+Example:
+
+"LLM API timeout"
+
+
+184. QUESTION:
+Metrics kya hain?
+
+ANSWER:
+Numerical measurements.
+
+Example:
+
+Latency = 250 ms
+
+
+185. QUESTION:
+Tracing kya hai?
+
+ANSWER:
+Single request ka complete journey trace karna.
+
+Example:
+
+API
+ ↓
+Retriever
+ ↓
+Vector DB
+ ↓
+LLM
+ ↓
+Response
+
+
+186. QUESTION:
+Distributed tracing AI system mein kyun important hai?
+
+ANSWER:
+AI request multiple services cross kar sakti hai.
+
+Example:
+
+Frontend
+ ↓
+API
+ ↓
+Agent
+ ↓
+Retriever
+ ↓
+Vector DB
+ ↓
+LLM
+
+Tracing se bottleneck identify kar sakte hain.
+
+
+187. QUESTION:
+Correlation ID kya hai?
+
+ANSWER:
+Request ko uniquely identify karne wala ID.
+
+Multiple services ke logs ko same request se connect karne mein useful.
+
+
+188. QUESTION:
+AI observability mein kya track karenge?
+
+ANSWER:
+
+- Request ID
+- Model
+- Prompt version
+- Tokens
+- Latency
+- Cost
+- Tool calls
+- Retrieval
+- Errors
+- Final output
+
+
+189. QUESTION:
+Monitoring alert kya hai?
+
+ANSWER:
+Threshold ya anomaly detect hone par notification trigger karna.
+
+Example:
+
+Error rate > 5%
+ ↓
+Alert
+
+
+190. QUESTION:
+Alert fatigue kya hai?
+
+ANSWER:
+Too many irrelevant alerts ki wajah se engineers important alerts ignore karne
+lagte hain.
+
+Isliye alerts actionable hone chahiye.
+
+
+============================================================
+SECTION 20: SENIOR GENAI MLOPS
+============================================================
+
+191. QUESTION:
+Senior GenAI Engineer ko MLOps mein sabse important kya samajhna chahiye?
+
+ANSWER:
+
+End-to-end lifecycle:
+
+Data
+ ↓
+Model
+ ↓
+Prompt
+ ↓
+RAG
+ ↓
+Agent
+ ↓
+API
+ ↓
+Deployment
+ ↓
+Observability
+ ↓
+Security
+ ↓
+Evaluation
+ ↓
+Optimization
+
+
+192. QUESTION:
+Production GenAI system ka reference architecture kya ho sakta hai?
+
+ANSWER:
+
+User
+ ↓
+API Gateway
+ ↓
+Authentication
+ ↓
+FastAPI
+ ↓
+Orchestrator
+ ↓
+Cache
+ ↓
+Retriever
+ ↓
+Vector DB
+ ↓
+LLM
+ ↓
+Guardrails
+ ↓
+Response
+ ↓
+Monitoring
+
+
+193. QUESTION:
+GenAI system mein cache kyun use karenge?
+
+ANSWER:
+Repeated requests ke response ko cache karke:
+
+- Latency reduce
+- LLM cost reduce
+- Throughput improve
+
+kar sakte hain.
+
+
+194. QUESTION:
+Semantic caching kya hai?
+
+ANSWER:
+Exact string match ke instead semantically similar queries ke responses
+reuse karna semantic caching hai.
+
+
+195. QUESTION:
+Rate limiting kya hai?
+
+ANSWER:
+Client/user ki requests ko defined limit ke andar restrict karna.
+
+Example:
+
+100 requests/minute.
+
+
+196. QUESTION:
+GenAI rate limiting kyun important hai?
+
+ANSWER:
+
+- Cost protection
+- Abuse prevention
+- API protection
+- Fair usage
+- System stability
+
+
+197. QUESTION:
+Backpressure kya hai?
+
+ANSWER:
+Jab downstream system overloaded ho to upstream traffic ko control karna
+backpressure hai.
+
+High-volume GenAI systems mein useful hai.
+
+
+198. QUESTION:
+Senior AI Engineer production issue solve karte waqt kya approach lega?
+
+ANSWER:
+
+1. Impact identify
+2. Metrics check
+3. Logs check
+4. Traces check
+5. Recent deployment check
+6. Data/model/prompt changes check
+7. Contain issue
+8. Rollback/fallback
+9. Root cause
+10. Prevent recurrence
+
+
+199. QUESTION:
+Senior GenAI Engineer ke liye MLOps ka biggest goal kya hai?
+
+ANSWER:
+
+"Reliable, scalable, observable, secure and cost-efficient AI system
+ko production mein continuously operate karna."
+
+
+200. QUESTION:
+Senior AI/GenAI Engineer ko MLOps kaise explain karna chahiye?
+
+ANSWER:
+
+"MLOps is the engineering discipline that operationalizes the complete
+AI lifecycle.
+
+As a Senior AI/GenAI Engineer, I focus not only on training or integrating
+models, but also on reproducibility, data and model versioning, CI/CD,
+deployment, scalability, monitoring, evaluation, security, observability,
+LLMOps, RAGOps, AgentOps, cost optimization and continuous improvement."
+
+
+============================================================
+SENIOR AI ENGINEER - MUST KNOW MLOPS STACK
+============================================================
+
+VERSION CONTROL:
+Git
+GitHub
+GitLab
+
+DATA VERSIONING:
+DVC
+Object Storage
+
+EXPERIMENT TRACKING:
+MLflow
+Weights & Biases
+
+MODEL REGISTRY:
+MLflow
+Cloud Model Registries
+
+API:
+FastAPI
+
+CONTAINER:
+Docker
+
+ORCHESTRATION:
+Kubernetes
+
+CI/CD:
+GitHub Actions
+GitLab CI
+Jenkins
+
+INFRASTRUCTURE:
+Terraform
+Pulumi
+
+CLOUD:
+AWS
+Azure
+GCP
+
+MONITORING:
+Prometheus
+Grafana
+
+LOGGING:
+ELK
+Cloud Logging
+
+TRACING:
+OpenTelemetry
+
+LLM SERVING:
+vLLM
+TGI
+Triton
+
+VECTOR DATABASE:
+Qdrant
+Pinecone
+Weaviate
+Chroma
+FAISS
+
+LLM/RAG FRAMEWORKS:
+LangChain
+LlamaIndex
+
+ORCHESTRATION:
+LangGraph
+
+CACHING:
+Redis
+
+DATABASE:
+PostgreSQL
+
+SECRETS:
+Cloud Secret Manager
+Vault
+
+
+============================================================
+SENIOR-LEVEL MLOPS ARCHITECTURE
+============================================================
+
+                    USERS
+                      |
+                      v
+                API GATEWAY
+                      |
+                      v
+              AUTH / RATE LIMIT
+                      |
+                      v
+                  FASTAPI
+                      |
+                      v
+              AI ORCHESTRATOR
+                 /         \
+                /           \
+               v             v
+           REDIS CACHE    TOOL LAYER
+               |             |
+               |             v
+               |         EXTERNAL APIs
+               |
+               v
+           RAG PIPELINE
+               |
+        +------+------+
+        |             |
+        v             v
+   EMBEDDINGS      RETRIEVER
+        |             |
+        +------+------+
+               |
+               v
+           VECTOR DB
+               |
+               v
+              LLM
+               |
+               v
+          GUARDRAILS
+               |
+               v
+            RESPONSE
+               |
+               v
+       OBSERVABILITY LAYER
+        /       |       \
+       /        |        \
+    LOGS      METRICS    TRACES
+
+
+============================================================
+MLOPS CI/CD FLOW
+============================================================
+
+Developer
+   |
+   v
+Git Push
+   |
+   v
+CI Pipeline
+   |
+   +---- Unit Tests
+   |
+   +---- Data Tests
+   |
+   +---- Security Scan
+   |
+   +---- Build Docker Image
+   |
+   +---- Model Tests
+   |
+   v
+Evaluation
+   |
+   v
+Quality Gate
+   |
+   +---- FAIL → Stop
+   |
+   +---- PASS
+          |
+          v
+      Model Registry
+          |
+          v
+       Staging
+          |
+          v
+    Integration Tests
+          |
+          v
+      Approval
+          |
+          v
+     Production
+          |
+          v
+      Monitoring
+          |
+          v
+    Drift Detection
+          |
+          v
+      Retraining
+          |
+          +------------+
+                       |
+                       v
+                    New Model
+
+
+============================================================
+GENAI PRODUCTION PIPELINE
+============================================================
+
+User
+ ↓
+API Gateway
+ ↓
+Authentication
+ ↓
+Rate Limiting
+ ↓
+FastAPI
+ ↓
+Prompt Validation
+ ↓
+Cache Check
+ ↓
+Retriever
+ ↓
+Vector Database
+ ↓
+Reranker
+ ↓
+Context Builder
+ ↓
+LLM
+ ↓
+Output Validation
+ ↓
+Guardrails
+ ↓
+Response
+ ↓
+Logging
+ ↓
+Metrics
+ ↓
+Tracing
+ ↓
+Evaluation
+
+
+============================================================
+TOP 30 SENIOR MLOPS QUESTIONS TO MASTER FIRST
+============================================================
+
+1. MLOps kya hai?
+
+2. MLOps vs DevOps?
+
+3. Data Drift vs Concept Drift?
+
+4. Training-serving skew?
+
+5. Data leakage?
+
+6. Model Registry?
+
+7. Model promotion?
+
+8. Model rollback?
+
+9. Canary deployment?
+
+10. Blue-Green deployment?
+
+11. Shadow deployment?
+
+12. CI/CD for ML?
+
+13. Docker?
+
+14. Kubernetes?
+
+15. HPA?
+
+16. GPU scheduling?
+
+17. Model serving?
+
+18. Online vs Batch inference?
+
+19. Model monitoring?
+
+20. Data drift monitoring?
+
+21. Model drift?
+
+22. LLMOps?
+
+23. RAGOps?
+
+24. AgentOps?
+
+25. LLM evaluation?
+
+26. Prompt versioning?
+
+27. LLM observability?
+
+28. Token/cost monitoring?
+
+29. AI security?
+
+30. Production incident handling?
+
+
+============================================================
+SENIOR INTERVIEW GOLDEN ANSWER FORMAT
+============================================================
+
+Kisi bhi MLOps question ka answer dete waqt:
+
+1. DEFINITION
+2. WHY IT IS NEEDED
+3. HOW IT WORKS
+4. REAL-WORLD EXAMPLE
+5. AI/GENAI USE CASE
+6. PRODUCTION CONSIDERATION
+
+
+Example:
+
+QUESTION:
+Canary deployment kya hai?
+
+ANSWER:
+
+"Canary deployment mein new model ko initially small percentage
+traffic diya jaata hai.
+
+For example, main 95% traffic old model ko aur 5% traffic new model
+ko de sakta hoon.
+
+Main new model ka error rate, latency, business KPI aur model quality
+monitor karunga.
+
+Agar metrics healthy hain to traffic gradually 10%, 25%, 50% and
+finally 100% tak shift karunga.
+
+Agar issue detect hota hai to immediately old model par rollback
+kar sakta hoon.
+
+GenAI production mein ye risky model changes ko safely release
+karne ke liye useful hai."
+
+
+============================================================
+SENIOR AI ENGINEER MINDSET
+============================================================
+
+Junior approach:
+
+"Model accuracy 95% hai."
+
+Senior approach:
+
+"Model accuracy 95% hai, but production mein mujhe data drift,
+latency, throughput, error rate, model cost, feature quality,
+prediction distribution aur business KPI bhi monitor karne honge."
+
+
+Junior GenAI approach:
+
+"LLM answer de raha hai."
+
+Senior GenAI approach:
+
+"Mujhe LLM response ke saath retrieval quality, groundedness,
+hallucination rate, token usage, latency, cost, prompt version,
+model version, tool calls, failures aur user feedback monitor
+karna hoga."
+
+
+============================================================
+FINAL SENIOR MLOPS FORMULA
+============================================================
+
+DATA
+ +
+VERSIONING
+ +
+EXPERIMENT TRACKING
+ +
+MODEL REGISTRY
+ +
+CI/CD
+ +
+DOCKER
+ +
+KUBERNETES
+ +
+CLOUD
+ +
+MODEL SERVING
+ +
+MONITORING
+ +
+OBSERVABILITY
+ +
+SECURITY
+ +
+EVALUATION
+ +
+LLMOPS
+ +
+RAGOPS
+ +
+AGENTOPS
+ +
+COST OPTIMIZATION
+ +
+GOVERNANCE
+ +
+INCIDENT MANAGEMENT
+ =
+SENIOR AI / GENAI ENGINEER
+
+
+============================================================
+ONE-LINE INTERVIEW DEFINITION
+============================================================
+
+"MLOps is not just deployment.
+
+It is the complete engineering discipline for building,
+deploying, monitoring, securing, scaling and continuously
+improving AI systems in production."
+
+
+============================================================
+SENIOR GENAI ENGINEER FINAL CHECKLIST
+============================================================
+
+[ ] Git
+[ ] GitHub
+[ ] Data Versioning
+[ ] DVC
+[ ] MLflow
+[ ] Experiment Tracking
+[ ] Model Registry
+[ ] Feature Store
+[ ] Data Validation
+[ ] Data Drift
+[ ] Concept Drift
+[ ] Model Drift
+[ ] CI/CD
+[ ] Docker
+[ ] Kubernetes
+[ ] HPA
+[ ] GPU
+[ ] Model Serving
+[ ] Batch Inference
+[ ] Online Inference
+[ ] Canary Deployment
+[ ] Blue-Green Deployment
+[ ] Shadow Deployment
+[ ] Rollback
+[ ] Autoscaling
+[ ] Load Testing
+[ ] Security Scanning
+[ ] Secrets Management
+[ ] IAM
+[ ] Logging
+[ ] Metrics
+[ ] Tracing
+[ ] Prometheus
+[ ] Grafana
+[ ] OpenTelemetry
+[ ] LLMOps
+[ ] Prompt Versioning
+[ ] LLM Evaluation
+[ ] RAGOps
+[ ] Vector DB Monitoring
+[ ] Embedding Versioning
+[ ] AgentOps
+[ ] Tool Monitoring
+[ ] Guardrails
+[ ] Rate Limiting
+[ ] Caching
+[ ] Redis
+[ ] Cost Optimization
+[ ] Token Monitoring
+[ ] Model Routing
+[ ] Fallback
+[ ] Circuit Breaker
+[ ] Incident Management
+[ ] RCA
+[ ] Postmortem
+[ ] Governance
+[ ] Auditability
+[ ] PII Protection
+[ ] Continuous Improvement

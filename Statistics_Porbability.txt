@@ -1,0 +1,1772 @@
+STATISTICS + PROBABILITY
+100 IMPORTANT INTERVIEW QUESTIONS & ANSWERS
+FOR AI ENGINEER / GENAI ENGINEER
+HINGLISH NOTES
+
+
+==================================================
+SECTION 1: BASIC STATISTICS
+==================================================
+
+1. QUESTION:
+Statistics kya hai?
+
+ANSWER:
+Statistics data ko collect, organize, summarize, analyze aur interpret karne ka process hai.
+
+AI Engineer ke liye statistics important hai because model performance, data quality, experiments aur business decisions ko understand karna hota hai.
+
+AI workflow:
+
+Data
+ ↓
+Statistics
+ ↓
+Analysis
+ ↓
+Model
+ ↓
+Evaluation
+ ↓
+Decision
+
+
+2. QUESTION:
+Population kya hoti hai?
+
+ANSWER:
+Population complete group of observations ko kehte hain jiske baare mein hum study karna chahte hain.
+
+Example:
+Ek company ke sabhi customers = population.
+
+
+3. QUESTION:
+Sample kya hota hai?
+
+ANSWER:
+Population ka selected subset sample hota hai.
+
+Example:
+
+Population = 10 lakh customers
+Sample = 10,000 customers
+
+AI/ML mein often complete population available nahi hoti, isliye sample par analysis kiya jaata hai.
+
+
+4. QUESTION:
+Population aur Sample mein difference?
+
+ANSWER:
+
+Population:
+Complete data/group.
+
+Sample:
+Population ka subset.
+
+Population parameter hota hai.
+
+Sample statistic hota hai.
+
+
+5. QUESTION:
+Parameter kya hota hai?
+
+ANSWER:
+Population ki numerical characteristic ko parameter kehte hain.
+
+Examples:
+
+Population Mean
+Population Variance
+Population Standard Deviation
+
+
+6. QUESTION:
+Statistic kya hota hai?
+
+ANSWER:
+Sample se calculate ki gayi numerical value ko statistic kehte hain.
+
+Example:
+
+Sample mean
+Sample variance
+Sample standard deviation
+
+
+7. QUESTION:
+Descriptive Statistics kya hai?
+
+ANSWER:
+Available data ko summarize aur describe karna descriptive statistics hai.
+
+Examples:
+
+Mean
+Median
+Mode
+Variance
+Standard Deviation
+Percentiles
+Range
+
+
+8. QUESTION:
+Inferential Statistics kya hai?
+
+ANSWER:
+Sample ke basis par population ke baare mein conclusions draw karna inferential statistics hai.
+
+Example:
+
+10,000 users ke sample se overall 10 lakh users ke behavior ka estimate karna.
+
+
+9. QUESTION:
+Mean kya hota hai?
+
+ANSWER:
+Mean average hota hai.
+
+Formula:
+
+Mean = Sum of all values / Number of values
+
+Example:
+
+10, 20, 30
+
+Mean = 60 / 3
+Mean = 20
+
+
+10. QUESTION:
+AI mein mean ka use kaha hota hai?
+
+ANSWER:
+Mean ka use:
+
+- Average model latency
+- Average prediction score
+- Average token usage
+- Average response time
+- Average revenue
+- Average feature value
+
+calculate karne mein hota hai.
+
+
+==================================================
+SECTION 2: CENTRAL TENDENCY
+==================================================
+
+11. QUESTION:
+Median kya hota hai?
+
+ANSWER:
+Sorted data ka middle value median hota hai.
+
+Example:
+
+10, 20, 30
+
+Median = 20
+
+Agar observations even hain:
+
+10, 20, 30, 40
+
+Median = (20 + 30) / 2
+Median = 25
+
+
+12. QUESTION:
+Mean vs Median kab use karenge?
+
+ANSWER:
+
+Mean:
+Jab data relatively symmetric ho aur extreme outliers ka effect acceptable ho.
+
+Median:
+Jab data skewed ho ya outliers present hon.
+
+Example:
+
+Salaries:
+20K, 25K, 30K, 35K, 5 Crore
+
+Yahan mean heavily affected hoga.
+
+Median better representation dega.
+
+
+13. QUESTION:
+Mode kya hota hai?
+
+ANSWER:
+Jo value sabse zyada frequently appear hoti hai usko mode kehte hain.
+
+Example:
+
+1, 2, 2, 3, 4
+
+Mode = 2
+
+
+14. QUESTION:
+Mean, Median aur Mode ka relation?
+
+ANSWER:
+
+Symmetric distribution:
+
+Mean ≈ Median ≈ Mode
+
+Right-skewed distribution:
+
+Mean > Median > Mode
+
+Left-skewed distribution:
+
+Mean < Median < Mode
+
+
+15. QUESTION:
+Weighted Mean kya hai?
+
+ANSWER:
+Jab different values ko different importance/weight diya jaata hai, weighted mean use karte hain.
+
+Formula:
+
+Weighted Mean =
+Σ(weight × value) / Σ(weight)
+
+ML model evaluation mein different samples ko different importance dene ke cases mein useful ho sakta hai.
+
+
+16. QUESTION:
+Geometric Mean kya hai?
+
+ANSWER:
+Multiple values ke product ka nth root geometric mean hota hai.
+
+Growth rates aur multiplicative changes ke analysis mein useful hai.
+
+
+17. QUESTION:
+Harmonic Mean kya hai?
+
+ANSWER:
+Harmonic mean reciprocal values ke average ka reciprocal hota hai.
+
+Formula:
+
+H = n / Σ(1/x)
+
+F1-score ka harmonic mean concept isi principle par based hai.
+
+
+18. QUESTION:
+F1 Score mein harmonic mean kyun use hota hai?
+
+ANSWER:
+F1 precision aur recall ko balance karta hai.
+
+Formula:
+
+F1 = 2 × Precision × Recall
+     -------------------------
+       Precision + Recall
+
+Agar precision ya recall mein se koi bahut low hai, F1 bhi low ho jaata hai.
+
+
+19. QUESTION:
+Central Tendency kya hoti hai?
+
+ANSWER:
+Data ke center ya typical value ko represent karne wale measures ko central tendency kehte hain.
+
+Main measures:
+
+Mean
+Median
+Mode
+
+
+20. QUESTION:
+AI Engineer ko central tendency kyun samajhni chahiye?
+
+ANSWER:
+Because real-world AI data mein typical behavior understand karna hota hai.
+
+Examples:
+
+Average latency
+Median latency
+Average token usage
+Typical transaction value
+Typical model score
+
+
+==================================================
+SECTION 3: DISPERSION
+==================================================
+
+21. QUESTION:
+Range kya hota hai?
+
+ANSWER:
+Maximum value minus minimum value.
+
+Formula:
+
+Range = Maximum - Minimum
+
+Example:
+
+10, 20, 50
+
+Range = 50 - 10
+Range = 40
+
+
+22. QUESTION:
+Variance kya hota hai?
+
+ANSWER:
+Variance data values mean se kitna spread hain usko measure karta hai.
+
+Basic formula:
+
+Variance =
+Average of squared deviations from mean.
+
+
+23. QUESTION:
+Standard Deviation kya hai?
+
+ANSWER:
+Standard deviation data ke spread ko measure karta hai.
+
+Formula:
+
+Standard Deviation = √Variance
+
+Low SD:
+Values mean ke close.
+
+High SD:
+Values widely spread.
+
+
+24. QUESTION:
+Variance aur Standard Deviation mein difference?
+
+ANSWER:
+
+Variance:
+Squared units mein hota hai.
+
+Standard Deviation:
+Original data ki same units mein hota hai.
+
+Isliye interpretation ke liye standard deviation generally easier hai.
+
+
+25. QUESTION:
+AI mein standard deviation ka use kaha hota hai?
+
+ANSWER:
+
+- Model performance variation
+- Response latency variation
+- Token usage variation
+- Feature distribution
+- Prediction uncertainty
+- Experiment analysis
+
+
+26. QUESTION:
+Coefficient of Variation kya hai?
+
+ANSWER:
+Standard deviation ko mean se divide karke relative variability measure karte hain.
+
+Formula:
+
+CV = Standard Deviation / Mean
+
+Usually percentage mein:
+
+CV = SD / Mean × 100
+
+
+27. QUESTION:
+Interquartile Range kya hai?
+
+ANSWER:
+IQR middle 50% data ka spread measure karta hai.
+
+Formula:
+
+IQR = Q3 - Q1
+
+
+28. QUESTION:
+IQR outlier detection mein kaise use hota hai?
+
+ANSWER:
+
+Lower Bound:
+
+Q1 - 1.5 × IQR
+
+Upper Bound:
+
+Q3 + 1.5 × IQR
+
+In bounds ke outside observations potential outliers ho sakte hain.
+
+
+29. QUESTION:
+Outlier kya hota hai?
+
+ANSWER:
+Outlier aisi observation hai jo baaki data se significantly different hoti hai.
+
+Example:
+
+10
+12
+11
+13
+500
+
+500 potential outlier hai.
+
+
+30. QUESTION:
+AI mein outliers problem kyun hain?
+
+ANSWER:
+Outliers:
+
+- Mean ko distort kar sakte hain
+- Model training affect kar sakte hain
+- Regression ko influence kar sakte hain
+- Anomaly detection mein important signal bhi ho sakte hain
+
+Important:
+Har outlier ko blindly remove nahi karna chahiye.
+
+
+==================================================
+SECTION 4: DISTRIBUTION
+==================================================
+
+31. QUESTION:
+Distribution kya hoti hai?
+
+ANSWER:
+Data values kis tarah spread ya occur hoti hain, usko distribution kehte hain.
+
+Distribution data ka overall pattern show karti hai.
+
+
+32. QUESTION:
+Normal Distribution kya hai?
+
+ANSWER:
+Normal distribution bell-shaped symmetric distribution hoti hai.
+
+Properties:
+
+Mean = Median = Mode
+
+Approximately:
+
+68% data → ±1 SD
+95% data → ±2 SD
+99.7% data → ±3 SD
+
+
+33. QUESTION:
+Normal distribution AI mein important kyun hai?
+
+ANSWER:
+Many statistical methods aur assumptions normality se related hain.
+
+Examples:
+
+- Statistical tests
+- Confidence intervals
+- Error analysis
+- Gaussian models
+- Feature analysis
+
+
+34. QUESTION:
+Z-score kya hota hai?
+
+ANSWER:
+Z-score batata hai ki observation mean se kitne standard deviations door hai.
+
+Formula:
+
+Z = (X - Mean) / Standard Deviation
+
+
+35. QUESTION:
+Z-score ka practical use?
+
+ANSWER:
+Z-score use kar sakte hain:
+
+- Outlier detection
+- Standardization
+- Comparing values
+- Feature preprocessing
+
+
+36. QUESTION:
+Agar Z-score = 3 hai to kya meaning hai?
+
+ANSWER:
+Observation mean se 3 standard deviations above hai.
+
+Normal distribution assumption ke under ye unusual observation ho sakti hai.
+
+
+37. QUESTION:
+Skewness kya hai?
+
+ANSWER:
+Distribution kitni asymmetric hai usko skewness measure karta hai.
+
+Positive skew:
+Right tail long.
+
+Negative skew:
+Left tail long.
+
+
+38. QUESTION:
+Positive Skewness kya hoti hai?
+
+ANSWER:
+Distribution ka right tail longer hota hai.
+
+Generally:
+
+Mean > Median
+
+
+39. QUESTION:
+Negative Skewness kya hoti hai?
+
+ANSWER:
+Distribution ka left tail longer hota hai.
+
+Generally:
+
+Mean < Median
+
+
+40. QUESTION:
+Kurtosis kya hai?
+
+ANSWER:
+Kurtosis distribution ke tail behavior/extreme values ko describe karne mein help karta hai.
+
+High tail heaviness ka matlab extreme observations zyada important ho sakti hain.
+
+
+==================================================
+SECTION 5: PROBABILITY BASICS
+==================================================
+
+41. QUESTION:
+Probability kya hai?
+
+ANSWER:
+Probability kisi event ke occur hone ki likelihood ko measure karti hai.
+
+Range:
+
+0 ≤ P(A) ≤ 1
+
+0 = Impossible
+1 = Certain
+
+
+42. QUESTION:
+Probability ka basic formula?
+
+ANSWER:
+
+P(A) =
+Favorable Outcomes
+------------------
+Total Outcomes
+
+Example:
+
+Fair coin mein Head:
+
+P(H) = 1/2
+
+
+43. QUESTION:
+Sample Space kya hai?
+
+ANSWER:
+Experiment ke all possible outcomes ka set sample space hota hai.
+
+Example:
+
+Coin:
+
+S = {Head, Tail}
+
+
+44. QUESTION:
+Event kya hota hai?
+
+ANSWER:
+Sample space ke one or more outcomes ko event kehte hain.
+
+Example:
+
+Dice mein even number:
+
+A = {2, 4, 6}
+
+
+45. QUESTION:
+Independent Events kya hote hain?
+
+ANSWER:
+Ek event ka result doosre event ke result ko affect nahi karta.
+
+Example:
+
+Coin toss 1
+Coin toss 2
+
+First toss ka second toss par effect nahi hota.
+
+
+46. QUESTION:
+Dependent Events kya hote hain?
+
+ANSWER:
+Ek event ka result doosre event ki probability ko affect karta hai.
+
+Example:
+
+Bag se card draw karna without replacement.
+
+Pehla card remove hone ke baad second draw ki probability change ho jaati hai.
+
+
+47. QUESTION:
+Mutually Exclusive Events kya hain?
+
+ANSWER:
+Do events simultaneously occur nahi kar sakte.
+
+Example:
+
+Single dice roll mein:
+
+A = 2
+B = 5
+
+Ek roll mein dono simultaneously nahi aa sakte.
+
+
+48. QUESTION:
+Mutually Exclusive aur Independent same hain?
+
+ANSWER:
+Nahi.
+
+Mutually exclusive:
+Dono events simultaneously nahi ho sakte.
+
+Independent:
+Ek event doosre ko affect nahi karta.
+
+Important interview concept:
+Non-trivial mutually exclusive events generally independent nahi hote.
+
+
+49. QUESTION:
+Complementary Event kya hai?
+
+ANSWER:
+Event ke not occurring ko complement kehte hain.
+
+Formula:
+
+P(A') = 1 - P(A)
+
+
+50. QUESTION:
+Probability of at least one event kaise calculate karenge?
+
+ANSWER:
+Often complement use karna easiest hota hai.
+
+Formula:
+
+P(at least one)
+=
+1 - P(none)
+
+Example:
+
+Agar failure probability p hai:
+
+P(at least one failure)
+=
+1 - P(no failure)
+
+
+==================================================
+SECTION 6: CONDITIONAL PROBABILITY
+==================================================
+
+51. QUESTION:
+Conditional Probability kya hai?
+
+ANSWER:
+Ek event ke occur hone ke condition par doosre event ki probability conditional probability hai.
+
+Formula:
+
+P(A|B)
+=
+P(A ∩ B) / P(B)
+
+
+52. QUESTION:
+P(A|B) ka meaning kya hai?
+
+ANSWER:
+"Probability of A given B."
+
+Meaning:
+A ki probability jab hume pata hai ki B already occur ho chuka hai.
+
+
+53. QUESTION:
+AI mein conditional probability ka example?
+
+ANSWER:
+Spam detection:
+
+P(Spam | Email contains suspicious words)
+
+Meaning:
+Suspicious words hone ke baad email spam hone ki probability.
+
+
+54. QUESTION:
+Joint Probability kya hai?
+
+ANSWER:
+Do events simultaneously occur hone ki probability joint probability hai.
+
+Notation:
+
+P(A ∩ B)
+
+
+55. QUESTION:
+Marginal Probability kya hai?
+
+ANSWER:
+Single variable/event ki overall probability marginal probability hoti hai.
+
+Example:
+
+P(Spam)
+
+without conditioning on another event.
+
+
+56. QUESTION:
+Bayes Theorem kya hai?
+
+ANSWER:
+Bayes theorem evidence ke basis par probability update karne ke liye use hota hai.
+
+Formula:
+
+P(A|B)
+=
+P(B|A) × P(A)
+----------------
+P(B)
+
+
+57. QUESTION:
+Bayes theorem AI mein kaha use hota hai?
+
+ANSWER:
+Examples:
+
+- Spam classification
+- Medical diagnosis
+- Bayesian ML
+- Fraud detection
+- Classification
+- Updating beliefs based on evidence
+
+
+58. QUESTION:
+Prior Probability kya hai?
+
+ANSWER:
+Evidence observe karne se pehle event ke baare mein existing belief ko prior probability kehte hain.
+
+Example:
+
+P(Spam)
+
+
+59. QUESTION:
+Likelihood kya hai?
+
+ANSWER:
+Given hypothesis, observed evidence kitna probable hai usko likelihood kehte hain.
+
+Example:
+
+P(Email words | Spam)
+
+
+60. QUESTION:
+Posterior Probability kya hai?
+
+ANSWER:
+Evidence observe karne ke baad updated probability posterior hoti hai.
+
+Formula:
+
+Posterior
+∝
+Likelihood × Prior
+
+
+==================================================
+SECTION 7: RANDOM VARIABLES
+==================================================
+
+61. QUESTION:
+Random Variable kya hota hai?
+
+ANSWER:
+Random experiment ke outcomes ko numerical values assign karne wale variable ko random variable kehte hain.
+
+Example:
+
+Coin toss:
+
+Head = 1
+Tail = 0
+
+
+62. QUESTION:
+Discrete Random Variable kya hai?
+
+ANSWER:
+Jo countable values leta hai.
+
+Example:
+
+Number of failed API calls
+Number of tokens
+Number of users
+
+
+63. QUESTION:
+Continuous Random Variable kya hai?
+
+ANSWER:
+Jo continuous range mein values le sakta hai.
+
+Example:
+
+Response latency
+Temperature
+Model inference time
+GPU utilization
+
+
+64. QUESTION:
+PMF kya hai?
+
+ANSWER:
+PMF ka full form Probability Mass Function hai.
+
+Discrete random variable ke individual values ki probability represent karta hai.
+
+
+65. QUESTION:
+PDF kya hai?
+
+ANSWER:
+PDF ka full form Probability Density Function hai.
+
+Continuous random variable ke distribution ko represent karta hai.
+
+Important:
+Continuous variable ke exact single point ki probability generally 0 hoti hai; interval probability area se milti hai.
+
+
+66. QUESTION:
+CDF kya hai?
+
+ANSWER:
+CDF ka full form Cumulative Distribution Function hai.
+
+Ye batata hai:
+
+P(X ≤ x)
+
+
+67. QUESTION:
+PMF, PDF aur CDF mein difference?
+
+ANSWER:
+
+PMF:
+Discrete variable.
+
+PDF:
+Continuous variable ki density.
+
+CDF:
+x tak cumulative probability.
+
+
+68. QUESTION:
+Expected Value kya hai?
+
+ANSWER:
+Random variable ka long-run average expected value hota hai.
+
+Discrete case:
+
+E[X] = Σ xP(x)
+
+
+69. QUESTION:
+AI mein Expected Value ka use?
+
+ANSWER:
+Expected cost, expected reward, expected loss aur expected performance calculate karne mein useful hai.
+
+Example:
+
+Expected API cost
+=
+Σ(probability × cost)
+
+
+70. QUESTION:
+Variance of Random Variable kya hai?
+
+ANSWER:
+Random variable expected value se kitna spread hai usko variance measure karta hai.
+
+Formula:
+
+Var(X)
+=
+E[(X - E[X])²]
+
+Alternative:
+
+Var(X)
+=
+E[X²] - (E[X])²
+
+
+==================================================
+SECTION 8: COVARIANCE AND CORRELATION
+==================================================
+
+71. QUESTION:
+Covariance kya hai?
+
+ANSWER:
+Covariance do variables ke saath mein kaise change karte hain ye measure karta hai.
+
+Positive covariance:
+Dono generally same direction mein move karte hain.
+
+Negative covariance:
+Opposite direction mein move karte hain.
+
+
+72. QUESTION:
+Correlation kya hai?
+
+ANSWER:
+Correlation do variables ke linear relationship ki strength aur direction measure karta hai.
+
+Range:
+
+-1 to +1
+
+
+73. QUESTION:
+Correlation = +1 ka meaning?
+
+ANSWER:
+Perfect positive linear relationship.
+
+Ek variable increase hota hai to doosra perfectly positive direction mein change karta hai.
+
+
+74. QUESTION:
+Correlation = -1 ka meaning?
+
+ANSWER:
+Perfect negative linear relationship.
+
+Ek variable increase hota hai to doosra perfectly opposite direction mein change karta hai.
+
+
+75. QUESTION:
+Correlation = 0 ka meaning?
+
+ANSWER:
+Linear relationship absent ho sakta hai.
+
+Important:
+Correlation zero ka matlab ye nahi ki koi bhi relationship nahi hai.
+
+
+76. QUESTION:
+Correlation aur Causation mein difference?
+
+ANSWER:
+
+Correlation:
+Do variables related hain.
+
+Causation:
+Ek variable doosre mein actual change cause karta hai.
+
+Important interview line:
+
+"Correlation does not imply causation."
+
+
+77. QUESTION:
+AI mein correlation ka use kaha hota hai?
+
+ANSWER:
+
+- Feature analysis
+- Feature selection
+- Multicollinearity detection
+- Exploratory Data Analysis
+- Understanding relationships
+
+
+78. QUESTION:
+Multicollinearity kya hai?
+
+ANSWER:
+Jab independent features aapas mein highly correlated hote hain, usko multicollinearity kehte hain.
+
+Regression models mein coefficients unstable ho sakte hain.
+
+
+79. QUESTION:
+Pearson Correlation kya hai?
+
+ANSWER:
+Pearson correlation do variables ke linear relationship ko measure karta hai.
+
+Range:
+
+-1 to +1
+
+
+80. QUESTION:
+Spearman Correlation kya hai?
+
+ANSWER:
+Spearman rank-based correlation hai.
+
+Monotonic relationships ke liye useful hai aur Pearson ke comparison mein assumptions different hain.
+
+
+==================================================
+SECTION 9: SAMPLING AND STATISTICAL INFERENCE
+==================================================
+
+81. QUESTION:
+Sampling kya hai?
+
+ANSWER:
+Population se representative subset select karna sampling hai.
+
+Large datasets ya populations mein sampling useful hoti hai.
+
+
+82. QUESTION:
+Random Sampling kya hai?
+
+ANSWER:
+Population ke members ko random process ke through select karna random sampling hai.
+
+Goal:
+Selection bias reduce karna.
+
+
+83. QUESTION:
+Sampling Bias kya hai?
+
+ANSWER:
+Jab sample population ko properly represent nahi karta, sampling bias hota hai.
+
+Example:
+
+Sirf premium users se product survey karna.
+
+Result entire user population ko represent nahi karega.
+
+
+84. QUESTION:
+Central Limit Theorem kya hai?
+
+ANSWER:
+Large enough random samples ke sample means ki distribution approximately normal ho sakti hai, even if original population normal na ho.
+
+Ye statistical inference ka fundamental concept hai.
+
+
+85. QUESTION:
+Standard Error kya hai?
+
+ANSWER:
+Sample statistic, especially sample mean, ki sampling variability ko standard error measure karta hai.
+
+Mean ke liye:
+
+SE = SD / √n
+
+n increase hone par standard error generally decrease hota hai.
+
+
+86. QUESTION:
+Confidence Interval kya hai?
+
+ANSWER:
+Confidence interval parameter ke plausible range ka estimate provide karta hai.
+
+Example:
+
+Mean latency:
+200 ms
+
+95% CI:
+190–210 ms
+
+Interpretation carefully karni chahiye:
+Repeated sampling procedure ke under 95% confidence intervals true parameter ko capture karenge.
+
+
+87. QUESTION:
+95% Confidence Interval ka simple meaning?
+
+ANSWER:
+Agar same statistical procedure ko repeatedly samples par apply karein, to approximately 95% constructed intervals true parameter ko contain karenge.
+
+Ye "parameter ke 95% chance interval mein hone" ka exact interpretation nahi hai.
+
+
+88. QUESTION:
+Margin of Error kya hai?
+
+ANSWER:
+Estimate ke around uncertainty ka allowable amount margin of error hota hai.
+
+Confidence interval approximately:
+
+Estimate ± Margin of Error
+
+
+89. QUESTION:
+Sample Size important kyun hai?
+
+ANSWER:
+Sample size badhne par estimates generally more stable hote hain aur standard error decrease hota hai.
+
+Lekin sirf large sample enough nahi hai.
+
+Sample representative bhi hona chahiye.
+
+
+90. QUESTION:
+Law of Large Numbers kya hai?
+
+ANSWER:
+Repeated independent observations badhne par sample average expected value ke closer approach karta hai.
+
+Simple idea:
+
+More observations
+        ↓
+More stable average
+
+
+==================================================
+SECTION 10: HYPOTHESIS TESTING + AI EVALUATION
+==================================================
+
+91. QUESTION:
+Hypothesis Testing kya hai?
+
+ANSWER:
+Data ke basis par statistical claim evaluate karna hypothesis testing hai.
+
+Basic process:
+
+Null Hypothesis
+       ↓
+Alternative Hypothesis
+       ↓
+Collect Data
+       ↓
+Calculate Test Statistic
+       ↓
+Calculate p-value
+       ↓
+Decision
+
+
+92. QUESTION:
+Null Hypothesis kya hai?
+
+ANSWER:
+Null hypothesis H0 generally "no effect" ya "no difference" represent karti hai.
+
+Example:
+
+H0:
+New AI model ki accuracy old model se different nahi hai.
+
+
+93. QUESTION:
+Alternative Hypothesis kya hai?
+
+ANSWER:
+Alternative hypothesis H1/Ha expected effect ya difference represent karti hai.
+
+Example:
+
+H1:
+New AI model ki accuracy old model se different hai.
+
+
+94. QUESTION:
+p-value kya hota hai?
+
+ANSWER:
+Agar null hypothesis true ho, to observed result ya usse more extreme result milne ki probability p-value se measure hoti hai.
+
+Small p-value:
+Data H0 ke against stronger evidence provide kar sakta hai.
+
+
+95. QUESTION:
+p-value < 0.05 ka kya meaning hai?
+
+ANSWER:
+Common convention ke under p-value < 0.05 ko statistically significant result maana ja sakta hai.
+
+Lekin:
+
+p-value < 0.05
+
+ka matlab ye nahi hai ki:
+
+"Null hypothesis ke false hone ki probability 95% hai."
+
+Practical significance bhi check karni chahiye.
+
+
+96. QUESTION:
+Type I Error kya hai?
+
+ANSWER:
+True Null Hypothesis ko reject kar dena.
+
+Simple:
+
+False Positive.
+
+
+97. QUESTION:
+Type II Error kya hai?
+
+ANSWER:
+False Null Hypothesis ko reject na karna.
+
+Simple:
+
+False Negative.
+
+
+98. QUESTION:
+Statistical Significance aur Practical Significance mein difference?
+
+ANSWER:
+
+Statistical significance:
+Effect statistically detectable hai.
+
+Practical significance:
+Effect business/engineering ke liye actually meaningful hai.
+
+Example:
+
+Model accuracy:
+90.00% → 90.01%
+
+Huge dataset ki wajah se statistically significant ho sakta hai.
+
+But business impact negligible ho sakta hai.
+
+
+99. QUESTION:
+A/B Testing AI/GenAI mein kaise use karenge?
+
+ANSWER:
+Do versions compare karne ke liye A/B testing use kar sakte hain.
+
+Example:
+
+A = Old LLM prompt
+B = New LLM prompt
+
+Metrics:
+
+- Accuracy
+- Task success rate
+- Latency
+- Token usage
+- Cost
+- User satisfaction
+
+Statistical testing se determine kar sakte hain ki observed improvement meaningful hai ya random variation.
+
+
+100. QUESTION:
+AI/GenAI Engineer ko Statistics aur Probability kyun aani chahiye?
+
+ANSWER:
+AI Engineer ke liye Statistics aur Probability sirf theory nahi hai.
+
+Ye directly use hoti hai:
+
+1. Data Analysis
+2. Feature Analysis
+3. Model Evaluation
+4. Probability Predictions
+5. Uncertainty Estimation
+6. A/B Testing
+7. Experimentation
+8. Error Analysis
+9. Anomaly Detection
+10. LLM Evaluation
+11. RAG Evaluation
+12. Agent Evaluation
+13. Cost Analysis
+14. Latency Analysis
+15. Business Decision Making
+
+
+Strong Interview Answer:
+
+"Statistics helps me understand data, variation, distributions and model performance, while probability helps me reason about uncertainty and outcomes. As an AI/GenAI Engineer, I use these concepts for data analysis, model evaluation, experimentation, anomaly detection, A/B testing and evaluating LLM or RAG systems."
+
+
+==================================================
+BONUS: GENAI-SPECIFIC STATISTICS & PROBABILITY
+==================================================
+
+IMPORTANT POINT 1:
+LLM output deterministic nahi bhi ho sakta.
+
+Temperature aur sampling settings output variability affect kar sakti hain.
+
+
+IMPORTANT POINT 2:
+LLM evaluation ko single example se judge nahi karna chahiye.
+
+Multiple test cases aur aggregate metrics use karna better hai.
+
+
+IMPORTANT POINT 3:
+Average score alone enough nahi hai.
+
+Mean ke saath:
+
+- Median
+- Standard Deviation
+- Percentiles
+- Distribution
+
+bhi check kar sakte hain.
+
+
+IMPORTANT POINT 4:
+LLM latency ke liye p50, p95 aur p99 important hain.
+
+p50:
+50% requests is latency se faster/equal hain.
+
+p95:
+95% requests is latency se faster/equal hain.
+
+p99:
+99% requests is latency se faster/equal hain.
+
+
+IMPORTANT POINT 5:
+GenAI cost analysis mein expected cost useful hai.
+
+Expected Cost:
+
+Σ Probability × Cost
+
+
+IMPORTANT POINT 6:
+RAG evaluation mein retrieval aur generation ko separately evaluate karna chahiye.
+
+Retrieval:
+Relevant documents aaye?
+
+Generation:
+Answer correct hai?
+
+
+IMPORTANT POINT 7:
+AI system mein uncertainty ko ignore nahi karna chahiye.
+
+Examples:
+
+- Prediction probability
+- Confidence interval
+- Model disagreement
+- Sampling variability
+
+
+IMPORTANT POINT 8:
+Correlation-based feature selection blindly nahi karna chahiye.
+
+Domain knowledge bhi important hai.
+
+
+IMPORTANT POINT 9:
+Outlier ko blindly remove nahi karna chahiye.
+
+Fraud detection mein outlier actual fraud signal ho sakta hai.
+
+
+IMPORTANT POINT 10:
+Large sample automatically unbiased sample nahi hota.
+
+Agar sampling biased hai to large biased sample bhi misleading result de sakta hai.
+
+
+==================================================
+TOP 25 MUST-REMEMBER FORMULAS
+==================================================
+
+1. MEAN
+
+Mean = Σx / n
+
+
+2. WEIGHTED MEAN
+
+Weighted Mean =
+Σ(wx) / Σw
+
+
+3. RANGE
+
+Range = Maximum - Minimum
+
+
+4. VARIANCE
+
+Variance =
+Average of squared deviations from mean
+
+
+5. STANDARD DEVIATION
+
+SD = √Variance
+
+
+6. COEFFICIENT OF VARIATION
+
+CV = SD / Mean
+
+
+7. IQR
+
+IQR = Q3 - Q1
+
+
+8. LOWER OUTLIER BOUND
+
+Q1 - 1.5 × IQR
+
+
+9. UPPER OUTLIER BOUND
+
+Q3 + 1.5 × IQR
+
+
+10. Z-SCORE
+
+Z = (X - Mean) / SD
+
+
+11. BASIC PROBABILITY
+
+P(A) =
+Favorable Outcomes / Total Outcomes
+
+
+12. COMPLEMENT
+
+P(A') = 1 - P(A)
+
+
+13. JOINT PROBABILITY
+
+P(A ∩ B)
+
+
+14. CONDITIONAL PROBABILITY
+
+P(A|B) =
+P(A ∩ B) / P(B)
+
+
+15. BAYES THEOREM
+
+P(A|B) =
+P(B|A)P(A) / P(B)
+
+
+16. EXPECTED VALUE
+
+E[X] = ΣxP(x)
+
+
+17. VARIANCE
+
+Var(X) =
+E[X²] - (E[X])²
+
+
+18. STANDARD ERROR
+
+SE = SD / √n
+
+
+19. CONFIDENCE INTERVAL
+
+Estimate ± Margin of Error
+
+
+20. F1 SCORE
+
+F1 =
+2 × Precision × Recall
+----------------------
+Precision + Recall
+
+
+21. CORRELATION RANGE
+
+-1 ≤ r ≤ +1
+
+
+22. POSITIVE CORRELATION
+
+r > 0
+
+
+23. NEGATIVE CORRELATION
+
+r < 0
+
+
+24. NO LINEAR CORRELATION
+
+r ≈ 0
+
+
+25. NORMAL DISTRIBUTION RULE
+
+68% → ±1 SD
+95% → ±2 SD
+99.7% → ±3 SD
+
+
+==================================================
+FINAL AI ENGINEER INTERVIEW FORMULA
+==================================================
+
+STATISTICS
+    +
+PROBABILITY
+    +
+LINEAR ALGEBRA
+    +
+PYTHON
+    +
+MACHINE LEARNING
+    +
+DEEP LEARNING
+    +
+LLM
+    +
+RAG
+    +
+AGENTS
+    +
+FASTAPI
+    +
+DATABASE
+    +
+CLOUD
+    +
+MLOPS
+    +
+EVALUATION
+    =
+AI / GENAI ENGINEER
+
+
+INTERVIEW MEIN HAR STATISTICS QUESTION KO
+IS FORMAT MEIN ANSWER KARO:
+
+1. Definition
+2. Formula
+3. Simple Example
+4. AI/GenAI Use Case
+5. Production Relevance
+
+
+Example:
+
+QUESTION:
+Standard Deviation kya hai?
+
+ANSWER:
+
+"Standard deviation data ke spread ko measure karta hai.
+
+Agar standard deviation low hai to values mean ke close hain.
+Agar standard deviation high hai to values widely spread hain.
+
+Formula:
+SD = √Variance
+
+AI mein main standard deviation ko model performance, latency,
+token usage aur experiment results ki variability understand karne
+ke liye use kar sakta hoon.
+
+Production mein sirf average latency dekhne ke instead p50,
+p95 aur p99 latency bhi analyze karunga."
+
+
+==================================================
+MOST IMPORTANT 30 TOPICS FOR INTERVIEW
+==================================================
+
+1. Mean
+2. Median
+3. Mode
+4. Variance
+5. Standard Deviation
+6. Range
+7. IQR
+8. Outliers
+9. Normal Distribution
+10. Z-score
+11. Skewness
+12. Probability
+13. Conditional Probability
+14. Bayes Theorem
+15. Independent Events
+16. Dependent Events
+17. Random Variables
+18. Expected Value
+19. PMF
+20. PDF
+21. CDF
+22. Covariance
+23. Correlation
+24. Sampling
+25. Central Limit Theorem
+26. Standard Error
+27. Confidence Interval
+28. Hypothesis Testing
+29. p-value
+30. Type I / Type II Error
+
+
+FINAL RULE:
+
+AI/GENAI INTERVIEW KE LIYE
+FORMULA RATTA MAT MARO.
+
+Har concept ko connect karo:
+
+DATA
+ ↓
+STATISTICS
+ ↓
+PROBABILITY
+ ↓
+MODEL
+ ↓
+EVALUATION
+ ↓
+EXPERIMENT
+ ↓
+BUSINESS DECISION
+
+
+Strong AI Engineer mindset:
+
+"Data mein variation hai.
+Probability uncertainty ko quantify karti hai.
+Statistics us variation ko analyze karti hai.
+Machine Learning patterns learn karta hai.
+GenAI systems probabilistic outputs produce kar sakte hain.
+Engineering ka kaam reliable, measurable aur production-ready
+system banana hai."
