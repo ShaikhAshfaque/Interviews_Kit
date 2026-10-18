@@ -1,0 +1,1250 @@
+============================================================
+AWS CLOUD FOR AI / GENAI ENGINEERS
+TOP 150 INTERVIEW QUESTIONS & ANSWERS
+HINGLISH COPY NOTES
+============================================================
+
+
+========================
+SECTION 1: AWS FUNDAMENTALS
+========================
+
+Q1. AWS kya hai?
+ANSWER:
+AWS = Amazon Web Services.
+Ye cloud platform hai jahan compute, storage, database, networking, security,
+AI/ML aur monitoring services available hoti hain.
+
+Q2. AI Engineer ke liye AWS kyun important hai?
+ANSWER:
+AI model ko production mein deploy karne ke liye compute, GPU, storage,
+database, API, security, monitoring aur scaling chahiye.
+AWS ye complete infrastructure provide karta hai.
+
+Q3. AWS Region kya hota hai?
+ANSWER:
+Region ek geographic location hoti hai jahan AWS ke multiple data centers hote hain.
+
+Example:
+Mumbai, Singapore, Frankfurt, London.
+
+Q4. Availability Zone kya hai?
+ANSWER:
+Availability Zone ek isolated data center location hoti hai within an AWS Region.
+
+Example:
+ap-south-1a
+ap-south-1b
+ap-south-1c
+
+Q5. Region aur AZ mein difference?
+ANSWER:
+Region = geographic area.
+AZ = Region ke andar isolated infrastructure location.
+
+Q6. AI application ko multiple AZ mein kyun deploy karenge?
+ANSWER:
+High availability ke liye.
+Agar ek AZ fail ho jaye to application doosre AZ se serve ho sakti hai.
+
+Q7. AWS Global Infrastructure kya hai?
+ANSWER:
+AWS Regions, Availability Zones, Edge Locations aur networking infrastructure
+ka global network AWS Global Infrastructure hai.
+
+Q8. AWS Console kya hai?
+ANSWER:
+AWS resources ko browser se manage karne ka graphical interface.
+
+Q9. AWS CLI kya hai?
+ANSWER:
+Command line se AWS resources manage karne ka tool.
+
+Example:
+aws s3 ls
+
+Q10. AWS SDK kya hai?
+ANSWER:
+Programming language ke through AWS services access karne ke liye SDK use hota hai.
+
+Python mein:
+Boto3.
+
+
+========================
+SECTION 2: IAM & SECURITY
+========================
+
+Q11. IAM kya hai?
+ANSWER:
+IAM = Identity and Access Management.
+Ye decide karta hai ki kaun AWS resources ko access kar sakta hai
+aur kya actions perform kar sakta hai.
+
+Q12. IAM User kya hai?
+ANSWER:
+Ek identity jisko AWS resources access karne ki permissions di ja sakti hain.
+
+Q13. IAM Role kya hai?
+ANSWER:
+Role temporary permissions provide karta hai.
+AI workloads mein EC2, Lambda, SageMaker jaise services ko AWS resources
+access karne ke liye roles use kiye jaate hain.
+
+Q14. IAM Policy kya hai?
+ANSWER:
+Policy JSON-based permission document hota hai.
+
+Example:
+Allow S3 read access.
+
+Q15. IAM User aur IAM Role mein difference?
+ANSWER:
+User generally human identity ke liye.
+Role applications/services ke liye preferred hai.
+
+Q16. Least Privilege kya hai?
+ANSWER:
+User/application ko sirf required permissions dena.
+
+Example:
+Agar application ko S3 read karna hai,
+to S3 full access nahi dena chahiye.
+
+Q17. AI application mein IAM ka use?
+ANSWER:
+AI application ko S3 datasets, Secrets Manager, Bedrock, SageMaker,
+CloudWatch etc. access karne ke liye IAM permissions chahiye.
+
+Q18. Access Key kya hoti hai?
+ANSWER:
+Programmatic AWS access ke liye credentials.
+Production applications mein hard-code nahi karni chahiye.
+
+Q19. AWS credentials code mein hard-code kyun nahi karne chahiye?
+ANSWER:
+Security risk hai.
+GitHub par accidentally credentials expose ho sakti hain.
+
+Q20. Production mein credentials kaise manage karenge?
+ANSWER:
+IAM Roles + AWS Secrets Manager + environment/configuration management
+use karenge.
+
+
+========================
+SECTION 3: S3 STORAGE
+========================
+
+Q21. Amazon S3 kya hai?
+ANSWER:
+S3 = Simple Storage Service.
+Object storage service hai.
+
+Q22. AI Engineer S3 ka use kahan karega?
+ANSWER:
+Datasets
+Model files
+Training data
+Embeddings
+Logs
+Evaluation datasets
+Documents
+Model artifacts
+Fine-tuned model checkpoints.
+
+Q23. S3 Bucket kya hai?
+ANSWER:
+S3 mein objects store karne ke liye container ko bucket kehte hain.
+
+Q24. S3 Object kya hai?
+ANSWER:
+S3 mein stored actual file ko object kehte hain.
+
+Example:
+dataset.csv
+model.pkl
+document.pdf
+
+Q25. AI pipeline mein S3 ka role?
+ANSWER:
+
+Raw Data
+   ↓
+S3
+   ↓
+Preprocessing
+   ↓
+Training
+   ↓
+Model Artifact
+   ↓
+S3
+
+Q26. S3 versioning kya hai?
+ANSWER:
+Same object ki multiple versions maintain kar sakte hain.
+
+AI/ML mein dataset aur model artifacts ke liye useful hai.
+
+Q27. S3 lifecycle policy kya hai?
+ANSWER:
+Old data ko automatically cheaper storage class mein move ya delete kar sakte hain.
+
+Q28. S3 encryption kya hai?
+ANSWER:
+S3 data ko encryption ke through secure kiya ja sakta hai.
+
+Common:
+SSE-S3
+SSE-KMS
+
+Q29. S3 aur EBS mein difference?
+ANSWER:
+S3 = object storage.
+EBS = block storage attached to EC2.
+
+Q30. Large AI dataset S3 mein kyun rakhte hain?
+ANSWER:
+Highly scalable, durable aur cost-effective object storage hai.
+
+
+========================
+SECTION 4: EC2 & COMPUTE
+========================
+
+Q31. EC2 kya hai?
+ANSWER:
+EC2 = Elastic Compute Cloud.
+Virtual servers provide karta hai.
+
+Q32. AI Engineer EC2 ka use kahan karega?
+ANSWER:
+FastAPI server
+ML inference
+Data processing
+Custom AI applications
+GPU workloads
+Training workloads.
+
+Q33. EC2 Instance Type kya hota hai?
+ANSWER:
+Different CPU, RAM, GPU aur network capabilities wale machine configurations.
+
+Q34. CPU aur GPU instance mein difference?
+ANSWER:
+CPU general-purpose processing ke liye.
+GPU parallel computation aur deep learning ke liye optimized hota hai.
+
+Q35. AI training ke liye GPU kyun useful hai?
+ANSWER:
+Neural networks mein large matrix operations hote hain.
+GPU parallel computation ke through training accelerate karta hai.
+
+Q36. GPU EC2 examples?
+ANSWER:
+AWS mein GPU-based instances jaise:
+G-series
+P-series
+
+Q37. P-series kis type ke workload ke liye useful hai?
+ANSWER:
+Heavy ML/DL training aur large AI workloads ke liye.
+
+Q38. G-series ka use?
+ANSWER:
+GPU-based inference, graphics aur selected ML workloads ke liye useful.
+
+Q39. EC2 Auto Scaling kya hai?
+ANSWER:
+Demand ke according EC2 instances automatically increase/decrease karna.
+
+Q40. AI inference mein Auto Scaling kyun important hai?
+ANSWER:
+Traffic increase hone par instances scale up.
+Traffic decrease hone par scale down.
+Isse availability aur cost dono manage hote hain.
+
+
+========================
+SECTION 5: VPC & NETWORKING
+========================
+
+Q41. VPC kya hai?
+ANSWER:
+VPC = Virtual Private Cloud.
+AWS mein logically isolated network environment hai.
+
+Q42. AI application mein VPC kyun important hai?
+ANSWER:
+Private networking, security aur controlled access ke liye.
+
+Q43. Public Subnet kya hai?
+ANSWER:
+Jis subnet ka route Internet Gateway ke through internet tak ho sakta hai.
+
+Q44. Private Subnet kya hai?
+ANSWER:
+Jahan resources directly public internet se accessible nahi hote.
+
+Q45. AI model ko private subnet mein kyun deploy karenge?
+ANSWER:
+Sensitive model, data aur internal services ko public exposure se protect karne ke liye.
+
+Q46. Internet Gateway kya hai?
+ANSWER:
+VPC ko internet se connect karne ke liye use hota hai.
+
+Q47. NAT Gateway kya hai?
+ANSWER:
+Private subnet ke resources ko outbound internet access provide karta hai
+without making them publicly accessible.
+
+Q48. Security Group kya hai?
+ANSWER:
+EC2/resource level virtual firewall hai.
+
+Q49. Network ACL kya hai?
+ANSWER:
+Subnet level traffic control mechanism hai.
+
+Q50. Security Group aur NACL mein difference?
+ANSWER:
+Security Group = resource/instance level.
+NACL = subnet level.
+
+
+========================
+SECTION 6: LOAD BALANCING & API
+========================
+
+Q51. Load Balancer kya hai?
+ANSWER:
+Incoming traffic ko multiple backend servers mein distribute karta hai.
+
+Q52. AI inference mein Load Balancer kyun?
+ANSWER:
+Multiple inference instances ke beech requests distribute karne ke liye.
+
+Q53. ALB kya hai?
+ANSWER:
+ALB = Application Load Balancer.
+HTTP/HTTPS based applications ke liye useful.
+
+Q54. API Gateway kya hai?
+ANSWER:
+APIs ko expose, secure, throttle aur manage karne ke liye AWS service.
+
+Q55. AI application mein API Gateway ka role?
+ANSWER:
+
+User
+ ↓
+API Gateway
+ ↓
+Authentication
+ ↓
+AI Backend
+ ↓
+LLM/Model
+
+Q56. API throttling kya hai?
+ANSWER:
+Requests per second/minute ko limit karna.
+
+Q57. AI APIs mein throttling kyun important hai?
+ANSWER:
+Abuse prevent karne, cost control aur backend overload prevent karne ke liye.
+
+Q58. Rate limiting aur throttling same hain?
+ANSWER:
+Conceptually related hain.
+Rate limiting request frequency control karta hai.
+Throttling excessive traffic ko restrict/delay kar sakta hai.
+
+Q59. AI inference endpoint mein health check kyun?
+ANSWER:
+Backend healthy hai ya nahi identify karne ke liye.
+
+Q60. Load Balancer health check kya karta hai?
+ANSWER:
+Backend endpoint ko periodically check karta hai aur unhealthy instances ko
+traffic se remove kar sakta hai.
+
+
+========================
+SECTION 7: LAMBDA
+========================
+
+Q61. AWS Lambda kya hai?
+ANSWER:
+Serverless compute service hai.
+Server manage kiye bina code execute kar sakte hain.
+
+Q62. AI Engineer Lambda ka use kahan karega?
+ANSWER:
+Lightweight preprocessing
+API logic
+Event processing
+S3 triggers
+Data validation
+Workflow automation.
+
+Q63. Lambda large LLM inference ke liye ideal hai?
+ANSWER:
+Generally nahi.
+Large models ko GPU, memory aur long-running compute ki zarurat hoti hai.
+
+Q64. Lambda cold start kya hai?
+ANSWER:
+Inactive function ko invoke karne par environment initialize hone mein jo
+extra latency hoti hai usse cold start kehte hain.
+
+Q65. AI pipeline mein Lambda + S3 ka example?
+ANSWER:
+
+File Upload
+   ↓
+S3
+   ↓
+Lambda Trigger
+   ↓
+Document Processing
+   ↓
+Metadata DB
+
+
+========================
+SECTION 8: DATABASES
+========================
+
+Q66. Amazon RDS kya hai?
+ANSWER:
+Managed relational database service.
+
+Q67. AI applications mein RDS ka use?
+ANSWER:
+Users
+Metadata
+Transactions
+Application configuration
+Evaluation results
+Audit records store karne ke liye.
+
+Q68. Amazon Aurora kya hai?
+ANSWER:
+AWS ka managed relational database engine compatible with MySQL/PostgreSQL.
+
+Q69. DynamoDB kya hai?
+ANSWER:
+Managed NoSQL database service.
+
+Q70. AI application mein DynamoDB ka use?
+ANSWER:
+High-scale key-value/document workloads ke liye.
+
+Q71. PostgreSQL AI applications mein kyun popular hai?
+ANSWER:
+Relational data + mature ecosystem + extensions + metadata management ke liye.
+
+Q72. Vector database kya hai?
+ANSWER:
+Embeddings ko store aur similarity search perform karne ke liye optimized database.
+
+Q73. AWS mein vector search kaise implement kar sakte hain?
+ANSWER:
+Options include:
+OpenSearch vector search
+Aurora PostgreSQL with pgvector
+specialized vector databases hosted/integrated with AWS.
+
+Q74. RAG application mein vector DB ka role?
+ANSWER:
+
+Documents
+ ↓
+Chunks
+ ↓
+Embeddings
+ ↓
+Vector DB
+ ↓
+Similarity Search
+ ↓
+Relevant Context
+
+Q75. Metadata database aur vector database mein difference?
+ANSWER:
+Metadata DB application information store karta hai.
+Vector DB embeddings aur similarity search handle karta hai.
+
+
+========================
+SECTION 9: SAGEMAKER
+========================
+
+Q76. Amazon SageMaker kya hai?
+ANSWER:
+AWS ka managed machine learning platform hai.
+
+Q77. AI Engineer SageMaker ka use kahan karega?
+ANSWER:
+Data preparation
+Training
+Experimentation
+Model deployment
+Model monitoring
+ML workflows.
+
+Q78. SageMaker Training Job kya hai?
+ANSWER:
+Managed environment mein ML model train karne ka job.
+
+Q79. SageMaker Endpoint kya hai?
+ANSWER:
+Trained model ko inference ke liye deploy karne ka managed endpoint.
+
+Q80. Real-time inference kya hai?
+ANSWER:
+Request aati hai aur model immediately prediction return karta hai.
+
+Q81. Batch Transform kya hai?
+ANSWER:
+Large dataset par offline predictions generate karna.
+
+Q82. Real-time vs batch inference?
+ANSWER:
+Real-time = low latency.
+Batch = large volume offline processing.
+
+Q83. SageMaker Model Registry kya hai?
+ANSWER:
+Models ke versions, metadata aur deployment lifecycle manage karne ke liye.
+
+Q84. SageMaker Pipelines kya hai?
+ANSWER:
+ML workflow automation aur orchestration ke liye.
+
+Q85. SageMaker Feature Store kya hai?
+ANSWER:
+ML features ko centrally store, manage aur serve karne ke liye.
+
+
+========================
+SECTION 10: BEDROCK & GENAI
+========================
+
+Q86. Amazon Bedrock kya hai?
+ANSWER:
+AWS managed service hai jo foundation models ko APIs ke through use karne deta hai.
+
+Q87. Bedrock ka advantage kya hai?
+ANSWER:
+Infrastructure khud manage kiye bina multiple foundation models access kar sakte hain.
+
+Q88. Bedrock mein foundation model kya hai?
+ANSWER:
+Large pre-trained model jo different GenAI tasks perform kar sakta hai.
+
+Q89. Bedrock mein model selection kaise karenge?
+ANSWER:
+Use case ke according:
+quality
+latency
+cost
+context window
+reasoning capability
+language support
+security
+evaluate karenge.
+
+Q90. Bedrock vs SageMaker?
+ANSWER:
+Bedrock = foundation models consume/customize through managed APIs.
+SageMaker = broader ML platform, custom training/deployment/workflows.
+
+Q91. GenAI application mein Bedrock ka architecture?
+ANSWER:
+
+User
+ ↓
+API
+ ↓
+Backend
+ ↓
+Prompt
+ ↓
+Bedrock
+ ↓
+Foundation Model
+ ↓
+Response
+
+Q92. Bedrock ko RAG mein kaise use karenge?
+ANSWER:
+
+User Query
+ ↓
+Embedding
+ ↓
+Vector Search
+ ↓
+Context
+ ↓
+Prompt
+ ↓
+Bedrock LLM
+ ↓
+Answer
+
+Q93. Bedrock Knowledge Bases kya solve karta hai?
+ANSWER:
+Managed RAG workflow ke through enterprise data ko foundation models ke saath
+connect karne mein help karta hai.
+
+Q94. Bedrock Guardrails kya hai?
+ANSWER:
+LLM inputs/outputs ko policies ke according control aur filter karne ke liye.
+
+Q95. GenAI security mein Guardrails kyun important hai?
+ANSWER:
+Unsafe content, policy violations, unwanted topics aur certain sensitive
+information handling ko control karne ke liye.
+
+
+========================
+SECTION 11: RAG ON AWS
+========================
+
+Q96. AWS par RAG architecture kaise design karenge?
+ANSWER:
+
+S3
+ ↓
+Document Processing
+ ↓
+Chunking
+ ↓
+Embedding Model
+ ↓
+Vector Store
+ ↓
+Retriever
+ ↓
+Reranker
+ ↓
+LLM
+ ↓
+Response
+
+Q97. Documents S3 mein kyun store karenge?
+ANSWER:
+Centralized, scalable aur durable object storage ke liye.
+
+Q98. RAG mein embedding model ka role?
+ANSWER:
+Text ko numerical vector representation mein convert karta hai.
+
+Q99. RAG retrieval quality kaise measure karenge?
+ANSWER:
+Retrieval Recall
+Precision
+Context Relevance
+Context Precision
+Answer Groundedness
+Faithfulness.
+
+Q100. RAG hallucination kaise reduce karenge?
+ANSWER:
+Better retrieval
+Reranking
+Strong prompts
+Context filtering
+Grounded generation
+Output validation
+Evaluation
+Guardrails.
+
+
+========================
+SECTION 12: CLOUDWATCH & OBSERVABILITY
+========================
+
+Q101. CloudWatch kya hai?
+ANSWER:
+AWS monitoring aur observability service hai.
+
+Q102. AI application mein CloudWatch ka use?
+ANSWER:
+Logs
+Metrics
+Alarms
+Latency
+Errors
+CPU
+Memory
+Request counts monitor karne ke liye.
+
+Q103. AI inference mein kaunse metrics monitor karenge?
+ANSWER:
+Latency
+Throughput
+Error rate
+CPU
+GPU
+Memory
+Request count
+Token usage
+Cost
+Model quality.
+
+Q104. p95 latency kya hai?
+ANSWER:
+95% requests given latency se lower ya equal hain.
+
+Q105. p99 latency kya hai?
+ANSWER:
+99% requests given latency se lower ya equal hain.
+
+Q106. AI application mein p95/p99 kyun important?
+ANSWER:
+Average latency hidden slow requests ko ignore kar sakti hai.
+p95/p99 tail latency identify karte hain.
+
+Q107. CloudWatch Alarm kya hai?
+ANSWER:
+Metric threshold cross hone par alert/action trigger kar sakta hai.
+
+Q108. AI production incident example?
+ANSWER:
+LLM latency suddenly increase ho gayi.
+CloudWatch metrics se latency spike identify karenge,
+logs/traces se root cause investigate karenge.
+
+Q109. Distributed tracing kya hai?
+ANSWER:
+Request ke different services ke through complete journey trace karna.
+
+Q110. AI application mein tracing example?
+ANSWER:
+
+User Request
+ ↓
+API Gateway
+ ↓
+FastAPI
+ ↓
+Retriever
+ ↓
+Vector DB
+ ↓
+LLM
+ ↓
+Response
+
+Har step ki latency trace kar sakte hain.
+
+
+========================
+SECTION 13: MLOPS ON AWS
+========================
+
+Q111. AWS MLOps architecture kya ho sakta hai?
+ANSWER:
+
+Git
+ ↓
+CI/CD
+ ↓
+Data Validation
+ ↓
+Training
+ ↓
+Evaluation
+ ↓
+Model Registry
+ ↓
+Staging
+ ↓
+Production
+ ↓
+Monitoring
+ ↓
+Retraining
+
+Q112. AWS mein model artifacts kahan store kar sakte hain?
+ANSWER:
+S3 mein.
+
+Q113. Experiment tracking kaise karenge?
+ANSWER:
+MLflow, SageMaker experiments ya other experiment tracking tools use kar sakte hain.
+
+Q114. Model registry kyun important hai?
+ANSWER:
+Model versions, approval aur deployment lifecycle manage karne ke liye.
+
+Q115. Model rollback kya hai?
+ANSWER:
+Production mein issue aane par previous stable model par return karna.
+
+Q116. Model deployment se pehle kya validate karenge?
+ANSWER:
+Accuracy
+Precision/Recall
+Latency
+Memory
+Robustness
+Bias
+Security
+Business metrics.
+
+Q117. Data drift kya hai?
+ANSWER:
+Production input data distribution training data se change ho jana.
+
+Q118. Concept drift kya hai?
+ANSWER:
+Input aur target relationship ka time ke saath change hona.
+
+Q119. AWS mein drift monitoring kaise implement karenge?
+ANSWER:
+Data/feature statistics collect karke baseline ke saath compare karenge
+aur alarms trigger karenge.
+
+Q120. Retraining pipeline kab trigger ho sakti hai?
+ANSWER:
+Drift threshold cross hone par,
+model performance degrade hone par,
+ya scheduled retraining ke basis par.
+
+
+========================
+SECTION 14: CONTAINERS & ECR
+========================
+
+Q121. Docker ka AWS mein use?
+ANSWER:
+AI application ko portable container mein package karne ke liye.
+
+Q122. Amazon ECR kya hai?
+ANSWER:
+ECR = Elastic Container Registry.
+Docker container images store karne ke liye.
+
+Q123. Typical AI deployment flow?
+ANSWER:
+
+Code
+ ↓
+Docker Build
+ ↓
+Docker Image
+ ↓
+ECR
+ ↓
+ECS/EKS/SageMaker
+ ↓
+Production
+
+Q124. ECS kya hai?
+ANSWER:
+Elastic Container Service.
+AWS managed container orchestration service.
+
+Q125. EKS kya hai?
+ANSWER:
+Elastic Kubernetes Service.
+Managed Kubernetes service.
+
+Q126. ECS vs EKS?
+ANSWER:
+ECS = AWS-native container orchestration.
+EKS = Kubernetes-based orchestration.
+
+Q127. AI Engineer EKS kyun choose karega?
+ANSWER:
+Complex AI workloads, Kubernetes ecosystem, custom orchestration,
+GPU scheduling aur portability ke liye.
+
+Q128. ECR mein image versioning kyun?
+ANSWER:
+Different application/model serving versions ko track aur rollback karne ke liye.
+
+Q129. Container image ko secure kaise karenge?
+ANSWER:
+Minimal base image
+Dependency scanning
+No secrets
+Non-root user
+Regular patching
+Image vulnerability scanning.
+
+Q130. AI inference container mein kya package karenge?
+ANSWER:
+Application code
+Dependencies
+Model serving framework
+Configuration
+Required runtime components.
+
+
+========================
+SECTION 15: COST, PERFORMANCE & SENIOR AI
+========================
+
+Q131. AWS AI cost ke major components kya hain?
+ANSWER:
+Compute
+GPU
+Storage
+Database
+Network
+LLM/API usage
+Logging
+Data transfer.
+
+Q132. GPU cost kaise optimize karenge?
+ANSWER:
+Right-size instance
+Autoscaling
+Spot where appropriate
+Batch workloads
+Model optimization
+Quantization
+Caching
+Scale-to-zero where possible.
+
+Q133. Spot Instance kya hai?
+ANSWER:
+Unused AWS compute capacity discounted price par use karne ka option.
+
+Q134. Spot GPU training mein risk kya hai?
+ANSWER:
+Instance interruption ho sakta hai.
+Checkpointing important hai.
+
+Q135. AI training mein checkpointing kyun?
+ANSWER:
+Training interrupt hone par complete training restart na karni pade.
+
+Q136. LLM cost kaise reduce karenge?
+ANSWER:
+Smaller model
+Prompt optimization
+Token reduction
+Caching
+Model routing
+Batching
+Quantization
+Appropriate model selection.
+
+Q137. Semantic caching kya hai?
+ANSWER:
+Similar semantic queries ke previous answers reuse karna.
+
+Q138. AI application mein Redis ka use?
+ANSWER:
+Caching
+Session state
+Rate limiting
+Queues
+Temporary data.
+
+Q139. Model routing kya hai?
+ANSWER:
+Different requests ko different models par route karna based on
+complexity, cost, latency ya quality.
+
+Q140. Example model routing?
+ANSWER:
+
+Simple Query → Small Model
+Complex Query → Large Model
+
+Isse cost optimize ho sakti hai.
+
+
+========================
+SECTION 16: SENIOR SECURITY & ARCHITECTURE
+========================
+
+Q141. AI application ko AWS par secure kaise karenge?
+ANSWER:
+IAM least privilege
+Private subnets
+Encryption
+Secrets Manager
+Security Groups
+VPC
+Logging
+Monitoring
+Network controls
+Guardrails.
+
+Q142. Data encryption at rest kya hai?
+ANSWER:
+Stored data ko encryption se protect karna.
+
+Example:
+S3 data encrypted with KMS.
+
+Q143. Encryption in transit kya hai?
+ANSWER:
+Network ke through data transfer ko TLS/HTTPS se secure karna.
+
+Q144. AWS KMS kya hai?
+ANSWER:
+KMS = Key Management Service.
+Encryption keys ko manage karne ke liye.
+
+Q145. Secrets Manager kya hai?
+ANSWER:
+Database passwords, API keys aur secrets securely store/manage karne ke liye.
+
+Q146. AI application mein prompt injection kya hai?
+ANSWER:
+Attacker malicious instructions dekar LLM ke intended behavior ko manipulate
+karne ki koshish karta hai.
+
+Q147. Prompt injection ko kaise mitigate karenge?
+ANSWER:
+Input validation
+Prompt isolation
+Tool permission control
+Least privilege
+Output validation
+Guardrails
+Monitoring
+Human approval for sensitive actions.
+
+Q148. Senior AI Engineer AWS architecture explain kare to kya cover kare?
+ANSWER:
+Client
+ ↓
+Route/API Gateway
+ ↓
+Authentication
+ ↓
+Load Balancer
+ ↓
+AI Backend
+ ↓
+Cache
+ ↓
+RAG/Agent Layer
+ ↓
+Vector DB
+ ↓
+LLM/Model
+ ↓
+Guardrails
+ ↓
+Response
+
+Alongside:
+
+S3 → Data
+IAM → Security
+CloudWatch → Monitoring
+ECR → Container Registry
+ECS/EKS/SageMaker → Deployment
+KMS → Encryption
+Secrets Manager → Secrets.
+
+Q149. Production GenAI AWS architecture ka best high-level answer?
+ANSWER:
+
+Users
+  ↓
+CloudFront / API Gateway
+  ↓
+Authentication + WAF + Rate Limiting
+  ↓
+Load Balancer
+  ↓
+FastAPI / AI Service
+  ↓
+Redis Cache
+  ↓
+AI Orchestrator
+  ↓
+Retriever
+  ↓
+Vector Database
+  ↓
+Reranker
+  ↓
+Amazon Bedrock / Hosted Model
+  ↓
+Guardrails
+  ↓
+Response
+
+Supporting Services:
+
+S3 → Documents + datasets + artifacts
+RDS → Application metadata
+IAM → Access control
+KMS → Encryption
+Secrets Manager → Secrets
+ECR → Container images
+ECS/EKS/SageMaker → Compute/deployment
+CloudWatch → Logs + metrics + alarms
+CI/CD → Automated deployment.
+
+Q150. Senior AI Engineer ko AWS interview mein kaise answer dena chahiye?
+ANSWER:
+
+Main sirf AWS service ka naam nahi bataunga.
+
+Main requirement ke according architecture design karunga:
+
+1. Business requirement
+2. Data requirement
+3. Compute requirement
+4. Storage
+5. Networking
+6. Security
+7. Model selection
+8. Training/inference strategy
+9. RAG/LLM architecture
+10. Deployment
+11. Scaling
+12. Monitoring
+13. Cost optimization
+14. Disaster recovery
+15. Governance
+
+Example:
+
+"Production GenAI application ke liye main private VPC architecture,
+IAM least privilege, S3 for document storage, vector database for embeddings,
+Bedrock/managed model for LLM inference, FastAPI for backend,
+Redis for caching, ECS/EKS/SageMaker for deployment,
+CloudWatch/OpenTelemetry for observability,
+Secrets Manager/KMS for security,
+API Gateway/WAF for API protection,
+and CI/CD for automated deployment use karunga.
+
+Traffic aur workload ke according autoscaling,
+caching, model routing aur token optimization se latency aur cost control karunga."
+============================================================
+AWS AI ENGINEER QUICK STACK
+============================================================
+
+Compute:
+EC2
+Lambda
+ECS
+EKS
+SageMaker
+
+Storage:
+S3
+EBS
+EFS
+
+Database:
+RDS
+Aurora
+DynamoDB
+OpenSearch
+Aurora + pgvector
+
+GenAI:
+Amazon Bedrock
+Bedrock Knowledge Bases
+Bedrock Guardrails
+
+Networking:
+VPC
+Subnet
+Internet Gateway
+NAT Gateway
+Security Group
+NACL
+ALB
+API Gateway
+Route 53
+
+Security:
+IAM
+KMS
+Secrets Manager
+WAF
+CloudTrail
+
+Containers:
+Docker
+ECR
+ECS
+EKS
+
+Monitoring:
+CloudWatch
+CloudTrail
+X-Ray
+OpenTelemetry
+
+MLOps:
+SageMaker
+SageMaker Pipelines
+Model Registry
+S3
+CI/CD
+
+Caching:
+ElastiCache
+Redis
+
+============================================================
+SENIOR AI ENGINEER AWS FORMULA
+============================================================
+
+DATA
++
+S3
++
+IAM
++
+VPC
++
+COMPUTE
++
+GPU
++
+SAGEMAKER
++
+BEDROCK
++
+RAG
++
+VECTOR DATABASE
++
+DOCKER
++
+ECR
++
+ECS/EKS
++
+API GATEWAY
++
+LOAD BALANCER
++
+REDIS
++
+MONITORING
++
+SECURITY
++
+CI/CD
++
+COST OPTIMIZATION
++
+SCALING
++
+DISASTER RECOVERY
+=
+PRODUCTION-READY AI / GENAI ENGINEER
+============================================================
