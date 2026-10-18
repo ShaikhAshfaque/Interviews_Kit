@@ -1,0 +1,1910 @@
+PYTHON FOR AI ENGINEER / GENAI ENGINEER
+TOP 100 INTERVIEW QUESTIONS & ANSWERS
+HINGLISH INTERVIEW REVISION NOTES
+
+==================================================
+SECTION 1: PYTHON FUNDAMENTALS
+==================================================
+
+1. QUESTION:
+Python kya hai?
+
+ANSWER:
+Python ek high-level, interpreted aur dynamically typed programming language hai.
+
+AI/ML, Data Science, Automation, Backend aur Generative AI mein Python ka bahut use hota hai.
+
+AI Engineer ke liye important libraries:
+- NumPy
+- Pandas
+- PyTorch
+- TensorFlow
+- FastAPI
+- Pydantic
+- LangChain
+
+
+2. QUESTION:
+Python ko interpreted language kyun kehte hain?
+
+ANSWER:
+Python code directly machine code mein execute nahi hota.
+
+Python source code ko bytecode mein convert karke Python Virtual Machine execute karti hai.
+
+Simple flow:
+
+Python Code
+    ↓
+Bytecode
+    ↓
+Python Virtual Machine
+    ↓
+Execution
+
+
+3. QUESTION:
+Dynamically typed language ka kya meaning hai?
+
+ANSWER:
+Python mein variable ka datatype manually declare karna zaroori nahi hota.
+
+Example:
+
+x = 10
+x = "Hello"
+
+Yahan same variable different types ki values hold kar sakta hai.
+
+
+4. QUESTION:
+Mutable aur Immutable kya hota hai?
+
+ANSWER:
+Mutable object ko create hone ke baad modify kar sakte hain.
+
+Mutable:
+- List
+- Dictionary
+- Set
+
+Immutable:
+- Integer
+- Float
+- String
+- Tuple
+
+Example:
+
+list1 = [1, 2, 3]
+list1.append(4)
+
+List modify ho gayi, isliye list mutable hai.
+
+
+5. QUESTION:
+List aur Tuple mein kya difference hai?
+
+ANSWER:
+
+List:
+- Mutable hoti hai.
+- Square brackets use karti hai.
+- Data modify kar sakte hain.
+
+Tuple:
+- Immutable hoti hai.
+- Parentheses use karti hai.
+- Data modify nahi kar sakte.
+
+Example:
+
+my_list = [1, 2, 3]
+my_tuple = (1, 2, 3)
+
+Interview line:
+"List mutable hai while tuple immutable hai."
+
+
+6. QUESTION:
+Set kya hota hai?
+
+ANSWER:
+Set unique elements ka unordered collection hai.
+
+Example:
+
+numbers = {1, 2, 2, 3}
+
+Output:
+
+{1, 2, 3}
+
+Duplicate automatically remove ho jaata hai.
+
+Set membership checking ke liye useful hai.
+
+
+7. QUESTION:
+Dictionary kya hoti hai?
+
+ANSWER:
+Dictionary key-value pairs store karti hai.
+
+Example:
+
+user = {
+    "name": "Ashfaque",
+    "role": "AI Engineer"
+}
+
+Yahan:
+name = key
+Ashfaque = value
+
+AI applications mein JSON-like data handle karne ke liye dictionaries bahut common hain.
+
+
+8. QUESTION:
+== aur is mein difference kya hai?
+
+ANSWER:
+
+== values compare karta hai.
+
+is object identity compare karta hai.
+
+Example:
+
+a == b
+
+Means:
+Kya dono ki values same hain?
+
+a is b
+
+Means:
+Kya dono same object ko reference kar rahe hain?
+
+
+9. QUESTION:
+None kya hota hai?
+
+ANSWER:
+None Python mein absence of value represent karta hai.
+
+Example:
+
+result = None
+
+API response mein missing value ko represent karne ke liye None commonly use hota hai.
+
+
+10. QUESTION:
+Python mein indentation important kyun hai?
+
+ANSWER:
+Python code blocks ko indentation se define karta hai.
+
+Example:
+
+if age > 18:
+    print("Adult")
+
+Indentation galat hone par IndentationError aa sakta hai.
+
+
+==================================================
+SECTION 2: FUNCTIONS AND CORE PYTHON
+==================================================
+
+11. QUESTION:
+Function kya hota hai?
+
+ANSWER:
+Function reusable block of code hota hai.
+
+Example:
+
+def add(a, b):
+    return a + b
+
+Function code duplication reduce karta hai.
+
+
+12. QUESTION:
+return aur print() mein difference kya hai?
+
+ANSWER:
+
+print():
+Output screen par show karta hai.
+
+return:
+Function se value caller ko wapas deta hai.
+
+Example:
+
+def add(a, b):
+    return a + b
+
+result = add(10, 20)
+
+AI pipelines mein return important hai because function ka output next processing step ko pass karna hota hai.
+
+
+13. QUESTION:
+*args kya hota hai?
+
+ANSWER:
+*args multiple positional arguments receive karne ke liye use hota hai.
+
+Example:
+
+def total(*args):
+    return sum(args)
+
+total(10, 20, 30)
+
+Yahan multiple arguments receive ho rahe hain.
+
+
+14. QUESTION:
+**kwargs kya hota hai?
+
+ANSWER:
+**kwargs multiple keyword arguments receive karne ke liye use hota hai.
+
+Example:
+
+def user(**kwargs):
+    print(kwargs)
+
+user(name="Ashfaque", role="AI Engineer")
+
+kwargs dictionary ke form mein values receive karega.
+
+
+15. QUESTION:
+Default argument kya hota hai?
+
+ANSWER:
+Function parameter ko default value dena default argument kehlata hai.
+
+Example:
+
+def greet(name="User"):
+    return f"Hello {name}"
+
+Agar name provide nahi kiya to "User" use hoga.
+
+
+16. QUESTION:
+Lambda function kya hai?
+
+ANSWER:
+Lambda ek small anonymous function hai.
+
+Example:
+
+square = lambda x: x * x
+
+print(square(5))
+
+Output:
+
+25
+
+Short operations ke liye lambda useful hai.
+
+
+17. QUESTION:
+List comprehension kya hai?
+
+ANSWER:
+List comprehension ek compact way hai list create karne ka.
+
+Example:
+
+squares = [x * x for x in range(5)]
+
+Output:
+
+[0, 1, 4, 9, 16]
+
+Data transformation mein useful hai.
+
+
+18. QUESTION:
+Generator kya hota hai?
+
+ANSWER:
+Generator values ko ek-ek karke generate karta hai.
+
+Ye complete data ko memory mein store nahi karta.
+
+Example:
+
+def numbers():
+    for i in range(5):
+        yield i
+
+Large datasets ke processing mein generators memory efficient hote hain.
+
+
+19. QUESTION:
+yield kya karta hai?
+
+ANSWER:
+yield function ko generator bana deta hai.
+
+yield value return karta hai aur function ki state preserve karta hai.
+
+Example:
+
+def numbers():
+    for i in range(3):
+        yield i
+
+Output:
+0
+1
+2
+
+
+20. QUESTION:
+Iterator kya hota hai?
+
+ANSWER:
+Iterator ek object hota hai jiske through values ko sequentially retrieve kar sakte hain.
+
+Important methods:
+
+__iter__()
+__next__()
+
+Example:
+
+numbers = iter([1, 2, 3])
+
+print(next(numbers))
+print(next(numbers))
+
+
+==================================================
+SECTION 3: OOP
+==================================================
+
+21. QUESTION:
+OOP kya hai?
+
+ANSWER:
+OOP ka full form Object-Oriented Programming hai.
+
+Isme code ko classes aur objects ke around organize karte hain.
+
+Main concepts:
+- Class
+- Object
+- Inheritance
+- Encapsulation
+- Polymorphism
+- Abstraction
+
+
+22. QUESTION:
+Class kya hoti hai?
+
+ANSWER:
+Class ek blueprint hoti hai jisse objects create kiye jaate hain.
+
+Example:
+
+class User:
+    pass
+
+
+23. QUESTION:
+Object kya hota hai?
+
+ANSWER:
+Class ka instance object hota hai.
+
+Example:
+
+class User:
+    pass
+
+user1 = User()
+
+Yahan user1 object hai.
+
+
+24. QUESTION:
+self kya hai?
+
+ANSWER:
+self current object ka reference hota hai.
+
+Example:
+
+class User:
+
+    def show(self):
+        print(self)
+
+self ke through object ke attributes aur methods access kar sakte hain.
+
+
+25. QUESTION:
+Constructor kya hota hai?
+
+ANSWER:
+Python mein __init__() method object initialize karne ke liye use hota hai.
+
+Example:
+
+class User:
+
+    def __init__(self, name):
+        self.name = name
+
+user = User("Ashfaque")
+
+
+26. QUESTION:
+Inheritance kya hai?
+
+ANSWER:
+Inheritance mein ek class doosri class ke properties aur methods reuse kar sakti hai.
+
+Example:
+
+class Animal:
+    def eat(self):
+        print("Eating")
+
+class Dog(Animal):
+    pass
+
+Dog Animal ke eat() method ko use kar sakta hai.
+
+
+27. QUESTION:
+Encapsulation kya hai?
+
+ANSWER:
+Data aur methods ko ek class ke andar organize aur control karna encapsulation hai.
+
+Iska purpose data ko properly manage karna hai.
+
+
+28. QUESTION:
+Polymorphism kya hai?
+
+ANSWER:
+Polymorphism ka meaning hai same interface ya method different objects ke liye different behavior de sakta hai.
+
+Example:
+
+class Dog:
+    def sound(self):
+        print("Bark")
+
+class Cat:
+    def sound(self):
+        print("Meow")
+
+Dono mein same method name hai but behavior different hai.
+
+
+29. QUESTION:
+Abstraction kya hai?
+
+ANSWER:
+Complex implementation ko hide karke sirf required interface expose karna abstraction hai.
+
+AI applications mein example:
+
+LLMClient.generate()
+
+Application ko internally API request ka complete implementation pata hona zaroori nahi hai.
+
+
+30. QUESTION:
+Composition aur Inheritance mein difference kya hai?
+
+ANSWER:
+
+Inheritance:
+"IS-A" relationship.
+
+Example:
+Dog IS-A Animal.
+
+Composition:
+"HAS-A" relationship.
+
+Example:
+Car HAS-A Engine.
+
+Production systems mein composition often loosely coupled architecture banane mein useful hoti hai.
+
+
+==================================================
+SECTION 4: EXCEPTION HANDLING
+==================================================
+
+31. QUESTION:
+Exception kya hai?
+
+ANSWER:
+Runtime par aane wali error condition ko exception kehte hain.
+
+Example:
+
+10 / 0
+
+Ye ZeroDivisionError generate karega.
+
+
+32. QUESTION:
+try-except kyun use karte hain?
+
+ANSWER:
+Runtime errors ko gracefully handle karne ke liye try-except use hota hai.
+
+Example:
+
+try:
+    result = 10 / 0
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+
+33. QUESTION:
+finally kya karta hai?
+
+ANSWER:
+finally block generally execute hota hai chahe exception aaye ya nahi.
+
+Example:
+
+try:
+    print("Processing")
+
+except Exception:
+    print("Error")
+
+finally:
+    print("Cleanup")
+
+Database connection ya resource cleanup mein useful hai.
+
+
+34. QUESTION:
+raise kya karta hai?
+
+ANSWER:
+raise manually exception generate karne ke liye use hota hai.
+
+Example:
+
+if age < 18:
+    raise ValueError("Age must be 18 or above")
+
+
+35. QUESTION:
+Custom exception kya hoti hai?
+
+ANSWER:
+Application-specific error ke liye custom exception create kar sakte hain.
+
+Example:
+
+class InvalidUserError(Exception):
+    pass
+
+Phir:
+
+raise InvalidUserError("Invalid user")
+
+
+36. QUESTION:
+Exception handling AI application mein important kyun hai?
+
+ANSWER:
+AI application mein multiple failures ho sakte hain:
+
+- LLM API failure
+- Timeout
+- Database failure
+- Invalid input
+- Model failure
+- Network failure
+
+Exception handling application ko crash hone se protect karta hai.
+
+
+37. QUESTION:
+Exception aur BaseException mein difference kya hai?
+
+ANSWER:
+BaseException Python exceptions ki top-level base class hai.
+
+Normal application errors ke liye Exception ko inherit karna recommended hai.
+
+Example:
+
+class MyError(Exception):
+    pass
+
+
+38. QUESTION:
+Multiple exceptions kaise handle karenge?
+
+ANSWER:
+
+try:
+    value = int(input("Enter number: "))
+
+except ValueError:
+    print("Invalid number")
+
+except TypeError:
+    print("Invalid type")
+
+Specific exceptions ko separately handle karna better hai.
+
+
+39. QUESTION:
+try ke saath else kya karta hai?
+
+ANSWER:
+else block tab execute hota hai jab try block successfully execute ho.
+
+Example:
+
+try:
+    result = 10 / 2
+
+except ZeroDivisionError:
+    print("Error")
+
+else:
+    print(result)
+
+
+40. QUESTION:
+Bare except kyun avoid karna chahiye?
+
+ANSWER:
+Bare except unexpected errors ko bhi hide kar sakta hai.
+
+Bad:
+
+except:
+    pass
+
+Better:
+
+except ValueError as e:
+    print(e)
+
+Specific exception handling better practice hai.
+
+
+==================================================
+SECTION 5: ADVANCED PYTHON
+==================================================
+
+41. QUESTION:
+Shallow copy aur Deep copy mein difference kya hai?
+
+ANSWER:
+
+Shallow copy:
+Outer object ki copy banata hai but nested objects ke references share ho sakte hain.
+
+Deep copy:
+Nested objects ko bhi recursively copy karta hai.
+
+Example:
+
+import copy
+
+new_data = copy.deepcopy(old_data)
+
+
+42. QUESTION:
+copy() aur assignment mein difference kya hai?
+
+ANSWER:
+
+Assignment:
+
+b = a
+
+Dono same object ko reference karte hain.
+
+Copy:
+
+b = a.copy()
+
+New outer object create hota hai.
+
+
+43. QUESTION:
+Decorator kya hai?
+
+ANSWER:
+Decorator existing function ke behavior ko modify ya extend karta hai without changing original function.
+
+Example:
+
+@decorator
+def hello():
+    pass
+
+FastAPI, authentication, logging aur middleware concepts mein decorators important hain.
+
+
+44. QUESTION:
+Closure kya hai?
+
+ANSWER:
+Closure mein inner function outer function ke variables ko remember karta hai.
+
+Example:
+
+def outer(x):
+
+    def inner():
+        return x
+
+    return inner
+
+x ki value inner function remember karega.
+
+
+45. QUESTION:
+Higher-order function kya hai?
+
+ANSWER:
+Jo function kisi function ko argument ke form mein receive kare ya function return kare.
+
+Example:
+
+def apply(func, value):
+    return func(value)
+
+
+46. QUESTION:
+map() kya karta hai?
+
+ANSWER:
+map() har element par given function apply karta hai.
+
+Example:
+
+numbers = [1, 2, 3]
+
+result = list(map(lambda x: x * 2, numbers))
+
+Output:
+
+[2, 4, 6]
+
+
+47. QUESTION:
+filter() kya karta hai?
+
+ANSWER:
+filter() condition satisfy karne wale elements return karta hai.
+
+Example:
+
+numbers = [1, 2, 3, 4]
+
+result = list(filter(lambda x: x > 2, numbers))
+
+Output:
+
+[3, 4]
+
+
+48. QUESTION:
+reduce() kya karta hai?
+
+ANSWER:
+reduce() multiple values ko repeatedly combine karke single result produce karta hai.
+
+Example:
+
+from functools import reduce
+
+result = reduce(lambda x, y: x + y, [1, 2, 3, 4])
+
+Output:
+
+10
+
+
+49. QUESTION:
+enumerate() kyun use karte hain?
+
+ANSWER:
+Index aur value dono ek saath chahiye ho to enumerate() use karte hain.
+
+Example:
+
+for index, value in enumerate(data):
+    print(index, value)
+
+
+50. QUESTION:
+zip() kya karta hai?
+
+ANSWER:
+zip() multiple iterables ke corresponding elements ko pair karta hai.
+
+Example:
+
+names = ["A", "B"]
+ages = [20, 25]
+
+for name, age in zip(names, ages):
+    print(name, age)
+
+
+==================================================
+SECTION 6: MEMORY AND PERFORMANCE
+==================================================
+
+51. QUESTION:
+Python memory management kaise karta hai?
+
+ANSWER:
+Python private heap memory, reference counting aur garbage collection ka use karta hai.
+
+Python automatically objects ki memory manage karta hai.
+
+
+52. QUESTION:
+Garbage Collection kya hai?
+
+ANSWER:
+Garbage collection unused ya unreachable objects ko memory se clean karta hai.
+
+Isse unnecessary memory usage reduce hota hai.
+
+
+53. QUESTION:
+Reference Counting kya hai?
+
+ANSWER:
+Python track karta hai ki kisi object ko kitne references point kar rahe hain.
+
+Jab reference count zero ho jaata hai, object ki memory release ho sakti hai.
+
+
+54. QUESTION:
+Python mein memory leak ho sakta hai?
+
+ANSWER:
+Haan.
+
+Possible reasons:
+
+- Unnecessary references
+- Global objects
+- Large caches
+- External resources
+- Improper cleanup
+
+Production AI applications mein memory monitoring important hai.
+
+
+55. QUESTION:
+List memory efficient hai?
+
+ANSWER:
+Har situation mein nahi.
+
+Large datasets ke liye:
+
+- Generator
+- Iterator
+- NumPy array
+- Streaming
+
+zyada efficient ho sakte hain.
+
+
+56. QUESTION:
+Generator memory efficient kyun hai?
+
+ANSWER:
+Generator complete data ko memory mein store nahi karta.
+
+Ye values on-demand generate karta hai.
+
+Example:
+
+def read_data():
+    for row in data:
+        yield row
+
+Large files ke liye useful hai.
+
+
+57. QUESTION:
+Python code optimize kaise karenge?
+
+ANSWER:
+
+1. Better algorithm choose karenge.
+2. Unnecessary loops reduce karenge.
+3. Built-in functions use karenge.
+4. Vectorization use karenge.
+5. Caching use karenge.
+6. Profiling karenge.
+7. I/O ke liye async use karenge where appropriate.
+
+
+58. QUESTION:
+Time Complexity kya hai?
+
+ANSWER:
+Input size increase hone par algorithm ka execution time kaise grow karta hai, usko time complexity kehte hain.
+
+Examples:
+
+O(1)  = Constant
+O(n)  = Linear
+O(n²) = Quadratic
+O(log n) = Logarithmic
+
+
+59. QUESTION:
+Space Complexity kya hai?
+
+ANSWER:
+Algorithm ko additional memory kitni chahiye, usko space complexity kehte hain.
+
+
+60. QUESTION:
+AI Engineer ke liye optimization important kyun hai?
+
+ANSWER:
+Production AI system mein:
+
+- Latency
+- Throughput
+- Memory
+- GPU/CPU usage
+- API cost
+- Cloud cost
+
+control karna important hai.
+
+
+==================================================
+SECTION 7: CONCURRENCY AND ASYNC
+==================================================
+
+61. QUESTION:
+Threading kya hai?
+
+ANSWER:
+Threading mein ek process ke andar multiple threads execute hote hain.
+
+I/O-bound workloads ke liye useful ho sakta hai.
+
+Example:
+- API calls
+- File operations
+- Network requests
+
+
+62. QUESTION:
+Multiprocessing kya hai?
+
+ANSWER:
+Multiprocessing mein multiple processes use hote hain.
+
+CPU-intensive tasks ke liye useful hai.
+
+Example:
+Large CPU-based computation.
+
+
+63. QUESTION:
+GIL kya hai?
+
+ANSWER:
+GIL ka full form Global Interpreter Lock hai.
+
+CPython mein ek time par ek thread Python bytecode execute kar sakta hai.
+
+Isliye CPU-bound pure Python tasks mein threading scaling limited ho sakti hai.
+
+
+64. QUESTION:
+GIL AI Engineer ke liye important kyun hai?
+
+ANSWER:
+Agar CPU-heavy Python code hai to threading expected parallelism nahi de sakti.
+
+Alternative:
+
+- Multiprocessing
+- NumPy
+- PyTorch
+- Native libraries
+- Distributed processing
+
+use kar sakte hain.
+
+
+65. QUESTION:
+Async programming kya hai?
+
+ANSWER:
+Async programming I/O operations ko efficiently handle karne ke liye use hoti hai.
+
+Ek operation ke wait ke time application doosra useful work kar sakti hai.
+
+
+66. QUESTION:
+async kya karta hai?
+
+ANSWER:
+async function ko coroutine banata hai.
+
+Example:
+
+async def get_data():
+    return "data"
+
+
+67. QUESTION:
+await kya karta hai?
+
+ANSWER:
+await asynchronous operation ke complete hone ka wait karta hai.
+
+Example:
+
+result = await get_data()
+
+
+68. QUESTION:
+Async API calls ke liye useful hai?
+
+ANSWER:
+Haan.
+
+Agar application ko multiple APIs call karni hain to async programming throughput improve kar sakti hai.
+
+GenAI applications mein:
+
+LLM API
+Database
+External API
+Tool calls
+
+ke scenarios mein useful hai.
+
+
+69. QUESTION:
+Async aur Threading mein difference kya hai?
+
+ANSWER:
+
+Async:
+- Event loop based
+- Cooperative concurrency
+- I/O-bound tasks ke liye useful
+
+Threading:
+- Multiple threads
+- I/O-bound blocking operations mein useful
+- GIL considerations important hain
+
+
+70. QUESTION:
+Async aur Multiprocessing mein difference kya hai?
+
+ANSWER:
+
+Async:
+I/O concurrency ke liye.
+
+Multiprocessing:
+CPU parallelism ke liye.
+
+Simple rule:
+
+I/O-bound → Async
+
+CPU-bound → Multiprocessing
+
+
+==================================================
+SECTION 8: PYTHON FOR AI/ML
+==================================================
+
+71. QUESTION:
+NumPy kya hai?
+
+ANSWER:
+NumPy Python ki numerical computing library hai.
+
+Features:
+
+- Arrays
+- Matrix operations
+- Mathematical operations
+- Vectorization
+
+Machine Learning aur Data Science mein heavily used hai.
+
+
+72. QUESTION:
+Pandas kya hai?
+
+ANSWER:
+Pandas tabular data processing aur analysis ke liye Python library hai.
+
+Common operations:
+
+- Read CSV
+- Filtering
+- GroupBy
+- Missing values
+- Data transformation
+- Data analysis
+
+
+73. QUESTION:
+NumPy Python list se faster kyun hai?
+
+ANSWER:
+NumPy optimized low-level implementations aur vectorized operations use karta hai.
+
+Large numerical operations mein Python loops ke comparison mein significantly faster ho sakta hai.
+
+
+74. QUESTION:
+Vectorization kya hai?
+
+ANSWER:
+Explicit Python loops ke instead array-level operations perform karna vectorization hai.
+
+Example:
+
+import numpy as np
+
+arr = np.array([1, 2, 3])
+
+result = arr * 2
+
+Ye vectorized operation hai.
+
+
+75. QUESTION:
+Python mein data preprocessing kaise karenge?
+
+ANSWER:
+
+Step 1:
+Data load
+
+Step 2:
+Data understand
+
+Step 3:
+Missing values handle
+
+Step 4:
+Duplicates remove
+
+Step 5:
+Outliers check
+
+Step 6:
+Feature transformation
+
+Step 7:
+Encoding
+
+Step 8:
+Scaling
+
+Step 9:
+Validation
+
+Step 10:
+Model-ready dataset
+
+
+76. QUESTION:
+Pandas mein missing values kaise handle karenge?
+
+ANSWER:
+
+Missing values check:
+
+df.isnull()
+
+Rows remove:
+
+df.dropna()
+
+Missing value fill:
+
+df.fillna()
+
+Approach business context aur data distribution par depend karega.
+
+
+77. QUESTION:
+Python mein JSON kaise handle karenge?
+
+ANSWER:
+
+import json
+
+data = json.loads(json_string)
+
+Python object ko JSON string mein:
+
+json.dumps(data)
+
+APIs, FastAPI aur LLM applications mein JSON bahut common hai.
+
+
+78. QUESTION:
+Pickle kya hai?
+
+ANSWER:
+Pickle Python objects ko serialize aur deserialize karne ke liye use hota hai.
+
+Example:
+
+import pickle
+
+Security note:
+
+Untrusted pickle file ko load nahi karna chahiye because arbitrary code execution ka risk ho sakta hai.
+
+
+79. QUESTION:
+Serialization kya hai?
+
+ANSWER:
+Object ko storage ya transmission ke suitable format mein convert karna serialization hai.
+
+Example:
+
+Python Object
+      ↓
+JSON
+      ↓
+API / Storage
+
+
+80. QUESTION:
+Deserialization kya hai?
+
+ANSWER:
+Serialized data ko wapas usable object mein convert karna deserialization hai.
+
+Example:
+
+JSON
+  ↓
+Python Object
+
+
+==================================================
+SECTION 9: AI PRODUCTION PYTHON
+==================================================
+
+81. QUESTION:
+Environment variables kyun use karte hain?
+
+ANSWER:
+Secrets aur configuration ko source code se separate rakhne ke liye.
+
+Example:
+
+import os
+
+api_key = os.getenv("OPENAI_API_KEY")
+
+API keys ko source code ya GitHub repository mein hardcode nahi karna chahiye.
+
+
+82. QUESTION:
+.env file kya hoti hai?
+
+ANSWER:
+Local environment variables aur configuration store karne ke liye .env file commonly use hoti hai.
+
+Example:
+
+OPENAI_API_KEY=xxxx
+DATABASE_URL=xxxx
+
+Production mein secrets manager use karna better ho sakta hai.
+
+
+83. QUESTION:
+Virtual Environment kya hai?
+
+ANSWER:
+Project-specific Python dependencies isolate karne ke liye virtual environment use karte hain.
+
+Command:
+
+python -m venv venv
+
+Activate karke project dependencies separately manage kar sakte hain.
+
+
+84. QUESTION:
+requirements.txt kya hai?
+
+ANSWER:
+Project ki Python dependencies aur unke versions define karne ke liye requirements.txt use hota hai.
+
+Example:
+
+fastapi
+pydantic
+numpy
+pandas
+
+
+85. QUESTION:
+FastAPI kya hai?
+
+ANSWER:
+FastAPI Python ka modern web framework hai jo APIs build karne ke liye use hota hai.
+
+AI applications mein:
+
+- ML model API
+- LLM API
+- RAG API
+- Agent API
+- Inference service
+
+banane ke liye useful hai.
+
+
+86. QUESTION:
+Pydantic kya hai?
+
+ANSWER:
+Pydantic data validation aur structured data models define karne ke liye use hota hai.
+
+Example:
+
+from pydantic import BaseModel
+
+class User(BaseModel):
+    name: str
+    age: int
+
+Agar invalid data aaye to validation error generate ho sakta hai.
+
+
+87. QUESTION:
+API validation kyun important hai?
+
+ANSWER:
+Invalid ya malicious input ko application process karne se pehle reject karne ke liye.
+
+Benefits:
+
+- Data quality
+- Security
+- Reliability
+- Predictable API behavior
+
+
+88. QUESTION:
+Dependency Injection kya hai?
+
+ANSWER:
+Dependency Injection mein required dependency ko function ke andar manually create karne ke instead externally provide/inject kiya jaata hai.
+
+FastAPI mein:
+
+Depends()
+
+commonly use hota hai.
+
+Examples:
+
+- Database session
+- Authentication
+- Current user
+- Configuration
+
+
+89. QUESTION:
+Logging kya hai?
+
+ANSWER:
+Application ke events aur errors ko record karna logging hai.
+
+Production AI system mein logging useful hai for:
+
+- Debugging
+- Monitoring
+- Error investigation
+- Audit
+- Performance analysis
+
+
+90. QUESTION:
+Retry mechanism kya hai?
+
+ANSWER:
+Temporary failure hone par request ko controlled way mein dobara attempt karna retry mechanism hai.
+
+Example:
+
+LLM API
+   ↓
+Timeout
+   ↓
+Wait
+   ↓
+Retry
+   ↓
+Success
+
+Production mein exponential backoff use karna common approach hai.
+
+
+==================================================
+SECTION 10: GENAI ENGINEER PYTHON
+==================================================
+
+91. QUESTION:
+Python se LLM API kaise call karenge?
+
+ANSWER:
+Generally official SDK ya HTTP client use karenge.
+
+Basic architecture:
+
+Python Application
+        ↓
+LLM SDK/API Client
+        ↓
+LLM API
+        ↓
+Response
+        ↓
+Python Application
+
+Production mein:
+- Authentication
+- Timeout
+- Retry
+- Logging
+- Error handling
+- Rate limiting
+
+bhi implement karenge.
+
+
+92. QUESTION:
+LLM response ko validate kaise karenge?
+
+ANSWER:
+Structured output aur schema validation use kar sakte hain.
+
+Architecture:
+
+LLM
+ ↓
+JSON Response
+ ↓
+Pydantic Validation
+ ↓
+Valid Object
+ ↓
+Application
+
+Agar validation fail ho to retry ya repair strategy use kar sakte hain.
+
+
+93. QUESTION:
+Prompt ko Python application mein kaise manage karenge?
+
+ANSWER:
+Prompt ko reusable template ke form mein manage kar sakte hain.
+
+Example:
+
+prompt = f"""
+You are an AI assistant.
+
+Question:
+{question}
+
+Answer clearly.
+"""
+
+Production mein:
+- Prompt versioning
+- Testing
+- Evaluation
+- Template management
+
+important hain.
+
+
+94. QUESTION:
+RAG pipeline Python mein kaise implement karenge?
+
+ANSWER:
+
+Step 1:
+Documents collect
+
+Step 2:
+Documents load
+
+Step 3:
+Text chunking
+
+Step 4:
+Embeddings generate
+
+Step 5:
+Vector database mein store
+
+Step 6:
+User query embedding
+
+Step 7:
+Similarity search
+
+Step 8:
+Relevant chunks retrieve
+
+Step 9:
+Context prompt mein add
+
+Step 10:
+LLM call
+
+Step 11:
+Final answer
+
+Architecture:
+
+Documents
+    ↓
+Chunking
+    ↓
+Embeddings
+    ↓
+Vector DB
+    ↓
+Similarity Search
+    ↓
+Retrieved Context
+    ↓
+Prompt
+    ↓
+LLM
+    ↓
+Answer
+
+
+95. QUESTION:
+Embedding kya hota hai?
+
+ANSWER:
+Embedding text ko numerical vector representation mein convert karta hai.
+
+Example:
+
+"Python is useful"
+
+       ↓
+
+[0.21, -0.43, 0.77, 0.15, ...]
+
+Semantically similar text ke embeddings generally vector space mein closer hote hain.
+
+
+96. QUESTION:
+Vector Database ko Python se kyun use karte hain?
+
+ANSWER:
+Vector database embeddings ko store aur similarity search karne ke liye use hota hai.
+
+Popular options:
+
+- Qdrant
+- Pinecone
+- Weaviate
+- Chroma
+- FAISS
+
+RAG systems mein vector database important component hai.
+
+
+97. QUESTION:
+AI Agent Python mein kya hota hai?
+
+ANSWER:
+AI Agent ek LLM-based system hota hai jo task complete karne ke liye tools aur external systems use kar sakta hai.
+
+Basic architecture:
+
+User
+ ↓
+LLM
+ ↓
+Reasoning
+ ↓
+Tool Selection
+ ↓
+Tool/API
+ ↓
+Tool Result
+ ↓
+LLM
+ ↓
+Final Answer
+
+Example tools:
+
+- Database
+- Search API
+- Calculator
+- CRM
+- Weather API
+- Internal company API
+
+
+98. QUESTION:
+Tool Calling kya hai?
+
+ANSWER:
+Tool calling mein LLM ko predefined functions/tools use karne ki capability di jaati hai.
+
+Example:
+
+def get_weather(city):
+    return weather_data
+
+LLM decide kar sakta hai ki user ke request ko answer karne ke liye get_weather() tool call karna hai.
+
+Flow:
+
+User
+ ↓
+LLM
+ ↓
+Tool Selection
+ ↓
+get_weather()
+ ↓
+Tool Result
+ ↓
+LLM
+ ↓
+Final Answer
+
+
+99. QUESTION:
+Python AI application ko production-ready kaise banayenge?
+
+ANSWER:
+
+Basic Python Code
+       ↓
+FastAPI
+       ↓
+Input Validation
+       ↓
+Authentication
+       ↓
+Business Logic
+       ↓
+LLM/RAG/Agent
+       ↓
+Error Handling
+       ↓
+Retry + Timeout
+       ↓
+Logging
+       ↓
+Caching
+       ↓
+Testing
+       ↓
+Docker
+       ↓
+Monitoring
+       ↓
+Cloud Deployment
+
+Production-ready AI system mein sirf model banana enough nahi hai.
+
+Important areas:
+
+- Reliability
+- Security
+- Scalability
+- Observability
+- Performance
+- Cost optimization
+
+
+100. QUESTION:
+AI Engineer ke liye Python ka sabse important skill kya hai?
+
+ANSWER:
+Sirf Python syntax yaad karna sabse important nahi hai.
+
+Sabse important skill hai:
+
+"Business problem ko production-grade technical solution mein convert karna."
+
+AI Engineer ko ye complete flow samajhna chahiye:
+
+Problem
+   ↓
+Requirements
+   ↓
+System Design
+   ↓
+Data
+   ↓
+Python Implementation
+   ↓
+AI/ML/LLM
+   ↓
+API
+   ↓
+Testing
+   ↓
+Security
+   ↓
+Deployment
+   ↓
+Monitoring
+   ↓
+Optimization
+
+Strong Interview Answer:
+
+"As an AI Engineer, I use Python not only for model development but also for data processing, API development, LLM integration, RAG pipelines, agent workflows, automation, testing and production deployment."
+
+
+==================================================
+TOP 20 MUST-PREPARE PYTHON TOPICS
+==================================================
+
+1. List vs Tuple
+
+2. Mutable vs Immutable
+
+3. == vs is
+
+4. *args and **kwargs
+
+5. List Comprehension
+
+6. Generator and yield
+
+7. Iterator
+
+8. Decorator
+
+9. Exception Handling
+
+10. Shallow Copy vs Deep Copy
+
+11. OOP
+
+12. GIL
+
+13. Threading vs Multiprocessing
+
+14. Async/Await
+
+15. Memory Management
+
+16. NumPy and Vectorization
+
+17. JSON and Serialization
+
+18. FastAPI and Pydantic
+
+19. Environment Variables and Security
+
+20. Python + LLM + RAG + Agent Integration
+
+
+==================================================
+AI/GENAI INTERVIEW GOLDEN FORMULA
+==================================================
+
+Jab interviewer Python ka question pooche:
+
+1. Definition batao
+2. Simple example do
+3. Real-world use case batao
+4. AI/GenAI use case connect karo
+5. Production consideration batao
+
+Example:
+
+QUESTION:
+Generator kya hai?
+
+ANSWER:
+
+"Generator Python mein values ko one-by-one generate karta hai using yield.
+
+Ye complete data memory mein store nahi karta, isliye memory efficient hota hai.
+
+For example, large dataset ya large file ko process karne mein generator useful hai.
+
+AI system mein agar mujhe millions of records process karne hain, to main generator/streaming approach use kar sakta hoon instead of loading everything into memory."
+
+
+==================================================
+FINAL INTERVIEW MINDSET
+==================================================
+
+Don't say only:
+
+"I know Python."
+
+Say:
+
+"I use Python for end-to-end AI engineering workflows including data processing, model development, API development, LLM integration, RAG, agent workflows, automation and production deployment."
+
+Remember:
+
+PYTHON
++
+DATA
++
+ML
++
+LLM
++
+RAG
++
+AGENTS
++
+FASTAPI
++
+DATABASE
++
+DOCKER
++
+CLOUD
++
+SECURITY
++
+MONITORING
+=
+AI ENGINEER

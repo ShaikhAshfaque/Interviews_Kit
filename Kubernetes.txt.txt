@@ -1,0 +1,156 @@
+# ======================================================Kubernetes===================================================================
+
+☸️ Kubernetes — One-Line Mental Model
+“Docker application ko containerize karta hai, Kubernetes un containers ko production mein deploy, manage, scale, heal aur monitor karta hai.”
+
+
+
+Your AI Application
+       ↓
+   Docker Image
+       ↓
+   Kubernetes
+       ↓
+┌─────────────────────────────┐
+│ Cluster                     │
+│                             │
+│  Control Plane              │
+│       ↓                     │
+│  Scheduler / API / etcd     │
+│       ↓                     │
+│  ┌────────┐  ┌────────┐     │
+│  │ Node 1 │  │ Node 2 │ ... │
+│  │  ↓     │  │  ↓     │     │
+│  │ Pods   │  │ Pods   │     │
+│  │  ↓     │  │  ↓     │     │
+│  │ AI App │  │ AI App │     │
+│  └────────┘  └────────┘     │
+└─────────────────────────────┘
+       ↓
+Deploy → Scale → Self-Heal → Route Traffic → Monitor
+
+🤖 AI/GenAI Mental Model
+
+Docker
+  ↓
+"AI model ko package karo"
+  ↓
+Kubernetes
+  ↓
+"AI model ko production mein reliably chalao"
+  ↓
+GPU + Scaling + Networking + Self-Healing + Monitoring
+
+Super-short version:
+🐳 Docker = Run the container
+☸️ Kubernetes = Run and manage containers at scale
+
+Kubernetes (K8s) ek container orchestration platform hai jo containers ko deploy, manage aur scale karta hai.  
+AI workloads mein Kubernetes ka use ML/AI models ko production mein deploy karne ke liye hota hai.  
+Kubernetes ka basic unit Pod hai, jisme ek ya multiple containers run kar sakte hain.  
+Deployment application ke Pods ki desired state maintain karta hai.  
+Service Pods ko stable network endpoint provide karti hai.  
+ConfigMap non-sensitive configuration ko store karne ke kaam aata hai.  
+Secret passwords, API keys aur tokens jaise sensitive data ke liye use hota hai.  
+Namespace cluster ke resources ko logically separate karne ke liye use hota hai.  
+Node wo machine hai jahan Kubernetes ke Pods actually run hote hain.  
+Cluster multiple nodes ka collection hota hai jo Kubernetes ke under managed hote hain.  
+Control Plane cluster ki overall state aur management ko control karta hai.  
+kube-apiserver Kubernetes cluster ka main API gateway hota hai.  
+etcd Kubernetes ki cluster state aur configuration ko store karta hai.  
+Scheduler decide karta hai ki Pod kis node par run hoga.  
+Kubelet node par Pods aur containers ko manage karta hai.  
+Container Runtime containers ko actually run karta hai, jaise containerd.  
+Kubernetes ka self-healing feature failed Pods ko automatically restart/replace kar sakta hai.  
+Horizontal Pod Autoscaler (HPA) workload ke basis par Pod replicas increase/decrease karta hai.  
+AI inference APIs ke liye HPA traffic ke according scaling provide kar sakta hai.  
+GPU-based AI workloads ke liye Kubernetes mein GPU resources allocate kiye ja sakte hain.  
+NVIDIA GPU Operator Kubernetes cluster mein GPU management ko simplify karta hai.  
+GPU workloads ke liye Pod specification mein GPU ko resource request/limit ke through define kiya ja sakta hai.  
+Requests scheduler ko batate hain ki workload ko minimum kitne resources chahiye.  
+Limits define karte hain ki container maximum kitne resources consume kar sakta hai.  
+AI model serving mein CPU, memory aur GPU utilization important monitoring metrics hain.  
+PersistentVolume (PV) Kubernetes mein persistent storage represent karta hai.  
+PersistentVolumeClaim (PVC) application ko required storage request karne deta hai.  
+Large AI models ke liye persistent storage model files ko store karne mein useful hota hai.  
+StatefulSet stateful workloads ko manage karne ke liye useful hai, jaise databases.  
+DaemonSet har suitable node par ek Pod run karne ke liye use hota hai.  
+Job one-time task execute karne ke liye use hota hai.  
+CronJob scheduled tasks run karne ke liye use hota hai, jaise periodic ML pipelines.  
+Ingress external HTTP/HTTPS traffic ko Kubernetes services tak route kar sakta hai.  
+NetworkPolicy Pods ke beech network communication ko control karke security improve karti hai.  
+RBAC decide karta hai ki kaun user ya service kya Kubernetes resource access kar sakti hai.  
+AI Engineer ko Docker + Kubernetes dono samajhna important hai because Kubernetes containers ko orchestrate karta hai.  
+Kubernetes mein application deployment commonly YAML manifests ke through define kiya jata hai.  
+Labels resources ko identify aur organize karne ke liye use hote hain.  
+Selectors matching labels ke basis par required Pods ko identify karte hain.  
+Rolling Update application ko gradually new version par migrate karta hai without complete downtime.  
+Rollback problematic deployment ko previous working version par wapas le ja sakta hai.  
+AI model serving mein readiness probe ensure karti hai ki Pod traffic receive karne ke liye ready hai.  
+Liveness probe detect karti hai ki application healthy hai ya stuck ho gayi hai.  
+Startup probe slow-starting applications, jaise large ML models, ke liye useful hoti hai.  
+Helm Kubernetes applications ko package, configure aur deploy karne ka popular tool hai.  
+Kustomize Kubernetes YAML configurations ko customize/manage karne ke liye useful hai.  
+Argo CD jaise GitOps tools Kubernetes deployments ko Git repository se automate kar sakte hain.  
+Production AI systems mein Kubernetes ko Prometheus + Grafana jaise tools ke saath monitor kiya ja sakta hai.  
+LLM/ML serving ke liye KServe, Ray Serve, NVIDIA Triton jaise frameworks Kubernetes ke saath use kiye ja sakte hain.  
+AI Engineer ke liye Kubernetes ka core goal hai: models ko reliably deploy, scale, monitor aur efficiently serve karna.
+
+Taints & Tolerations se specific workloads ko specific nodes par schedule kar sakte hain, jaise GPU workloads.  
+Node Affinity se Pod ko particular node characteristics ke basis par schedule kiya ja sakta hai.  
+Pod Affinity/Anti-Affinity se related Pods ko paas ya alag nodes par place kar sakte hain.  
+PriorityClass important AI workloads ko higher scheduling priority de sakta hai.  
+PodDisruptionBudget (PDB) voluntary disruptions ke time minimum available Pods maintain karta hai.  
+ResourceQuota namespace ke CPU, memory aur other resources ko limit kar sakta hai.  
+LimitRange namespace mein default resource requests aur limits define kar sakta hai.  
+ServiceAccount Pod ko Kubernetes API aur cloud resources ke saath securely authenticate karne mein help karta hai.  
+Workload Identity Kubernetes workloads ko cloud IAM permissions securely provide kar sakti hai.  
+AI workloads mein GPU scheduling CPU scheduling se zyada carefully design karna padta hai.  
+GPU sharing multiple workloads ko same GPU efficiently use karne mein help kar sakti hai.  
+MIG (Multi-Instance GPU) supported NVIDIA GPUs ko multiple isolated GPU instances mein divide kar sakta hai.  
+NVIDIA Triton Inference Server multiple ML frameworks ke models ko production mein serve kar sakta hai.  
+KServe Kubernetes-native model serving aur inference deployments ke liye popular framework hai.  
+Ray distributed AI/ML workloads aur LLM applications ko Kubernetes par run karne ke liye useful hai.  
+Kubeflow Kubernetes ke upar ML workflows aur MLOps capabilities provide karta hai.  
+ML pipelines ko Kubernetes Jobs, Argo Workflows ya Kubeflow Pipelines ke through automate kiya ja sakta hai.  
+Model training ko Kubernetes mein distributed workloads ke form mein execute kiya ja sakta hai.  
+PyTorchJob distributed PyTorch training ko Kubernetes environment mein manage karne ke liye use hota hai.  
+Training Operator distributed ML training jobs ko Kubernetes par manage karne mein help karta hai.  
+Large models ke liye model weights ko object storage mein rakhna common production pattern hai.  
+Model loading time reduce karne ke liye local caching useful ho sakti hai.  
+AI inference mein cold start latency important issue hai, especially large LLMs ke case mein.  
+Warm Pods model ko already memory/GPU mein loaded rakhkar inference latency reduce kar sakte hain.  
+LLM serving mein batching multiple requests ko combine karke GPU utilization improve kar sakti hai.  
+Continuous batching modern LLM serving systems mein throughput improve karne ke liye commonly used technique hai.  
+Autoscaling based on CPU alone LLM workloads ke liye sufficient nahi hota.  
+LLM applications mein GPU utilization, request rate, queue length aur latency better scaling signals ho sakte hain.  
+KEDA event-driven autoscaling ke liye useful Kubernetes component hai.  
+Custom Metrics API ke through Kubernetes applications custom AI metrics ke basis par scale ho sakti hain.  
+Horizontal scaling multiple inference replicas create karta hai.  
+Vertical scaling existing workload ko more CPU/memory resources provide karta hai.  
+Cluster Autoscaler workload demand ke according nodes add/remove kar sakta hai.  
+Node pools CPU, GPU, memory-optimized aur general-purpose nodes ko separate karne mein useful hain.  
+Production AI clusters mein CPU nodes aur GPU nodes ko separate rakhna cost-efficient ho sakta hai.  
+Spot/Preemptible GPU instances training costs reduce kar sakte hain but interruptions handle karni padti hain.  
+Distributed training mein checkpointing important hai taaki failure ke baad training resume ho sake.  
+Object storage checkpoints, datasets aur model artifacts store karne ke liye commonly used hota hai.  
+Init Containers main AI container start hone se pehle initialization tasks perform kar sakte hain.  
+Sidecar Containers logging, proxying ya monitoring jaise supporting tasks handle kar sakte hain.  
+Service Mesh microservices ke beech traffic management, security aur observability provide kar sakta hai.  
+Istio Kubernetes environments mein service-mesh capabilities provide karne wala popular option hai.  
+AI microservices mein mTLS service-to-service communication ko secure kar sakta hai.  
+Observability ke three major pillars hain: metrics, logs aur traces.  
+Prometheus metrics collect karne ke liye widely used monitoring system hai.  
+Grafana metrics ko dashboards ke form mein visualize karne ke liye useful hai.  
+OpenTelemetry distributed applications ke telemetry data ko collect/export karne mein help karta hai.  
+Production LLM systems mein p95/p99 latency monitor karna average latency se zyada informative ho sakta hai.  
+AI production deployment mein cost per inference/request bhi important business metric hai.  
+Kubernetes ko master karne ka AI Engineer roadmap hai: Docker → Pods → Deployments → Services → Storage → GPU → Autoscaling → Monitoring → KServe/Ray/Kubeflow → Production MLOps.
+
+Agar interview preparation kar rahe ho, toh main inhe priority dunga:
+Must Know:
+Docker → Pod → Deployment → Service → ConfigMap → Secret → Namespace → Requests/Limits → Probes → HPA → Ingress → RBAC
+AI/ML Specific:
+GPU → NVIDIA GPU Operator → Node Affinity → Taints/Tolerations → KServe → Triton → Ray → Kubeflow → Distributed Training → Model Serving → Autoscaling
+Production/MLOps:
+Helm → Argo CD → Prometheus → Grafana → OpenTelemetry → Logging → CI/CD → GitOps → Cost Optimization → Security

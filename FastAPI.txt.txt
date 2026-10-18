@@ -1,0 +1,1166 @@
+============================================================
+# FASTAPI — 50 TECHNICAL INTERVIEW QUESTIONS + ANSWERS
+# FOR AI ENGINEER / GENAI ENGINEER / FDE
+# ============================================================
+
+
+# ============================================================
+# 01. QUESTION:
+# FastAPI kya hai aur AI/GenAI applications mein kyun use hota hai?
+#
+# ANSWER:
+# FastAPI ek modern Python web framework hai jo APIs banane ke liye use hota hai.
+# Ye Pydantic validation aur Python type hints use karta hai.
+# AI/GenAI mein iska use LLM APIs, RAG APIs, ML inference,document processing aur AI microservices ke liye hota hai.
+# Iska async support high-concurrency applications ke liye useful hai.
+
+
+# ============================================================
+# 02. QUESTION:
+# FastAPI application kaise create karte hain?
+#
+# ANSWER:
+# FastAPI() ka object create karke application initialize karte hain.
+#
+# Example:
+#
+# from fastapi import FastAPI
+#
+# app = FastAPI()
+#
+# Yahan `app` FastAPI application instance hai.
+# Isi object par hum API routes define karte hain.
+
+
+# ============================================================
+# 03. QUESTION:
+# FastAPI mein GET, POST, PUT, PATCH aur DELETE mein kya difference hai?
+#
+# ANSWER:
+# GET    -> Data retrieve karne ke liye.
+# POST   -> New data/resource create karne ke liye.
+# PUT    -> Existing resource ko completely update karne ke liye.
+# PATCH  -> Existing resource ke specific fields update karne ke liye.
+# DELETE -> Resource delete karne ke liye.
+#
+# AI application example:
+# GET    -> Model information retrieve
+# POST   -> Chat/query create
+# PUT    -> Complete model configuration update
+# PATCH  -> Sirf temperature update
+# DELETE -> Uploaded document delete
+
+
+# ============================================================
+# 04. QUESTION:
+# Path parameter aur query parameter mein kya difference hai?
+#
+# ANSWER:
+# Path parameter URL ka required part hota hai.
+#
+# Example:
+# /students/10
+#
+# Yahan 10 path parameter hai.
+#
+# Query parameter `?` ke baad aata hai.
+#
+# Example:
+# /students?course=AI
+#
+# Yahan course query parameter hai.
+#
+# Path parameter generally resource identify karta hai.
+# Query parameter filtering, searching ya optional configuration ke liye useful hai.
+
+
+# ============================================================
+# 05. QUESTION:
+# Pydantic BaseModel kya hai?
+#
+# ANSWER:
+# Pydantic BaseModel request aur response data ko validate aur serialize karne ke liye use hota hai.
+#
+# Example:
+#
+# from pydantic import BaseModel
+#
+# class User(BaseModel):
+#     name: str
+#     age: int
+#
+# Agar client age mein invalid value bhejta hai, Pydantic validation error generate kar sakta hai.
+# GenAI mein prompt, user_id, model_name, temperature etc validate karne ke liye useful hai.
+
+
+# ============================================================
+# 06. QUESTION:
+# FastAPI mein Field() ka use kya hai?
+#
+# ANSWER:
+# Field() Pydantic fields par additional validation rules define karta hai.
+#
+# Example:
+#
+# from pydantic import BaseModel, Field
+#
+# class User(BaseModel):
+#     age: int = Field(ge=18, le=100)
+#
+# Iska matlab age 18 se 100 ke beech honi chahiye.
+#
+# GenAI example:
+# temperature: float = Field(ge=0, le=2)
+#
+# Isse invalid model configuration API tak nahi pahunchti.
+
+
+# ============================================================
+# 07. QUESTION:
+# Request body kya hoti hai?
+#
+# ANSWER:
+# POST/PUT/PATCH request mein client JSON data body ke andar bhej sakta hai.
+#
+# Example JSON:
+#
+# {
+#     "prompt": "Explain RAG",
+#     "temperature": 0.7
+# }
+#
+# FastAPI Pydantic model ke through is JSON ko validate kar sakta hai.
+#
+# Ye GenAI APIs mein bahut common pattern hai.
+
+
+# ============================================================
+# 08. QUESTION:
+# response_model kya hai?
+#
+# ANSWER:
+# response_model define karta hai ki API client ko kis structure mein response return karna hai.
+#
+# Example:
+#
+# @app.get("/user", response_model=User)
+#
+# Isse response validation aur serialization bhi improve hoti hai.
+#
+# Security benefit:
+# Database mein extra sensitive fields hone ke bawajood
+# response_model sirf required fields return kar sakta hai.
+
+
+# ============================================================
+# 09. QUESTION:
+# HTTPException kya hai?
+#
+# ANSWER:
+# HTTPException API mein HTTP error return karne ke liye use hota hai.
+#
+# Example:
+#
+# from fastapi import HTTPException
+#
+# raise HTTPException(
+#     status_code=404,
+#     detail="User not found"
+# )
+#
+# Common status codes:
+#
+# 400 -> Bad Request
+# 401 -> Unauthorized
+# 403 -> Forbidden
+# 404 -> Not Found
+# 422 -> Validation Error
+# 500 -> Internal Server Error
+
+
+# ============================================================
+# 10. QUESTION:
+# status_code parameter ka use kya hai?
+#
+# ANSWER:
+# Endpoint ka expected HTTP status code define karne ke liye use hota hai.
+#
+# Example:
+#
+# @app.post("/users", status_code=201)
+#
+# 201 ka matlab resource successfully create hua.
+#
+# Common:
+# 200 -> Successful request
+# 201 -> Created
+# 204 -> No Content
+# 400 -> Bad Request
+# 404 -> Not Found
+
+
+# ============================================================
+# 11. QUESTION:
+# async def aur normal def mein kya difference hai?
+#
+# ANSWER:
+# `def` synchronous function hota hai.
+# `async def` asynchronous function hota hai.
+#
+# Async function I/O operations ke during event loop ko block nahi karne mein help kar sakta hai.
+#
+# AI applications mein:
+# LLM API calls
+# Database calls
+# External API calls
+# Network requests
+# jaise I/O-heavy operations ke liye async useful ho sakta hai.
+#
+# Important:
+# Async automatically CPU-heavy ML inference ko faster nahi banata.
+
+
+# ============================================================
+# 12. QUESTION:
+# await keyword kya karta hai?
+#
+# ANSWER:
+# `await` asynchronous operation complete hone ka wait karta hai bina unnecessarily event loop ko block kiye.
+#
+# Example:
+#
+# response = await client.get(url) 
+#
+# Jab external API response ka wait ho raha hai, event loop doosre requests handle kar sakta hai.
+
+
+# ============================================================
+# 13. QUESTION:
+# FastAPI mein Depends() kya hai?
+#
+# ANSWER:
+# Depends() dependency injection implement karta hai.
+#
+# Iska use common functionality ke liye hota hai:
+#
+# Authentication
+# Database session
+# Current user
+# Permission checking
+# Common configuration
+#
+# Example:
+#
+# def get_current_user():
+#     return user
+#
+# @app.get("/profile")
+# def profile(user=Depends(get_current_user)):
+#     return user
+#
+# Isse reusable architecture banta hai.
+
+
+# ============================================================
+# 14. QUESTION:
+# Database dependency kaise implement karenge?
+#
+# ANSWER:
+# Database session/connection ko dependency function mein create/manage karke endpoint mein Depends() ke through inject kar sakte hain.
+#
+# Isse database connection logic har endpoint mein duplicate nahi karna padta.
+#
+# Production application mein connection pooling aur proper lifecycle management bhi important hai.
+
+def get_db():
+ return Supabase
+
+app.get("/user)
+def get_student(db = Depends(get_db)):
+    response = db.table("students").select("*").execute()
+    return response.data
+
+db = Depends(get_db)
+
+FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe db variable mein de do.
+
+# ============================================================
+# 15. QUESTION:
+# Middleware kya hota hai?
+#
+# ANSWER:
+# Middleware request aur response ke beech execute hone wala layer hai.
+#
+# Typical use cases:
+#
+# Logging
+# Authentication-related processing
+# CORS
+# Request timing
+# Request ID
+# Security headers
+#
+# AI application mein middleware se request latency aur request ID track kar sakte hain.
+
+
+# ============================================================
+# 16. QUESTION:
+# CORS kya hai?
+#
+# ANSWER:
+# CORS = Cross-Origin Resource Sharing.
+#
+# Agar frontend aur backend different origins par run kar rahe hain,
+# browser security policy ke wajah se request block ho sakti hai.
+#
+# Example:
+#
+# React:
+# http://localhost:3000
+#
+# FastAPI:
+# http://localhost:8000
+#
+# FastAPI mein CORSMiddleware use karke allowed origins define karte hain.
+#
+# Production mein "*" blindly allow nahi karna chahiye.
+
+
+# ============================================================
+# 17. QUESTION:
+# Authentication aur Authorization mein kya difference hai?
+#
+# ANSWER:
+# Authentication = User kaun hai?
+#
+# Authorization = User kya kar sakta hai?
+#
+# Example:
+#
+# Authentication:
+# User JWT token ke through identify hua.
+#
+# Authorization:
+# Kya ye user admin endpoint access kar sakta hai?
+#
+# GenAI application mein dono security layers important hain.
+
+
+# ============================================================
+# 18. QUESTION:
+# JWT authentication FastAPI mein kaise kaam karti hai?
+#
+# ANSWER:
+# Typical flow:
+#
+# 1. User login karta hai.
+# 2. Server credentials validate karta hai.
+# 3. Server JWT token generate karta hai.
+# 4. Client token store karta hai.
+# 5. Client subsequent request mein Bearer token bhejta hai.
+# 6. FastAPI token validate karta hai.
+# 7. User identity retrieve hoti hai.
+#
+# Example header:
+#
+# Authorization: Bearer <token>
+
+
+# ============================================================
+# 19. QUESTION:
+# API Key authentication kya hai?
+#
+# ANSWER:
+# API key ek secret credential hota hai jo client ko identify/authenticate
+# karne ke liye use kiya ja sakta hai.
+#
+# Internal AI services mein useful hai.
+#
+# Example:
+#
+# X-API-Key: secret-key
+#
+# API key ko source code mein hardcode nahi karna chahiye.
+# Environment variable ya proper secrets manager use karna chahiye.
+
+
+# ============================================================
+# 20. QUESTION:
+# OAuth2PasswordBearer kya hai?
+#
+# ANSWER:
+# OAuth2PasswordBearer FastAPI ka security utility hai jo
+# Bearer token authentication flow mein token extract karne mein help karta hai.
+#
+# Example:
+#
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+#
+# Endpoint mein:
+#
+# token: str = Depends(oauth2_scheme)
+#
+# Isse Authorization header se Bearer token obtain kiya ja sakta hai.
+
+
+# ============================================================
+# 21. QUESTION:
+# Rate limiting kya hai aur GenAI API mein kyun important hai?
+#
+# ANSWER:
+# Rate limiting ek client ko specific time period mein limited requests
+# allow karta hai.
+#
+# Example:
+#
+# 5 requests/minute
+#
+# GenAI mein rate limiting important hai because:
+#
+# API abuse prevent hota hai.
+# DDoS-like excessive traffic reduce hota hai.
+# LLM token cost control hoti hai.
+# Backend overload prevent hota hai.
+
+
+# ============================================================
+# 22. QUESTION:
+# SlowAPI kya hai?
+#
+# ANSWER:
+# SlowAPI FastAPI/Starlette applications ke liye rate limiting library hai.
+#
+# Example concept:
+#
+# @limiter.limit("5/minute")
+#
+# Iska matlab client limited number of requests per minute kar sakta hai.
+#
+# Production architecture mein distributed rate limiting ke liye
+# Redis jaise shared store ka use bhi consider kiya ja sakta hai.
+
+
+# ============================================================
+# 23. QUESTION:
+# Input validation GenAI API mein kyun important hai?
+#
+# ANSWER:
+# User se directly aane wale data ko validate karna important hai.
+#
+# Validate:
+# Prompt length
+# File size
+# File type
+# Temperature range
+# Token limits
+# User ID
+# Required fields
+#
+# Isse malformed requests, resource abuse aur unnecessary processing
+# ko reduce kiya ja sakta hai.
+
+
+# ============================================================
+# 24. QUESTION:
+# Global exception handler kya hai?
+#
+# ANSWER:
+# Global exception handler application-level errors ko centrally handle
+# karne ke liye use hota hai.
+#
+# Benefit:
+# Har endpoint mein same try/except repeat nahi karna padta.
+#
+# Custom response format bhi define kar sakte hain.
+#
+# Example response:
+#
+# {
+#     "error": "Model service unavailable",
+#     "request_id": "abc123"
+# }
+
+
+# ============================================================
+# 25. QUESTION:
+# FastAPI application mein logging kyun important hai?
+#
+# ANSWER:
+# Production debugging aur monitoring ke liye logging important hai.
+#
+# AI API mein useful logs:
+#
+# Request ID
+# Endpoint
+# User ID
+# Latency
+# Model name
+# Token usage
+# Error
+# Status code
+#
+# Sensitive prompts/API keys/passwords ko blindly logs mein nahi likhna chahiye.
+
+
+# ============================================================
+# 26. QUESTION:
+# BackgroundTasks kya hai?
+#
+# ANSWER:
+# FastAPI BackgroundTasks response return hone ke baad lightweight
+# background work execute karne ke liye use kiya ja sakta hai.
+#
+# Example:
+#
+# Email notification
+# Simple audit logging
+# Small analytics task
+#
+# Long-running GPU jobs ya heavy ML training ke liye BackgroundTasks
+# ideal solution nahi hai.
+# Uske liye proper job queue/worker architecture better hai.
+
+
+# ============================================================
+# 27. QUESTION:
+# StreamingResponse kya hai?
+#
+# ANSWER:
+# StreamingResponse response data ko chunks mein client ko send kar sakta hai.
+#
+# GenAI mein iska use:
+#
+# User prompt
+#     ↓
+# LLM generates tokens
+#     ↓
+# FastAPI streams output
+#     ↓
+# Frontend token-by-token display
+#
+# Isse user ko complete response ke liye wait nahi karna padta.
+
+
+# ============================================================
+# 28. QUESTION:
+# Server-Sent Events (SSE) kya hai?
+#
+# ANSWER:
+# SSE server se client ki taraf continuous event stream provide karta hai.
+#
+# LLM streaming applications mein SSE useful hai because
+# server generated tokens/events ko progressively client tak bhej sakta hai.
+#
+# SSE one-way communication hai:
+#
+# Server → Client
+#
+# Agar two-way real-time communication required ho,
+# WebSocket consider kiya ja sakta hai.
+
+
+# ============================================================
+# 29. QUESTION:
+# WebSocket kya hai aur AI applications mein kab use karenge?
+#
+# ANSWER:
+# WebSocket persistent two-way communication provide karta hai.
+#
+# Client ↔ Server
+#
+# Use cases:
+#
+# Real-time AI assistant
+# Voice AI
+# Live agent interaction
+# Real-time dashboard
+#
+# Normal REST request-response ke comparison mein WebSocket
+# continuous communication ke liye useful hai.
+
+
+# ============================================================
+# 30. QUESTION:
+# FastAPI mein file upload kaise karte hain?
+#
+# ANSWER:
+# FastAPI mein UploadFile aur File() use karke files receive kar sakte hain.
+#
+# AI/RAG use case:
+#
+# PDF upload
+#     ↓
+# FastAPI
+#     ↓
+# PDF parsing
+#     ↓
+# Text extraction
+#     ↓
+# Chunking
+#     ↓
+# Embeddings
+#     ↓
+# Vector Database
+#
+# Upload size aur file type validation important hai.
+
+
+# ============================================================
+# 31. QUESTION:
+# FastAPI ke through RAG pipeline kaise expose karenge?
+#
+# ANSWER:
+# Typical architecture:
+#
+# POST /documents
+#     ↓
+# Document upload
+#     ↓
+# Parse document
+#     ↓
+# Chunk text
+#     ↓
+# Generate embeddings
+#     ↓
+# Store vectors
+#
+# Query endpoint:
+#
+# POST /chat
+#     ↓
+# User query
+#     ↓
+# Embedding
+#     ↓
+# Vector search
+#     ↓
+# Relevant chunks
+#     ↓
+# LLM
+#     ↓
+# Response
+#
+# FastAPI yahan orchestration/API layer ka role play karta hai.
+
+
+# ============================================================
+# 32. QUESTION:
+# FastAPI ko LangChain ke saath kaise integrate karenge?
+#
+# ANSWER:
+# FastAPI API layer provide karega aur LangChain AI workflow manage kar sakta hai.
+#
+# Example:
+#
+# Client
+#   ↓
+# FastAPI /chat
+#   ↓
+# LangChain
+#   ↓
+# Retriever
+#   ↓
+# Vector DB
+#   ↓
+# LLM
+#   ↓
+# FastAPI
+#   ↓
+# Client
+#
+# FastAPI ko business/API layer aur LangChain ko AI orchestration
+# layer ke roop mein separate rakhna maintainability improve karta hai.
+
+
+# ============================================================
+# 33. QUESTION:
+# FastAPI ko LlamaIndex ke saath kaise integrate karenge?
+#
+# ANSWER:
+# FastAPI request receive karega aur LlamaIndex retrieval/query
+# workflow ko invoke kar sakta hai.
+#
+# Flow:
+#
+# User Question
+#      ↓
+# FastAPI
+#      ↓
+# LlamaIndex
+#      ↓
+# Retriever / Index
+#      ↓
+# LLM
+#      ↓
+# FastAPI Response
+#
+# Is architecture mein FastAPI external clients ke liye API interface provide karta hai.
+
+
+# ============================================================
+# 34. QUESTION:
+# FastAPI se external LLM API kaise call karenge?
+#
+# ANSWER:
+# FastAPI endpoint user request receive karega.
+# Backend external LLM provider ko request bhejega.
+# Response receive karke client ko return karega.
+#
+# Flow:
+#
+# Client
+#   ↓
+# FastAPI
+#   ↓
+# LLM Provider
+#   ↓
+# FastAPI
+#   ↓
+# Client
+#
+# API key environment variable/secrets manager mein store karni chahiye.
+# Production mein timeout, retries, error handling aur rate limits bhi important hain.
+
+
+# ============================================================
+# 35. QUESTION:
+# Environment variables kyun use karte hain?
+#
+# ANSWER:
+# Sensitive configuration ko source code se separate rakhne ke liye
+# environment variables use karte hain.
+#
+# Examples:
+#
+# SUPABASE_URL
+# SUPABASE_KEY
+# OPENAI_API_KEY
+# DATABASE_URL
+#
+# Galat approach:
+#
+# API_KEY = "my-secret-key"
+#
+# Correct approach:
+#
+# API_KEY = os.getenv("OPENAI_API_KEY")
+#
+# Production mein cloud secrets manager bhi use kiya ja sakta hai.
+
+
+# ============================================================
+# 36. QUESTION:
+# FastAPI ko PostgreSQL/Supabase ke saath kaise integrate karenge?
+#
+# ANSWER:
+# FastAPI endpoints database operations ko expose kar sakte hain.
+#
+# Example architecture:
+#
+# Client
+#   ↓
+# FastAPI
+#   ↓
+# Database Layer
+#   ↓
+# PostgreSQL / Supabase
+#
+# CRUD:
+#
+# Create
+# Read
+# Update
+# Delete
+#
+# Production mein database connection pooling, transactions,
+# indexes aur error handling important hain.
+
+
+# ============================================================
+# 37. QUESTION:
+# PUT aur PATCH mein kya difference hai?
+#
+# ANSWER:
+# PUT generally complete resource replacement/update ke liye use hota hai.
+#
+# PATCH partial update ke liye use hota hai.
+#
+# Example:
+#
+# Existing:
+# {
+#     "name": "Ashfaque",
+#     "age": 28,
+#     "course": "AI"
+# }
+#
+# PATCH:
+# {
+#     "course": "GenAI"
+# }
+#
+# Sirf course update ho sakta hai.
+#
+# PATCH APIs mein optional Pydantic fields useful hote hain.
+
+
+# ============================================================
+# 38. QUESTION:
+# exclude_unset=True kya karta hai?
+#
+# ANSWER:
+# `exclude_unset=True` sirf wahi fields return karta hai
+# jo request mein explicitly provide ki gayi hain.
+#
+# PATCH ke liye ye important hai.
+#
+# Example:
+#
+# student.model_dump(exclude_unset=True)
+#
+# Agar client sirf:
+#
+# {
+#     "course": "GenAI"
+# }
+#
+# bhejta hai, to update data mein sirf course include hoga.
+#
+# Isse accidentally existing fields overwrite hone se bach sakte hain.
+
+
+# ============================================================
+# 39. QUESTION:
+# Supabase response.data kya hota hai?
+#
+# ANSWER:
+# Supabase query execute karne ke baad response object mein
+# returned records commonly `response.data` mein milte hain.
+#
+# Example concept:
+#
+# response = client.table("students").select("*").execute()
+#
+# data = response.data
+#
+# `data` mein database se returned rows/records mil sakte hain.
+#
+# Actual response handling ke saath error handling bhi karni chahiye.
+
+
+# ============================================================
+# 40. QUESTION:
+# FastAPI application ko Docker mein kyun deploy karte hain?
+#
+# ANSWER:
+# Docker application aur dependencies ko portable container mein package karta hai.
+#
+# Benefits:
+#
+# Consistent environment
+# Easy deployment
+# Dependency isolation
+# Scaling
+# CI/CD integration
+#
+# Typical flow:
+#
+# Code
+#   ↓
+# Docker Image
+#   ↓
+# Container
+#   ↓
+# Cloud
+
+
+# ============================================================
+# 41. QUESTION:
+# Uvicorn kya hai?
+#
+# ANSWER:
+# Uvicorn ek ASGI server hai jo FastAPI application ko run karta hai.
+#
+# Example:
+#
+# uvicorn main:app --reload
+#
+# `main` -> Python file/module
+# `app`  -> FastAPI object
+# `--reload` -> Development mein code changes detect karke reload
+#
+# Production mein reload use nahi karna chahiye.
+
+
+# ============================================================
+# 42. QUESTION:
+# FastAPI mein workers kya hote hain?
+#
+# ANSWER:
+# Workers application processes hote hain jo requests process kar sakte hain.
+#
+# Multiple workers multiple processes run kar sakte hain.
+#
+# Example concept:
+#
+# 1 worker
+#     ↓
+# 1 application process
+#
+# Multiple workers
+#     ↓
+# Multiple application processes
+#
+# Worker count CPU resources aur workload ke according decide karna chahiye.
+#
+# Important:
+# Multiple workers ke beech in-memory state automatically shared nahi hoti.
+
+
+# ============================================================
+# 43. QUESTION:
+# FastAPI ko cloud par deploy karne ka basic architecture kya hoga?
+#
+# ANSWER:
+# Typical production architecture:
+#
+# Client
+#   ↓
+# Load Balancer / API Gateway
+#   ↓
+# FastAPI Containers
+#   ↓
+# Redis / PostgreSQL / Vector DB
+#   ↓
+# External LLM / Model Serving
+#
+# Monitoring aur logging bhi architecture ka part hone chahiye.
+#
+# Docker + Kubernetes large-scale deployments mein useful ho sakte hain.
+
+
+# ============================================================
+# 44. QUESTION:
+# FastAPI + Redis ka use kyun karenge?
+#
+# ANSWER:
+# Redis ek in-memory data store hai.
+#
+# FastAPI + Redis use cases:
+#
+# Caching
+# Session state
+# Rate limiting
+# Temporary data
+# Job queues
+#
+# GenAI example:
+#
+# Same user query repeatedly aaye,
+# to cached response return karke LLM cost aur latency reduce kar sakte hain.
+#
+# Cache invalidation strategy carefully design karni chahiye.
+
+
+# ============================================================
+# 45. QUESTION:
+# Long-running AI jobs ko FastAPI request ke andar kyun nahi chalana chahiye?
+#
+# ANSWER:
+# Long-running tasks request ko unnecessarily open rakh sakte hain
+# aur server resources consume kar sakte hain.
+#
+# Example:
+#
+# Large PDF processing
+# Embedding millions of documents
+# Model training
+# Batch inference
+#
+# Better architecture:
+#
+# FastAPI
+#    ↓
+# Queue
+#    ↓
+# Worker
+#    ↓
+# Heavy processing
+#
+# Celery, RQ ya cloud-native queue systems use kiye ja sakte hain.
+
+
+# ============================================================
+# 46. QUESTION:
+# FastAPI AI application mein latency kaise measure karenge?
+#
+# ANSWER:
+# Complete request latency ko components mein break karna chahiye.
+#
+# Example:
+#
+# Total latency = 2 seconds
+#
+# FastAPI processing = 100 ms
+# Database = 200 ms
+# Retrieval = 300 ms
+# LLM = 1.4 sec
+#
+# Is analysis se bottleneck identify kar sakte hain.
+#
+# AI systems mein TTFT (Time To First Token) bhi important metric hai
+# jab streaming LLM response use kar rahe ho.
+
+
+# ============================================================
+# 47. QUESTION:
+# FastAPI GenAI application mein observability kya hai?
+#
+# ANSWER:
+# Observability ka matlab system ke internal behavior ko
+# logs, metrics aur traces ke through understand karna.
+#
+# Important metrics:
+#
+# Request latency
+# Error rate
+# Request count
+# LLM latency
+# Token usage
+# Cost
+# Retrieval latency
+# Database latency
+#
+# Distributed GenAI systems mein tracing especially useful hoti hai.
+
+
+# ============================================================
+# 48. QUESTION:
+# FastAPI GenAI API ko secure kaise karenge?
+#
+# ANSWER:
+# Multiple security layers use karenge:
+#
+# 1. Authentication
+# 2. Authorization
+# 3. HTTPS
+# 4. Input validation
+# 5. Rate limiting
+# 6. Secure CORS configuration
+# 7. Secrets management
+# 8. Request size limits
+# 9. Proper error handling
+# 10. Logging and monitoring
+#
+# GenAI mein prompt injection, data leakage aur excessive token usage
+# jaise application-specific risks ko bhi consider karna chahiye.
+
+
+# ============================================================
+# 49. QUESTION:
+# FastAPI + RAG + Vector DB + LLM ka production architecture explain karein.
+#
+# ANSWER:
+#
+# User
+#   ↓
+# API Gateway
+#   ↓
+# FastAPI
+#   ↓
+# Authentication
+#   ↓
+# Query Validation
+#   ↓
+# Retriever
+#   ↓
+# Vector Database
+#   ↓
+# Relevant Documents
+#   ↓
+# Reranker
+#   ↓
+# Prompt Construction
+#   ↓
+# LLM
+#   ↓
+# Streaming Response
+#   ↓
+# User
+#
+# Supporting components:
+#
+# Redis      → Cache / state
+# PostgreSQL → Application data
+# Vector DB  → Embeddings
+# Monitoring → Logs / metrics / traces
+#
+# Ye production RAG system ka common high-level architecture hai.
+
+
+# ============================================================
+# 50. QUESTION:
+# Ek production-grade GenAI application ke liye complete FastAPI architecture
+# kaise design karenge?
+#
+# ANSWER:
+#
+# High-level architecture:
+#
+#                       ┌─────────────────┐
+#                       │    Frontend     │
+#                       └────────┬────────┘
+#                                ↓
+#                       ┌─────────────────┐
+#                       │ API Gateway/LB  │
+#                       └────────┬────────┘
+#                                ↓
+#                       ┌─────────────────┐
+#                       │     FastAPI     │
+#                       └────────┬────────┘
+#                                ↓
+#              ┌─────────────────┼─────────────────┐
+#              ↓                 ↓                 ↓
+#          Auth Layer         Redis          PostgreSQL
+#              │                 │
+#              ↓                 ↓
+#         Authorization       Cache/Queue
+#                                │
+#                                ↓
+#                       ┌─────────────────┐
+#                       │  AI/RAG Layer   │
+#                       └────────┬────────┘
+#                                ↓
+#                       ┌─────────────────┐
+#                       │   Vector DB     │
+#                       └────────┬────────┘
+#                                ↓
+#                       ┌─────────────────┐
+#                       │      LLM        │
+#                       └────────┬────────┘
+#                                ↓
+#                       Streaming Response
+#                                ↓
+#                             Client
+#
+# Production requirements:
+#
+# Authentication
+# Authorization
+# Rate limiting
+# Input validation
+# Async I/O
+# Caching
+# Queue-based processing
+# Logging
+# Monitoring
+# Tracing
+# Error handling
+# Docker
+# CI/CD
+# Cloud deployment
+# Security
+#
+# FDE perspective:
+# FastAPI sirf API framework nahi hai.
+# Ye complete AI system ka backend/API integration layer ban sakta hai.
