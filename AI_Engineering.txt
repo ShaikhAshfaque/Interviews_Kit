@@ -1,0 +1,2306 @@
+AI ENGINEERING INTERVIEW – 200 IMPORTANT Q&A
+Basic → Advanced → Senior Level
+For AI Engineer | GenAI Engineer | Senior AI Engineer
+
+
+==================================================
+LEVEL 1 – AI ENGINEERING FUNDAMENTALS
+==================================================
+
+1. QUESTION:
+AI Engineering kya hoti hai?
+
+ANSWER:
+AI Engineering ka matlab AI/ML models ko real-world applications mein integrate karke production-ready intelligent systems banana hai.
+
+Isme sirf model banana nahi hota, balki APIs, databases, cloud, security, monitoring, deployment aur scalability bhi important hote hain.
+
+
+2. QUESTION:
+AI Engineer aur Data Scientist mein kya difference hai?
+
+ANSWER:
+Data Scientist ka focus data analysis, experimentation, statistical analysis aur model development par zyada hota hai.
+
+AI Engineer ka focus AI/ML models ko real-world applications mein integrate, deploy, scale aur maintain karna hota hai.
+
+
+3. QUESTION:
+AI Engineer aur ML Engineer mein kya difference hai?
+
+ANSWER:
+ML Engineer traditionally machine learning pipelines, model training, deployment aur MLOps par focus karta hai.
+
+AI Engineer ka scope broader ho sakta hai jisme ML, Deep Learning, LLMs, RAG, AI Agents, APIs aur AI applications include hote hain.
+
+
+4. QUESTION:
+AI Engineering lifecycle kya hota hai?
+
+ANSWER:
+Typical AI Engineering lifecycle:
+
+Requirement
+→ Data
+→ Model
+→ Evaluation
+→ API
+→ Deployment
+→ Monitoring
+→ Feedback
+→ Improvement
+
+Production system mein ye lifecycle continuously repeat hota hai.
+
+
+5. QUESTION:
+AI project start karne se pehle kya karenge?
+
+ANSWER:
+Sabse pehle business problem ko clearly define karenge.
+
+Uske baad:
+- Business objective
+- Success metrics
+- Data availability
+- Model requirements
+- Latency requirements
+- Cost constraints
+- Security requirements
+- Deployment requirements
+
+identify karenge.
+
+
+6. QUESTION:
+AI solution ke functional requirements kya hote hain?
+
+ANSWER:
+Functional requirements define karte hain ki system ko exactly kya kaam karna hai.
+
+Example:
+- Prediction karna
+- Classification karna
+- Chatbot provide karna
+- Document summarize karna
+- Fraud detect karna
+
+
+7. QUESTION:
+Non-functional requirements kya hote hain?
+
+ANSWER:
+Non-functional requirements system ki quality aur operational behavior define karte hain.
+
+Examples:
+- Performance
+- Latency
+- Scalability
+- Availability
+- Security
+- Reliability
+- Cost
+
+
+8. QUESTION:
+AI system mein latency kya hoti hai?
+
+ANSWER:
+User request send karne aur response receive hone ke beech ka total time latency hota hai.
+
+Real-time AI applications mein low latency important hoti hai.
+
+
+9. QUESTION:
+Throughput kya hota hai?
+
+ANSWER:
+System ek given time mein kitni requests process kar sakta hai usse throughput kehte hain.
+
+Example:
+100 requests per second.
+
+
+10. QUESTION:
+Scalability kya hoti hai?
+
+ANSWER:
+Increasing users, traffic ya data ke saath system ki capacity ko efficiently increase karna scalability hai.
+
+
+11. QUESTION:
+Horizontal aur Vertical scaling mein difference?
+
+ANSWER:
+Vertical scaling mein existing server ki CPU, RAM ya GPU increase karte hain.
+
+Horizontal scaling mein multiple servers, containers ya instances add karte hain.
+
+AI production systems mein horizontal scaling commonly useful hoti hai.
+
+
+12. QUESTION:
+AI system mein bottleneck kya ho sakta hai?
+
+ANSWER:
+AI application ke bottlenecks ho sakte hain:
+
+- Model inference
+- GPU
+- CPU
+- Database
+- Vector search
+- Network
+- External API
+- Serialization
+- Storage
+
+
+13. QUESTION:
+Deterministic aur Probabilistic AI mein difference?
+
+ANSWER:
+Rule-based systems generally deterministic behavior provide karte hain.
+
+LLMs probabilistic output generate karte hain, isliye same input par output variation possible hai.
+
+
+14. QUESTION:
+Model inference kya hai?
+
+ANSWER:
+Already trained model ko new input dekar prediction ya output generate karna inference kehlata hai.
+
+
+15. QUESTION:
+Training aur Inference mein difference?
+
+ANSWER:
+Training phase mein model parameters data se learn karte hain.
+
+Inference phase mein trained model new data par prediction/output generate karta hai.
+
+
+16. QUESTION:
+Batch inference kya hai?
+
+ANSWER:
+Large number of records ko ek batch mein process karke predictions generate karna batch inference hai.
+
+Example:
+Daily 10 million customer records par prediction run karna.
+
+
+17. QUESTION:
+Real-time inference kya hai?
+
+ANSWER:
+User request ke response mein immediately model prediction generate karna real-time inference hai.
+
+Example:
+Real-time fraud detection.
+
+
+18. QUESTION:
+AI API kya hoti hai?
+
+ANSWER:
+AI API application aur AI model ke beech communication layer provide karti hai.
+
+Example:
+FastAPI endpoint user input leta hai, model ko call karta hai aur prediction return karta hai.
+
+
+19. QUESTION:
+FastAPI AI projects mein kyun use hota hai?
+
+ANSWER:
+FastAPI Python ka high-performance web framework hai.
+
+AI applications mein iska use:
+- REST APIs
+- Async operations
+- Request validation
+- Authentication
+- Model serving
+- Automatic Swagger documentation
+
+ke liye hota hai.
+
+
+20. QUESTION:
+Pydantic ka role kya hai?
+
+ANSWER:
+Pydantic request aur response data validation ke liye use hota hai.
+
+Isse incorrect ya invalid input ko API level par validate aur reject kar sakte hain.
+
+
+==================================================
+LEVEL 2 – PYTHON + AI ENGINEERING
+==================================================
+
+21. QUESTION:
+AI Engineer ke liye Python important kyun hai?
+
+ANSWER:
+Python mein AI/ML ecosystem bahut strong hai.
+
+Important libraries:
+- NumPy
+- Pandas
+- Scikit-learn
+- TensorFlow
+- PyTorch
+- Transformers
+- LangChain
+- FastAPI
+
+
+22. QUESTION:
+List aur Tuple mein difference?
+
+ANSWER:
+List mutable hoti hai, matlab usko modify kar sakte hain.
+
+Tuple immutable hota hai, matlab create hone ke baad directly modify nahi kar sakte.
+
+Frequently changing data ke liye List aur fixed data ke liye Tuple use kar sakte hain.
+
+
+23. QUESTION:
+Dictionary AI applications mein kahan use hoti hai?
+
+ANSWER:
+Dictionary key-value data store karti hai.
+
+AI applications mein iska use:
+- Configuration
+- Metadata
+- JSON-like data
+- Model output
+- API response
+- Mapping
+
+ke liye hota hai.
+
+
+24. QUESTION:
+Generator kya hota hai?
+
+ANSWER:
+Generator data ko ek-ek karke produce karta hai instead of complete dataset ko memory mein load karne ke.
+
+Large datasets aur streaming applications mein generators memory efficient hote hain.
+
+
+25. QUESTION:
+Iterator kya hota hai?
+
+ANSWER:
+Iterator ek object hai jo elements ko sequentially provide karta hai.
+
+Python mein iterator __iter__() aur __next__() protocol follow karta hai.
+
+
+26. QUESTION:
+Exception handling kyun important hai?
+
+ANSWER:
+Production AI application mein API, database, model ya external service fail ho sakti hai.
+
+try-except ke through controlled error handling implement kar sakte hain.
+
+
+27. QUESTION:
+Logging kya hoti hai?
+
+ANSWER:
+Application ke important events, errors aur operational information ko record karna logging hai.
+
+Production debugging aur monitoring ke liye logging important hai.
+
+
+28. QUESTION:
+Environment variables kyun use karte hain?
+
+ANSWER:
+API keys, database URLs aur secrets ko source code mein hardcode nahi karna chahiye.
+
+Environment variables ya secret managers use karne chahiye.
+
+
+29. QUESTION:
+Virtual environment kya hai?
+
+ANSWER:
+Virtual environment project-specific Python dependencies ko isolate karta hai.
+
+Isse different projects ke package versions ke conflicts avoid hote hain.
+
+
+30. QUESTION:
+Dependency management kya hai?
+
+ANSWER:
+Project ki required libraries aur unke versions ko manage karna dependency management hai.
+
+requirements.txt, Poetry ya other package management tools use kiye ja sakte hain.
+
+
+31. QUESTION:
+Async programming kya hai?
+
+ANSWER:
+Async programming ka purpose I/O operations ke wait ke dauran application ko unnecessarily block na karna hai.
+
+AI APIs, database aur external API calls mein async programming useful hai.
+
+
+32. QUESTION:
+CPU-bound aur I/O-bound task mein difference?
+
+ANSWER:
+CPU-bound task mein heavy computation hoti hai.
+
+I/O-bound task mein application network, database ya external service response ka wait karti hai.
+
+
+33. QUESTION:
+Threading aur Multiprocessing mein difference?
+
+ANSWER:
+Threading mainly I/O-bound workloads ke liye useful hai.
+
+Multiprocessing CPU-heavy workloads ko multiple processes ke through execute karne mein useful hai.
+
+
+34. QUESTION:
+Serialization kya hai?
+
+ANSWER:
+Python object ko transferable format jaise JSON mein convert karna serialization hai.
+
+APIs mein request aur response exchange ke liye serialization important hai.
+
+
+35. QUESTION:
+JSON AI applications mein important kyun hai?
+
+ANSWER:
+REST APIs, LLM APIs, configurations aur structured data exchange mein JSON widely used format hai.
+
+
+==================================================
+LEVEL 3 – MACHINE LEARNING FUNDAMENTALS
+==================================================
+
+36. QUESTION:
+Machine Learning kya hai?
+
+ANSWER:
+Machine Learning mein system historical data se patterns learn karta hai aur learned patterns ke basis par unseen data par prediction karta hai.
+
+
+37. QUESTION:
+Supervised Learning kya hai?
+
+ANSWER:
+Jahan training data ke saath target/label available hota hai usse supervised learning kehte hain.
+
+Examples:
+- Classification
+- Regression
+
+
+38. QUESTION:
+Unsupervised Learning kya hai?
+
+ANSWER:
+Jahan predefined labels available nahi hote aur algorithm data mein hidden patterns identify karta hai.
+
+Example:
+Clustering.
+
+
+39. QUESTION:
+Classification kya hai?
+
+ANSWER:
+Input ko predefined classes/categories mein assign karna classification hai.
+
+Example:
+Spam vs Not Spam.
+
+
+40. QUESTION:
+Regression kya hai?
+
+ANSWER:
+Continuous numerical value predict karna regression hai.
+
+Example:
+House price prediction.
+
+
+41. QUESTION:
+Overfitting kya hai?
+
+ANSWER:
+Jab model training data ko bahut achhe se memorize kar leta hai lekin unseen data par poor performance deta hai, usse overfitting kehte hain.
+
+
+42. QUESTION:
+Underfitting kya hai?
+
+ANSWER:
+Jab model underlying data patterns ko adequately learn nahi kar pata, usse underfitting kehte hain.
+
+
+43. QUESTION:
+Bias-Variance Tradeoff kya hai?
+
+ANSWER:
+High bias model usually too simple hota hai.
+
+High variance model training data ke noise ko bhi learn kar leta hai.
+
+Good model mein bias aur variance ke beech proper balance hona chahiye.
+
+
+44. QUESTION:
+Train, Validation aur Test dataset kya hote hain?
+
+ANSWER:
+Train dataset model ko train karne ke liye use hota hai.
+
+Validation dataset hyperparameter tuning aur model selection ke liye use hota hai.
+
+Test dataset final unbiased evaluation ke liye use hota hai.
+
+
+45. QUESTION:
+Cross-validation kya hai?
+
+ANSWER:
+Dataset ko multiple folds mein divide karke multiple training aur validation rounds perform karna cross-validation hai.
+
+Isse model ki generalization performance better estimate kar sakte hain.
+
+
+46. QUESTION:
+Feature Engineering kya hai?
+
+ANSWER:
+Raw data se meaningful aur useful features create ya transform karna feature engineering hai.
+
+
+47. QUESTION:
+Feature Scaling kya hai?
+
+ANSWER:
+Different numerical features ko comparable scale par transform karna feature scaling hai.
+
+Common methods:
+- Normalization
+- Standardization
+
+
+48. QUESTION:
+Normalization aur Standardization mein difference?
+
+ANSWER:
+Normalization generally values ko fixed range, commonly 0 to 1, mein transform karta hai.
+
+Standardization data ko mean 0 aur standard deviation 1 ke around transform karta hai.
+
+
+49. QUESTION:
+Data Leakage kya hai?
+
+ANSWER:
+Jab training process mein aisi information accidentally use ho jaye jo prediction time par available nahi hogi, usse data leakage kehte hain.
+
+Data leakage se unrealistically high model performance mil sakti hai.
+
+
+50. QUESTION:
+Class Imbalance kya hai?
+
+ANSWER:
+Jab different classes ka distribution highly unequal ho, usse class imbalance kehte hain.
+
+Example:
+99% normal transactions
+1% fraud transactions.
+
+
+==================================================
+LEVEL 4 – MACHINE LEARNING EVALUATION
+==================================================
+
+51. QUESTION:
+Accuracy kya hai?
+
+ANSWER:
+Total predictions mein se kitni predictions correct hain, uska percentage accuracy hai.
+
+Balanced dataset mein accuracy useful ho sakti hai.
+
+
+52. QUESTION:
+Precision kya hai?
+
+ANSWER:
+Model ne jitne positive predictions diye unmein se actually positive cases ka ratio precision hai.
+
+
+53. QUESTION:
+Recall kya hai?
+
+ANSWER:
+Actual positive cases mein se model ne kitne correctly identify kiye, uska ratio recall hai.
+
+
+54. QUESTION:
+F1 Score kya hai?
+
+ANSWER:
+F1 score precision aur recall ka harmonic mean hai.
+
+Imbalanced classification problems mein F1 score useful hota hai.
+
+
+55. QUESTION:
+Precision aur Recall kab use karenge?
+
+ANSWER:
+Agar false positives costly hain to precision important hai.
+
+Agar false negatives costly hain to recall important hai.
+
+
+56. QUESTION:
+ROC-AUC kya hai?
+
+ANSWER:
+ROC-AUC classification model ki discrimination/ranking capability ko different thresholds par evaluate karta hai.
+
+
+57. QUESTION:
+Confusion Matrix kya hai?
+
+ANSWER:
+Confusion Matrix mein:
+
+TP = True Positive
+TN = True Negative
+FP = False Positive
+FN = False Negative
+
+show hote hain.
+
+
+58. QUESTION:
+Regression ke common metrics kya hain?
+
+ANSWER:
+Common regression metrics:
+
+- MAE
+- MSE
+- RMSE
+- R2 Score
+
+
+59. QUESTION:
+MAE aur RMSE mein difference?
+
+ANSWER:
+MAE absolute errors ka average calculate karta hai.
+
+RMSE large errors ko comparatively zyada penalize karta hai.
+
+
+60. QUESTION:
+Business Metric kya hai?
+
+ANSWER:
+Sirf model accuracy sufficient nahi hoti.
+
+Business metrics jaise:
+- Revenue
+- Cost reduction
+- Fraud loss reduction
+- Conversion
+- Customer retention
+
+bhi measure karne chahiye.
+
+
+==================================================
+LEVEL 5 – DEEP LEARNING
+==================================================
+
+61. QUESTION:
+Neural Network kya hai?
+
+ANSWER:
+Neural Network interconnected computational units/neurons aur layers ka model hai jo complex patterns learn karta hai.
+
+
+62. QUESTION:
+Neuron kya karta hai?
+
+ANSWER:
+Neuron input values ko weights ke saath combine karta hai, bias add karta hai aur activation function apply karta hai.
+
+
+63. QUESTION:
+Activation Function kya hai?
+
+ANSWER:
+Activation function neural network mein non-linearity introduce karta hai.
+
+Examples:
+- ReLU
+- Sigmoid
+- Tanh
+
+
+64. QUESTION:
+ReLU kyun popular hai?
+
+ANSWER:
+ReLU simple computational function hai aur deep neural networks mein commonly use hota hai.
+
+Ye sigmoid/tanh ke comparison mein certain gradient issues ko reduce karne mein help karta hai.
+
+
+65. QUESTION:
+Backpropagation kya hai?
+
+ANSWER:
+Loss function ke basis par gradients calculate karke neural network ke weights ko update karna backpropagation ka core concept hai.
+
+
+66. QUESTION:
+Gradient Descent kya hai?
+
+ANSWER:
+Loss function ko minimize karne ke liye model parameters ko gradient ki direction ke according iteratively update karna gradient descent hai.
+
+
+67. QUESTION:
+Learning Rate kya hai?
+
+ANSWER:
+Learning rate decide karta hai ki har optimization step mein model parameters kitna update honge.
+
+
+68. QUESTION:
+Batch Size kya hai?
+
+ANSWER:
+Ek training iteration mein kitne samples process kiye jayenge usse batch size kehte hain.
+
+
+69. QUESTION:
+Epoch kya hai?
+
+ANSWER:
+Complete training dataset par ek full pass ko one epoch kehte hain.
+
+
+70. QUESTION:
+Vanishing Gradient kya hai?
+
+ANSWER:
+Deep neural network mein gradients bahut small ho jaane ki wajah se early layers effectively learn nahi kar pati.
+
+Is problem ko vanishing gradient kehte hain.
+
+
+==================================================
+LEVEL 6 – NLP FUNDAMENTALS
+==================================================
+
+71. QUESTION:
+NLP kya hai?
+
+ANSWER:
+Natural Language Processing ka purpose machines ko human language understand, process aur generate karne ki capability dena hai.
+
+
+72. QUESTION:
+Tokenization kya hai?
+
+ANSWER:
+Text ko smaller units called tokens mein divide karna tokenization hai.
+
+
+73. QUESTION:
+Word Tokenization kya hai?
+
+ANSWER:
+Text ko words ke basis par split karna word tokenization hai.
+
+
+74. QUESTION:
+Subword Tokenization kya hai?
+
+ANSWER:
+Words ko smaller subword units mein divide karna subword tokenization hai.
+
+Modern LLMs mein subword tokenization widely used hai.
+
+
+75. QUESTION:
+BPE kya hai?
+
+ANSWER:
+BPE yani Byte Pair Encoding frequent character ya subword patterns ko merge karke efficient vocabulary create karta hai.
+
+
+76. QUESTION:
+Embedding kya hai?
+
+ANSWER:
+Text, token ya object ko numerical vector representation mein convert karna embedding hai.
+
+
+77. QUESTION:
+Embedding ka use kya hai?
+
+ANSWER:
+Embeddings ka use:
+
+- Semantic Search
+- Similarity
+- Recommendation
+- Clustering
+- RAG
+- Retrieval
+
+mein hota hai.
+
+
+78. QUESTION:
+Semantic Similarity kya hai?
+
+ANSWER:
+Do texts meaning ke level par kitne similar hain usko semantic similarity kehte hain.
+
+
+79. QUESTION:
+Cosine Similarity kya hai?
+
+ANSWER:
+Do vectors ke beech angular similarity measure karne ke liye cosine similarity use hoti hai.
+
+Vector databases mein semantic similarity search ke liye commonly use hoti hai.
+
+
+80. QUESTION:
+Context Window kya hai?
+
+ANSWER:
+LLM ek request mein maximum kitne tokens process kar sakta hai, uski capacity ko context window kehte hain.
+
+
+==================================================
+LEVEL 7 – LLM FUNDAMENTALS
+==================================================
+
+81. QUESTION:
+LLM kya hai?
+
+ANSWER:
+LLM yani Large Language Model ek large-scale neural network hai jo massive text data par train hota hai aur language ko understand aur generate kar sakta hai.
+
+
+82. QUESTION:
+Transformer kya hai?
+
+ANSWER:
+Transformer architecture attention mechanism ka use karke sequence ke different tokens ke relationships learn karti hai.
+
+Modern LLMs ka foundation Transformer architecture hai.
+
+
+83. QUESTION:
+Self-Attention kya hai?
+
+ANSWER:
+Self-attention input ke different tokens ke relationships calculate karta hai aur determine karta hai ki current token ke liye kaunse tokens important hain.
+
+
+84. QUESTION:
+Query, Key aur Value kya hote hain?
+
+ANSWER:
+Query current information represent karta hai.
+
+Key matching information represent karta hai.
+
+Value actual information represent karta hai jo attention output mein contribute karti hai.
+
+
+85. QUESTION:
+Multi-Head Attention kya hai?
+
+ANSWER:
+Multiple attention heads simultaneously different types ke relationships aur representations learn karte hain.
+
+
+86. QUESTION:
+Positional Encoding kya hai?
+
+ANSWER:
+Transformer ko sequence ke token order/position ki information provide karne ke liye positional information use ki jaati hai.
+
+
+87. QUESTION:
+Decoder-only model kya hai?
+
+ANSWER:
+Decoder-only Transformer architecture autoregressive text generation ke liye commonly use hoti hai.
+
+
+88. QUESTION:
+Autoregressive Generation kya hai?
+
+ANSWER:
+Model previous tokens ko context mein use karke next token predict karta hai aur repeatedly generation continue karta hai.
+
+
+89. QUESTION:
+Temperature kya hai?
+
+ANSWER:
+Temperature LLM output ki probability distribution ko control karta hai.
+
+Higher temperature generally more diverse output generate kar sakta hai.
+
+Lower temperature generally more deterministic output provide karta hai.
+
+
+90. QUESTION:
+Top-p kya hai?
+
+ANSWER:
+Top-p nucleus sampling technique hai jisme model cumulative probability ke specified threshold ke andar candidate tokens se sampling karta hai.
+
+
+==================================================
+LEVEL 8 – PROMPT ENGINEERING
+==================================================
+
+91. QUESTION:
+Prompt Engineering kya hai?
+
+ANSWER:
+LLM ko desired output generate karwane ke liye instructions, context, examples, constraints aur formatting ko systematically design karna prompt engineering hai.
+
+
+92. QUESTION:
+Zero-shot Prompting kya hai?
+
+ANSWER:
+Model ko examples provide kiye bina directly task instruction dena zero-shot prompting hai.
+
+
+93. QUESTION:
+Few-shot Prompting kya hai?
+
+ANSWER:
+Prompt mein kuch examples provide karke model ko desired input-output behavior demonstrate karna few-shot prompting hai.
+
+
+94. QUESTION:
+Chain-of-Thought kya hai?
+
+ANSWER:
+Complex reasoning tasks mein intermediate reasoning ko guide karne ka approach conceptually Chain-of-Thought kehlata hai.
+
+Production systems mein unnecessary private reasoning expose nahi karna chahiye.
+
+
+95. QUESTION:
+System Prompt kya hai?
+
+ANSWER:
+System prompt model ke overall behavior, role, rules aur constraints define karta hai.
+
+
+96. QUESTION:
+User Prompt kya hai?
+
+ANSWER:
+User prompt actual question, task ya input provide karta hai.
+
+
+97. QUESTION:
+Prompt Injection kya hai?
+
+ANSWER:
+Malicious ya unintended instructions ke through AI system ke intended behavior ko manipulate karna prompt injection hai.
+
+
+98. QUESTION:
+Prompt Injection se protection kaise karenge?
+
+ANSWER:
+Protection ke liye:
+
+- Input validation
+- Instruction hierarchy
+- Tool restrictions
+- Output validation
+- Sandboxing
+- Least privilege
+- Guardrails
+
+use kar sakte hain.
+
+
+99. QUESTION:
+Structured Output kya hai?
+
+ANSWER:
+LLM output ko predefined schema ya JSON format mein generate karwana structured output hai.
+
+Downstream applications mein reliability improve hoti hai.
+
+
+100. QUESTION:
+Prompt Versioning kya hai?
+
+ANSWER:
+Production prompts ko version-control system mein maintain karna prompt versioning hai.
+
+Isse prompt changes track aur rollback kar sakte hain.
+
+
+==================================================
+LEVEL 9 – RAG
+==================================================
+
+101. QUESTION:
+RAG kya hai?
+
+ANSWER:
+RAG yani Retrieval-Augmented Generation mein external knowledge ko retrieve karke LLM ko relevant context provide kiya jata hai.
+
+LLM us context ke basis par answer generate karta hai.
+
+
+102. QUESTION:
+RAG ki need kyun hoti hai?
+
+ANSWER:
+RAG useful hai kyunki LLM ko:
+
+- Private company data
+- Frequently changing information
+- Domain-specific knowledge
+- External documents
+
+provide karne ki need ho sakti hai.
+
+
+103. QUESTION:
+RAG Pipeline kya hoti hai?
+
+ANSWER:
+
+Documents
+→ Load
+→ Clean
+→ Chunk
+→ Embed
+→ Vector DB
+→ Retrieve
+→ Rerank
+→ Prompt
+→ LLM
+→ Response
+
+
+104. QUESTION:
+Document Chunking kya hai?
+
+ANSWER:
+Large documents ko smaller meaningful sections mein divide karna document chunking hai.
+
+
+105. QUESTION:
+Chunk Size kaise choose karenge?
+
+ANSWER:
+Chunk size decide karte waqt:
+
+- Document type
+- Information density
+- Retrieval accuracy
+- Context window
+- Latency
+- Embedding quality
+
+consider karenge.
+
+
+106. QUESTION:
+Chunk Overlap kya hai?
+
+ANSWER:
+Adjacent chunks ke beech common overlapping content maintain karna chunk overlap hai.
+
+Isse important information boundary par split hone ka risk reduce ho sakta hai.
+
+
+107. QUESTION:
+Vector Database kya hai?
+
+ANSWER:
+Embeddings ko store aur efficiently similarity-search karne ke liye vector database use hota hai.
+
+
+108. QUESTION:
+Vector Database ke examples?
+
+ANSWER:
+
+- Qdrant
+- Pinecone
+- Weaviate
+- Milvus
+- pgvector
+- Chroma
+
+
+109. QUESTION:
+Similarity Search kya hai?
+
+ANSWER:
+User query ke embedding ke nearest vectors/documents retrieve karna similarity search hai.
+
+
+110. QUESTION:
+Metadata Filtering kya hai?
+
+ANSWER:
+Vector similarity ke saath metadata conditions apply karna metadata filtering hai.
+
+Example:
+
+department = HR
+
+document_type = policy
+
+
+111. QUESTION:
+Hybrid Search kya hai?
+
+ANSWER:
+Keyword-based search aur semantic/vector search ko combine karna hybrid search hai.
+
+
+112. QUESTION:
+Reranking kya hai?
+
+ANSWER:
+Initial retrieval ke baad retrieved documents ko more accurate relevance model ke through reorder karna reranking hai.
+
+
+113. QUESTION:
+RAG hallucination kaise reduce karenge?
+
+ANSWER:
+RAG hallucination reduce karne ke liye:
+
+- Better chunking
+- Better embeddings
+- Hybrid retrieval
+- Reranking
+- Metadata filtering
+- Grounded prompts
+- Citations
+- Output validation
+- Evaluation
+
+use karenge.
+
+
+114. QUESTION:
+Top-K retrieval kya hai?
+
+ANSWER:
+Top-K define karta hai ki query ke liye initial retrieval stage mein kitne candidate documents retrieve karne hain.
+
+
+115. QUESTION:
+Retrieval Precision kya hai?
+
+ANSWER:
+Retrieved documents mein actually relevant documents ka proportion retrieval precision ko represent karta hai.
+
+
+116. QUESTION:
+Retrieval Recall kya hai?
+
+ANSWER:
+Total relevant documents mein se kitne relevant documents retrieve hue, retrieval recall indicate karta hai.
+
+
+117. QUESTION:
+RAG aur Fine-Tuning mein difference?
+
+ANSWER:
+RAG external knowledge ko runtime par provide karta hai.
+
+Fine-tuning model ke behavior, style ya task capability ko adapt karta hai.
+
+
+118. QUESTION:
+RAG kab use karenge?
+
+ANSWER:
+Frequently changing, private, enterprise ya domain-specific knowledge ke liye RAG preferred approach ho sakti hai.
+
+
+119. QUESTION:
+Fine-Tuning kab use karenge?
+
+ANSWER:
+Consistent behavior, specific output style, specialized task performance ya domain-specific behavior ke liye fine-tuning consider kar sakte hain.
+
+
+120. QUESTION:
+RAG ka biggest bottleneck kya ho sakta hai?
+
+ANSWER:
+Common bottlenecks:
+
+- Poor document quality
+- Bad chunking
+- Weak embeddings
+- Poor retrieval
+- Irrelevant context
+- Excessive context
+- Slow vector search
+
+
+==================================================
+LEVEL 10 – FINE-TUNING
+==================================================
+
+121. QUESTION:
+Fine-Tuning kya hai?
+
+ANSWER:
+Pretrained model ko task-specific ya domain-specific dataset par further train karke uske behavior ko adapt karna fine-tuning hai.
+
+
+122. QUESTION:
+Full Fine-Tuning kya hai?
+
+ANSWER:
+Model ke majority ya all parameters ko update karke training karna full fine-tuning hai.
+
+Ye computationally expensive aur memory intensive ho sakta hai.
+
+
+123. QUESTION:
+PEFT kya hai?
+
+ANSWER:
+PEFT yani Parameter-Efficient Fine-Tuning mein complete model parameters ko update karne ke instead limited parameters ko train kiya jata hai.
+
+
+124. QUESTION:
+LoRA kya hai?
+
+ANSWER:
+LoRA yani Low-Rank Adaptation base model ke original weights ko mostly freeze karke small trainable matrices add karta hai.
+
+Isse trainable parameters aur memory requirement reduce ho sakti hai.
+
+
+125. QUESTION:
+QLoRA kya hai?
+
+ANSWER:
+QLoRA quantized base model ke saath LoRA adapters train karta hai.
+
+Isse limited GPU memory par fine-tuning possible ho sakti hai.
+
+
+126. QUESTION:
+Fine-Tuning dataset kaisa hona chahiye?
+
+ANSWER:
+Fine-tuning dataset:
+
+- High quality
+- Relevant
+- Representative
+- Correctly formatted
+- Consistent
+- Task-specific
+
+hona chahiye.
+
+
+127. QUESTION:
+Data Quality aur Data Quantity mein kya important hai?
+
+ANSWER:
+High-quality relevant examples often huge noisy dataset se better hote hain.
+
+Quantity useful hai, lekin data quality sabse important factors mein se ek hai.
+
+
+128. QUESTION:
+Fine-Tuning mein Overfitting kya hai?
+
+ANSWER:
+Agar dataset small ho ya model ko excessively train kiya jaye to model training examples memorize kar sakta hai aur unseen data par performance reduce ho sakti hai.
+
+
+129. QUESTION:
+Fine-Tuned model ko kaise evaluate karenge?
+
+ANSWER:
+Holdout evaluation dataset create karke:
+
+Base Model vs Fine-Tuned Model
+
+compare karenge.
+
+Task-specific metrics aur human evaluation bhi use kar sakte hain.
+
+
+130. QUESTION:
+Catastrophic Forgetting kya hai?
+
+ANSWER:
+Fine-tuning ke during model apni previously learned capabilities ka kuch part lose kar sakta hai.
+
+Isse catastrophic forgetting kehte hain.
+
+
+==================================================
+LEVEL 11 – AI AGENTS
+==================================================
+
+131. QUESTION:
+AI Agent kya hai?
+
+ANSWER:
+AI Agent ek intelligent system hai jo goal achieve karne ke liye reasoning/planning, tools, memory aur external environment ke saath interact kar sakta hai.
+
+
+132. QUESTION:
+LLM aur AI Agent mein difference?
+
+ANSWER:
+LLM primarily text/input ko process karke response generate karta hai.
+
+Agent LLM ke saath tools, memory, planning aur execution capabilities combine karta hai.
+
+
+133. QUESTION:
+Tool Calling kya hai?
+
+ANSWER:
+LLM structured request generate karta hai jisse external function, API, database ya tool execute kiya jata hai.
+
+
+134. QUESTION:
+Agent Loop kya hota hai?
+
+ANSWER:
+
+Understand
+→ Plan
+→ Tool Call
+→ Observe
+→ Decide
+→ Repeat
+→ Final Answer
+
+
+135. QUESTION:
+Agent Memory kya hai?
+
+ANSWER:
+Previous interaction, task state ya useful information ko preserve karna agent memory hai.
+
+
+136. QUESTION:
+Short-Term Memory kya hai?
+
+ANSWER:
+Current conversation ya current task ka temporary context short-term memory mein maintain kiya jata hai.
+
+
+137. QUESTION:
+Long-Term Memory kya hai?
+
+ANSWER:
+Persistent user information, historical data ya reusable knowledge ko long-term memory/storage mein maintain kiya ja sakta hai.
+
+
+138. QUESTION:
+ReAct Pattern kya hai?
+
+ANSWER:
+ReAct approach mein agent situation ko analyze karta hai, action/tool execute karta hai, observation receive karta hai aur us observation ke basis par next action decide karta hai.
+
+
+139. QUESTION:
+Agent Hallucination kya hai?
+
+ANSWER:
+Agent incorrect assumptions, wrong tool selection ya fabricated information generate kar sakta hai.
+
+Isliye validation aur guardrails important hain.
+
+
+140. QUESTION:
+Agent Loop infinite ho sakta hai?
+
+ANSWER:
+Haan.
+
+Isliye production agent mein:
+
+- Maximum iterations
+- Timeout
+- Token budget
+- Tool limits
+- Termination conditions
+
+define karni chahiye.
+
+
+==================================================
+LEVEL 12 – MULTI-AGENT SYSTEMS
+==================================================
+
+141. QUESTION:
+Multi-Agent System kya hai?
+
+ANSWER:
+Multiple specialized AI agents ko coordinate karke complex business problem solve karna multi-agent architecture hai.
+
+
+142. QUESTION:
+Multi-Agent System kab use karenge?
+
+ANSWER:
+Jab complex problem naturally multiple specialized roles mein divide ho sakti ho.
+
+Example:
+
+Researcher Agent
+→ Analyst Agent
+→ Writer Agent
+→ Reviewer Agent
+
+
+143. QUESTION:
+Multi-Agent System ka disadvantage kya hai?
+
+ANSWER:
+
+- Complexity increase
+- Latency increase
+- Token cost increase
+- Debugging difficult
+- Coordination issues
+- More failure points
+
+
+144. QUESTION:
+Supervisor Agent kya hai?
+
+ANSWER:
+Supervisor Agent multiple agents ko coordinate karta hai, tasks assign karta hai, results evaluate karta hai aur workflow control karta hai.
+
+
+145. QUESTION:
+Agent Communication kya hai?
+
+ANSWER:
+Multiple agents structured messages, shared state, events ya APIs ke through information exchange kar sakte hain.
+
+
+146. QUESTION:
+Shared State kya hai?
+
+ANSWER:
+Multiple agents ke beech common task information/state maintain karna shared state hai.
+
+
+147. QUESTION:
+Agent Orchestration kya hai?
+
+ANSWER:
+Agent execution order, dependencies, state, retries aur failure handling ko manage karna agent orchestration hai.
+
+
+148. QUESTION:
+Agent Guardrails kya hain?
+
+ANSWER:
+Agents ko allowed tools, inputs, outputs aur actions ki defined boundaries mein rakhna guardrails hai.
+
+
+149. QUESTION:
+Agent Reliability kaise improve karenge?
+
+ANSWER:
+Reliability improve karne ke liye:
+
+- Deterministic workflows
+- Structured outputs
+- Validation
+- Tool restrictions
+- Retry logic
+- Observability
+- Evaluation
+- Human approval
+
+use kar sakte hain.
+
+
+150. QUESTION:
+Human-in-the-Loop kya hai?
+
+ANSWER:
+High-risk ya sensitive action perform karne se pehle human approval require karna Human-in-the-Loop approach hai.
+
+
+==================================================
+LEVEL 13 – PRODUCTION AI ENGINEERING
+==================================================
+
+151. QUESTION:
+AI application production-ready kab hoti hai?
+
+ANSWER:
+Jab application:
+
+- Reliable
+- Secure
+- Observable
+- Scalable
+- Cost controlled
+- Maintainable
+
+ho aur defined business SLA meet kare.
+
+
+152. QUESTION:
+Docker ka use AI applications mein kyun hota hai?
+
+ANSWER:
+Docker application, dependencies aur runtime environment ko container mein package karta hai.
+
+Isse development aur production environment consistent rakhna easy hota hai.
+
+
+153. QUESTION:
+Kubernetes ka role kya hai?
+
+ANSWER:
+Kubernetes containerized applications ko:
+
+- Deploy
+- Scale
+- Restart
+- Manage
+- Load balance
+
+karne ke liye use kiya ja sakta hai.
+
+
+154. QUESTION:
+CI/CD kya hai?
+
+ANSWER:
+CI/CD automated software delivery process hai jisme code changes ke saath:
+
+Build
+→ Test
+→ Validate
+→ Deploy
+
+automatically perform kiya ja sakta hai.
+
+
+155. QUESTION:
+Model Registry kya hai?
+
+ANSWER:
+Models ke:
+
+- Versions
+- Artifacts
+- Metadata
+- Lifecycle
+- Deployment status
+
+manage karne ke liye model registry use hoti hai.
+
+
+156. QUESTION:
+MLflow ka use kya hai?
+
+ANSWER:
+MLflow ka use commonly:
+
+- Experiment tracking
+- Model management
+- Artifact management
+- Model lifecycle
+
+ke liye hota hai.
+
+
+157. QUESTION:
+Model Versioning kya hai?
+
+ANSWER:
+Different trained model versions ko track karna model versioning hai.
+
+Isse reproducibility aur rollback possible hota hai.
+
+
+158. QUESTION:
+Blue-Green Deployment kya hai?
+
+ANSWER:
+Existing production version aur new version ke liye separate environments maintain karke controlled traffic switch karna Blue-Green Deployment hai.
+
+
+159. QUESTION:
+Canary Deployment kya hai?
+
+ANSWER:
+New model/application ko initially small percentage traffic dena aur performance validate karne ke baad gradually traffic increase karna Canary Deployment hai.
+
+
+160. QUESTION:
+Rollback kya hai?
+
+ANSWER:
+Agar new deployment fail ho jaye to previous stable version par return karna rollback hai.
+
+
+==================================================
+LEVEL 14 – LLMOPS / OBSERVABILITY
+==================================================
+
+161. QUESTION:
+LLMOps kya hai?
+
+ANSWER:
+LLMOps mein LLM applications ke:
+
+- Deployment
+- Monitoring
+- Evaluation
+- Prompt management
+- Cost management
+- Reliability
+
+ko manage kiya jata hai.
+
+
+162. QUESTION:
+AI Observability kya hai?
+
+ANSWER:
+AI system ke:
+
+- Latency
+- Errors
+- Token usage
+- Model quality
+- Retrieval quality
+- Tool calls
+- Cost
+
+ko monitor karna AI observability hai.
+
+
+163. QUESTION:
+LLM latency ko kaise break down karenge?
+
+ANSWER:
+Total latency ko:
+
+Network Latency
++
+Retrieval Latency
++
+Model Processing Time
++
+Generation Time
+
+mein break down kar sakte hain.
+
+
+164. QUESTION:
+TTFT kya hai?
+
+ANSWER:
+TTFT yani Time To First Token.
+
+Request receive hone se lekar first generated token receive hone tak ka time TTFT hai.
+
+
+165. QUESTION:
+Token Usage kya hai?
+
+ANSWER:
+LLM request mein input tokens aur output tokens consume hote hain.
+
+Total token usage cost calculation aur monitoring ke liye important hai.
+
+
+166. QUESTION:
+LLM cost kaise calculate karenge?
+
+ANSWER:
+
+Cost =
+Input Tokens × Input Token Price
++
+Output Tokens × Output Token Price
+
+Actual pricing model/provider ke according vary karti hai.
+
+
+167. QUESTION:
+AI Cost Optimization kaise karenge?
+
+ANSWER:
+Cost reduce karne ke liye:
+
+- Smaller models
+- Prompt optimization
+- Token reduction
+- Caching
+- Batching
+- Model routing
+- Efficient retrieval
+- Fewer unnecessary tool calls
+
+use kar sakte hain.
+
+
+168. QUESTION:
+Semantic Caching kya hai?
+
+ANSWER:
+Semantically similar user queries ke previous results reuse karke unnecessary LLM calls reduce karna semantic caching hai.
+
+
+169. QUESTION:
+LLM Fallback kya hai?
+
+ANSWER:
+Agar primary model unavailable, overloaded ya failed ho to secondary model/strategy use karna fallback mechanism hai.
+
+
+170. QUESTION:
+Retry Strategy kya hai?
+
+ANSWER:
+Temporary failures ke liye:
+
+- Exponential backoff
+- Maximum retry count
+- Timeout
+- Jitter
+
+use karke reliable retry mechanism implement kar sakte hain.
+
+
+==================================================
+LEVEL 15 – LLM EVALUATION
+==================================================
+
+171. QUESTION:
+LLM Evaluation difficult kyun hai?
+
+ANSWER:
+Traditional accuracy har generative task ko properly measure nahi karti.
+
+LLM output ko multiple dimensions par evaluate karna padta hai:
+
+- Correctness
+- Relevance
+- Groundedness
+- Safety
+- Helpfulness
+- Style
+
+
+172. QUESTION:
+LLM Evaluation ke types kya hain?
+
+ANSWER:
+
+- Offline Evaluation
+- Online Evaluation
+- Human Evaluation
+- Automated Evaluation
+- LLM-as-a-Judge
+
+
+173. QUESTION:
+Groundedness kya hai?
+
+ANSWER:
+Model ka answer provided/source context ke according supported hai ya nahi, usko groundedness kehte hain.
+
+
+174. QUESTION:
+Faithfulness kya hai?
+
+ANSWER:
+Generated answer retrieved evidence ke facts ko accurately represent karta hai ya nahi, faithfulness measure karta hai.
+
+
+175. QUESTION:
+Answer Relevance kya hai?
+
+ANSWER:
+Model ka response user ke actual question ko directly address karta hai ya nahi, answer relevance measure karta hai.
+
+
+176. QUESTION:
+Golden Dataset kya hai?
+
+ANSWER:
+High-quality expected inputs aur outputs ka curated dataset golden dataset kehlata hai.
+
+LLM evaluation aur regression testing mein iska use hota hai.
+
+
+177. QUESTION:
+LLM Regression Testing kya hai?
+
+ANSWER:
+Prompt, model ya pipeline change ke baad existing benchmark questions par new performance ko previous performance se compare karna regression testing hai.
+
+
+178. QUESTION:
+Human Evaluation kya hai?
+
+ANSWER:
+Human reviewers predefined evaluation rubric ke basis par AI responses ko score karte hain.
+
+Example:
+
+- Correctness
+- Relevance
+- Clarity
+- Helpfulness
+
+
+179. QUESTION:
+LLM-as-a-Judge kya hai?
+
+ANSWER:
+Ek LLM ko evaluator ke role mein use karke generated answers ko predefined criteria ke basis par score karna LLM-as-a-Judge approach hai.
+
+
+180. QUESTION:
+Production Feedback Loop kya hai?
+
+ANSWER:
+Production users ke:
+
+- Feedback
+- Failed queries
+- Logs
+- Evaluation results
+- Error patterns
+
+collect karke system ko continuously improve karna production feedback loop hai.
+
+
+==================================================
+LEVEL 16 – AI SECURITY
+==================================================
+
+181. QUESTION:
+AI application mein API Key kaise secure karenge?
+
+ANSWER:
+API keys ko source code mein hardcode nahi karenge.
+
+Environment variables ya dedicated secret manager use karenge.
+
+Keys ko regularly rotate bhi karna chahiye.
+
+
+182. QUESTION:
+Prompt Injection security risk kya hai?
+
+ANSWER:
+Attacker malicious instructions provide karke AI system ke intended behavior ko manipulate kar sakta hai.
+
+Tool-using agents mein iska risk aur important ho jata hai.
+
+
+183. QUESTION:
+Sensitive Data Leakage kya hai?
+
+ANSWER:
+User PII, credentials, internal documents ya confidential information accidentally model, logs ya response mein expose ho sakti hai.
+
+
+184. QUESTION:
+PII kya hai?
+
+ANSWER:
+PII yani Personally Identifiable Information.
+
+Examples:
+
+- Name
+- Email
+- Phone
+- Address
+- Identification information
+
+PII ko appropriate privacy aur security controls ke saath handle karna chahiye.
+
+
+185. QUESTION:
+Least Privilege kya hai?
+
+ANSWER:
+AI agent ko sirf required permissions aur tools dene chahiye.
+
+Unnecessary:
+
+- Admin access
+- Delete access
+- Write access
+- Production access
+
+avoid karna chahiye.
+
+
+186. QUESTION:
+Input Validation kya hai?
+
+ANSWER:
+User input ko validate, sanitize aur constrain karke malicious ya invalid requests ka risk reduce karna input validation hai.
+
+
+187. QUESTION:
+Output Validation kya hai?
+
+ANSWER:
+LLM output ko downstream system mein use karne se pehle:
+
+- Schema validation
+- Business rule validation
+- Security validation
+
+perform karna output validation hai.
+
+
+188. QUESTION:
+Rate Limiting kya hai?
+
+ANSWER:
+Ek user, IP ya API client ko fixed time window mein limited requests allow karna rate limiting hai.
+
+Isse abuse aur unexpected AI cost reduce kar sakte hain.
+
+
+189. QUESTION:
+AI Security Logging kya hai?
+
+ANSWER:
+Important security events, authentication failures, tool calls aur suspicious activity ko log karna chahiye.
+
+Lekin passwords, API keys aur unnecessary sensitive data logs mein store nahi karna chahiye.
+
+
+190. QUESTION:
+Human Approval kab required hai?
+
+ANSWER:
+High-risk actions jaise:
+
+- Financial transaction
+- Data deletion
+- Production changes
+- Sensitive business actions
+- High-impact decisions
+
+ke liye human approval useful ho sakta hai.
+
+
+==================================================
+LEVEL 17 – SENIOR AI ENGINEER / SYSTEM DESIGN
+==================================================
+
+191. QUESTION:
+AI Chatbot ka architecture explain karein.
+
+ANSWER:
+
+User
+→ API Gateway
+→ FastAPI
+→ Authentication
+→ Query Processing
+→ RAG
+→ Vector Database
+→ LLM
+→ Guardrails
+→ Response
+
+Production architecture mein:
+
+- Caching
+- Monitoring
+- Rate Limiting
+- Logging
+- Fallback
+- Security
+
+bhi add karenge.
+
+
+192. QUESTION:
+Enterprise RAG Architecture kaise design karenge?
+
+ANSWER:
+
+DOCUMENT INGESTION:
+
+Documents
+→ Parsing
+→ Cleaning
+→ Chunking
+→ Metadata
+→ Embeddings
+→ Vector Database
+
+
+QUERY PIPELINE:
+
+User Query
+→ Query Understanding
+→ Query Rewrite
+→ Hybrid Retrieval
+→ Reranking
+→ Context Selection
+→ Prompt
+→ LLM
+→ Validation
+→ Citation
+→ Response
+
+
+193. QUESTION:
+High-Traffic AI API ko kaise scale karenge?
+
+ANSWER:
+High-traffic AI API ke liye:
+
+- Stateless FastAPI services
+- Load Balancer
+- Horizontal Scaling
+- Containerization
+- Caching
+- Async I/O
+- Database optimization
+- Queue-based processing
+- Dedicated inference infrastructure
+
+use kar sakte hain.
+
+
+194. QUESTION:
+AI System ka SLA kaise define karenge?
+
+ANSWER:
+SLA mein define kar sakte hain:
+
+- Availability
+- P95 latency
+- P99 latency
+- Error rate
+- Throughput
+- Response quality
+- Recovery Time
+
+Example:
+
+99.9% availability
++
+Defined P95 latency
++
+Defined error rate
+
+
+195. QUESTION:
+AI Model kaise choose karenge?
+
+ANSWER:
+Sirf benchmark score ke basis par model choose nahi karenge.
+
+Factors:
+
+- Quality
+- Latency
+- Cost
+- Context Window
+- Tool Calling
+- Structured Output
+- Privacy
+- Deployment
+- Scalability
+- Business requirement
+
+consider karenge.
+
+
+196. QUESTION:
+Small Model vs Large Model?
+
+ANSWER:
+Simple tasks ke liye small model cost-effective aur low-latency option ho sakta hai.
+
+Complex reasoning aur advanced tasks ke liye larger model useful ho sakta hai.
+
+Production system mein model routing use karke dono ka combination bhi possible hai.
+
+
+197. QUESTION:
+AI Model Routing kya hai?
+
+ANSWER:
+Different types ki queries ke according appropriate model select karna model routing hai.
+
+Example:
+
+Simple Query
+→ Small/Cheap Model
+
+Complex Query
+→ Powerful Model
+
+Isse cost aur latency optimize ho sakti hai.
+
+
+198. QUESTION:
+End-to-End AI Project interview mein kaise explain karenge?
+
+ANSWER:
+
+Business Problem
+→ Requirements
+→ Data
+→ Architecture
+→ Model
+→ Evaluation
+→ API
+→ Deployment
+→ Monitoring
+→ Security
+→ Cost
+→ Business Impact
+
+
+199. QUESTION:
+Senior AI Engineer se System Design mein kya expect hota hai?
+
+ANSWER:
+Senior AI Engineer se sirf model development expect nahi hota.
+
+Usko explain karna aana chahiye:
+
+- Architecture
+- Scalability
+- Reliability
+- Security
+- Observability
+- Cost Optimization
+- Failure Handling
+- Model Selection
+- Deployment
+- Business Impact
+
+
+200. QUESTION:
+“Tell me about your AI Project” ka best framework kya hai?
+
+ANSWER:
+
+Problem
+→ Users
+→ Business Requirement
+→ Architecture
+→ Your Contribution
+→ Technology
+→ Data
+→ Model
+→ Challenges
+→ Solution
+→ Evaluation
+→ Deployment
+→ Monitoring
+→ Security
+→ Cost
+→ Business Impact
+
+Interview mein answer ko isi flow mein explain karne se response structured, practical aur production-focused lagta hai.
+
+
+==================================================
+FINAL SENIOR AI ENGINEER REVISION
+==================================================
+
+INTERVIEW SE PEHLE YE 10 AREAS DEEPLY REVISE KAREIN:
+
+1. Python + FastAPI
+
+2. Machine Learning Fundamentals
+
+3. ML Evaluation Metrics
+
+4. Transformers + LLM Architecture
+
+5. Prompt Engineering
+
+6. RAG + Vector Database
+
+7. Fine-Tuning + LoRA + QLoRA
+
+8. AI Agents + Tool Calling + Multi-Agent Systems
+
+9. LLMOps + Evaluation + Monitoring
+
+10. AI Security + Production System Design
+
+
+==================================================
+SENIOR AI ENGINEER ANSWER FORMULA
+==================================================
+
+Har technical interview answer ko possible ho to is structure mein explain karein:
+
+PROBLEM
+→
+WHY
+→
+ARCHITECTURE
+→
+IMPLEMENTATION
+→
+TRADE-OFF
+→
+FAILURE HANDLING
+→
+SECURITY
+→
+MONITORING
+→
+COST
+→
+BUSINESS IMPACT
+
+
+==================================================
+IMPORTANT
+==================================================
+
+Senior AI Engineer interview mein sirf ye bolna enough nahi hai:
+
+“I used an LLM.”
+
+Better answer:
+
+“I first understood the business requirement, then selected the appropriate model based on quality, latency and cost. For private knowledge I implemented RAG using embeddings and vector search. I exposed the pipeline through FastAPI, containerized the service using Docker, added authentication, monitoring, evaluation and fallback mechanisms, and finally optimized latency and token cost for production.”
+
+
+==================================================
+ONE-LINE REVISION
+==================================================
+
+AI Engineer =
+AI Model
++
+Python
++
+APIs
++
+Data
++
+LLM
++
+RAG
++
+Agents
++
+Deployment
++
+Security
++
+Monitoring
++
+Cost Optimization
++
+System Design
+
+
+GENAI ENGINEER =
+LLM
++
+Prompt Engineering
++
+RAG
++
+Vector DB
++
+Fine-Tuning
++
+Agents
++
+Tool Calling
++
+LLMOps
+
+
+SENIOR AI ENGINEER =
+AI/GenAI
++
+Production Architecture
++
+Scalability
++
+Reliability
++
+Security
++
+Observability
++
+Cost
++
+Business Impact
