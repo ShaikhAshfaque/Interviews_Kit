@@ -1,0 +1,2382 @@
+NLP + COMPUTER VISION INTERVIEW
+200 IMPORTANT HINGLISH Q&A
+Basic → Intermediate → Advanced → Production
+
+
+==================================================
+PART A — NLP INTERVIEW QUESTIONS
+100 POINTS
+==================================================
+
+
+==============================
+LEVEL 1 — NLP FUNDAMENTALS
+==============================
+
+
+1. QUESTION:
+NLP kya hai?
+
+ANSWER:
+NLP yani Natural Language Processing AI ka ek domain hai jisme machines ko human language ko understand, process, analyze aur generate karne ki capability di jaati hai.
+
+Examples:
+- Chatbots
+- Sentiment Analysis
+- Translation
+- Text Classification
+- Search
+- Summarization
+- Question Answering
+
+
+2. QUESTION:
+NLP ka real-world use kahan hota hai?
+
+ANSWER:
+NLP ka use:
+
+- Chatbots
+- Voice assistants
+- Spam detection
+- Search engines
+- Recommendation systems
+- Sentiment analysis
+- Document processing
+- Machine translation
+- Customer support
+
+mein hota hai.
+
+
+3. QUESTION:
+NLP aur Generative AI mein kya relation hai?
+
+ANSWER:
+NLP broader field hai jo human language processing ko cover karta hai.
+
+Generative AI language ko generate bhi kar sakta hai.
+
+LLMs NLP ke advanced applications mein se ek hain.
+
+
+4. QUESTION:
+Text Classification kya hai?
+
+ANSWER:
+Text ko predefined categories/classes mein assign karna text classification hai.
+
+Example:
+
+Email → Spam
+
+Customer message → Complaint
+
+Review → Positive/Negative
+
+
+5. QUESTION:
+Sentiment Analysis kya hai?
+
+ANSWER:
+Text mein expressed sentiment ya emotion identify karna sentiment analysis hai.
+
+Example:
+
+"I love this product."
+
+Output:
+Positive.
+
+
+6. QUESTION:
+Named Entity Recognition kya hai?
+
+ANSWER:
+NER text mein important entities identify karta hai.
+
+Examples:
+
+"Rahul works at Microsoft in Delhi."
+
+Entities:
+
+Rahul → PERSON
+Microsoft → ORGANIZATION
+Delhi → LOCATION
+
+
+7. QUESTION:
+Text Summarization kya hai?
+
+ANSWER:
+Large text/document ko shorter meaningful summary mein convert karna text summarization hai.
+
+
+8. QUESTION:
+Machine Translation kya hai?
+
+ANSWER:
+Ek language ke text ko doosri language mein translate karna machine translation hai.
+
+Example:
+
+English → Hindi
+
+Hindi → Arabic
+
+
+9. QUESTION:
+Question Answering kya hai?
+
+ANSWER:
+User ke question ko understand karke relevant answer generate ya retrieve karna Question Answering system ka purpose hai.
+
+
+10. QUESTION:
+Information Extraction kya hai?
+
+ANSWER:
+Unstructured text se structured information extract karna Information Extraction hai.
+
+Example:
+
+"Order 12345 was delivered on Monday."
+
+Extract:
+
+Order ID = 12345
+Date = Monday
+
+
+11. QUESTION:
+Tokenization kya hai?
+
+ANSWER:
+Text ko smaller units called tokens mein divide karna tokenization hai.
+
+Example:
+
+"I love AI"
+
+Tokens:
+
+I
+love
+AI
+
+
+12. QUESTION:
+Word Tokenization kya hai?
+
+ANSWER:
+Text ko words ke basis par split karna word tokenization hai.
+
+
+13. QUESTION:
+Character Tokenization kya hai?
+
+ANSWER:
+Text ko individual characters mein divide karna character tokenization hai.
+
+Example:
+
+AI
+
+A
+I
+
+
+14. QUESTION:
+Subword Tokenization kya hai?
+
+ANSWER:
+Words ko smaller meaningful subword units mein break karna subword tokenization hai.
+
+Modern LLMs mein subword tokenization widely use hoti hai.
+
+
+15. QUESTION:
+BPE kya hai?
+
+ANSWER:
+BPE yani Byte Pair Encoding frequent character/subword combinations ko merge karke vocabulary build karta hai.
+
+Isse unknown words ko bhi smaller subwords mein represent karna possible hota hai.
+
+
+16. QUESTION:
+WordPiece kya hai?
+
+ANSWER:
+WordPiece subword tokenization technique hai jo vocabulary ko efficiently represent karti hai.
+
+BERT family mein WordPiece commonly associated hai.
+
+
+17. QUESTION:
+SentencePiece kya hai?
+
+ANSWER:
+SentencePiece raw text ko language-independent way mein tokenize kar sakta hai aur whitespace par dependent nahi hota.
+
+
+18. QUESTION:
+Stop Words kya hote hain?
+
+ANSWER:
+Common words jaise:
+
+the
+is
+a
+an
+of
+
+ko traditional NLP pipelines mein stop words kaha jata hai.
+
+Lekin modern transformer applications mein blindly stop-word removal karna zaroori nahi hota.
+
+
+19. QUESTION:
+Stemming kya hai?
+
+ANSWER:
+Word ko simplified root-like form mein reduce karna stemming hai.
+
+Example:
+
+playing
+played
+plays
+
+→ play
+
+
+20. QUESTION:
+Lemmatization kya hai?
+
+ANSWER:
+Word ko linguistically valid base form yani lemma mein convert karna lemmatization hai.
+
+Example:
+
+better → good
+
+Lemmatization generally stemming se more linguistically meaningful hoti hai.
+
+
+==============================
+LEVEL 2 — TEXT REPRESENTATION
+==============================
+
+
+21. QUESTION:
+Bag of Words kya hai?
+
+ANSWER:
+Bag of Words text ko word occurrence/frequency ke numerical representation mein convert karta hai.
+
+Isme word order generally preserve nahi hota.
+
+
+22. QUESTION:
+TF-IDF kya hai?
+
+ANSWER:
+TF-IDF yani Term Frequency-Inverse Document Frequency kisi document mein word ki importance measure karta hai.
+
+Common words ka weight reduce aur relatively distinctive words ka weight increase ho sakta hai.
+
+
+23. QUESTION:
+TF kya hai?
+
+ANSWER:
+Term Frequency batata hai ki kisi document mein ek particular term kitni frequently appear hoti hai.
+
+
+24. QUESTION:
+IDF kya hai?
+
+ANSWER:
+Inverse Document Frequency measure karta hai ki term poore document collection mein kitni rare hai.
+
+Jo word har document mein common hai uska IDF low hota hai.
+
+
+25. QUESTION:
+Word Embedding kya hai?
+
+ANSWER:
+Word ya text ko dense numerical vector mein represent karna embedding hai.
+
+Embedding semantic relationships capture karne ki koshish karta hai.
+
+
+26. QUESTION:
+Word2Vec kya hai?
+
+ANSWER:
+Word2Vec neural-network-based technique hai jo words ko vector space mein represent karti hai.
+
+Similar context wale words ke embeddings often nearby hote hain.
+
+
+27. QUESTION:
+CBOW kya hai?
+
+ANSWER:
+CBOW yani Continuous Bag of Words surrounding/context words se target word predict karta hai.
+
+
+28. QUESTION:
+Skip-Gram kya hai?
+
+ANSWER:
+Skip-Gram target word ko use karke surrounding context words predict karta hai.
+
+
+29. QUESTION:
+GloVe kya hai?
+
+ANSWER:
+GloVe yani Global Vectors word embeddings learn karta hai using global word co-occurrence statistics.
+
+
+30. QUESTION:
+Static aur Contextual Embeddings mein difference?
+
+ANSWER:
+Static embedding mein ek word ka generally fixed vector hota hai.
+
+Contextual embedding mein same word ka representation surrounding context ke according change ho sakta hai.
+
+
+31. QUESTION:
+Contextual Embedding kya hai?
+
+ANSWER:
+Word ka representation uske sentence context ke according generate hona contextual embedding hai.
+
+Example:
+
+"I went to the bank."
+
+"The river bank was beautiful."
+
+Dono cases mein "bank" ka meaning different hai.
+
+
+32. QUESTION:
+Cosine Similarity kya hai?
+
+ANSWER:
+Do vectors ke beech semantic/angular similarity measure karne ke liye cosine similarity commonly use hoti hai.
+
+
+33. QUESTION:
+Dense Vector kya hai?
+
+ANSWER:
+Dense vector mein most dimensions meaningful numerical values contain karti hain.
+
+Embeddings generally dense vectors hote hain.
+
+
+34. QUESTION:
+Sparse Vector kya hai?
+
+ANSWER:
+Sparse vector mein large number of dimensions zero ho sakti hain.
+
+Bag-of-Words aur TF-IDF representations commonly sparse ho sakte hain.
+
+
+35. QUESTION:
+Semantic Similarity kya hai?
+
+ANSWER:
+Do text inputs meaning ke level par kitne similar hain, semantic similarity measure karta hai.
+
+
+==============================
+LEVEL 3 — NLP PREPROCESSING
+==============================
+
+
+36. QUESTION:
+Text Cleaning kya hai?
+
+ANSWER:
+Raw text se unwanted noise remove ya normalize karna text cleaning hai.
+
+Examples:
+
+- Extra spaces
+- Unwanted HTML
+- Invalid characters
+- Duplicate content
+- Encoding issues
+
+
+37. QUESTION:
+Lowercasing kyun karte hain?
+
+ANSWER:
+Traditional NLP mein uppercase/lowercase variations ko normalize karne ke liye lowercasing use hoti thi.
+
+Lekin transformer-based NLP mein case information useful ho sakti hai, isliye blindly lowercase nahi karna chahiye.
+
+
+38. QUESTION:
+Regular Expression ka NLP mein use?
+
+ANSWER:
+Regex ka use:
+
+- Pattern extraction
+- Email extraction
+- Phone extraction
+- Data cleaning
+- Rule-based preprocessing
+
+ke liye hota hai.
+
+
+39. QUESTION:
+N-gram kya hai?
+
+ANSWER:
+N-gram consecutive N tokens ka sequence hota hai.
+
+Example:
+
+"machine learning"
+
+Bigram = machine learning
+
+
+40. QUESTION:
+Unigram, Bigram aur Trigram kya hain?
+
+ANSWER:
+
+Unigram = 1 word
+
+Bigram = 2 consecutive words
+
+Trigram = 3 consecutive words
+
+
+41. QUESTION:
+Text Normalization kya hai?
+
+ANSWER:
+Different text representations ko consistent format mein convert karna text normalization hai.
+
+
+42. QUESTION:
+Handling spelling errors kaise karenge?
+
+ANSWER:
+Approach:
+
+- Dictionary lookup
+- Edit distance
+- Spell correction models
+- Transformer-based correction
+
+use kar sakte hain.
+
+
+43. QUESTION:
+Edit Distance kya hai?
+
+ANSWER:
+Ek string ko doosri string mein convert karne ke liye required minimum insert, delete aur substitute operations ki count edit distance hoti hai.
+
+
+44. QUESTION:
+Language Detection kya hai?
+
+ANSWER:
+Given text kis language mein hai, identify karna language detection hai.
+
+Multilingual AI systems mein useful hai.
+
+
+45. QUESTION:
+Multilingual NLP kya hai?
+
+ANSWER:
+Multiple human languages ko process karne wale NLP systems multilingual NLP systems hote hain.
+
+
+==============================
+LEVEL 4 — MACHINE LEARNING NLP
+==============================
+
+
+46. QUESTION:
+NLP mein classification models kaunse use kar sakte hain?
+
+ANSWER:
+
+- Logistic Regression
+- Naive Bayes
+- SVM
+- Decision Trees
+- Random Forest
+- Neural Networks
+- Transformers
+
+
+47. QUESTION:
+Naive Bayes NLP mein kyun popular tha?
+
+ANSWER:
+Naive Bayes simple, fast aur text classification ke liye effective baseline model hai.
+
+Spam classification mein historically widely used hua hai.
+
+
+48. QUESTION:
+SVM NLP mein kaise use hota hai?
+
+ANSWER:
+Text ko numerical feature representation mein convert karke SVM classification boundary learn karta hai.
+
+TF-IDF + SVM traditional NLP ka strong baseline ho sakta hai.
+
+
+49. QUESTION:
+NLP mein class imbalance kaise handle karenge?
+
+ANSWER:
+
+- Class weights
+- Resampling
+- Threshold tuning
+- F1 score
+- Precision/Recall
+- Better dataset collection
+
+use kar sakte hain.
+
+
+50. QUESTION:
+NLP model ko kaise evaluate karenge?
+
+ANSWER:
+Task ke according metrics choose karenge.
+
+Classification:
+- Accuracy
+- Precision
+- Recall
+- F1
+
+Generation:
+- BLEU
+- ROUGE
+- BERTScore
+- Human Evaluation
+- LLM-based evaluation
+
+
+==============================
+LEVEL 5 — SEQUENCE MODELS
+==============================
+
+
+51. QUESTION:
+RNN kya hai?
+
+ANSWER:
+RNN yani Recurrent Neural Network sequential data ko process karne ke liye design kiya gaya neural network architecture hai.
+
+Previous hidden state ko next step mein use kiya jata hai.
+
+
+52. QUESTION:
+RNN ki limitation kya hai?
+
+ANSWER:
+Long sequences mein vanishing/exploding gradients ke wajah se long-term dependencies learn karna difficult ho sakta hai.
+
+
+53. QUESTION:
+LSTM kya hai?
+
+ANSWER:
+LSTM yani Long Short-Term Memory RNN ka improved architecture hai jo gates ke through long-term information ko maintain karne ki capability improve karta hai.
+
+
+54. QUESTION:
+LSTM mein gates kaunse hote hain?
+
+ANSWER:
+
+- Forget Gate
+- Input Gate
+- Output Gate
+
+Ye information ko control karne mein help karte hain.
+
+
+55. QUESTION:
+GRU kya hai?
+
+ANSWER:
+GRU yani Gated Recurrent Unit LSTM ka comparatively simpler gated architecture hai.
+
+Isme fewer gates hote hain aur architecture simpler hota hai.
+
+
+56. QUESTION:
+RNN vs LSTM?
+
+ANSWER:
+RNN simple hai lekin long-term dependencies mein struggle kar sakta hai.
+
+LSTM gating mechanism ke through long-term dependencies ko better handle karta hai.
+
+
+57. QUESTION:
+Sequence-to-Sequence model kya hai?
+
+ANSWER:
+Ek input sequence ko doosre output sequence mein transform karne wala architecture sequence-to-sequence model hai.
+
+Machine translation iska classic example hai.
+
+
+58. QUESTION:
+Encoder kya karta hai?
+
+ANSWER:
+Encoder input sequence ko useful internal representation mein encode karta hai.
+
+
+59. QUESTION:
+Decoder kya karta hai?
+
+ANSWER:
+Decoder encoded representation ke basis par output sequence generate karta hai.
+
+
+60. QUESTION:
+Attention mechanism ki need kyun hui?
+
+ANSWER:
+Long sequence mein entire information ko ek fixed representation mein compress karna difficult tha.
+
+Attention model ko relevant input parts par dynamically focus karne deta hai.
+
+
+==============================
+LEVEL 6 — TRANSFORMERS
+==============================
+
+
+61. QUESTION:
+Transformer kya hai?
+
+ANSWER:
+Transformer sequence processing architecture hai jo self-attention mechanism ka use karta hai aur modern NLP/LLMs ka major foundation hai.
+
+
+62. QUESTION:
+Transformer ka main advantage kya hai?
+
+ANSWER:
+Transformer parallel processing enable karta hai aur long-range token relationships ko effectively model kar sakta hai.
+
+
+63. QUESTION:
+Self-Attention kya hai?
+
+ANSWER:
+Self-attention input sequence ke tokens ke beech relationships calculate karta hai aur har token ke liye relevant contextual information aggregate karta hai.
+
+
+64. QUESTION:
+Query, Key aur Value kya hain?
+
+ANSWER:
+Query batata hai current token kis information ko search kar raha hai.
+
+Key batata hai har token kis type ki information provide karta hai.
+
+Value actual information represent karta hai jo output mein contribute karti hai.
+
+
+65. QUESTION:
+Attention Score kya hai?
+
+ANSWER:
+Query aur Key ke relationship se attention score calculate hota hai.
+
+High score ka matlab generally stronger relevance indicate karta hai.
+
+
+66. QUESTION:
+Multi-Head Attention kya hai?
+
+ANSWER:
+Multiple attention heads different representation subspaces mein relationships learn karte hain.
+
+Isse model multiple types ke dependencies capture kar sakta hai.
+
+
+67. QUESTION:
+Positional Encoding kya hai?
+
+ANSWER:
+Transformer ko token order ki information dene ke liye positional information add ki jaati hai.
+
+
+68. QUESTION:
+Encoder-only Transformer kya hai?
+
+ANSWER:
+Encoder-only models input understanding/representation tasks ke liye commonly useful hote hain.
+
+Example:
+BERT.
+
+
+69. QUESTION:
+Decoder-only Transformer kya hai?
+
+ANSWER:
+Decoder-only architecture autoregressive text generation ke liye commonly use hoti hai.
+
+Modern generative LLMs ka major architecture pattern hai.
+
+
+70. QUESTION:
+Encoder-Decoder Transformer kya hai?
+
+ANSWER:
+Encoder input ko represent karta hai aur decoder output generate karta hai.
+
+Machine translation aur sequence-to-sequence tasks mein useful hai.
+
+
+==============================
+LEVEL 7 — ADVANCED NLP / LLM
+==============================
+
+
+71. QUESTION:
+BERT kya hai?
+
+ANSWER:
+BERT yani Bidirectional Encoder Representations from Transformers transformer-based language representation model hai.
+
+Ye contextual text understanding ke tasks ke liye widely influential raha hai.
+
+
+72. QUESTION:
+GPT kya hai?
+
+ANSWER:
+GPT family decoder-style autoregressive language models par based hai jo next-token prediction ke through language generation learn karte hain.
+
+
+73. QUESTION:
+Masked Language Modeling kya hai?
+
+ANSWER:
+Sentence ke kuch tokens hide/mask karke model se missing tokens predict karwana Masked Language Modeling hai.
+
+BERT-style training mein iska use hota hai.
+
+
+74. QUESTION:
+Next Token Prediction kya hai?
+
+ANSWER:
+Previous tokens ke context ke basis par next token predict karna autoregressive language modeling ka core objective hai.
+
+
+75. QUESTION:
+Pretraining kya hai?
+
+ANSWER:
+Large-scale general dataset par model ko broad language patterns learn karwana pretraining hai.
+
+
+76. QUESTION:
+Fine-Tuning kya hai?
+
+ANSWER:
+Pretrained model ko specific task ya domain dataset par further train karke behavior adapt karna fine-tuning hai.
+
+
+77. QUESTION:
+Instruction Tuning kya hai?
+
+ANSWER:
+Model ko instructions aur corresponding desired responses ke examples par train karke instruction-following capability improve karna instruction tuning hai.
+
+
+78. QUESTION:
+RLHF kya hai?
+
+ANSWER:
+RLHF yani Reinforcement Learning from Human Feedback mein human preferences ka use karke model behavior ko align karne ki koshish ki jaati hai.
+
+
+79. QUESTION:
+Hallucination kya hai?
+
+ANSWER:
+Jab language model confident-sounding but incorrect ya unsupported information generate karta hai, usse hallucination kehte hain.
+
+
+80. QUESTION:
+NLP mein hallucination kaise reduce karenge?
+
+ANSWER:
+
+- RAG
+- Grounded prompts
+- Tool usage
+- Retrieval validation
+- Structured output
+- Human evaluation
+- Model evaluation
+- Confidence/verification mechanisms
+
+use kar sakte hain.
+
+
+==============================
+LEVEL 8 — NLP PRODUCTION
+==============================
+
+
+81. QUESTION:
+NLP application ko production mein kaise deploy karenge?
+
+ANSWER:
+
+User
+→ API
+→ Preprocessing
+→ Model
+→ Postprocessing
+→ Response
+
+Production mein additionally:
+
+- Authentication
+- Logging
+- Monitoring
+- Rate limiting
+- Error handling
+- Scaling
+
+add karenge.
+
+
+82. QUESTION:
+NLP model latency kaise reduce karenge?
+
+ANSWER:
+
+- Smaller model
+- Quantization
+- Batching
+- Caching
+- Efficient tokenization
+- Model optimization
+- GPU inference
+- Async processing
+
+use kar sakte hain.
+
+
+83. QUESTION:
+NLP model caching kya hai?
+
+ANSWER:
+Frequently repeated ya semantically similar requests ke results cache karke unnecessary model inference reduce kar sakte hain.
+
+
+84. QUESTION:
+Batch inference NLP mein kab useful hai?
+
+ANSWER:
+Jab real-time response ki requirement nahi ho aur large amount of documents process karne ho.
+
+Example:
+Daily 1 million documents classify karna.
+
+
+85. QUESTION:
+Streaming response kya hai?
+
+ANSWER:
+Complete response ka wait karne ke instead generated output ko incremental chunks/tokens mein client ko send karna streaming response hai.
+
+
+86. QUESTION:
+NLP pipeline monitoring mein kya track karenge?
+
+ANSWER:
+
+- Latency
+- Error rate
+- Token usage
+- Model quality
+- Input distribution
+- Output quality
+- Drift
+- Cost
+
+
+87. QUESTION:
+NLP Model Drift kya hai?
+
+ANSWER:
+Production input data ya language patterns time ke saath change hone se model performance degrade ho sakti hai.
+
+Isse data/concept drift ke context mein monitor kiya ja sakta hai.
+
+
+88. QUESTION:
+Prompt Versioning kya hai?
+
+ANSWER:
+Production prompts ko version control ke through maintain karna prompt versioning hai.
+
+Isse prompt changes ka impact track kar sakte hain.
+
+
+89. QUESTION:
+NLP application mein security risks kya hain?
+
+ANSWER:
+
+- Prompt injection
+- Data leakage
+- PII exposure
+- Malicious input
+- Unauthorized API access
+- Prompt extraction
+- Excessive tool permissions
+
+
+90. QUESTION:
+NLP system ka cost optimize kaise karenge?
+
+ANSWER:
+
+- Smaller models
+- Token reduction
+- Prompt optimization
+- Caching
+- Batching
+- Model routing
+- Quantization
+- Efficient retrieval
+
+use karenge.
+
+
+==============================
+LEVEL 9 — ADVANCED NLP SYSTEM DESIGN
+==============================
+
+
+91. QUESTION:
+Enterprise NLP Search System ka architecture?
+
+ANSWER:
+
+Documents
+→ Cleaning
+→ Chunking
+→ Embeddings
+→ Vector DB
+
+User Query
+→ Query Embedding
+→ Hybrid Search
+→ Reranking
+→ Results
+
+
+92. QUESTION:
+Enterprise RAG NLP system ka architecture?
+
+ANSWER:
+
+Document Ingestion
+→ Parsing
+→ Chunking
+→ Embedding
+→ Vector Database
+
+User
+→ Query
+→ Retrieval
+→ Reranking
+→ Context
+→ LLM
+→ Validation
+→ Response
+
+
+93. QUESTION:
+NLP system mein Hybrid Search kyun use karenge?
+
+ANSWER:
+Keyword search exact terms ko capture karta hai.
+
+Vector search semantic meaning capture karta hai.
+
+Dono ko combine karne se retrieval quality improve ho sakti hai.
+
+
+94. QUESTION:
+NLP mein Reranker kyun use karenge?
+
+ANSWER:
+Initial retrieval broad candidates return kar sakta hai.
+
+Reranker un candidates ko deeper relevance ke basis par reorder karta hai.
+
+
+95. QUESTION:
+NLP system mein metadata filtering ka benefit?
+
+ANSWER:
+Search ko specific attributes ke according restrict kar sakte hain.
+
+Example:
+
+Department = Finance
+
+Year = 2026
+
+Document Type = Policy
+
+
+96. QUESTION:
+NLP system ko multilingual kaise banayenge?
+
+ANSWER:
+
+- Multilingual embeddings
+- Language detection
+- Multilingual LLM
+- Translation layer
+- Language-specific evaluation
+
+use kar sakte hain.
+
+
+97. QUESTION:
+NLP system ke liye model kaise choose karenge?
+
+ANSWER:
+Factors:
+
+- Accuracy
+- Language support
+- Context window
+- Latency
+- Cost
+- Deployment options
+- Privacy
+- Hardware requirement
+- Fine-tuning support
+
+
+98. QUESTION:
+NLP interview mein project kaise explain karenge?
+
+ANSWER:
+
+Problem
+→ Data
+→ Preprocessing
+→ Model
+→ Training
+→ Evaluation
+→ API
+→ Deployment
+→ Monitoring
+→ Business Impact
+
+
+99. QUESTION:
+Senior NLP Engineer ke liye important skills kya hain?
+
+ANSWER:
+
+- Python
+- NLP
+- Transformers
+- LLMs
+- Embeddings
+- RAG
+- Vector DB
+- APIs
+- MLOps
+- Evaluation
+- Security
+- System Design
+
+
+100. QUESTION:
+NLP Engineer ka production-level answer kaise dena chahiye?
+
+ANSWER:
+Answer mein sirf model ka naam nahi bolna chahiye.
+
+Explain:
+
+Problem
+→ Why this approach
+→ Data
+→ Model
+→ Evaluation
+→ API
+→ Deployment
+→ Latency
+→ Cost
+→ Monitoring
+→ Security
+→ Business Impact
+
+
+
+==================================================
+PART B — COMPUTER VISION INTERVIEW QUESTIONS
+100 POINTS
+==================================================
+
+
+==============================
+LEVEL 1 — COMPUTER VISION FUNDAMENTALS
+==============================
+
+
+101. QUESTION:
+Computer Vision kya hai?
+
+ANSWER:
+Computer Vision AI ka domain hai jisme machines images aur videos ko understand, analyze aur interpret karna seekhti hain.
+
+
+102. QUESTION:
+Computer Vision ke real-world applications?
+
+ANSWER:
+
+- Face Detection
+- Face Recognition
+- OCR
+- Object Detection
+- Autonomous Vehicles
+- Medical Imaging
+- Surveillance
+- Quality Inspection
+- Image Search
+- Document Processing
+
+
+103. QUESTION:
+Image kya hoti hai?
+
+ANSWER:
+Digital image pixels ka collection hoti hai.
+
+Har pixel intensity ya color information represent karta hai.
+
+
+104. QUESTION:
+Pixel kya hai?
+
+ANSWER:
+Pixel digital image ka smallest individual picture element hai.
+
+Image ka visual information pixels ke through represent hota hai.
+
+
+105. QUESTION:
+Image Resolution kya hai?
+
+ANSWER:
+Image mein total horizontal aur vertical pixels ki dimensions resolution define karti hain.
+
+Example:
+
+1920 × 1080
+
+
+106. QUESTION:
+Grayscale Image kya hai?
+
+ANSWER:
+Grayscale image mein generally har pixel ek intensity value represent karta hai.
+
+Usually black se white tak intensity range hoti hai.
+
+
+107. QUESTION:
+RGB Image kya hai?
+
+ANSWER:
+RGB image mein har pixel ke liye:
+
+Red
+Green
+Blue
+
+channels hote hain.
+
+
+108. QUESTION:
+RGB aur Grayscale mein difference?
+
+ANSWER:
+RGB image mein three color channels hote hain.
+
+Grayscale image mein generally one intensity channel hota hai.
+
+Grayscale computationally simpler ho sakti hai.
+
+
+109. QUESTION:
+Image Channel kya hai?
+
+ANSWER:
+Channel image ke ek information dimension ko represent karta hai.
+
+RGB image mein three channels hote hain:
+
+R
+G
+B
+
+
+110. QUESTION:
+Pixel Intensity kya hai?
+
+ANSWER:
+Pixel intensity pixel ke brightness/value ko represent karti hai.
+
+Grayscale images mein common 8-bit representation mein values 0 se 255 tak hoti hain.
+
+
+==============================
+LEVEL 2 — IMAGE PROCESSING
+==============================
+
+
+111. QUESTION:
+Image Preprocessing kya hai?
+
+ANSWER:
+Model ko input dene se pehle image ko clean, resize, normalize ya transform karna image preprocessing hai.
+
+
+112. QUESTION:
+Image Resizing kya hai?
+
+ANSWER:
+Image ke dimensions ko required size mein convert karna resizing hai.
+
+Deep learning models fixed ya controlled input dimensions expect kar sakte hain.
+
+
+113. QUESTION:
+Image Normalization kya hai?
+
+ANSWER:
+Pixel values ko suitable numerical range mein scale karna normalization hai.
+
+Example:
+
+0–255
+→
+0–1
+
+
+114. QUESTION:
+Image Cropping kya hai?
+
+ANSWER:
+Image ke selected region ko extract karna cropping hai.
+
+
+115. QUESTION:
+Image Padding kya hai?
+
+ANSWER:
+Image ke borders par additional pixels add karna padding hai.
+
+Aspect ratio preserve karne ya fixed dimensions achieve karne ke liye use ho sakta hai.
+
+
+116. QUESTION:
+Data Augmentation kya hai?
+
+ANSWER:
+Training images ke modified versions create karke dataset diversity increase karna data augmentation hai.
+
+
+117. QUESTION:
+Common Image Augmentation techniques?
+
+ANSWER:
+
+- Rotation
+- Flipping
+- Cropping
+- Scaling
+- Translation
+- Brightness change
+- Contrast change
+- Noise
+- Color jitter
+
+
+118. QUESTION:
+Data Augmentation kyun use karte hain?
+
+ANSWER:
+Dataset diversity increase karne aur overfitting reduce karne ke liye data augmentation useful hai.
+
+
+119. QUESTION:
+Image Filtering kya hai?
+
+ANSWER:
+Image ko smooth, sharpen ya specific patterns emphasize karne ke liye filters apply karna image filtering hai.
+
+
+120. QUESTION:
+Gaussian Blur kya hai?
+
+ANSWER:
+Gaussian blur image ko smooth karta hai aur high-frequency noise/details ko reduce kar sakta hai.
+
+
+==============================
+LEVEL 3 — IMAGE PROCESSING ADVANCED
+==============================
+
+
+121. QUESTION:
+Convolution kya hai?
+
+ANSWER:
+Convolution operation mein kernel/filter image par slide karta hai aur local pixel patterns ko detect karta hai.
+
+
+122. QUESTION:
+Kernel kya hai?
+
+ANSWER:
+Kernel ek small matrix/filter hota hai jo image ke local region par operation perform karta hai.
+
+Different kernels different patterns detect kar sakte hain.
+
+
+123. QUESTION:
+Edge Detection kya hai?
+
+ANSWER:
+Image mein sharp intensity changes identify karna edge detection hai.
+
+Edges objects ki boundaries identify karne mein useful hain.
+
+
+124. QUESTION:
+Sobel Operator kya hai?
+
+ANSWER:
+Sobel operator image mein horizontal aur vertical intensity gradients detect karne ke liye use hota hai.
+
+
+125. QUESTION:
+Canny Edge Detection kya hai?
+
+ANSWER:
+Canny ek multi-stage edge detection algorithm hai jo noise reduction, gradient detection aur edge selection ke through edges identify karta hai.
+
+
+126. QUESTION:
+Thresholding kya hai?
+
+ANSWER:
+Pixel intensity ke basis par image ko regions/classes mein divide karna thresholding hai.
+
+
+127. QUESTION:
+Binary Image kya hai?
+
+ANSWER:
+Binary image mein pixels generally do possible values/classes represent karte hain.
+
+Example:
+
+0
+and
+1
+
+
+128. QUESTION:
+Morphological Operations kya hain?
+
+ANSWER:
+Binary ya grayscale image structures ko modify/process karne ke operations morphological operations kehlate hain.
+
+Common operations:
+
+- Erosion
+- Dilation
+- Opening
+- Closing
+
+
+129. QUESTION:
+Erosion kya hai?
+
+ANSWER:
+Erosion foreground regions ko shrink kar sakta hai aur small noise/remove structures ko eliminate karne mein useful ho sakta hai.
+
+
+130. QUESTION:
+Dilation kya hai?
+
+ANSWER:
+Dilation foreground regions ko expand kar sakta hai aur small gaps ko connect karne mein useful ho sakta hai.
+
+
+==============================
+LEVEL 4 — CNN
+==============================
+
+
+131. QUESTION:
+CNN kya hai?
+
+ANSWER:
+CNN yani Convolutional Neural Network image data se spatial patterns learn karne ke liye specialized neural network architecture hai.
+
+
+132. QUESTION:
+CNN mein Convolution Layer kya karti hai?
+
+ANSWER:
+Convolution layer image se local features learn karti hai.
+
+Early layers:
+- Edges
+- Corners
+- Textures
+
+Later layers:
+- Shapes
+- Object parts
+- High-level features
+
+learn kar sakti hain.
+
+
+133. QUESTION:
+Pooling kya hai?
+
+ANSWER:
+Pooling feature maps ka spatial size reduce karta hai aur important information ko retain karne ki koshish karta hai.
+
+
+134. QUESTION:
+Max Pooling kya hai?
+
+ANSWER:
+Local region mein maximum activation select karna max pooling hai.
+
+Ye strong detected feature ko preserve kar sakta hai.
+
+
+135. QUESTION:
+Average Pooling kya hai?
+
+ANSWER:
+Local region ke activations ka average calculate karna average pooling hai.
+
+
+136. QUESTION:
+CNN mein ReLU kyun use hota hai?
+
+ANSWER:
+ReLU non-linearity introduce karta hai aur convolutional networks mein efficient activation function ke roop mein widely used hai.
+
+
+137. QUESTION:
+CNN mein Stride kya hai?
+
+ANSWER:
+Filter image par kitne pixels ka step lekar move karega, usse stride kehte hain.
+
+
+138. QUESTION:
+Padding kya hai CNN mein?
+
+ANSWER:
+Input ke borders par additional values/pixels add karna padding hai.
+
+Padding output size control aur border information preserve karne mein help kar sakti hai.
+
+
+139. QUESTION:
+Same aur Valid Padding?
+
+ANSWER:
+Same padding generally output spatial dimensions ko input ke similar maintain karne ke liye use hoti hai.
+
+Valid padding mein additional padding nahi hoti aur output dimensions reduce ho sakti hain.
+
+
+140. QUESTION:
+Receptive Field kya hai?
+
+ANSWER:
+Network ka koi neuron input image ke kitne spatial region ko indirectly observe kar raha hai, us region ko receptive field kehte hain.
+
+
+==============================
+LEVEL 5 — IMAGE CLASSIFICATION
+==============================
+
+
+141. QUESTION:
+Image Classification kya hai?
+
+ANSWER:
+Complete image ko predefined class/category assign karna image classification hai.
+
+Example:
+
+Cat
+Dog
+Car
+
+
+142. QUESTION:
+Binary Image Classification kya hai?
+
+ANSWER:
+Jab model ko two classes mein se ek choose karni ho.
+
+Example:
+
+Defective
+vs
+Non-Defective
+
+
+143. QUESTION:
+Multi-Class Classification kya hai?
+
+ANSWER:
+Multiple classes mein se exactly one class predict karna multi-class classification hai.
+
+
+144. QUESTION:
+Multi-Label Classification kya hai?
+
+ANSWER:
+Ek image mein simultaneously multiple labels assign karna multi-label classification hai.
+
+Example:
+
+Image:
+Dog + Car + Person
+
+
+145. QUESTION:
+Transfer Learning kya hai?
+
+ANSWER:
+Pretrained model ke learned visual features ko new task/dataset mein reuse karna transfer learning hai.
+
+
+146. QUESTION:
+Transfer Learning Computer Vision mein kyun useful hai?
+
+ANSWER:
+Large image dataset se pretrained features reuse karne ke karan limited domain data mein training faster aur often more effective ho sakti hai.
+
+
+147. QUESTION:
+Image classification model kaise evaluate karenge?
+
+ANSWER:
+
+- Accuracy
+- Precision
+- Recall
+- F1
+- Confusion Matrix
+- Per-class metrics
+
+
+148. QUESTION:
+Confusion Matrix Computer Vision mein kya batati hai?
+
+ANSWER:
+Classification model ne kaunsi classes correctly ya incorrectly predict ki hain, confusion matrix se identify kar sakte hain.
+
+
+149. QUESTION:
+Class Imbalance Computer Vision mein kaise handle karenge?
+
+ANSWER:
+
+- Class weights
+- Oversampling
+- Augmentation
+- Balanced dataset
+- Focal Loss
+- Appropriate metrics
+
+
+150. QUESTION:
+Focal Loss kya hai?
+
+ANSWER:
+Focal Loss difficult/misclassified examples par relatively more focus karta hai.
+
+Object detection aur class imbalance problems mein useful ho sakta hai.
+
+
+==============================
+LEVEL 6 — OBJECT DETECTION
+==============================
+
+
+151. QUESTION:
+Object Detection kya hai?
+
+ANSWER:
+Image mein objects ko identify karna aur unki locations bounding boxes ke through detect karna object detection hai.
+
+
+152. QUESTION:
+Object Detection aur Classification mein difference?
+
+ANSWER:
+Classification batata hai image mein kya hai.
+
+Object detection batata hai:
+
+Kya hai?
++
+Kahan hai?
+
+
+153. QUESTION:
+Bounding Box kya hai?
+
+ANSWER:
+Object ke around rectangular coordinates define karna bounding box hai.
+
+
+154. QUESTION:
+IoU kya hai?
+
+ANSWER:
+IoU yani Intersection over Union predicted bounding box aur ground-truth bounding box ke overlap ko measure karta hai.
+
+Formula:
+
+IoU =
+Intersection Area
+/
+Union Area
+
+
+155. QUESTION:
+IoU ka use kahan hota hai?
+
+ANSWER:
+IoU ka use:
+
+- Detection evaluation
+- Positive/negative matching
+- NMS
+- Localization quality
+
+mein hota hai.
+
+
+156. QUESTION:
+YOLO kya hai?
+
+ANSWER:
+YOLO yani You Only Look Once real-time object detection family hai jo detection ko efficient single-stage approach ke through perform karti hai.
+
+
+157. QUESTION:
+Two-Stage Detector kya hai?
+
+ANSWER:
+Two-stage detector pehle candidate regions propose karta hai aur phir un regions ko classify/localize karta hai.
+
+Faster R-CNN iska famous example hai.
+
+
+158. QUESTION:
+One-Stage Detector kya hai?
+
+ANSWER:
+One-stage detector directly image se object classes aur locations predict karta hai.
+
+YOLO family aur SSD common examples hain.
+
+
+159. QUESTION:
+NMS kya hai?
+
+ANSWER:
+NMS yani Non-Maximum Suppression overlapping bounding boxes mein se strongest prediction retain karke duplicate detections suppress karta hai.
+
+
+160. QUESTION:
+Object Detection mein Precision aur Recall kyun important hain?
+
+ANSWER:
+Detection mein false positives aur false negatives dono important hote hain.
+
+Precision false detections ko measure karne mein useful hai.
+
+Recall missed objects ko measure karne mein useful hai.
+
+
+==============================
+LEVEL 7 — SEGMENTATION
+==============================
+
+
+161. QUESTION:
+Image Segmentation kya hai?
+
+ANSWER:
+Image ko meaningful regions/pixels mein divide karna image segmentation hai.
+
+
+162. QUESTION:
+Semantic Segmentation kya hai?
+
+ANSWER:
+Har pixel ko class assign karna semantic segmentation hai.
+
+Same class ke multiple objects ko generally same category treat kiya jata hai.
+
+
+163. QUESTION:
+Instance Segmentation kya hai?
+
+ANSWER:
+Har individual object instance ko separately segment karna instance segmentation hai.
+
+Example:
+
+Person 1
+Person 2
+Person 3
+
+
+164. QUESTION:
+Semantic vs Instance Segmentation?
+
+ANSWER:
+Semantic segmentation:
+Pixel → Class
+
+Instance segmentation:
+Pixel → Individual Object Instance
+
+
+165. QUESTION:
+Mask kya hai?
+
+ANSWER:
+Image ke pixels par selected region/object ko represent karne wali binary ya probability map ko mask kaha ja sakta hai.
+
+
+166. QUESTION:
+U-Net kya hai?
+
+ANSWER:
+U-Net encoder-decoder style architecture hai jo especially biomedical image segmentation mein highly influential raha hai.
+
+
+167. QUESTION:
+Encoder ka segmentation mein role?
+
+ANSWER:
+Encoder image se progressively high-level features extract karta hai aur spatial dimensions reduce kar sakta hai.
+
+
+168. QUESTION:
+Decoder ka role?
+
+ANSWER:
+Decoder feature representation se spatial resolution restore karke pixel-level prediction generate karta hai.
+
+
+169. QUESTION:
+Skip Connection kya hai?
+
+ANSWER:
+Earlier layers ki spatial/detail information ko later layers ke saath connect karna skip connection hai.
+
+Segmentation architectures mein fine-grained details recover karne mein useful hai.
+
+
+170. QUESTION:
+Segmentation ko kaise evaluate karenge?
+
+ANSWER:
+
+- IoU
+- Dice Score
+- Pixel Accuracy
+- Precision
+- Recall
+
+use kar sakte hain.
+
+
+==============================
+LEVEL 8 — OCR + DOCUMENT VISION
+==============================
+
+
+171. QUESTION:
+OCR kya hai?
+
+ANSWER:
+OCR yani Optical Character Recognition image/document mein present text ko machine-readable text mein convert karta hai.
+
+
+172. QUESTION:
+OCR pipeline kya ho sakti hai?
+
+ANSWER:
+
+Document/Image
+→ Preprocessing
+→ Text Detection
+→ Text Recognition
+→ Postprocessing
+→ Structured Output
+
+
+173. QUESTION:
+OCR preprocessing mein kya karenge?
+
+ANSWER:
+
+- Resize
+- Denoising
+- Deskew
+- Contrast enhancement
+- Thresholding
+- Cropping
+
+
+174. QUESTION:
+Document AI kya hai?
+
+ANSWER:
+Documents ko visually understand karke text, tables, fields aur semantic information extract karna Document AI hai.
+
+
+175. QUESTION:
+Invoice processing kaise automate karenge?
+
+ANSWER:
+
+Invoice
+→ OCR
+→ Field Detection
+→ Entity Extraction
+→ Validation
+→ Structured JSON
+→ Database/API
+
+
+176. QUESTION:
+Handwritten Text Recognition kya hai?
+
+ANSWER:
+Handwritten text ko image se identify karke digital text mein convert karna Handwritten Text Recognition hai.
+
+
+177. QUESTION:
+Table Extraction kya hai?
+
+ANSWER:
+Document image/PDF mein tables identify karke rows, columns aur cell values ko structured format mein convert karna table extraction hai.
+
+
+178. QUESTION:
+Document Layout Analysis kya hai?
+
+ANSWER:
+Document ke visual regions jaise:
+
+- Heading
+- Paragraph
+- Table
+- Image
+- Footer
+- Header
+
+identify karna layout analysis hai.
+
+
+179. QUESTION:
+OCR accuracy kaise improve karenge?
+
+ANSWER:
+
+- Better image quality
+- Deskewing
+- Denoising
+- Proper cropping
+- Better OCR model
+- Language-specific model
+- Post-processing
+- Confidence filtering
+
+
+180. QUESTION:
+OCR errors kaise handle karenge?
+
+ANSWER:
+OCR output ko validation rules, dictionaries, regex, confidence scores aur downstream language models ke through verify/correct kar sakte hain.
+
+
+==============================
+LEVEL 9 — ADVANCED COMPUTER VISION
+==============================
+
+
+181. QUESTION:
+Vision Transformer kya hai?
+
+ANSWER:
+Vision Transformer yani ViT image ko patches mein divide karke transformer architecture ke through image relationships learn karta hai.
+
+
+182. QUESTION:
+CNN vs Vision Transformer?
+
+ANSWER:
+CNN strong local inductive biases aur convolution operations use karta hai.
+
+Vision Transformer image patches ko token-like representation mein convert karke self-attention use karta hai.
+
+Dono architectures ke trade-offs dataset, scale, compute aur task par depend karte hain.
+
+
+183. QUESTION:
+Image Patch kya hai?
+
+ANSWER:
+Vision Transformer mein image ko small fixed-size regions/patches mein divide kiya jata hai.
+
+Har patch ko embedding/token representation mein convert kiya ja sakta hai.
+
+
+184. QUESTION:
+Multimodal AI kya hai?
+
+ANSWER:
+Text, image, audio ya video jaise multiple modalities ko ek AI system mein process/combine karna multimodal AI hai.
+
+
+185. QUESTION:
+Vision-Language Model kya hai?
+
+ANSWER:
+Vision-Language Model image aur text dono ko process karke cross-modal understanding ya generation perform kar sakta hai.
+
+
+186. QUESTION:
+Image Captioning kya hai?
+
+ANSWER:
+Image ko analyze karke natural-language description generate karna image captioning hai.
+
+
+187. QUESTION:
+Visual Question Answering kya hai?
+
+ANSWER:
+Image aur natural-language question dono ko input dekar image-based answer generate karna VQA hai.
+
+
+188. QUESTION:
+Object Tracking kya hai?
+
+ANSWER:
+Video ke multiple frames mein same object ki identity aur location ko continuously track karna object tracking hai.
+
+
+189. QUESTION:
+Detection aur Tracking mein difference?
+
+ANSWER:
+Object detection har frame mein objects locate karta hai.
+
+Tracking detected objects ko frames ke across same identity ke saath follow karta hai.
+
+
+190. QUESTION:
+Video Analytics kya hai?
+
+ANSWER:
+Video streams ko process karke events, objects, activities aur behaviors identify karna video analytics hai.
+
+
+==============================
+LEVEL 10 — PRODUCTION COMPUTER VISION
+==============================
+
+
+191. QUESTION:
+Computer Vision model ko production mein kaise deploy karenge?
+
+ANSWER:
+
+Image/Video
+→ API/Stream
+→ Preprocessing
+→ Model Inference
+→ Postprocessing
+→ Business Logic
+→ Response
+
+Production mein monitoring, security aur scaling bhi add karenge.
+
+
+192. QUESTION:
+Computer Vision inference latency kaise reduce karenge?
+
+ANSWER:
+
+- Model quantization
+- Smaller architecture
+- Image resizing
+- Batch inference
+- GPU acceleration
+- TensorRT/optimized runtime
+- Model pruning
+- Efficient preprocessing
+
+
+193. QUESTION:
+Model Quantization kya hai?
+
+ANSWER:
+Model weights/activations ko lower numerical precision mein represent karna quantization hai.
+
+Isse model size aur inference cost/latency reduce ho sakti hai, although accuracy impact evaluate karna zaroori hai.
+
+
+194. QUESTION:
+Computer Vision model mein Data Drift kya hai?
+
+ANSWER:
+Production images ka distribution training data se significantly change ho jaye to model performance degrade ho sakti hai.
+
+Example:
+
+Training:
+Daytime images
+
+Production:
+Night-time CCTV images
+
+
+195. QUESTION:
+Computer Vision model monitoring mein kya track karenge?
+
+ANSWER:
+
+- Inference latency
+- Error rate
+- Confidence scores
+- Class distribution
+- Image quality
+- Data drift
+- Detection metrics
+- GPU utilization
+- Throughput
+
+
+196. QUESTION:
+Low-quality images ko kaise handle karenge?
+
+ANSWER:
+
+- Image quality checks
+- Blur detection
+- Resolution checks
+- Brightness checks
+- Preprocessing
+- Image enhancement
+- Reject/flag low-quality inputs
+
+
+197. QUESTION:
+Computer Vision system ko scalable kaise banayenge?
+
+ANSWER:
+
+- Containerization
+- GPU inference servers
+- Horizontal scaling
+- Load balancing
+- Batch processing
+- Queue-based architecture
+- Model optimization
+- Async processing
+
+
+198. QUESTION:
+Real-time CCTV Computer Vision architecture explain karein.
+
+ANSWER:
+
+CCTV Camera
+→ Video Stream
+→ Frame Sampling
+→ Preprocessing
+→ Object Detection
+→ Tracking
+→ Event Detection
+→ Alert Service
+→ Database
+→ Dashboard
+
+Production mein GPU inference, monitoring aur alert deduplication bhi add karenge.
+
+
+199. QUESTION:
+Senior Computer Vision Engineer se kya expect hota hai?
+
+ANSWER:
+Senior CV Engineer ko sirf model train karna nahi, balki:
+
+- Problem formulation
+- Data strategy
+- Model selection
+- Evaluation
+- Optimization
+- Deployment
+- GPU utilization
+- Monitoring
+- Scalability
+- Security
+- Business impact
+
+explain karna aana chahiye.
+
+
+200. QUESTION:
+Computer Vision project ko interview mein kaise explain karenge?
+
+ANSWER:
+
+Business Problem
+→ Dataset
+→ Data Cleaning
+→ Annotation
+→ Augmentation
+→ Model Selection
+→ Training
+→ Evaluation
+→ Error Analysis
+→ Optimization
+→ API/Deployment
+→ Monitoring
+→ Business Impact
+
+
+==================================================
+FINAL REVISION — NLP + COMPUTER VISION
+==================================================
+
+NLP CORE TOPICS:
+
+1. Tokenization
+2. Text Cleaning
+3. Stemming
+4. Lemmatization
+5. TF-IDF
+6. Word2Vec
+7. Embeddings
+8. Transformers
+9. BERT
+10. GPT
+11. Attention
+12. RAG
+13. Fine-Tuning
+14. LLM Evaluation
+15. NLP Deployment
+
+
+COMPUTER VISION CORE TOPICS:
+
+1. Pixels
+2. RGB
+3. Grayscale
+4. Image Processing
+5. Convolution
+6. CNN
+7. Transfer Learning
+8. Image Classification
+9. Object Detection
+10. YOLO
+11. IoU
+12. NMS
+13. Segmentation
+14. OCR
+15. Vision Transformer
+
+
+==================================================
+SENIOR INTERVIEW ANSWER FORMULA
+==================================================
+
+NLP PROJECT:
+
+Problem
+→ Data
+→ Preprocessing
+→ Representation
+→ Model
+→ Evaluation
+→ API
+→ Deployment
+→ Monitoring
+→ Security
+→ Cost
+→ Business Impact
+
+
+COMPUTER VISION PROJECT:
+
+Problem
+→ Dataset
+→ Annotation
+→ Preprocessing
+→ Augmentation
+→ Model
+→ Training
+→ Evaluation
+→ Error Analysis
+→ Optimization
+→ Deployment
+→ Monitoring
+→ Business Impact
+
+
+==================================================
+ONE-LINE REVISION
+==================================================
+
+NLP =
+Text
++
+Tokenization
++
+Embeddings
++
+Transformers
++
+LLMs
++
+RAG
++
+Evaluation
++
+Production
+
+
+COMPUTER VISION =
+Images
++
+Pixels
++
+Preprocessing
++
+CNN
++
+Detection
++
+Segmentation
++
+OCR
++
+Vision Transformers
++
+Deployment
+
+
+AI ENGINEER =
+NLP
++
+Computer Vision
++
+Machine Learning
++
+Deep Learning
++
+LLMs
++
+RAG
++
+Agents
++
+APIs
++
+MLOps
++
+System Design
+
+
+SENIOR AI ENGINEER =
+Models
++
+Data
++
+Architecture
++
+Evaluation
++
+Scalability
++
+Security
++
+Monitoring
++
+Cost Optimization
++
+Business Impact
