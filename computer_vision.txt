@@ -1,0 +1,400 @@
+========================================================
+COMPUTER VISION — 100 IMPORTANT POINTS
+BASIC → ADVANCED | HINGLISH INTERVIEW REVISION
+========================================================
+
+1. Computer Vision kya hai?
+Computer Vision AI/ML ka field hai jisme machine ko images,
+videos aur visual data ko understand, analyze aur interpret
+karna sikhaya jata hai.
+
+2. Computer Vision ka main objective kya hai?
+Image/video se meaningful information extract karna, jaise
+object, face, text, activity, defect ya scene identify karna.
+
+3. Image kya hoti hai?
+Image pixels ka 2D/3D arrangement hoti hai jisme har pixel
+visual information represent karta hai.
+
+4. Pixel kya hota hai?
+Pixel image ka smallest visual unit hota hai. Har pixel ke
+andar intensity ya color information stored hoti hai.
+
+5. Image resolution kya hoti hai?
+Resolution image ke width × height pixels ko represent karti hai.
+Example: 1920 × 1080.
+
+6. Grayscale image kya hoti hai?
+Grayscale image mein generally ek intensity channel hota hai,
+jisme values commonly 0 se 255 ke range mein hoti hain.
+
+7. RGB image kya hoti hai?
+RGB image mein Red, Green aur Blue 3 color channels hote hain.
+
+8. RGB aur BGR mein difference kya hai?
+RGB order Red-Green-Blue hota hai, jabki OpenCV commonly
+BGR order use karta hai.
+
+9. Image channels kya hote hain?
+Channels image ke different information layers hote hain.
+RGB image mein 3 channels hote hain.
+
+10. Image preprocessing kya hai?
+Model ko dene se pehle image ko resize, normalize, denoise,
+crop ya transform karna preprocessing kehlata hai.
+
+11. Image resizing kya hai?
+Image ke dimensions ko change karna resizing hai.
+Example: 1920×1080 ko 224×224 mein convert karna.
+
+12. Image normalization kya hai?
+Pixel values ko controlled range mein convert karna.
+Commonly 0-255 ko 0-1 range mein convert kiya jata hai.
+
+13. Image augmentation kya hai?
+Training data ko artificially increase/diversify karne ke liye
+rotation, flipping, cropping, zooming jaise transformations use karna.
+
+14. Data augmentation kyun use karte hain?
+Model ki generalization improve karne aur overfitting reduce
+karne ke liye augmentation useful hai.
+
+15. Horizontal flip kya hai?
+Image ko left-right direction mein mirror karna horizontal flip hai.
+
+16. Rotation augmentation kya hai?
+Image ko specific angle par rotate karke additional training
+examples create karna rotation augmentation hai.
+
+17. Cropping kya hai?
+Image ke selected region ko extract karna cropping hai.
+
+18. Image denoising kya hai?
+Image mein unwanted noise remove karna denoising kehlata hai.
+
+19. Gaussian Blur kya hai?
+Gaussian Blur neighboring pixels ko weighted average karke
+image ko smooth karta hai.
+
+20. Image filtering kya hai?
+Image ke pixels par mathematical operation apply karke
+noise reduction, sharpening ya feature extraction karna filtering hai.
+
+21. Convolution kya hai?
+Convolution ek mathematical operation hai jisme filter/kernel
+image ke different regions par slide karke feature values generate karta hai.
+
+22. Kernel kya hota hai?
+Kernel ya filter ek small matrix hota hai jo image ke local
+patterns/features detect karne ke liye use hota hai.
+
+23. Edge kya hota hai?
+Image mein jahan pixel intensity suddenly change hoti hai,
+wahan edge present ho sakta hai.
+
+24. Edge detection kya hai?
+Image mein object boundaries ya intensity changes identify karna
+edge detection kehlata hai.
+
+25. Sobel operator kya hai?
+Sobel operator horizontal aur vertical intensity gradients
+calculate karke edges detect karta hai.
+
+26. Canny Edge Detection kya hai?
+Canny ek multi-stage edge detection algorithm hai jo
+noise reduction, gradient calculation, non-maximum suppression
+aur hysteresis thresholding use karta hai.
+
+27. Thresholding kya hai?
+Pixel intensity ke basis par image ko different regions/classes
+mein separate karna thresholding hai.
+
+28. Binary image kya hoti hai?
+Binary image mein usually pixels do values represent karte hain,
+jaise 0 aur 1 ya 0 aur 255.
+
+29. Otsu Thresholding kya hai?
+Otsu automatically threshold select karta hai by maximizing
+between-class variance.
+
+30. Morphological operations kya hain?
+Shape-based image processing operations jaise erosion,
+dilation, opening aur closing morphological operations hain.
+
+31. Erosion kya karta hai?
+Erosion foreground region ko shrink karta hai aur small noise
+remove karne mein help kar sakta hai.
+
+32. Dilation kya karta hai?
+Dilation foreground region ko expand karta hai aur small gaps
+fill karne mein help kar sakta hai.
+
+33. Opening kya hai?
+Opening = Erosion + Dilation.
+Ye small noise remove karne mein useful hota hai.
+
+34. Closing kya hai?
+Closing = Dilation + Erosion.
+Ye small holes aur gaps fill karne mein useful hota hai.
+
+35. Histogram kya hai?
+Histogram image ke pixel intensity distribution ko represent karta hai.
+
+36. Histogram Equalization kya hai?
+Image contrast improve karne ke liye intensity distribution ko
+redistribute karna histogram equalization hai.
+
+37. CLAHE kya hai?
+CLAHE yani Contrast Limited Adaptive Histogram Equalization.
+Ye local regions par contrast enhancement karta hai aur noise
+amplification ko limit karta hai.
+
+38. Image segmentation kya hai?
+Image ko meaningful regions/classes mein divide karna segmentation hai.
+
+39. Semantic segmentation kya hai?
+Har pixel ko ek class label assign kiya jata hai.
+Example: road, car, person, sky.
+
+40. Instance segmentation kya hai?
+Same class ke individual objects ko separately identify kiya jata hai.
+Example: 5 persons hain to 5 separate masks.
+
+41. Panoptic segmentation kya hai?
+Semantic + instance segmentation ka combination panoptic
+segmentation kehlata hai.
+
+42. Object detection kya hai?
+Image mein objects identify karna aur unke locations ke around
+bounding boxes generate karna object detection hai.
+
+43. Image classification kya hai?
+Complete image ko ek ya multiple predefined classes mein classify karna.
+
+44. Multi-class classification kya hai?
+Ek image ko multiple possible classes mein se ek class assign karna.
+
+45. Multi-label classification kya hai?
+Ek image mein multiple labels simultaneously assign kiye ja sakte hain.
+
+46. Bounding box kya hota hai?
+Object ke around rectangular coordinates ka box bounding box hota hai.
+
+47. Confidence score kya hota hai?
+Model ka prediction par estimated confidence/probability-like score
+confidence score kehlata hai.
+
+48. IoU kya hai?
+IoU = Intersection over Union.
+Predicted box aur ground-truth box ke overlap ko measure karta hai.
+
+49. IoU formula kya hai?
+IoU = Area of Intersection / Area of Union.
+
+50. Non-Maximum Suppression kya hai?
+NMS overlapping multiple detections mein generally highest-confidence
+prediction ko retain karke redundant boxes remove karta hai.
+
+51. Precision kya hai?
+Precision batata hai predicted positives mein kitne actually positive hain.
+
+Precision = TP / (TP + FP)
+
+52. Recall kya hai?
+Recall batata hai actual positives mein se kitne model ne detect kiye.
+
+Recall = TP / (TP + FN)
+
+53. F1-score kya hai?
+Precision aur Recall ka harmonic mean F1-score hota hai.
+
+F1 = 2 × Precision × Recall / (Precision + Recall)
+
+54. True Positive kya hai?
+Model ne positive object ko correctly positive predict kiya.
+
+55. False Positive kya hai?
+Model ne non-object ko object ke roop mein incorrectly detect kiya.
+
+56. False Negative kya hai?
+Actual object present tha lekin model ne detect nahi kiya.
+
+57. CNN kya hai?
+CNN yani Convolutional Neural Network image/video data ke
+spatial patterns learn karne ke liye widely used deep learning architecture hai.
+
+58. CNN kyun use hota hai?
+CNN automatically edges, textures, shapes aur high-level visual
+features learn kar sakta hai.
+
+59. CNN ka basic flow kya hai?
+Input Image → Convolution → Activation → Pooling →
+Feature Extraction → Fully Connected/Head → Prediction.
+
+60. CNN mein feature map kya hai?
+Convolution operation ke baad generated matrix ko feature map
+kehte hain jo learned visual patterns represent karta hai.
+
+61. ReLU kya hai?
+ReLU activation function:
+f(x) = max(0, x)
+
+Ye neural networks mein non-linearity introduce karta hai.
+
+62. Pooling kya hai?
+Pooling feature maps ka spatial size reduce karta hai aur
+computational complexity kam karne mein help karta hai.
+
+63. Max Pooling kya hai?
+Pooling window ke andar maximum value select karta hai.
+
+64. Average Pooling kya hai?
+Pooling window ke andar values ka average calculate karta hai.
+
+65. Stride kya hai?
+Kernel image par kitne pixels ke step se move karega,
+use stride kehte hain.
+
+66. Padding kya hai?
+Image ke borders ke around extra pixels add karna padding hai.
+
+67. Same padding kya hai?
+Aisa padding jisse output spatial dimensions generally input
+dimensions ke same maintain kiye jate hain.
+
+68. Valid padding kya hai?
+Padding apply nahi hota aur output dimensions reduce ho sakte hain.
+
+69. Receptive field kya hai?
+Input image ka wo region jo network ke particular neuron ko
+influence karta hai receptive field kehlata hai.
+
+70. Transfer Learning kya hai?
+Pretrained model ke learned features ko new computer vision
+task ke liye reuse karna transfer learning hai.
+
+71. Fine-tuning kya hai?
+Pretrained model ko new dataset par additional training dena
+fine-tuning kehlata hai.
+
+72. Feature extractor kya hota hai?
+Pretrained network ka backbone use karke useful visual features
+extract karna feature extraction approach hai.
+
+73. ResNet kya hai?
+ResNet ek deep CNN architecture hai jo residual/skip connections
+use karta hai.
+
+74. Skip connection kya hai?
+Network ke ek layer/block ka output directly later layer tak
+pass karna skip connection hai.
+
+75. ResNet ka main advantage kya hai?
+Deep networks mein vanishing gradient problem ko reduce karne
+aur optimization improve karne mein help karta hai.
+
+76. VGG kya hai?
+VGG ek CNN architecture hai jo mainly stacked 3×3 convolution
+layers ke use ke liye known hai.
+
+77. Inception architecture kya hai?
+Inception architecture different kernel sizes aur operations ko
+parallel use karke multi-scale feature extraction karta hai.
+
+78. EfficientNet kya hai?
+EfficientNet model depth, width aur image resolution ko
+systematically scale karta hai.
+
+79. Vision Transformer kya hai?
+Vision Transformer yani ViT image ko patches mein divide karke
+Transformer architecture ke through visual relationships learn karta hai.
+
+80. CNN vs Vision Transformer?
+CNN local spatial patterns ko convolution ke through efficiently
+learn karta hai, while ViT self-attention ke through global
+relationships model kar sakta hai.
+
+81. Image patch kya hota hai?
+Vision Transformer mein image ko small fixed-size regions mein
+divide kiya jata hai; in regions ko patches kehte hain.
+
+82. Self-attention vision mein kya karta hai?
+Self-attention image ke different patches ke beech relationships
+learn karta hai.
+
+83. YOLO kya hai?
+YOLO yani You Only Look Once real-time object detection ke liye
+popular one-stage detection family hai.
+
+84. One-stage detector kya hai?
+Object localization aur classification ko single detection pipeline
+mein efficiently perform karta hai.
+
+85. Two-stage detector kya hai?
+Generally pehle region proposals generate karta hai aur phir
+un regions par object classification/localization perform karta hai.
+
+86. Faster R-CNN kya hai?
+Faster R-CNN ek two-stage object detection architecture hai jo
+Region Proposal Network (RPN) use karta hai.
+
+87. R-CNN family kya hai?
+R-CNN, Fast R-CNN aur Faster R-CNN object detection architectures
+ki well-known family hain.
+
+88. SSD kya hai?
+SSD yani Single Shot MultiBox Detector ek one-stage object
+detection architecture hai.
+
+89. mAP kya hai?
+mAP yani mean Average Precision object detection performance
+evaluate karne ka common metric hai.
+
+90. AP kya hai?
+Average Precision ek class ke precision-recall relationship se
+calculate hone wala detection metric hai.
+
+91. OCR kya hai?
+OCR yani Optical Character Recognition image/document se text
+identify aur extract karta hai.
+
+92. Face detection kya hai?
+Image/video mein human faces ki location identify karna face detection hai.
+
+93. Face recognition kya hai?
+Detected face ko known identity ke saath match/identify karna
+face recognition hai.
+
+94. Pose estimation kya hai?
+Human body ke keypoints jaise shoulders, elbows, knees aur wrists
+detect karna pose estimation hai.
+
+95. Keypoint detection kya hai?
+Object/person ke important landmark points identify karna keypoint
+detection kehlata hai.
+
+96. Optical Flow kya hai?
+Video ke consecutive frames mein pixels/features ki apparent
+motion estimate karna optical flow hai.
+
+97. Tracking kya hai?
+Video ke multiple frames mein same object ki identity/location
+continuously maintain karna object tracking hai.
+
+98. Computer Vision deployment mein important challenges kya hain?
+Latency, GPU/CPU cost, memory, model size, input quality,
+lighting variation, camera angle, domain shift aur scalability
+important challenges hain.
+
+99. Computer Vision production pipeline kya ho sakti hai?
+Camera/Image → Preprocessing → Model Inference → Postprocessing
+→ Detection/Classification → Business Logic → API → Monitoring.
+
+100. Computer Vision interview ke liye kya master karna chahiye?
+Image Processing + OpenCV + CNN + Transfer Learning +
+Object Detection + Segmentation + OCR + Tracking +
+Vision Transformers + Evaluation Metrics + Deployment +
+Optimization + Real-world project understanding.
+========================================================
+END — COMPUTER VISION 100 IMPORTANT POINTS
+========================================================
