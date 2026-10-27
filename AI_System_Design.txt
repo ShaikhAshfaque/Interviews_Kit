@@ -1,0 +1,223 @@
+# Top 100 Senior AI Engineering System Design Interview Questions (Hinglish)
+
+Senior AI / GenAI Engineer interviews ke liye short, interview-ready answers.
+
+## A. Fundamentals aur Approach
+
+**1. AI system design aur normal system design mein kya fark hai?** Normal system deterministic hota hai, AI system probabilistic. Yahan model quality, data drift, evaluation, guardrails aur cost per token bhi design ka hissa hain.
+
+**2. Koi bhi AI system design question ko kaise approach karte ho?** Pehle requirements clarify karo (functional + non-functional), phir data, model choice, serving architecture, evaluation, monitoring, cost/scale aur failure modes. Last mein trade-offs explain karo.
+
+**3. API (OpenAI/Anthropic) vs self-hosted LLM: kab kya choose karoge?** Low volume aur fast launch: API. High volume, data privacy ya custom latency: self-host (Llama/Mistral on vLLM). Break-even tokens/month se calculate karo.
+
+**4. Latency, cost aur quality ka trade-off kaise manage karte ho?** Model routing: simple queries chhote model ko, hard queries bade model ko. Caching, quantization aur prompt compression se cost kam karo.
+
+**5. Online vs batch inference kab use karte ho?** Batch: nightly scoring, recommendations (throughput important). Online: chat, fraud check (low latency). Hybrid: precompute + online rerank.
+
+**6. LLM app ke non-functional requirements kya hote hain?** p95 latency, TTFT, throughput, availability, cost per request, safety, compliance aur data residency.
+
+**7. LLM system ka capacity planning kaise karoge?** QPS x avg input/output tokens se tokens/sec nikalo, GPU throughput benchmark karo, peak vs average dekho aur 30-40% headroom rakho.
+
+**8. AI system mein monolith vs microservices?** Model serving alag service rakho taaki GPU independently scale ho. Orchestration, retrieval aur gateway bhi alag layers mein.
+
+**9. AI Gateway kya hota hai aur kyun chahiye?** Single entry point: auth, rate limit, routing, fallback, caching, logging, PII filtering aur cost tracking. Provider switch karna easy ho jata hai.
+
+**10. Synchronous vs asynchronous AI workflows?** Chat sync/streaming hota hai. Heavy jobs (document processing, report generation) queue (Kafka/SQS) + workers pe async, status polling ya webhook ke saath.
+
+## B. LLM Serving aur Inference
+
+**11. TTFT aur TPOT kya hain?** TTFT = Time To First Token (user ko kitni jaldi response start dikhe). TPOT = Time Per Output Token (generation speed). Dono ko alag optimize karte hain.
+
+**12. KV cache kya hai?** Attention ke previous tokens ke key/value tensors store karna taaki har naye token pe dobara compute na ho. Speed badhta hai, lekin GPU memory khata hai.
+
+**13. Continuous batching kya hai?** Requests ko token-level pe dynamically batch me add/remove karte hain, poore batch ke khatam hone ka wait nahi. GPU utilization aur throughput bahut improve hota hai.
+
+**14. PagedAttention (vLLM) kya karta hai?** KV cache ko fixed-size blocks (pages) me manage karta hai, jaise OS memory paging. Fragmentation kam, zyada concurrent requests.
+
+**15. Quantization kya hai aur trade-off kya hai?** Weights ko FP16 se INT8/INT4 (AWQ, GPTQ) me convert karna. Memory aur cost kam, speed zyada; thodi accuracy loss ho sakti hai, isliye eval zaroor karo.
+
+**16. Speculative decoding kya hai?** Chhota draft model kai tokens guess karta hai, bada model ek baar me verify karta hai. Output quality same, latency kam.
+
+**17. Tensor parallelism vs pipeline parallelism?** Tensor: ek layer ke weights GPUs me split (low latency, fast interconnect chahiye). Pipeline: layers GPUs me split (bade model fit hote hain, bubbles ka issue).
+
+**18. Streaming responses kaise implement karoge?** SSE ya WebSocket se token-by-token bhejo. Backend ko disconnect handle karna chahiye taaki cancelled request pe GPU waste na ho.
+
+**19. GPU autoscaling kaise karoge?** CPU nahi, queue depth, GPU utilization ya tokens/sec pe scale karo (KEDA/HPA custom metrics). Cold start ke liye warm pool rakho.
+
+**20. Prefix/prompt caching kya hai?** Same system prompt ya long context ka KV cache reuse karna. Repeated prefix wale requests me cost aur TTFT dono kam hote hain.
+
+**21. Semantic caching kab useful hai?** Similar questions ke liye embedding similarity se cached answer return karna (FAQ bots). Risk: galat hit, isliye threshold tune karo aur personalized queries skip karo.
+
+**22. Rate limiting aur backpressure kaise design karoge?** Per-user/per-tenant token-based limits (sirf request count nahi). Queue full ho to 429 + retry-after, priority queues premium users ke liye.
+
+**23. Multi-model routing aur fallback?** Router classifier (rules ya small model) query difficulty dekh ke model choose karta hai. Primary fail ho to secondary provider pe fallback with circuit breaker.
+
+**24. GPU pod ka cold start kaise kam karoge?** Model weights ko local NVMe/shared volume pe cache karo, image chhoti rakho, min replicas warm rakho aur lazy loading avoid karo.
+
+**25. Long context requests kaise handle karoge?** Chunk + summarize, RAG, ya long-context model. Dhyan rakho: context badhne se KV cache memory aur latency quadratic-ish badhti hai.
+
+**26. vLLM, TGI, TensorRT-LLM, Triton: kaise choose karoge?** vLLM: easy, high throughput default. TensorRT-LLM: NVIDIA pe max performance, setup complex. TGI: HuggingFace ecosystem. Triton: multi-model/ensemble serving.
+
+**27. Multi-tenant LLM serving kaise karoge?** Shared base model + per-tenant LoRA adapters, tenant-wise quotas, isolation of data/logs aur noisy neighbour se bachne ke liye priority scheduling.
+
+**28. LLM requests ke liye round-robin load balancing kyun galat hai?** Requests ki length alag hoti hai, isliye load uneven hota hai. Queue length ya in-flight tokens ke basis pe route karo, cache-aware routing bhi use karo.
+
+**29. Distillation serving me kaise help karta hai?** Bade teacher model ke outputs se chhota student train karte hain. Specific task pe similar quality, kam latency aur cost.
+
+**30. Offline batch inference (millions of docs) kaise design karoge?** Job queue + parallel workers, large batches, checkpointing, retry with idempotency, aur cheap spot GPUs. Provider batch APIs se 50% tak saving.
+
+## C. RAG Systems
+
+**31. Basic RAG architecture explain karo.** Ingestion: documents -> parse -> chunk -> embed -> vector DB. Query time: query embed -> retrieve top-k -> (rerank) -> prompt me context -> LLM answer with citations.
+
+**32. Chunking strategy kaise decide karte ho?** Document type pe depend karta hai: semantic/structure-based chunks (headings), 200-800 tokens with overlap. Tables aur code alag handle karo. Eval se chunk size tune karo.
+
+**33. Embedding model kaise choose karoge?** Domain, language (Hindi/Arabic support), dimension, latency aur cost dekho. MTEB benchmark se shortlist, phir apne data pe retrieval eval chalao.
+
+**34. Vector DB aur index type kaise choose karoge?** HNSW: fast, high recall, memory heavy. IVF/PQ: bade scale pe memory kam. Options: pgvector (small), Qdrant/Weaviate/Milvus/Pinecone (scale). Filtering aur ops cost bhi dekho.
+
+**35. Hybrid search kyun use karte hain?** Vector search semantic match deta hai, BM25 exact keywords/IDs deta hai. Dono combine (RRF) karne se recall behtar hota hai.
+
+**36. Reranker kyun lagate hain?** First-stage retrieval fast but rough hota hai. Cross-encoder reranker top 50 me se best 5 chunks chunta hai, precision badhti hai, thoda latency badhta hai.
+
+**37. Query rewriting, HyDE aur multi-query kya hain?** User query ko LLM se behtar form me rewrite karna, ya hypothetical answer generate karke usse search karna (HyDE), ya kai variations se retrieve karke merge karna. Vague queries pe recall badhta hai.
+
+**38. RAG me hallucination kaise kam karoge?** Better retrieval, strict prompt ("sirf context se answer do"), citations, confidence threshold pe "I don't know", aur groundedness check/verifier step.
+
+**39. Index ko fresh kaise rakhoge?** Change data capture ya webhooks se incremental indexing, document hash se dedupe, versioning, aur purane chunks ka delete/tombstone.
+
+**40. RAG me access control aur multi-tenancy kaise handle karoge?** Har chunk pe metadata (tenant, ACL) store karo aur retrieval time pe filter lagao. Kabhi bhi LLM ko unauthorized chunk mat do; filter post-LLM nahi, pre-retrieval hona chahiye.
+
+**41. RAG ko evaluate kaise karoge?** Retrieval alag: recall@k, MRR, nDCG. Generation alag: faithfulness, answer relevance, correctness. Golden Q&A set + LLM-as-judge (RAGAS style) + human spot checks.
+
+**42. 1 billion vectors tak scale kaise karoge?** Sharding, IVF-PQ ya DiskANN, quantized vectors, tiered storage (hot/cold), aur metadata pre-filtering. Recall vs cost trade-off measure karo.
+
+**43. Multimodal RAG (images, tables, PDFs) kaise design karoge?** OCR/layout parsing, tables ko structured text me convert, images ke captions ya multimodal embeddings (CLIP/ColPali), aur source page reference store karo.
+
+**44. GraphRAG kab useful hai?** Jab questions multi-hop ya relationship-based hon ("kaun kis se linked hai"), ya poore corpus ka global summary chahiye. Build cost high hai, isliye simple RAG pehle try karo.
+
+**45. RAG vs fine-tuning vs long context: kaise decide karoge?** Facts/knowledge badalta rehta hai: RAG. Style, format ya task behavior: fine-tuning. Chhota fixed corpus: long context. Production me aksar RAG + light fine-tuning combine hota hai.
+
+**46. Citations aur grounding kaise implement karoge?** Har chunk ko ID do, prompt me ID ke saath bhejo, LLM se answer + chunk IDs maango, phir verify karo ki claim chunk me actually hai.
+
+**47. 10,000 PDFs pe "chat with documents" system design karo.** Upload -> parse (OCR agar scanned) -> chunk -> embed -> vector DB with metadata. Query: hybrid retrieve -> rerank -> LLM with citations. Async ingestion queue, per-user ACL, caching, feedback loop.
+
+**48. Enterprise search me different data sources (Drive, Slack, Jira) kaise integrate karoge?** Connectors per source, common schema, permission sync (ACL mirror), incremental sync, aur unified index with source metadata.
+
+**49. Context window budget kaise manage karte ho?** System prompt + history + retrieved chunks + output tokens ka budget fix karo. History summarize karo, chunks dedupe/compress karo, aur sabse relevant ko prompt ke start/end me rakho.
+
+**50. Conversation memory kaise design karoge?** Short-term: recent turns window. Long-term: summaries + facts vector DB/KV store me. Memory write rules (kya store hoga), privacy aur user delete control define karo.
+
+## D. Agents aur Tool Use
+
+**51. Production AI agent ka architecture kaisa hota hai?** LLM (planner) + tools + memory + orchestrator loop + guardrails + observability. Har step ka state persist hota hai taaki failure pe resume ho sake.
+
+**52. Workflow vs agent: kab kya use karoge?** Fixed, predictable steps: workflow (cheaper, reliable). Open-ended tasks jahan steps pehle se unknown hon: agent. Pehle simple workflow try karo, jarurat ho tabhi agent.
+
+**53. ReAct vs Plan-and-Execute?** ReAct: har step pe think -> act -> observe (flexible, costly). Plan-and-Execute: pehle poora plan, phir steps run (cheaper, but plan badalna mushkil). Hybrid with re-planning common hai.
+
+**54. Tool calling safely kaise design karoge?** Strict JSON schema, input validation, least-privilege permissions, timeouts, retries with idempotency keys, aur risky actions (payment, delete) pe human approval.
+
+**55. MCP (Model Context Protocol) kya hai aur kyun useful hai?** Tools/data sources ko LLM apps se connect karne ka standard protocol. Ek baar MCP server banao, kai clients me reuse karo, custom integration ka kaam kam.
+
+**56. Multi-agent system kab banana chahiye?** Jab tasks ko alag specialties me todna ho (researcher, coder, reviewer) ya context bahut bada ho. Cost, latency aur debugging complexity badhti hai, isliye single agent se shuru karo.
+
+**57. Agent memory kaise design karoge?** Working memory (current context), episodic (past runs), semantic (facts) aur procedural (learned rules). Store + retrieval policy + expiry define karo.
+
+**58. Agent infinite loop ya runaway cost kaise rokoge?** Max steps, token/cost budget, timeout, repeated-action detection aur kill switch. Budget exceed pe graceful fail ya human escalation.
+
+**59. Human-in-the-loop kab aur kaise?** High-risk ya low-confidence actions pe approval step. Workflow ko pause/resume support karna chahiye (durable state), taaki approval ke baad wahin se continue ho.
+
+**60. Code execution tool ko safely kaise sandbox karoge?** Isolated containers/microVMs (gVisor, Firecracker), no network ya allow-list, CPU/memory/time limits, read-only filesystem aur per-session ephemeral storage.
+
+**61. Long-running agent tasks ka state kaise manage karoge?** Durable execution engines (Temporal, LangGraph checkpointer) ya DB-backed state machine. Har step checkpoint karo taaki crash pe resume ho.
+
+**62. Tool failures aur partial results kaise handle karoge?** Retries with backoff, fallback tools, error message ko LLM ko structured form me do taaki wo recover kare, aur compensating actions (saga pattern) side-effects ke liye.
+
+## E. Evaluation, Safety aur Observability
+
+**63. LLM system ka evaluation pipeline kaisa hoga?** Offline: golden dataset + automated metrics + LLM-as-judge. Online: A/B test, user feedback (thumbs), business metrics. CI me regression gate lagao.
+
+**64. LLM-as-judge ke risks kya hain?** Position bias, verbosity bias, self-preference. Clear rubric do, judge ko human labels se calibrate karo aur critical cases me human review rakho.
+
+**65. Golden dataset kaise banate ho?** Real production queries sample karo, domain experts se labels lo, edge cases aur failures add karo, aur dataset ko versioned rakho. Synthetic data se coverage badhao, par human-verify karo.
+
+**66. LLM feature ke liye A/B testing kaise karoge?** Randomized user split, primary metric (task success, resolution rate) + guardrail metrics (latency, cost, safety). Non-determinism ki wajah se sample size bada rakho.
+
+**67. Guardrails ka architecture kya hoga?** Input guardrails (PII, injection, topic filter) -> LLM -> output guardrails (toxicity, policy, schema validation, groundedness). Fast classifiers use karo taaki latency kam rahe.
+
+**68. Prompt injection se kaise bachoge?** Untrusted content ko instructions se alag treat karo, least-privilege tools, output validation, sensitive actions pe confirmation, aur retrieved content me instructions detect/strip karo. Koi single fix nahi hai, defense in depth chahiye.
+
+**69. PII aur sensitive data kaise handle karoge?** LLM ko bhejne se pehle detect + mask/tokenize, logs me redaction, encryption at rest/in transit, retention policy aur region-specific data residency.
+
+**70. Hallucination detect kaise karoge?** Groundedness check against retrieved context, self-consistency (multiple samples), NLI/verifier model, aur citation verification. Low confidence pe abstain karo.
+
+**71. LLM observability me kya track karoge?** Traces (har step, prompt, tool call), latency (TTFT, total), tokens, cost, error rate, feedback aur quality scores. Tools: LangSmith, Langfuse, OpenTelemetry.
+
+**72. Production feedback loop kaise banate ho?** User feedback + failed traces collect karo, label karo, eval set me add karo, prompts/retrieval/model improve karo, phir regression test ke baad deploy.
+
+**73. Red teaming kaise karte ho?** Jailbreak, injection, data leak, bias aur harmful content ke test cases banao (manual + automated attackers). Findings ko guardrails aur eval set me wapas feed karo.
+
+**74. Model drift aur data drift ko LLM context me kaise detect karoge?** Input distribution (embeddings clustering), output quality scores, refusal/error rates aur provider model updates monitor karo. Pinned model versions + scheduled eval runs.
+
+## F. Fine-tuning aur Data Pipelines
+
+**75. Fine-tuning kab karni chahiye?** Jab prompting + RAG se behavior/format/style na mile, ya latency/cost ke liye chhota model chahiye. Pehle prompt engineering aur RAG try karo, kyunki fine-tuning costly aur maintain karna mushkil hai.
+
+**76. LoRA aur QLoRA kya hain?** LoRA: base weights freeze karke chhote low-rank adapters train karna. QLoRA: base model ko 4-bit quantize karke LoRA train karna. Kam GPU memory, adapters swap karna easy.
+
+**77. SFT data pipeline kaise design karoge?** Collect -> clean/dedupe -> quality filter -> format (instruction/response) -> train/val split -> versioning. Data quality quantity se zyada important hai.
+
+**78. RLHF vs DPO?** RLHF: reward model + PPO (complex, unstable). DPO: preference pairs se direct optimize (simple, stable). Aaj kal zyada teams DPO-style methods prefer karti hain.
+
+**79. Synthetic data kaise use karoge?** Bade model se training/eval data generate karo, filter aur human-verify karo. Risk: bias aur model collapse, isliye real data ke saath mix karo.
+
+**80. Feature store kab chahiye?** Traditional ML (fraud, ranking) me online/offline features consistent rakhne ke liye (Feast, Tecton). Training-serving skew kam hota hai.
+
+**81. Training infrastructure design karo.** Distributed training (FSDP/DeepSpeed), checkpointing, experiment tracking (MLflow/W&B), spot instances with auto-resume aur data loading pipeline jo GPU idle na chhode.
+
+**82. Model registry aur versioning kaise karoge?** Har model ke saath data version, code, hyperparameters, metrics store karo. Stage promotion (staging -> prod) approvals ke saath aur rollback ready.
+
+**83. Prompts ko version aur manage kaise karoge?** Prompts ko code ki tarah Git me ya prompt registry me rakho, versions ko eval results se link karo aur config se hot-swap karo, redeploy ke bina.
+
+**84. LLM apps ke liye CI/CD kaise banate ho?** PR pe automated eval suite, prompt/model change ke liye regression gate, canary/shadow rollout, aur monitoring-based auto-rollback.
+
+## G. Scale, Cost aur Reliability
+
+**85. LLM cost kaise optimize karoge?** Caching (prefix + semantic), model routing, chhote/distilled models, prompt compression, output length limits, batching aur quantization. Pehle cost per request measure karo.
+
+**86. Token budget aur per-user quotas kaise implement karoge?** Gateway me token counting, per-user/tenant limits, usage dashboards aur alerts. Soft limits pe warning, hard limits pe throttle.
+
+**87. GPU vs CPU inference kab?** Chhote embedding/classifier models CPU pe ho sakte hain (cost kam). LLMs aur large models GPU pe. Throughput aur latency benchmark karke decide karo.
+
+**88. Multi-region deployment kaise karoge?** Users ke paas region me serving (latency + data residency), global load balancer, replicated vector DB/config, aur region failover. GPU availability bhi plan me rakho.
+
+**89. LLM provider outage ka plan?** Multi-provider fallback via gateway, circuit breaker, degraded mode (cached/simple responses), aur status monitoring. Fallback models ko pehle se eval karke rakho.
+
+**90. Disaster recovery aur backups?** Vector index aur metadata ke regular snapshots, ingestion pipeline replayable rakho (source of truth raw data), aur RTO/RPO define karo.
+
+**91. Canary vs shadow deployment for models?** Shadow: naya model parallel chalta hai par users ko response nahi jata (safe comparison). Canary: chhote traffic % ko naya model serve hota hai. Dono ko metrics se compare karo.
+
+**92. Traditional ML system (jaise recommendation) aur LLM system ko kaise combine karoge?** Retrieval/ranking models candidates dete hain, LLM reranking/explanation ya natural language interface deta hai. Latency-critical path pe lightweight models, LLM sirf jahan value ho.
+
+## H. Case Study Designs
+
+**93. ChatGPT jaisa chat system design karo.** Client -> gateway (auth, rate limit) -> orchestrator (history, memory, safety) -> LLM serving cluster (vLLM, autoscaling) -> streaming response. Conversation DB, caching, moderation, observability aur cost controls add karo.
+
+**94. Customer support AI bot design karo.** Intent classifier + RAG on help docs + tool calls (order status, refund) + escalation to human agent. Guardrails, CSAT tracking, aur feedback loop se KB improve karo.
+
+**95. Real-time fraud detection system design karo.** Streaming events (Kafka) -> feature store -> low-latency ML model (<100 ms) -> risk score. High-risk par block/step-up auth, medium par manual review. LLM sirf analyst explanations/case summary ke liye, false positives ko feedback se kam karo.
+
+**96. AI code assistant (Copilot jaisa) design karo.** IDE plugin -> context builder (current file, repo index, embeddings) -> low-latency code model (FIM) -> suggestions. Latency <300 ms target, caching, telemetry (acceptance rate) aur secret/license filtering.
+
+**97. Recommendation system with LLM design karo.** Candidate generation (two-tower/ANN) -> ranking model -> LLM reranker/explanations for top-N. Cold start ke liye content embeddings, offline + online metrics aur A/B tests.
+
+**98. Document intelligence (invoice/contract extraction) system design karo.** OCR/layout model -> LLM structured extraction (JSON schema) -> validation rules -> confidence score -> human review queue. Active learning se low-confidence cases se model improve karo.
+
+**99. Voice assistant design karo.** Streaming ASR -> LLM (streaming) -> streaming TTS, VAD aur barge-in support. End-to-end latency <1 sec target; har stage pipeline me overlap karo.
+
+**100. E-commerce semantic search system design karo.** Query understanding (rewrite, intent) -> hybrid retrieval (BM25 + vector) -> ranking (LTR with click data) -> personalization. Offline nDCG + online CTR/conversion metrics, typo/Hinglish queries handle karo.
+
+---
+
+**Interview tip:** Har answer ke end me trade-offs, failure modes aur metrics zaroor mention karo. Senior level pe wahi difference banata hai.
