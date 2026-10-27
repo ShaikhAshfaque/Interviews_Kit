@@ -1,0 +1,1530 @@
+============================================================
+SQL + PYTHON INTERVIEW PRACTICE
+============================================================
+
+DATABASE TABLE: employees
+
+Columns:
+id
+name
+department
+salary
+experience
+
+
+============================================================
+1. SELECT ALL EMPLOYEES
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees;
+
+
+PYTHON + PANDAS:
+
+df = pd.read_sql_query(
+    "SELECT * FROM employees",
+    conn
+)
+
+print(df)
+
+
+============================================================
+2. SELECT SPECIFIC COLUMNS
+============================================================
+
+SQL:
+
+SELECT name, salary
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT name, salary
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+3. WHERE CONDITION
+============================================================
+
+Question:
+Find employees whose salary is greater than 80000.
+
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE salary > 80000;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+WHERE salary > 80000
+""", conn)
+
+print(df)
+
+
+============================================================
+4. MULTIPLE WHERE CONDITIONS
+============================================================
+
+Question:
+Find employees having salary > 80000
+and experience > 4.
+
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE salary > 80000
+AND experience > 4;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+WHERE salary > 80000
+AND experience > 4
+""", conn)
+
+print(df)
+
+
+============================================================
+5. OR CONDITION
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE department = 'IT'
+OR department = 'Data Science';
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+WHERE department = 'IT'
+OR department = 'Data Science'
+""", conn)
+
+print(df)
+
+
+============================================================
+6. DISTINCT
+============================================================
+
+Question:
+Find unique departments.
+
+
+SQL:
+
+SELECT DISTINCT department
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT DISTINCT department
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+7. ORDER BY ASCENDING
+============================================================
+
+Question:
+Sort employees by salary from low to high.
+
+
+SQL:
+
+SELECT *
+FROM employees
+ORDER BY salary ASC;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+ORDER BY salary ASC
+""", conn)
+
+print(df)
+
+
+============================================================
+8. ORDER BY DESCENDING
+============================================================
+
+Question:
+Sort employees by salary from high to low.
+
+
+SQL:
+
+SELECT *
+FROM employees
+ORDER BY salary DESC;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+ORDER BY salary DESC
+""", conn)
+
+print(df)
+
+
+============================================================
+9. TOP 3 HIGHEST SALARY
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees
+ORDER BY salary DESC
+LIMIT 3;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+ORDER BY salary DESC
+LIMIT 3
+""", conn)
+
+print(df)
+
+
+============================================================
+10. HIGHEST SALARY
+============================================================
+
+SQL:
+
+SELECT MAX(salary) AS highest_salary
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT MAX(salary) AS highest_salary
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+11. LOWEST SALARY
+============================================================
+
+SQL:
+
+SELECT MIN(salary) AS lowest_salary
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT MIN(salary) AS lowest_salary
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+12. AVERAGE SALARY
+============================================================
+
+SQL:
+
+SELECT AVG(salary) AS average_salary
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT AVG(salary) AS average_salary
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+13. TOTAL SALARY
+============================================================
+
+SQL:
+
+SELECT SUM(salary) AS total_salary
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT SUM(salary) AS total_salary
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+14. COUNT EMPLOYEES
+============================================================
+
+SQL:
+
+SELECT COUNT(*) AS employee_count
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT COUNT(*) AS employee_count
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+15. COUNT EMPLOYEES BY DEPARTMENT
+============================================================
+
+SQL:
+
+SELECT
+    department,
+    COUNT(*) AS employee_count
+FROM employees
+GROUP BY department;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    department,
+    COUNT(*) AS employee_count
+FROM employees
+GROUP BY department
+""", conn)
+
+print(df)
+
+
+============================================================
+16. AVERAGE SALARY BY DEPARTMENT
+============================================================
+
+SQL:
+
+SELECT
+    department,
+    AVG(salary) AS average_salary
+FROM employees
+GROUP BY department;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    department,
+    AVG(salary) AS average_salary
+FROM employees
+GROUP BY department
+""", conn)
+
+print(df)
+
+
+============================================================
+17. MAXIMUM SALARY BY DEPARTMENT
+============================================================
+
+SQL:
+
+SELECT
+    department,
+    MAX(salary) AS maximum_salary
+FROM employees
+GROUP BY department;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    department,
+    MAX(salary) AS maximum_salary
+FROM employees
+GROUP BY department
+""", conn)
+
+print(df)
+
+
+============================================================
+18. HAVING
+============================================================
+
+Question:
+Find departments having average salary > 80000.
+
+
+SQL:
+
+SELECT
+    department,
+    AVG(salary) AS average_salary
+FROM employees
+GROUP BY department
+HAVING AVG(salary) > 80000;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    department,
+    AVG(salary) AS average_salary
+FROM employees
+GROUP BY department
+HAVING AVG(salary) > 80000
+""", conn)
+
+print(df)
+
+
+============================================================
+19. LIKE
+============================================================
+
+Question:
+Find employees whose name starts with A.
+
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE name LIKE 'A%';
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+WHERE name LIKE 'A%'
+""", conn)
+
+print(df)
+
+
+============================================================
+20. IN OPERATOR
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE department IN ('IT', 'HR');
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+WHERE department IN ('IT', 'HR')
+""", conn)
+
+print(df)
+
+
+============================================================
+21. BETWEEN
+============================================================
+
+Question:
+Find employees with salary between 70000 and 100000.
+
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE salary BETWEEN 70000 AND 100000;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+WHERE salary BETWEEN 70000 AND 100000
+""", conn)
+
+print(df)
+
+
+============================================================
+22. CASE WHEN
+============================================================
+
+Question:
+Create salary category.
+
+
+SQL:
+
+SELECT
+    name,
+    salary,
+    CASE
+        WHEN salary >= 100000 THEN 'High'
+        WHEN salary >= 80000 THEN 'Medium'
+        ELSE 'Low'
+    END AS salary_category
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    name,
+    salary,
+    CASE
+        WHEN salary >= 100000 THEN 'High'
+        WHEN salary >= 80000 THEN 'Medium'
+        ELSE 'Low'
+    END AS salary_category
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+23. INNER JOIN
+============================================================
+
+Tables:
+
+employees
+projects
+
+
+SQL:
+
+SELECT
+    e.name,
+    e.department,
+    p.project_name
+FROM employees e
+INNER JOIN projects p
+ON e.id = p.employee_id;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    e.name,
+    e.department,
+    p.project_name
+FROM employees e
+INNER JOIN projects p
+ON e.id = p.employee_id
+""", conn)
+
+print(df)
+
+
+============================================================
+24. LEFT JOIN
+============================================================
+
+SQL:
+
+SELECT
+    e.name,
+    e.department,
+    p.project_name
+FROM employees e
+LEFT JOIN projects p
+ON e.id = p.employee_id;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    e.name,
+    e.department,
+    p.project_name
+FROM employees e
+LEFT JOIN projects p
+ON e.id = p.employee_id
+""", conn)
+
+print(df)
+
+
+============================================================
+25. FIND EMPLOYEES WITHOUT PROJECT
+============================================================
+
+SQL:
+
+SELECT
+    e.name
+FROM employees e
+LEFT JOIN projects p
+ON e.id = p.employee_id
+WHERE p.employee_id IS NULL;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    e.name
+FROM employees e
+LEFT JOIN projects p
+ON e.id = p.employee_id
+WHERE p.employee_id IS NULL
+""", conn)
+
+print(df)
+
+
+============================================================
+26. SECOND HIGHEST SALARY
+============================================================
+
+SQL:
+
+SELECT MAX(salary) AS second_highest_salary
+FROM employees
+WHERE salary < (
+    SELECT MAX(salary)
+    FROM employees
+);
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT MAX(salary) AS second_highest_salary
+FROM employees
+WHERE salary < (
+    SELECT MAX(salary)
+    FROM employees
+)
+""", conn)
+
+print(df)
+
+
+============================================================
+27. SECOND HIGHEST SALARY USING DENSE_RANK
+============================================================
+
+SQL:
+
+SELECT name, salary
+FROM (
+    SELECT
+        name,
+        salary,
+        DENSE_RANK() OVER (
+            ORDER BY salary DESC
+        ) AS salary_rank
+    FROM employees
+)
+WHERE salary_rank = 2;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT name, salary
+FROM (
+    SELECT
+        name,
+        salary,
+        DENSE_RANK() OVER (
+            ORDER BY salary DESC
+        ) AS salary_rank
+    FROM employees
+)
+WHERE salary_rank = 2
+""", conn)
+
+print(df)
+
+
+============================================================
+28. RANK EMPLOYEES BY SALARY
+============================================================
+
+SQL:
+
+SELECT
+    name,
+    salary,
+    RANK() OVER (
+        ORDER BY salary DESC
+    ) AS salary_rank
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    name,
+    salary,
+    RANK() OVER (
+        ORDER BY salary DESC
+    ) AS salary_rank
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+29. DEPARTMENT-WISE SALARY RANK
+============================================================
+
+SQL:
+
+SELECT
+    name,
+    department,
+    salary,
+    RANK() OVER (
+        PARTITION BY department
+        ORDER BY salary DESC
+    ) AS department_rank
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    name,
+    department,
+    salary,
+    RANK() OVER (
+        PARTITION BY department
+        ORDER BY salary DESC
+    ) AS department_rank
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+30. HIGHEST PAID EMPLOYEE FROM EACH DEPARTMENT
+============================================================
+
+SQL:
+
+SELECT
+    name,
+    department,
+    salary
+FROM (
+    SELECT
+        name,
+        department,
+        salary,
+        RANK() OVER (
+            PARTITION BY department
+            ORDER BY salary DESC
+        ) AS rnk
+    FROM employees
+)
+WHERE rnk = 1;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    name,
+    department,
+    salary
+FROM (
+    SELECT
+        name,
+        department,
+        salary,
+        RANK() OVER (
+            PARTITION BY department
+            ORDER BY salary DESC
+        ) AS rnk
+    FROM employees
+)
+WHERE rnk = 1
+""", conn)
+
+print(df)
+
+
+============================================================
+31. CTE
+============================================================
+
+Question:
+Find departments whose average salary is greater than 80000.
+
+
+SQL:
+
+WITH department_salary AS (
+    SELECT
+        department,
+        AVG(salary) AS avg_salary
+    FROM employees
+    GROUP BY department
+)
+
+SELECT *
+FROM department_salary
+WHERE avg_salary > 80000;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+WITH department_salary AS (
+    SELECT
+        department,
+        AVG(salary) AS avg_salary
+    FROM employees
+    GROUP BY department
+)
+
+SELECT *
+FROM department_salary
+WHERE avg_salary > 80000
+""", conn)
+
+print(df)
+
+
+============================================================
+32. SQL QUERY WITH PYTHON VARIABLE
+============================================================
+
+Python:
+
+min_salary = 80000
+
+df = pd.read_sql_query("""
+SELECT
+    name,
+    salary
+FROM employees
+WHERE salary > ?
+""", conn, params=(min_salary,))
+
+print(df)
+
+
+============================================================
+33. INSERT DATA USING PYTHON
+============================================================
+
+SQL:
+
+INSERT INTO employees
+(id, name, department, salary, experience)
+VALUES
+(6, 'Vikas', 'IT', 75000, 3);
+
+
+PYTHON:
+
+cursor.execute("""
+INSERT INTO employees
+(id, name, department, salary, experience)
+VALUES (?, ?, ?, ?, ?)
+""", (
+    6,
+    "Vikas",
+    "IT",
+    75000,
+    3
+))
+
+conn.commit()
+
+
+============================================================
+34. UPDATE DATA USING PYTHON
+============================================================
+
+SQL:
+
+UPDATE employees
+SET salary = 85000
+WHERE id = 6;
+
+
+PYTHON:
+
+cursor.execute("""
+UPDATE employees
+SET salary = ?
+WHERE id = ?
+""", (85000, 6))
+
+conn.commit()
+
+
+============================================================
+35. DELETE DATA USING PYTHON
+============================================================
+
+SQL:
+
+DELETE FROM employees
+WHERE id = 6;
+
+
+PYTHON:
+
+cursor.execute("""
+DELETE FROM employees
+WHERE id = ?
+""", (6,))
+
+conn.commit()
+
+
+============================================================
+36. SQL + PANDAS DATA ANALYSIS
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+""", conn)
+
+print(df.head())
+print(df.shape)
+print(df.columns)
+print(df.info())
+print(df.describe())
+
+
+============================================================
+37. SQL DATA + PYTHON AVERAGE
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query(
+    "SELECT * FROM employees",
+    conn
+)
+
+average_salary = df["salary"].mean()
+
+print(average_salary)
+
+
+============================================================
+38. SQL DATA + PYTHON GROUPBY
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query(
+    "SELECT * FROM employees",
+    conn
+)
+
+result = (
+    df.groupby("department")["salary"]
+      .mean()
+      .reset_index()
+)
+
+print(result)
+
+
+============================================================
+39. SQL DATA + PYTHON SORT
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees
+ORDER BY salary DESC;
+
+
+PYTHON:
+
+df = pd.read_sql_query(
+    "SELECT * FROM employees",
+    conn
+)
+
+result = df.sort_values(
+    by="salary",
+    ascending=False
+)
+
+print(result)
+
+
+============================================================
+40. SQL DATA + PYTHON TOP 3
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees
+ORDER BY salary DESC
+LIMIT 3;
+
+
+PYTHON:
+
+df = pd.read_sql_query(
+    "SELECT * FROM employees",
+    conn
+)
+
+result = df.nlargest(
+    3,
+    "salary"
+)
+
+print(result)
+
+
+============================================================
+41. SQL DATA + PYTHON FILTER
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE salary > 80000;
+
+
+PYTHON:
+
+df = pd.read_sql_query(
+    "SELECT * FROM employees",
+    conn
+)
+
+result = df[
+    df["salary"] > 80000
+]
+
+print(result)
+
+
+============================================================
+42. SQL DATA + PYTHON MULTIPLE FILTER
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE salary > 80000
+AND experience > 4;
+
+
+PYTHON:
+
+df = pd.read_sql_query(
+    "SELECT * FROM employees",
+    conn
+)
+
+result = df[
+    (df["salary"] > 80000)
+    &
+    (df["experience"] > 4)
+]
+
+print(result)
+
+
+============================================================
+43. SQL DATA + PYTHON DUPLICATES
+============================================================
+
+SQL:
+
+SELECT
+    name,
+    COUNT(*) AS count
+FROM employees
+GROUP BY name
+HAVING COUNT(*) > 1;
+
+
+PYTHON:
+
+df = pd.read_sql_query(
+    "SELECT * FROM employees",
+    conn
+)
+
+duplicates = df[
+    df.duplicated(
+        subset=["name"],
+        keep=False
+    )
+]
+
+print(duplicates)
+
+
+============================================================
+44. SQL NULL VALUES
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE salary IS NULL;
+
+
+PYTHON:
+
+df = pd.read_sql_query(
+    "SELECT * FROM employees",
+    conn
+)
+
+result = df[
+    df["salary"].isna()
+]
+
+print(result)
+
+
+============================================================
+45. SQL NOT NULL
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE salary IS NOT NULL;
+
+
+PYTHON:
+
+df = pd.read_sql_query(
+    "SELECT * FROM employees",
+    conn
+)
+
+result = df[
+    df["salary"].notna()
+]
+
+print(result)
+
+
+============================================================
+46. DATE FILTER
+============================================================
+
+SQL:
+
+SELECT *
+FROM employees
+WHERE joining_date >= '2025-01-01';
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT *
+FROM employees
+WHERE joining_date >= '2025-01-01'
+""", conn)
+
+print(df)
+
+
+============================================================
+47. LAG FUNCTION
+============================================================
+
+SQL:
+
+SELECT
+    name,
+    salary,
+    LAG(salary) OVER (
+        ORDER BY salary
+    ) AS previous_salary
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    name,
+    salary,
+    LAG(salary) OVER (
+        ORDER BY salary
+    ) AS previous_salary
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+48. RUNNING TOTAL
+============================================================
+
+SQL:
+
+SELECT
+    name,
+    salary,
+    SUM(salary) OVER (
+        ORDER BY id
+    ) AS running_salary
+FROM employees;
+
+
+PYTHON:
+
+df = pd.read_sql_query("""
+SELECT
+    name,
+    salary,
+    SUM(salary) OVER (
+        ORDER BY id
+    ) AS running_salary
+FROM employees
+""", conn)
+
+print(df)
+
+
+============================================================
+49. SQL → PYTHON → MACHINE LEARNING
+============================================================
+
+SQL:
+
+SELECT
+    age,
+    monthly_revenue,
+    tenure,
+    churn
+FROM customers
+WHERE monthly_revenue > 500;
+
+
+PYTHON:
+
+import pandas as pd
+
+query = """
+SELECT
+    age,
+    monthly_revenue,
+    tenure,
+    churn
+FROM customers
+WHERE monthly_revenue > 500
+"""
+
+df = pd.read_sql_query(
+    query,
+    conn
+)
+
+X = df[
+    [
+        "age",
+        "monthly_revenue",
+        "tenure"
+    ]
+]
+
+y = df["churn"]
+
+print(X.head())
+print(y.head())
+
+
+============================================================
+50. COMPLETE DATA SCIENTIST WORKFLOW
+============================================================
+
+SQL:
+
+SELECT
+    customer_id,
+    age,
+    monthly_revenue,
+    tenure,
+    support_calls,
+    churn
+FROM customers
+WHERE monthly_revenue > 500
+AND tenure >= 12;
+
+
+PYTHON:
+
+import pandas as pd
+
+query = """
+SELECT
+    customer_id,
+    age,
+    monthly_revenue,
+    tenure,
+    support_calls,
+    churn
+FROM customers
+WHERE monthly_revenue > 500
+AND tenure >= 12
+"""
+
+df = pd.read_sql_query(
+    query,
+    conn
+)
+
+# Data understanding
+
+print(df.head())
+print(df.shape)
+print(df.info())
+print(df.describe())
+
+# Missing values
+
+print(df.isnull().sum())
+
+# Feature selection
+
+X = df[
+    [
+        "age",
+        "monthly_revenue",
+        "tenure",
+        "support_calls"
+    ]
+]
+
+# Target
+
+y = df["churn"]
+
+print("Features:")
+print(X.head())
+
+print("Target:")
+print(y.head())
+
+
+============================================================
+IMPORTANT PYTHON IMPORTS
+============================================================
+
+import pandas as pd
+import sqlite3
+
+conn = sqlite3.connect("company.db")
+
+
+============================================================
+MOST IMPORTANT INTERVIEW TOPICS
+============================================================
+
+1. SELECT
+2. WHERE
+3. DISTINCT
+4. ORDER BY
+5. LIMIT
+6. GROUP BY
+7. HAVING
+8. COUNT
+9. SUM
+10. AVG
+11. MIN
+12. MAX
+13. CASE WHEN
+14. LIKE
+15. IN
+16. BETWEEN
+17. INNER JOIN
+18. LEFT JOIN
+19. RIGHT JOIN
+20. FULL JOIN
+21. Subquery
+22. CTE
+23. UNION
+24. UNION ALL
+25. RANK
+26. DENSE_RANK
+27. ROW_NUMBER
+28. LAG
+29. LEAD
+30. Running Total
+31. Date Functions
+32. NULL Handling
+33. Duplicate Detection
+34. Second Highest Salary
+35. Nth Highest Salary
+36. Top N per Group
+37. SQL + Python
+38. SQL + Pandas
+39. SQL + Machine Learning
+40. SQL Optimization
+
+
+============================================================
+KEY CONCEPT
+============================================================
+
+SQL:
+
+Database
+   ↓
+SQL Query
+   ↓
+Filtered / Aggregated Data
+
+
+Python:
+
+Database
+   ↓
+SQL Query
+   ↓
+Pandas DataFrame
+   ↓
+Data Cleaning
+   ↓
+EDA
+   ↓
+Feature Engineering
+   ↓
+Machine Learning
+   ↓
+Prediction
+
+
+============================================================
+DATA SCIENTIST INTERVIEW FORMULA
+============================================================
+
+SQL + Python + Pandas + Statistics + ML
+
+        ↓
+
+Data Extraction
+        ↓
+Data Cleaning
+        ↓
+EDA
+        ↓
+Feature Engineering
+        ↓
+Model Training
+        ↓
+Model Evaluation
+        ↓
+Deployment
