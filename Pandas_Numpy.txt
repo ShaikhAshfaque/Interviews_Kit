@@ -1,0 +1,2971 @@
+
+# PANDAS + NUMPY + SEABORN
+# 150 REAL DATA SCIENTIST SCENARIO-BASED QUESTIONS
+# HINGLISH EXPLANATION + CODE
+
+============================================================
+PART A — PANDAS
+QUESTIONS 1–60
+============================================================
+
+# Q1. Customer dataset ko load kaise karoge?
+
+SCENARIO:
+Company ke paas customers.csv file hai.
+
+CODE:
+
+import pandas as pd
+
+df = pd.read_csv("customers.csv")
+
+print(df.head())
+
+EXPLANATION:
+
+pd.read_csv() CSV file ko DataFrame mein convert karta hai.
+DataFrame ko Excel table ki tarah samajh sakte ho.
+
+INTERVIEW POINT:
+
+Data Scientist ka first step usually data ko load aur inspect karna hota hai.
+
+
+# Q2. Dataset ki first 5 rows kaise dekhoge?
+
+CODE:
+
+print(df.head())
+
+EXPLANATION:
+
+head() default first 5 rows show karta hai.
+
+Agar first 10 rows chahiye:
+
+print(df.head(10))
+
+
+# Q3. Last 5 rows kaise dekhoge?
+
+CODE:
+
+print(df.tail())
+
+EXPLANATION:
+
+tail() dataset ke last records show karta hai.
+
+Useful for:
+- Data loading verify karna
+- Last records inspect karna
+
+
+# Q4. Dataset mein kitni rows aur columns hain?
+
+CODE:
+
+print(df.shape)
+
+EXPLANATION:
+
+Output:
+
+(rows, columns)
+
+Example:
+
+(10000, 12)
+
+Matlab:
+10000 rows
+12 columns.
+
+
+# Q5. Column names kaise check karoge?
+
+CODE:
+
+print(df.columns)
+
+EXPLANATION:
+
+Ye dataset ke saare feature names show karega.
+
+
+# Q6. Dataset ke data types kaise check karoge?
+
+CODE:
+
+print(df.dtypes)
+
+EXPLANATION:
+
+Isse pata chalega:
+- int
+- float
+- object/string
+- datetime
+etc.
+
+ML se pehle datatype check karna important hai.
+
+
+# Q7. Complete dataset information kaise dekhenge?
+
+CODE:
+
+df.info()
+
+EXPLANATION:
+
+info() se:
+- columns
+- non-null count
+- datatype
+- memory usage
+
+sab milta hai.
+
+
+# Q8. Numerical statistical summary kaise nikaloge?
+
+CODE:
+
+print(df.describe())
+
+EXPLANATION:
+
+describe() deta hai:
+
+count
+mean
+std
+min
+25%
+50%
+75%
+max
+
+Ye EDA ka basic step hai.
+
+
+# Q9. Dataset mein missing values kitni hain?
+
+CODE:
+
+print(df.isnull().sum())
+
+EXPLANATION:
+
+Har column mein kitne missing values hain, ye pata chalega.
+
+
+# Q10. Missing values ka percentage kaise calculate karoge?
+
+CODE:
+
+missing_percentage = (
+    df.isnull().mean() * 100
+)
+
+print(missing_percentage)
+
+EXPLANATION:
+
+isnull() → True/False
+mean() → missing ratio
+*100 → percentage.
+
+
+# Q11. Salary column mein missing values fill karni hain.
+
+SCENARIO:
+Salary missing hai aur median se fill karna hai.
+
+CODE:
+
+df["salary"] = df["salary"].fillna(
+    df["salary"].median()
+)
+
+EXPLANATION:
+
+Salary generally skewed ho sakti hai.
+Isliye median mean se safer ho sakta hai.
+
+
+# Q12. Missing categorical value ko mode se fill kaise karoge?
+
+CODE:
+
+df["city"] = df["city"].fillna(
+    df["city"].mode()[0]
+)
+
+EXPLANATION:
+
+Mode = sabse frequently occurring value.
+
+
+# Q13. Jis row mein missing value hai usko remove kaise karoge?
+
+CODE:
+
+df_clean = df.dropna()
+
+EXPLANATION:
+
+dropna() missing-containing rows remove karta hai.
+
+CAUTION:
+
+Agar bahut missing values hain to unnecessary data loss ho sakta hai.
+
+
+# Q14. Duplicate records kaise find karoge?
+
+CODE:
+
+duplicates = df.duplicated()
+
+print(duplicates.sum())
+
+EXPLANATION:
+
+duplicated() duplicate rows identify karta hai.
+
+
+# Q15. Duplicate rows remove kaise karoge?
+
+CODE:
+
+df = df.drop_duplicates()
+
+EXPLANATION:
+
+Duplicate records data analysis ko distort kar sakte hain.
+
+
+# Q16. Customer IDs duplicate hain ya nahi?
+
+CODE:
+
+duplicate_ids = df[
+    df["customer_id"].duplicated(keep=False)
+]
+
+print(duplicate_ids)
+
+EXPLANATION:
+
+keep=False ka matlab duplicate ID ki saari occurrences show hongi.
+
+
+# Q17. Salary > 100000 employees find karo.
+
+CODE:
+
+result = df[
+    df["salary"] > 100000
+]
+
+print(result)
+
+EXPLANATION:
+
+Boolean filtering use hua hai.
+
+
+# Q18. IT department ke employees find karo.
+
+CODE:
+
+result = df[
+    df["department"] == "IT"
+]
+
+print(result)
+
+
+# Q19. Multiple conditions apply karo.
+
+SCENARIO:
+IT employees jinki salary 80000 se zyada hai.
+
+CODE:
+
+result = df[
+    (df["department"] == "IT") &
+    (df["salary"] > 80000)
+]
+
+print(result)
+
+IMPORTANT:
+
+Pandas mein multiple conditions ke liye:
+& = AND
+| = OR
+
+
+# Q20. OR condition kaise lagayenge?
+
+CODE:
+
+result = df[
+    (df["department"] == "IT") |
+    (df["department"] == "HR")
+]
+
+print(result)
+
+
+# Q21. Specific columns select karo.
+
+CODE:
+
+result = df[
+    ["name", "salary", "department"]
+]
+
+print(result)
+
+
+# Q22. Dataset ko salary ke basis par sort karo.
+
+CODE:
+
+result = df.sort_values(
+    "salary",
+    ascending=False
+)
+
+print(result)
+
+EXPLANATION:
+
+ascending=False → descending order.
+
+
+# Q23. Top 10 highest-paid employees find karo.
+
+CODE:
+
+top10 = df.nlargest(
+    10,
+    "salary"
+)
+
+print(top10)
+
+
+# Q24. Bottom 10 salary employees find karo.
+
+CODE:
+
+bottom10 = df.nsmallest(
+    10,
+    "salary"
+)
+
+print(bottom10)
+
+
+# Q25. Unique departments find karo.
+
+CODE:
+
+print(df["department"].unique())
+
+
+# Q26. Unique department count karo.
+
+CODE:
+
+print(df["department"].nunique())
+
+
+# Q27. Department-wise employee count.
+
+CODE:
+
+result = df.groupby(
+    "department"
+).size()
+
+print(result)
+
+EXPLANATION:
+
+groupby() data ko groups mein divide karke aggregation karne ke liye use hota hai.
+
+
+# Q28. Department-wise average salary.
+
+CODE:
+
+result = (
+    df.groupby("department")["salary"]
+      .mean()
+)
+
+print(result)
+
+
+# Q29. Department-wise maximum salary.
+
+CODE:
+
+result = (
+    df.groupby("department")["salary"]
+      .max()
+)
+
+print(result)
+
+
+# Q30. Department-wise minimum salary.
+
+CODE:
+
+result = (
+    df.groupby("department")["salary"]
+      .min()
+)
+
+print(result)
+
+
+# Q31. Multiple aggregations ek saath.
+
+CODE:
+
+result = (
+    df.groupby("department")["salary"]
+      .agg([
+          "mean",
+          "min",
+          "max",
+          "count"
+      ])
+)
+
+print(result)
+
+
+# Q32. City + department ke basis par grouping.
+
+CODE:
+
+result = (
+    df.groupby(
+        ["city", "department"]
+    )["salary"]
+    .mean()
+)
+
+print(result)
+
+
+# Q33. Department mein top salary employee find karo.
+
+CODE:
+
+result = (
+    df.sort_values(
+        "salary",
+        ascending=False
+    )
+    .groupby("department")
+    .head(1)
+)
+
+print(result)
+
+
+# Q34. Customer churn rate calculate karo.
+
+SCENARIO:
+churn = 1 means customer churned.
+
+CODE:
+
+churn_rate = df["churn"].mean()
+
+print(churn_rate)
+
+EXPLANATION:
+
+Agar churn column 0/1 hai:
+
+mean = churn proportion.
+
+Example:
+
+0.25 = 25% churn.
+
+
+# Q35. Churn percentage calculate karo.
+
+CODE:
+
+churn_percentage = (
+    df["churn"].mean() * 100
+)
+
+print(churn_percentage)
+
+
+# Q36. Churned customers filter karo.
+
+CODE:
+
+churned = df[
+    df["churn"] == 1
+]
+
+print(churned)
+
+
+# Q37. Churn rate by city.
+
+CODE:
+
+result = (
+    df.groupby("city")["churn"]
+      .mean()
+      .sort_values(
+          ascending=False
+      )
+)
+
+print(result)
+
+
+# Q38. Churn rate by customer segment.
+
+CODE:
+
+result = (
+    df.groupby("segment")["churn"]
+      .mean()
+)
+
+print(result)
+
+
+# Q39. New feature create karo.
+
+SCENARIO:
+Monthly revenue aur months active se total revenue estimate karna hai.
+
+CODE:
+
+df["total_revenue"] = (
+    df["monthly_revenue"] *
+    df["months_active"]
+)
+
+EXPLANATION:
+
+Feature engineering ka basic example.
+
+
+# Q40. Salary category create karo.
+
+CODE:
+
+df["salary_category"] = "Low"
+
+df.loc[
+    df["salary"] >= 80000,
+    "salary_category"
+] = "Medium"
+
+df.loc[
+    df["salary"] >= 120000,
+    "salary_category"
+] = "High"
+
+print(df)
+
+
+# Q41. np.where-style Pandas conditional feature.
+
+CODE:
+
+import numpy as np
+
+df["high_value_customer"] = np.where(
+    df["monthly_revenue"] >= 1000,
+    1,
+    0
+)
+
+EXPLANATION:
+
+Condition true → 1
+Condition false → 0
+
+
+# Q42. Two DataFrames ko customer_id se join karo.
+
+CODE:
+
+result = pd.merge(
+    customers,
+    transactions,
+    on="customer_id",
+    how="left"
+)
+
+print(result)
+
+EXPLANATION:
+
+merge() database-style joins perform karta hai.
+
+
+# Q43. Inner join kaise karoge?
+
+CODE:
+
+result = pd.merge(
+    customers,
+    transactions,
+    on="customer_id",
+    how="inner"
+)
+
+
+# Q44. Left join kab use karoge?
+
+SCENARIO:
+
+Customers table ke saare customers chahiye, chahe transaction ho ya na ho.
+
+CODE:
+
+result = pd.merge(
+    customers,
+    transactions,
+    on="customer_id",
+    how="left"
+)
+
+EXPLANATION:
+
+Left table ke all records preserve hote hain.
+
+
+# Q45. Do datasets vertically combine karo.
+
+CODE:
+
+combined = pd.concat(
+    [df1, df2],
+    ignore_index=True
+)
+
+EXPLANATION:
+
+Same columns wale datasets ko rows ke direction mein combine karna ho to concat useful hai.
+
+
+# Q46. Column names rename karo.
+
+CODE:
+
+df = df.rename(
+    columns={
+        "cust_id": "customer_id",
+        "rev": "revenue"
+    }
+)
+
+
+# Q47. String column lowercase karo.
+
+CODE:
+
+df["city"] = (
+    df["city"]
+    .str.lower()
+)
+
+
+# Q48. Extra spaces remove karo.
+
+CODE:
+
+df["city"] = (
+    df["city"]
+    .str.strip()
+)
+
+
+# Q49. Text mein keyword search karo.
+
+SCENARIO:
+Product description mein "phone" word find karna hai.
+
+CODE:
+
+result = df[
+    df["description"]
+    .str.contains(
+        "phone",
+        case=False,
+        na=False
+    )
+]
+
+print(result)
+
+
+# Q50. Date column convert karo.
+
+CODE:
+
+df["date"] = pd.to_datetime(
+    df["date"]
+)
+
+EXPLANATION:
+
+Date analysis ke liye datetime type important hai.
+
+
+# Q51. Year extract karo.
+
+CODE:
+
+df["year"] = df["date"].dt.year
+
+
+# Q52. Month extract karo.
+
+CODE:
+
+df["month"] = df["date"].dt.month
+
+
+# Q53. Day of week extract karo.
+
+CODE:
+
+df["day_name"] = (
+    df["date"].dt.day_name()
+)
+
+
+# Q54. Monthly sales calculate karo.
+
+CODE:
+
+monthly_sales = (
+    df.groupby(
+        df["date"].dt.to_period("M")
+    )["sales"]
+    .sum()
+)
+
+print(monthly_sales)
+
+
+# Q55. Running total calculate karo.
+
+CODE:
+
+df = df.sort_values("date")
+
+df["running_sales"] = (
+    df["sales"].cumsum()
+)
+
+EXPLANATION:
+
+cumsum() cumulative total calculate karta hai.
+
+
+# Q56. Previous month's revenue compare karo.
+
+CODE:
+
+df = df.sort_values("date")
+
+df["previous_sales"] = (
+    df["sales"].shift(1)
+)
+
+EXPLANATION:
+
+shift(1) previous row ki value laata hai.
+
+
+# Q57. Month-over-month growth calculate karo.
+
+CODE:
+
+df["growth"] = (
+    df["sales"].pct_change() * 100
+)
+
+EXPLANATION:
+
+pct_change() percentage change calculate karta hai.
+
+
+# Q58. Outlier salary identify karo using IQR.
+
+CODE:
+
+Q1 = df["salary"].quantile(0.25)
+Q3 = df["salary"].quantile(0.75)
+
+IQR = Q3 - Q1
+
+lower = Q1 - 1.5 * IQR
+upper = Q3 + 1.5 * IQR
+
+outliers = df[
+    (df["salary"] < lower) |
+    (df["salary"] > upper)
+]
+
+print(outliers)
+
+EXPLANATION:
+
+IQR method extreme observations identify karne ke liye commonly used technique hai.
+
+
+# Q59. Numeric columns automatically select karo.
+
+CODE:
+
+numeric_df = df.select_dtypes(
+    include="number"
+)
+
+print(numeric_df)
+
+
+# Q60. Complete basic EDA function banao.
+
+CODE:
+
+def basic_eda(df):
+
+    print("Shape:")
+    print(df.shape)
+
+    print("\nColumns:")
+    print(df.columns)
+
+    print("\nData Types:")
+    print(df.dtypes)
+
+    print("\nMissing Values:")
+    print(df.isnull().sum())
+
+    print("\nDuplicates:")
+    print(df.duplicated().sum())
+
+    print("\nStatistics:")
+    print(df.describe())
+
+basic_eda(df)
+
+EXPLANATION:
+
+Interview mein agar bola jaye:
+"How do you start exploring a new dataset?"
+
+Ye ek strong basic framework hai.
+
+
+============================================================
+PART B — NUMPY
+QUESTIONS 61–105
+============================================================
+
+
+# Q61. NumPy array create karo.
+
+CODE:
+
+import numpy as np
+
+arr = np.array(
+    [10, 20, 30, 40, 50]
+)
+
+print(arr)
+
+EXPLANATION:
+
+NumPy arrays numerical computation ke liye optimized multidimensional data structure provide karte hain. Vectorized operations loops ke comparison mein concise aur efficient hote hain.
+
+
+# Q62. Array ka shape check karo.
+
+CODE:
+
+print(arr.shape)
+
+
+# Q63. Array dimensions check karo.
+
+CODE:
+
+print(arr.ndim)
+
+
+# Q64. Array datatype check karo.
+
+CODE:
+
+print(arr.dtype)
+
+
+# Q65. Array size check karo.
+
+CODE:
+
+print(arr.size)
+
+
+# Q66. 0 se 9 tak numbers create karo.
+
+CODE:
+
+arr = np.arange(10)
+
+print(arr)
+
+
+# Q67. 1 se 100 tak numbers.
+
+CODE:
+
+arr = np.arange(
+    1,
+    101
+)
+
+print(arr)
+
+
+# Q68. Equal intervals generate karo.
+
+SCENARIO:
+
+0 se 1 ke beech 10 values chahiye.
+
+CODE:
+
+arr = np.linspace(
+    0,
+    1,
+    10
+)
+
+print(arr)
+
+
+# Q69. Zeros matrix create karo.
+
+CODE:
+
+arr = np.zeros(
+    (3, 4)
+)
+
+print(arr)
+
+
+# Q70. Ones matrix create karo.
+
+CODE:
+
+arr = np.ones(
+    (3, 4)
+)
+
+print(arr)
+
+
+# Q71. Random customer revenue generate karo.
+
+CODE:
+
+revenue = np.random.randint(
+    100,
+    1000,
+    100
+)
+
+print(revenue)
+
+
+# Q72. Random floating values generate karo.
+
+CODE:
+
+values = np.random.random(10)
+
+print(values)
+
+
+# Q73. Mean calculate karo.
+
+CODE:
+
+mean = np.mean(arr)
+
+print(mean)
+
+
+# Q74. Median calculate karo.
+
+CODE:
+
+median = np.median(arr)
+
+print(median)
+
+
+# Q75. Standard deviation calculate karo.
+
+CODE:
+
+std = np.std(arr)
+
+print(std)
+
+EXPLANATION:
+
+Standard deviation data spread measure karta hai.
+
+
+# Q76. Variance calculate karo.
+
+CODE:
+
+variance = np.var(arr)
+
+print(variance)
+
+
+# Q77. Minimum value.
+
+CODE:
+
+print(np.min(arr))
+
+
+# Q78. Maximum value.
+
+CODE:
+
+print(np.max(arr))
+
+
+# Q79. Minimum value ka index.
+
+CODE:
+
+index = np.argmin(arr)
+
+print(index)
+
+
+# Q80. Maximum value ka index.
+
+CODE:
+
+index = np.argmax(arr)
+
+print(index)
+
+
+# Q81. Customer age > 30 filter karo.
+
+CODE:
+
+ages = np.array(
+    [22, 35, 41, 28, 50]
+)
+
+result = ages[ages > 30]
+
+print(result)
+
+EXPLANATION:
+
+Ye NumPy boolean indexing hai.
+
+
+# Q82. Multiple conditions apply karo.
+
+CODE:
+
+result = ages[
+    (ages > 25) &
+    (ages < 45)
+]
+
+print(result)
+
+
+# Q83. Revenue ko 10% increase karo.
+
+CODE:
+
+revenue = np.array(
+    [100, 200, 300]
+)
+
+new_revenue = (
+    revenue * 1.10
+)
+
+print(new_revenue)
+
+
+# Q84. Vectorized calculation kya hota hai?
+
+CODE:
+
+salary = np.array(
+    [50000, 60000, 70000]
+)
+
+bonus = salary * 0.10
+
+print(bonus)
+
+EXPLANATION:
+
+Loop likhne ki zarurat nahi.
+Poore array par operation ek saath apply hota hai.
+
+
+# Q85. Do arrays add karo.
+
+CODE:
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+result = a + b
+
+print(result)
+
+
+# Q86. Element-wise multiplication.
+
+CODE:
+
+result = a * b
+
+print(result)
+
+
+# Q87. Matrix multiplication.
+
+CODE:
+
+A = np.array([
+    [1, 2],
+    [3, 4]
+])
+
+B = np.array([
+    [5, 6],
+    [7, 8]
+])
+
+result = A @ B
+
+print(result)
+
+
+# Q88. Matrix transpose.
+
+CODE:
+
+result = A.T
+
+print(result)
+
+
+# Q89. Array reshape karo.
+
+CODE:
+
+arr = np.arange(12)
+
+matrix = arr.reshape(
+    3,
+    4
+)
+
+print(matrix)
+
+
+# Q90. Flatten matrix.
+
+CODE:
+
+flat = matrix.flatten()
+
+print(flat)
+
+
+# Q91. Missing numerical values identify karo.
+
+CODE:
+
+arr = np.array([
+    10,
+    20,
+    np.nan,
+    40
+])
+
+print(np.isnan(arr))
+
+
+# Q92. NaN values count karo.
+
+CODE:
+
+count = np.isnan(arr).sum()
+
+print(count)
+
+
+# Q93. NaN ko mean se replace karo.
+
+CODE:
+
+mean_value = np.nanmean(arr)
+
+arr = np.where(
+    np.isnan(arr),
+    mean_value,
+    arr
+)
+
+print(arr)
+
+
+# Q94. NaN-safe mean.
+
+CODE:
+
+mean = np.nanmean(arr)
+
+print(mean)
+
+EXPLANATION:
+
+nanmean missing values ko ignore karta hai.
+
+
+# Q95. NaN-safe median.
+
+CODE:
+
+median = np.nanmedian(arr)
+
+print(median)
+
+
+# Q96. Percentile calculate karo.
+
+CODE:
+
+arr = np.array([
+    10, 20, 30, 40, 50
+])
+
+p90 = np.percentile(
+    arr,
+    90
+)
+
+print(p90)
+
+
+# Q97. 95th percentile revenue find karo.
+
+CODE:
+
+p95 = np.percentile(
+    revenue,
+    95
+)
+
+print(p95)
+
+EXPLANATION:
+
+Business mein P95:
+"95% observations is value ke below hain."
+
+
+# Q98. Outlier threshold calculate karo.
+
+CODE:
+
+Q1 = np.percentile(
+    revenue,
+    25
+)
+
+Q3 = np.percentile(
+    revenue,
+    75
+)
+
+IQR = Q3 - Q1
+
+lower = Q1 - 1.5 * IQR
+upper = Q3 + 1.5 * IQR
+
+print(lower)
+print(upper)
+
+
+# Q99. Outliers identify karo.
+
+CODE:
+
+outliers = revenue[
+    (revenue < lower) |
+    (revenue > upper)
+]
+
+print(outliers)
+
+
+# Q100. Data standardize karo.
+
+SCENARIO:
+
+ML model se pehle feature standardization.
+
+CODE:
+
+X = np.array([
+    10,
+    20,
+    30,
+    40,
+    50
+])
+
+X_scaled = (
+    (X - np.mean(X))
+    / np.std(X)
+)
+
+print(X_scaled)
+
+EXPLANATION:
+
+Formula:
+
+z = (x - mean) / std
+
+
+# Q101. Min-Max normalization.
+
+CODE:
+
+X = np.array([
+    10,
+    20,
+    30,
+    40,
+    50
+])
+
+X_min = np.min(X)
+X_max = np.max(X)
+
+X_scaled = (
+    (X - X_min)
+    / (X_max - X_min)
+)
+
+print(X_scaled)
+
+EXPLANATION:
+
+Result generally 0 aur 1 ke range mein hota hai.
+
+
+# Q102. Random train-test split manually.
+
+CODE:
+
+data = np.arange(100)
+
+np.random.shuffle(data)
+
+train = data[:80]
+test = data[80:]
+
+print(train)
+print(test)
+
+
+# Q103. Random seed kyun use karte hain?
+
+CODE:
+
+np.random.seed(42)
+
+values = np.random.rand(5)
+
+print(values)
+
+EXPLANATION:
+
+Seed same rakhne se random result reproducible hota hai.
+
+Interview answer:
+
+"Random seed ensures reproducibility."
+
+
+# Q104. Correlation calculate karo.
+
+CODE:
+
+x = np.array([
+    10, 20, 30, 40, 50
+])
+
+y = np.array([
+    20, 40, 60, 80, 100
+])
+
+corr = np.corrcoef(
+    x,
+    y
+)
+
+print(corr)
+
+EXPLANATION:
+
+Correlation relationship ki strength/direction ko measure karta hai.
+
+
+# Q105. Large dataset mein vectorization ka use kyun?
+
+CODE:
+
+arr = np.arange(
+    1_000_000
+)
+
+result = arr * 2
+
+print(result[:10])
+
+EXPLANATION:
+
+Loop-by-loop Python operation ke instead NumPy vectorized operation use kar raha hai.
+
+Real DS benefit:
+
+Large numerical datasets par efficient computation.
+
+============================================================
+PART C — SEABORN
+QUESTIONS 106–150
+============================================================
+
+
+# Q106. Seaborn import kaise karoge?
+
+CODE:
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+# Q107. Customer age distribution visualize karo.
+
+CODE:
+
+sns.histplot(
+    data=df,
+    x="age"
+)
+
+plt.show()
+
+EXPLANATION:
+
+Histogram numerical variable ki distribution dikhata hai.
+
+
+# Q108. Revenue distribution dekho.
+
+CODE:
+
+sns.histplot(
+    data=df,
+    x="revenue",
+    kde=True
+)
+
+plt.show()
+
+EXPLANATION:
+
+kde=True smooth distribution curve bhi show karta hai.
+
+
+# Q109. Churn distribution visualize karo.
+
+CODE:
+
+sns.countplot(
+    data=df,
+    x="churn"
+)
+
+plt.show()
+
+EXPLANATION:
+
+Countplot categorical values ke counts show karta hai.
+
+
+# Q110. Department-wise employee count.
+
+CODE:
+
+sns.countplot(
+    data=df,
+    x="department"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+
+# Q111. Department-wise salary distribution.
+
+CODE:
+
+sns.boxplot(
+    data=df,
+    x="department",
+    y="salary"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+EXPLANATION:
+
+Boxplot:
+- median
+- quartiles
+- spread
+- potential outliers
+
+show karne ke liye useful hai.
+
+
+# Q112. Salary outliers identify visually.
+
+CODE:
+
+sns.boxplot(
+    data=df,
+    y="salary"
+)
+
+plt.show()
+
+
+# Q113. Age vs salary relationship.
+
+CODE:
+
+sns.scatterplot(
+    data=df,
+    x="age",
+    y="salary"
+)
+
+plt.show()
+
+EXPLANATION:
+
+Scatterplot two numerical variables ke relationship ko visualize karta hai.
+
+
+# Q114. Revenue vs churn visualize karo.
+
+CODE:
+
+sns.boxplot(
+    data=df,
+    x="churn",
+    y="revenue"
+)
+
+plt.show()
+
+EXPLANATION:
+
+Compare kar sakte ho ki churned vs non-churned customers ki revenue distribution different hai ya nahi.
+
+
+# Q115. Tenure vs churn.
+
+CODE:
+
+sns.boxplot(
+    data=df,
+    x="churn",
+    y="tenure"
+)
+
+plt.show()
+
+
+# Q116. Department vs salary.
+
+CODE:
+
+sns.barplot(
+    data=df,
+    x="department",
+    y="salary"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+EXPLANATION:
+
+Barplot category-wise aggregated numerical value compare karta hai.
+
+
+# Q117. Gender-wise salary compare karo.
+
+CODE:
+
+sns.boxplot(
+    data=df,
+    x="gender",
+    y="salary"
+)
+
+plt.show()
+
+
+# Q118. City-wise revenue compare karo.
+
+CODE:
+
+sns.barplot(
+    data=df,
+    x="city",
+    y="revenue"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+
+# Q119. Correlation heatmap.
+
+CODE:
+
+numeric_df = df.select_dtypes(
+    include="number"
+)
+
+corr = numeric_df.corr()
+
+sns.heatmap(
+    corr,
+    annot=True
+)
+
+plt.show()
+
+EXPLANATION:
+
+Heatmap numerical variables ke pairwise correlation ko visually show karta hai.
+
+
+# Q120. Strongly correlated features find karo.
+
+CODE:
+
+corr = df.corr(
+    numeric_only=True
+)
+
+print(corr)
+
+EXPLANATION:
+
+ML mein highly correlated features identify karne ke liye useful.
+
+
+# Q121. Distribution by category.
+
+SCENARIO:
+
+Different departments ki salary distribution.
+
+CODE:
+
+sns.histplot(
+    data=df,
+    x="salary",
+    hue="department",
+    kde=True
+)
+
+plt.show()
+
+
+# Q122. Churn by gender.
+
+CODE:
+
+sns.countplot(
+    data=df,
+    x="gender",
+    hue="churn"
+)
+
+plt.show()
+
+EXPLANATION:
+
+Gender categories ke andar churned/non-churned counts compare kar sakte ho.
+
+
+# Q123. Churn by contract type.
+
+CODE:
+
+sns.countplot(
+    data=df,
+    x="contract_type",
+    hue="churn"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+
+# Q124. Monthly revenue distribution by churn.
+
+CODE:
+
+sns.histplot(
+    data=df,
+    x="monthly_revenue",
+    hue="churn",
+    kde=True
+)
+
+plt.show()
+
+
+# Q125. Customer tenure distribution.
+
+CODE:
+
+sns.histplot(
+    data=df,
+    x="tenure",
+    bins=20
+)
+
+plt.show()
+
+
+# Q126. Revenue vs tenure.
+
+CODE:
+
+sns.scatterplot(
+    data=df,
+    x="tenure",
+    y="revenue"
+)
+
+plt.show()
+
+
+# Q127. Revenue vs tenure with churn.
+
+CODE:
+
+sns.scatterplot(
+    data=df,
+    x="tenure",
+    y="revenue",
+    hue="churn"
+)
+
+plt.show()
+
+
+# Q128. Department-wise experience.
+
+CODE:
+
+sns.boxplot(
+    data=df,
+    x="department",
+    y="experience"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+
+# Q129. Top departments by average salary.
+
+CODE:
+
+summary = (
+    df.groupby("department")["salary"]
+      .mean()
+      .sort_values(
+          ascending=False
+      )
+      .reset_index()
+)
+
+sns.barplot(
+    data=summary,
+    x="department",
+    y="salary"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+
+# Q130. Missing values ka visual overview.
+
+CODE:
+
+missing = (
+    df.isnull()
+      .sum()
+      .sort_values(
+          ascending=False
+      )
+)
+
+missing = missing[
+    missing > 0
+]
+
+sns.barplot(
+    x=missing.values,
+    y=missing.index
+)
+
+plt.show()
+
+EXPLANATION:
+
+Kaunse columns mein missing data zyada hai, visually identify kar sakte ho.
+
+
+# Q131. Outlier detection using boxplot.
+
+CODE:
+
+sns.boxplot(
+    data=df,
+    x="salary"
+)
+
+plt.show()
+
+INTERVIEW:
+
+"Why boxplot?"
+
+ANSWER:
+
+"To identify distribution, median, quartiles and potential outliers."
+
+
+# Q132. Multiple numerical variables ka distribution.
+
+CODE:
+
+sns.pairplot(
+    df[
+        [
+            "age",
+            "salary",
+            "experience",
+            "revenue"
+        ]
+    ]
+)
+
+plt.show()
+
+EXPLANATION:
+
+Pairplot multiple variables ke relationships ek saath explore karne mein useful hai.
+
+
+# Q133. Pairplot with churn.
+
+CODE:
+
+sns.pairplot(
+    df[
+        [
+            "age",
+            "salary",
+            "experience",
+            "churn"
+        ]
+    ],
+    hue="churn"
+)
+
+plt.show()
+
+
+# Q134. Department-wise age distribution.
+
+CODE:
+
+sns.violinplot(
+    data=df,
+    x="department",
+    y="age"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+EXPLANATION:
+
+Violin plot distribution ka shape bhi show karta hai.
+
+
+# Q135. Salary distribution using violin plot.
+
+CODE:
+
+sns.violinplot(
+    data=df,
+    y="salary"
+)
+
+plt.show()
+
+
+# Q136. Category-wise count percentages.
+
+CODE:
+
+counts = (
+    df["department"]
+    .value_counts(
+        normalize=True
+    )
+    * 100
+)
+
+print(counts)
+
+
+# Q137. Count percentage visualize karo.
+
+CODE:
+
+summary = (
+    df["department"]
+    .value_counts()
+    .reset_index()
+)
+
+summary.columns = [
+    "department",
+    "count"
+]
+
+sns.barplot(
+    data=summary,
+    x="department",
+    y="count"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+
+# Q138. Monthly sales trend.
+
+CODE:
+
+monthly = (
+    df.groupby("month")["sales"]
+      .sum()
+      .reset_index()
+)
+
+sns.lineplot(
+    data=monthly,
+    x="month",
+    y="sales",
+    marker="o"
+)
+
+plt.show()
+
+EXPLANATION:
+
+Time-series trend identify karne ke liye line plot useful hai.
+
+
+# Q139. Daily revenue trend.
+
+CODE:
+
+daily = (
+    df.groupby("date")["revenue"]
+      .sum()
+      .reset_index()
+)
+
+sns.lineplot(
+    data=daily,
+    x="date",
+    y="revenue"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+
+# Q140. Sales by product category.
+
+CODE:
+
+summary = (
+    df.groupby("category")["sales"]
+      .sum()
+      .reset_index()
+)
+
+sns.barplot(
+    data=summary,
+    x="category",
+    y="sales"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+
+# Q141. Product category vs churn.
+
+CODE:
+
+sns.countplot(
+    data=df,
+    x="category",
+    hue="churn"
+)
+
+plt.xticks(rotation=45)
+
+plt.show()
+
+
+# Q142. Correlation heatmap with formatting.
+
+CODE:
+
+corr = df.corr(
+    numeric_only=True
+)
+
+sns.heatmap(
+    corr,
+    annot=True,
+    fmt=".2f",
+    cmap="coolwarm"
+)
+
+plt.show()
+
+EXPLANATION:
+
+fmt=".2f" correlation ko 2 decimal places mein show karta hai.
+
+
+# Q143. Strong correlation ka threshold identify karo.
+
+CODE:
+
+corr = df.corr(
+    numeric_only=True
+)
+
+strong_corr = corr[
+    abs(corr) > 0.7
+]
+
+print(strong_corr)
+
+EXPLANATION:
+
+Absolute correlation > 0.7 ko potential strong relationship ke candidate ke roop mein investigate kar sakte ho.
+
+Important:
+Correlation causation prove nahi karta.
+
+
+# Q144. Churn probability by contract.
+
+CODE:
+
+churn_rate = (
+    df.groupby(
+        "contract_type"
+    )["churn"]
+    .mean()
+    .reset_index()
+)
+
+sns.barplot(
+    data=churn_rate,
+    x="contract_type",
+    y="churn"
+)
+
+plt.show()
+
+EXPLANATION:
+
+0.30 means approximately 30% churn in that group.
+
+
+# Q145. High-value customers ka analysis.
+
+SCENARIO:
+
+Revenue > 1000 wale customers.
+
+CODE:
+
+high_value = df[
+    df["revenue"] > 1000
+]
+
+sns.histplot(
+    data=high_value,
+    x="revenue",
+    kde=True
+)
+
+plt.show()
+
+
+# Q146. Fraud transaction distribution.
+
+SCENARIO:
+
+fraud = 0/1.
+
+CODE:
+
+sns.countplot(
+    data=df,
+    x="fraud"
+)
+
+plt.show()
+
+EXPLANATION:
+
+Fraud dataset mein class imbalance visually identify kar sakte ho.
+
+
+# Q147. Fraud amount analysis.
+
+CODE:
+
+sns.boxplot(
+    data=df,
+    x="fraud",
+    y="transaction_amount"
+)
+
+plt.show()
+
+INTERVIEW INSIGHT:
+
+Agar fraud transactions ka amount distribution significantly different hai, transaction_amount useful predictive feature ho sakta hai.
+
+Lekin final decision statistical testing + ML evaluation se lena chahiye.
+
+
+# Q148. Complete EDA visualization.
+
+CODE:
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Distribution
+
+sns.histplot(
+    data=df,
+    x="age",
+    kde=True
+)
+
+plt.show()
+
+# Churn
+
+sns.countplot(
+    data=df,
+    x="churn"
+)
+
+plt.show()
+
+# Boxplot
+
+sns.boxplot(
+    data=df,
+    x="churn",
+    y="monthly_revenue"
+)
+
+plt.show()
+
+# Correlation
+
+corr = df.corr(
+    numeric_only=True
+)
+
+sns.heatmap(
+    corr,
+    annot=True
+)
+
+plt.show()
+
+EXPLANATION:
+
+Ye basic EDA sequence hai:
+
+Distribution
+→ Target distribution
+→ Outliers
+→ Correlation
+
+
+# Q149. Real Data Scientist EDA workflow.
+
+SCENARIO:
+
+Telecom customer churn dataset mila.
+
+CODE:
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# 1. Load
+
+df = pd.read_csv(
+    "telecom_customers.csv"
+)
+
+# 2. Understand
+
+print(df.shape)
+print(df.head())
+print(df.info())
+
+# 3. Missing values
+
+print(
+    df.isnull().sum()
+)
+
+# 4. Duplicate check
+
+print(
+    df.duplicated().sum()
+)
+
+# 5. Numerical summary
+
+print(
+    df.describe()
+)
+
+# 6. Target distribution
+
+print(
+    df["churn"].value_counts()
+)
+
+# 7. Churn rate
+
+print(
+    df["churn"].mean()
+)
+
+# 8. Revenue distribution
+
+sns.histplot(
+    data=df,
+    x="monthly_revenue",
+    kde=True
+)
+
+plt.show()
+
+# 9. Churn vs revenue
+
+sns.boxplot(
+    data=df,
+    x="churn",
+    y="monthly_revenue"
+)
+
+plt.show()
+
+# 10. Correlation
+
+corr = df.corr(
+    numeric_only=True
+)
+
+sns.heatmap(
+    corr,
+    annot=True
+)
+
+plt.show()
+
+
+# Q150. Complete Data Scientist scenario:
+# Pandas + NumPy + Seaborn ko ek project mein kaise combine karoge?
+
+SCENARIO:
+
+Telecom company wants to predict customer churn.
+
+DATA:
+
+customer_id
+age
+tenure
+monthly_revenue
+support_calls
+contract_type
+churn
+
+
+CODE:
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+# ==========================================
+# STEP 1 — LOAD DATA
+# ==========================================
+
+df = pd.read_csv(
+    "telecom_customers.csv"
+)
+
+
+# ==========================================
+# STEP 2 — BASIC DATA UNDERSTANDING
+# ==========================================
+
+print(df.shape)
+
+print(df.head())
+
+print(df.info())
+
+print(df.describe())
+
+
+# ==========================================
+# STEP 3 — MISSING VALUES
+# ==========================================
+
+print(
+    df.isnull().sum()
+)
+
+
+# ==========================================
+# STEP 4 — DUPLICATES
+# ==========================================
+
+print(
+    df.duplicated().sum()
+)
+
+df = df.drop_duplicates()
+
+
+# ==========================================
+# STEP 5 — NUMERIC MISSING VALUE
+# ==========================================
+
+df["monthly_revenue"] = (
+    df["monthly_revenue"]
+    .fillna(
+        df["monthly_revenue"].median()
+    )
+)
+
+
+# ==========================================
+# STEP 6 — CATEGORICAL MISSING VALUE
+# ==========================================
+
+df["contract_type"] = (
+    df["contract_type"]
+    .fillna(
+        df["contract_type"].mode()[0]
+    )
+)
+
+
+# ==========================================
+# STEP 7 — CHURN DISTRIBUTION
+# ==========================================
+
+print(
+    df["churn"].value_counts()
+)
+
+
+# ==========================================
+# STEP 8 — CHURN RATE
+# ==========================================
+
+churn_rate = (
+    df["churn"].mean() * 100
+)
+
+print(
+    "Churn Rate:",
+    churn_rate
+)
+
+
+# ==========================================
+# STEP 9 — NUMPY STATISTICS
+# ==========================================
+
+revenue = df[
+    "monthly_revenue"
+].to_numpy()
+
+print(
+    "Mean Revenue:",
+    np.mean(revenue)
+)
+
+print(
+    "Median Revenue:",
+    np.median(revenue)
+)
+
+print(
+    "Std Revenue:",
+    np.std(revenue)
+)
+
+print(
+    "P95 Revenue:",
+    np.percentile(
+        revenue,
+        95
+    )
+)
+
+
+# ==========================================
+# STEP 10 — OUTLIER DETECTION
+# ==========================================
+
+Q1 = np.percentile(
+    revenue,
+    25
+)
+
+Q3 = np.percentile(
+    revenue,
+    75
+)
+
+IQR = Q3 - Q1
+
+lower = Q1 - 1.5 * IQR
+
+upper = Q3 + 1.5 * IQR
+
+outliers = df[
+    (df["monthly_revenue"] < lower) |
+    (df["monthly_revenue"] > upper)
+]
+
+print(
+    "Outliers:",
+    len(outliers)
+)
+
+
+# ==========================================
+# STEP 11 — CHURN BY CONTRACT
+# ==========================================
+
+contract_churn = (
+    df.groupby(
+        "contract_type"
+    )["churn"]
+    .mean()
+    .reset_index()
+)
+
+print(contract_churn)
+
+
+# ==========================================
+# STEP 12 — VISUALIZE CONTRACT CHURN
+# ==========================================
+
+sns.barplot(
+    data=contract_churn,
+    x="contract_type",
+    y="churn"
+)
+
+plt.xticks(
+    rotation=45
+)
+
+plt.show()
+
+
+# ==========================================
+# STEP 13 — REVENUE DISTRIBUTION
+# ==========================================
+
+sns.histplot(
+    data=df,
+    x="monthly_revenue",
+    kde=True
+)
+
+plt.show()
+
+
+# ==========================================
+# STEP 14 — TENURE VS CHURN
+# ==========================================
+
+sns.boxplot(
+    data=df,
+    x="churn",
+    y="tenure"
+)
+
+plt.show()
+
+
+# ==========================================
+# STEP 15 — REVENUE VS CHURN
+# ==========================================
+
+sns.boxplot(
+    data=df,
+    x="churn",
+    y="monthly_revenue"
+)
+
+plt.show()
+
+
+# ==========================================
+# STEP 16 — CORRELATION
+# ==========================================
+
+corr = df.corr(
+    numeric_only=True
+)
+
+sns.heatmap(
+    corr,
+    annot=True,
+    fmt=".2f"
+)
+
+plt.show()
+
+
+# ==========================================
+# STEP 17 — FEATURE PREPARATION
+# ==========================================
+
+features = [
+    "age",
+    "tenure",
+    "monthly_revenue",
+    "support_calls"
+]
+
+X = df[features]
+
+y = df["churn"]
+
+
+# ==========================================
+# FINAL DATA
+# ==========================================
+
+print(
+    "Features:"
+)
+
+print(X.head())
+
+print(
+    "Target:"
+)
+
+print(y.head())
+
+
+============================================================
+FINAL DATA SCIENTIST MENTAL MODEL
+============================================================
+
+REAL DATA:
+
+CSV / SQL / API
+      ↓
+PANDAS
+      ↓
+Data Loading
+      ↓
+Data Cleaning
+      ↓
+Missing Values
+      ↓
+Duplicates
+      ↓
+Filtering
+      ↓
+GroupBy
+      ↓
+Merge / Join
+      ↓
+Feature Engineering
+      ↓
+NUMPY
+      ↓
+Numerical Computation
+      ↓
+Statistics
+      ↓
+Arrays
+      ↓
+Vectorization
+      ↓
+Outlier Detection
+      ↓
+Normalization
+      ↓
+SEABORN
+      ↓
+Distribution
+      ↓
+Relationship
+      ↓
+Outliers
+      ↓
+Correlation
+      ↓
+EDA
+      ↓
+FEATURES + TARGET
+      ↓
+MACHINE LEARNING
+      ↓
+MODEL EVALUATION
+      ↓
+DEPLOYMENT
+
+
+============================================================
+MOST IMPORTANT INTERVIEW QUESTIONS TO MASTER
+============================================================
+
+PANDAS:
+
+1. How do you handle missing values?
+2. How do you detect duplicates?
+3. Difference between loc and iloc?
+4. How does groupby work?
+5. How do you merge two DataFrames?
+6. Difference between merge and concat?
+7. How do you handle categorical data?
+8. How do you detect outliers?
+9. How do you calculate group-wise statistics?
+10. How do you perform feature engineering?
+11. How do you handle datetime data?
+12. How do you optimize Pandas memory?
+13. How do you handle large datasets?
+14. What is vectorization?
+15. How do you avoid apply() when possible?
+
+
+NUMPY:
+
+16. Difference between list and NumPy array?
+17. What is vectorization?
+18. What is broadcasting?
+19. reshape vs resize?
+20. flatten vs ravel?
+21. How do you handle NaN?
+22. How do you calculate percentiles?
+23. How do you calculate correlation?
+24. How do you standardize data?
+25. Why is NumPy faster for numerical operations?
+
+
+SEABORN:
+
+26. When do you use histogram?
+27. When do you use boxplot?
+28. When do you use scatterplot?
+29. When do you use countplot?
+30. When do you use barplot?
+31. When do you use violinplot?
+32. How do you create correlation heatmap?
+33. How do you visualize class imbalance?
+34. How do you visualize outliers?
+35. How do you visualize feature relationships?
+
+
+============================================================
+MOST IMPORTANT REAL DS SCENARIO
+============================================================
+
+INTERVIEWER:
+
+"You receive a 10-million-row telecom
+customer dataset. What will you do?"
+
+YOUR ANSWER:
+
+Step 1:
+Understand schema and business objective.
+
+Step 2:
+Load required columns instead of unnecessary columns.
+
+Step 3:
+Check datatype.
+
+Step 4:
+Check missing values.
+
+Step 5:
+Check duplicates.
+
+Step 6:
+Check target distribution.
+
+Step 7:
+Perform statistical EDA.
+
+Step 8:
+Use Pandas groupby for business insights.
+
+Step 9:
+Use NumPy for numerical/statistical operations.
+
+Step 10:
+Use Seaborn for visualization.
+
+Step 11:
+Detect outliers.
+
+Step 12:
+Perform feature engineering.
+
+Step 13:
+Check correlations.
+
+Step 14:
+Prepare X and y.
+
+Step 15:
+Split data into train/test.
+
+Step 16:
+Train ML models.
+
+Step 17:
+Evaluate using appropriate metrics.
+
+Step 18:
+Perform error analysis.
+
+Step 19:
+Deploy the model.
+
+Step 20:
+Monitor model/data drift.
+
+
+============================================================
+ONE-LINE MEMORY NOTES
+============================================================
+
+Pandas
+→ Data manipulation
+
+NumPy
+→ Numerical computation
+
+Seaborn
+→ Statistical visualization
+
+groupby()
+→ Group-wise analysis
+
+merge()
+→ SQL-style join
+
+concat()
+→ Combine DataFrames
+
+fillna()
+→ Missing values fill
+
+dropna()
+→ Missing rows/columns remove
+
+drop_duplicates()
+→ Duplicate records remove
+
+describe()
+→ Statistical summary
+
+value_counts()
+→ Category frequency
+
+isnull()
+→ Missing detection
+
+sort_values()
+→ Sorting
+
+loc
+→ Label-based selection
+
+iloc
+→ Position-based selection
+
+np.mean()
+→ Average
+
+np.median()
+→ Middle value
+
+np.std()
+→ Standard deviation
+
+np.percentile()
+→ Percentile
+
+np.where()
+→ Conditional vectorized operation
+
+np.isnan()
+→ NaN detection
+
+sns.histplot()
+→ Distribution
+
+sns.boxplot()
+→ Distribution + outliers
+
+sns.scatterplot()
+→ Relationship
+
+sns.countplot()
+→ Category counts
+
+sns.barplot()
+→ Category comparison
+
+sns.heatmap()
+→ Matrix/correlation visualization
+
+sns.pairplot()
+→ Multiple variable relationships
+
+============================================================
+END
+============================================================
