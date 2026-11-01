@@ -1,7 +1,6 @@
-============================================================
-# FASTAPI — 50 TECHNICAL INTERVIEW QUESTIONS + ANSWERS
-# FOR AI ENGINEER / GENAI ENGINEER / FDE
-# ============================================================
+==================================================================================================================================
+# FASTAPI — 50 TECHNICAL INTERVIEW QUESTIONS + ANSWERS FOR AI ENGINEER / GENAI ENGINEER / FDE
+# ================================================================================================================================
 
 
 # ============================================================
@@ -59,7 +58,7 @@
 # Path parameter URL ka required part hota hai.
 #
 # Example:
-# /students/10
+# app.get("/students/10")
 #
 # Yahan 10 path parameter hai.
 #
@@ -88,6 +87,11 @@
 # class User(BaseModel):
 #     name: str
 #     age: int
+
+@app.get("/student")
+def User_get("user": int):
+      name : str 
+      age  int
 #
 # Agar client age mein invalid value bhejta hai, Pydantic validation error generate kar sakta hai.
 # GenAI mein prompt, user_id, model_name, temperature etc validate karne ke liye useful hai.
@@ -148,8 +152,7 @@
 # Isse response validation aur serialization bhi improve hoti hai.
 #
 # Security benefit:
-# Database mein extra sensitive fields hone ke bawajood
-# response_model sirf required fields return kar sakta hai.
+# Database mein extra sensitive fields hone ke bawajood response_model sirf required fields return kar sakta hai.
 
 
 # ============================================================
@@ -310,8 +313,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # ANSWER:
 # CORS = Cross-Origin Resource Sharing.
 #
-# Agar frontend aur backend different origins par run kar rahe hain,
-# browser security policy ke wajah se request block ho sakti hai.
+# Agar frontend aur backend different origins par run kar rahe hain, browser security policy ke wajah se request block ho sakti hai.
 #
 # Example:
 #
@@ -368,11 +370,10 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 
 # ============================================================
 # 19. QUESTION:
-# API Key authentication kya hai?
+# API_Key authentication kya hai?
 #
 # ANSWER:
-# API key ek secret credential hota hai jo client ko identify/authenticate
-# karne ke liye use kiya ja sakta hai.
+# API key ek secret credential hota hai jo client ko identify/authenticate karne ke liye use kiya ja sakta hai.
 #
 # Internal AI services mein useful hai.
 #
@@ -389,8 +390,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # OAuth2PasswordBearer kya hai?
 #
 # ANSWER:
-# OAuth2PasswordBearer FastAPI ka security utility hai jo
-# Bearer token authentication flow mein token extract karne mein help karta hai.
+# OAuth2PasswordBearer FastAPI ka security utility hai jo Bearer token authentication flow mein token extract karne mein help karta hai.
 #
 # Example:
 #
@@ -408,8 +408,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # Rate limiting kya hai aur GenAI API mein kyun important hai?
 #
 # ANSWER:
-# Rate limiting ek client ko specific time period mein limited requests
-# allow karta hai.
+# Rate limiting ek client ko specific time period mein limited requests allow karta hai.
 #
 # Example:
 #
@@ -435,9 +434,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # @limiter.limit("5/minute")
 #
 # Iska matlab client limited number of requests per minute kar sakta hai.
-#
-# Production architecture mein distributed rate limiting ke liye
-# Redis jaise shared store ka use bhi consider kiya ja sakta hai.
+# Production architecture mein distributed rate limiting ke liye Redis jaise shared store ka use bhi consider kiya ja sakta hai.
 
 
 # ============================================================
@@ -456,8 +453,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # User ID
 # Required fields
 #
-# Isse malformed requests, resource abuse aur unnecessary processing
-# ko reduce kiya ja sakta hai.
+# Isse malformed requests, resource abuse aur unnecessary processing ko reduce kiya ja sakta hai.
 
 
 # ============================================================
@@ -465,8 +461,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # Global exception handler kya hai?
 #
 # ANSWER:
-# Global exception handler application-level errors ko centrally handle
-# karne ke liye use hota hai.
+# Global exception handler application-level errors ko centrally handle karne ke liye use hota hai.
 #
 # Benefit:
 # Har endpoint mein same try/except repeat nahi karna padta.
@@ -507,8 +502,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # BackgroundTasks kya hai?
 #
 # ANSWER:
-# FastAPI BackgroundTasks response return hone ke baad lightweight
-# background work execute karne ke liye use kiya ja sakta hai.
+# FastAPI BackgroundTasks response return hone ke baad lightweight background work execute karne ke liye use kiya ja sakta hai.
 #
 # Example:
 #
@@ -516,8 +510,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # Simple audit logging
 # Small analytics task
 #
-# Long-running GPU jobs ya heavy ML training ke liye BackgroundTasks
-# ideal solution nahi hai.
+# Long-running GPU jobs ya heavy ML training ke liye BackgroundTasks ideal solution nahi hai.
 # Uske liye proper job queue/worker architecture better hai.
 
 
@@ -555,8 +548,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 #
 # Server → Client
 #
-# Agar two-way real-time communication required ho,
-# WebSocket consider kiya ja sakta hai.
+# Agar two-way real-time communication required ho, WebSocket consider kiya ja sakta hai.
 
 
 # ============================================================
@@ -575,8 +567,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # Live agent interaction
 # Real-time dashboard
 #
-# Normal REST request-response ke comparison mein WebSocket
-# continuous communication ke liye useful hai.
+# Normal REST request-response ke comparison mein WebSocket continuous communication ke liye useful hai.
 
 
 # ============================================================
@@ -668,8 +659,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 #   ↓
 # Client
 #
-# FastAPI ko business/API layer aur LangChain ko AI orchestration
-# layer ke roop mein separate rakhna maintainability improve karta hai.
+# FastAPI ko business/API layer aur LangChain ko AI orchestration layer ke roop mein separate rakhna maintainability improve karta hai.
 
 
 # ============================================================
@@ -677,8 +667,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # FastAPI ko LlamaIndex ke saath kaise integrate karenge?
 #
 # ANSWER:
-# FastAPI request receive karega aur LlamaIndex retrieval/query
-# workflow ko invoke kar sakta hai.
+# FastAPI request receive karega aur LlamaIndex retrieval/query workflow ko invoke kar sakta hai.
 #
 # Flow:
 #
@@ -727,8 +716,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # Environment variables kyun use karte hain?
 #
 # ANSWER:
-# Sensitive configuration ko source code se separate rakhne ke liye
-# environment variables use karte hain.
+# Sensitive configuration ko source code se separate rakhne ke liye environment variables use karte hain.
 #
 # Examples:
 #
@@ -772,8 +760,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # Update
 # Delete
 #
-# Production mein database connection pooling, transactions,
-# indexes aur error handling important hain.
+# Production mein database connection pooling, transactions, indexes aur error handling important hain.
 
 
 # ============================================================
@@ -834,8 +821,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # Supabase response.data kya hota hai?
 #
 # ANSWER:
-# Supabase query execute karne ke baad response object mein
-# returned records commonly `response.data` mein milte hain.
+# Supabase query execute karne ke baad response object mein returned records commonly `response.data` mein milte hain.
 #
 # Example concept:
 #
@@ -967,8 +953,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 # Long-running AI jobs ko FastAPI request ke andar kyun nahi chalana chahiye?
 #
 # ANSWER:
-# Long-running tasks request ko unnecessarily open rakh sakte hain
-# aur server resources consume kar sakte hain.
+# Long-running tasks request ko unnecessarily open rakh sakte hain aur server resources consume kar sakte hain.
 #
 # Example:
 #
@@ -1008,8 +993,7 @@ FastAPI, pehle get_db() function ko call karo aur jo database client mile, mujhe
 #
 # Is analysis se bottleneck identify kar sakte hain.
 #
-# AI systems mein TTFT (Time To First Token) bhi important metric hai
-# jab streaming LLM response use kar rahe ho.
+# AI systems mein TTFT (Time To First Token) bhi important metric hai jab streaming LLM response use kar rahe ho.
 
 
 # ============================================================

@@ -1,0 +1,64 @@
+🤖 AI Agents ke Top 50 Concepts – Hinglish One-Line Explanation
+
+1. AI Agent Basics
+1. AI Agent – Aisa AI system jo goal samajhkar khud decisions leta hai aur tasks complete karta hai.
+2. Agentic AI – AI ka aisa approach jisme system sirf answers nahi deta, balki actions lekar goals achieve karta hai.
+3. Autonomy – Agent kitna kaam bina human help ke khud kar sakta hai.
+4. Environment – Wo digital ya physical world jahan agent operate karta hai.
+5. Perception – Agent ka environment se information collect aur understand karna.
+6. Action – Agent ka goal achieve karne ke liye koi step execute karna.
+7. Goal – Wo final objective jise achieve karne ke liye agent kaam karta hai.
+8. Task – Goal achieve karne ke liye kiya jane wala specific kaam.
+9. Observation – Environment se agent ko milne wala current information ya input.
+10. Feedback – Action ke baad milne wala result jisse agent apna performance improve karta hai.
+
+2. Agent Architecture
+11. Agent Architecture – Agent ke brain, memory, tools aur decision-making components ka overall structure.
+12. LLM (Large Language Model) – Agent ka reasoning aur language understanding karne wala AI model.
+13. Reasoning – Problem ko analyze karke logical next step decide karna.
+14. Planning – Goal achieve karne ke liye steps ka sequence banana.
+15. Task Decomposition – Ek bade task ko chhote manageable subtasks mein divide karna.
+16. Execution – Planned steps ko practically perform karna.
+17. State – Agent aur environment ki current situation ka representation.
+18. Policy – Rules ya strategy jo decide karti hai ki kis situation mein kya action lena hai.
+19. Decision Making – Available options mein se best action choose karna.
+20. Agent Loop – Observe → Think → Act → Feedback ka repeated cycle.
+
+3. Memory & Knowledge
+21. Short-Term Memory – Current conversation ya task ki temporary information store karna.
+22. Long-Term Memory – Important information ko future tasks ke liye remember karna.
+23. Episodic Memory – Past experiences aur completed tasks ki history store karna.
+24. Semantic Memory – Facts, concepts aur general knowledge ko store karna.
+25. Working Memory – Current task ke important information ko actively use karna.
+26. Context Window – Ek time par LLM jitna text aur information process kar sakta hai.
+27. RAG (Retrieval-Augmented Generation) – External documents se relevant information retrieve karke better answer generate karna.
+28. Knowledge Base – Agent ke use ke liye organized information ka collection.
+29. Embeddings – Text ya data ko numerical vectors mein convert karna taaki similarity search ho sake.
+30. Vector Database – Embeddings ko store aur similarity ke basis par retrieve karne wala database.
+
+4. Tools & Integration
+31. Tool Calling – Agent ka external tools ko invoke karke specific task perform karna.
+32. API Integration – Agent ko external software ya services ke saath connect karna.
+33. Function Calling – LLM ka structured arguments ke saath predefined function execute karne ka request dena.
+34. Web Search – Agent ka internet se latest ya relevant information find karna.
+35. Browser Automation – Agent ka browser mein websites navigate, click aur form fill karna.
+36. Computer Use – Agent ka screen, mouse aur keyboard ke through computer operate karna.
+37. Workflow Automation – Multiple repetitive steps ko automatically execute karna.
+38. Human-in-the-Loop – Important decisions ya actions mein human approval include karna.
+39. Guardrails – Agent ke behavior aur actions ko safe boundaries mein rakhne wale rules.
+40. Permissions – Agent ko kaunse data, tools aur actions access karne ki authority hai.
+
+5. Advanced AI Agent Concepts
+41. Multi-Agent System – Multiple AI agents milkar ek complex goal achieve karte hain.
+42. Agent Orchestration – Different agents aur tasks ko coordinate karne ka process.
+43. Role-Based Agents – Agents ko specific roles dena, jaise researcher, writer ya reviewer.
+44. Agent Communication – Agents ka messages aur information exchange karna.
+45. Parallel Execution – Multiple independent tasks ko simultaneously perform karna.
+46. Reflection – Agent ka apne previous output ko evaluate karke improve karna.
+47. Self-Correction – Error detect karke apni approach ya output ko correct karna.
+48. Evaluation – Agent ke accuracy, reliability aur task completion ko measure karna.
+49. Observability – Agent ke actions, decisions, errors aur execution history ko monitor karna.
+50. Agent Security – Agent ko unauthorized actions, malicious inputs aur data leaks se protect karna.
+
+
+Yaad rakhne ka formula: AI Agent = LLM + Instructions + Memory + Tools + Planning + Execution + Feedback.

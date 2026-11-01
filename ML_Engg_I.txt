@@ -1,514 +1,513 @@
-SENIOR ML ENGINEER: BASIC TO ADVANCED
-200 IMPORTANT POINTS IN HINGLISH
+SENIOR ML ENGINEER: BASIC TO ADVANCED 200 IMPORTANT POINTS
 
 ==============================
 SECTION 1: ML FUNDAMENTALS
 ==============================
 
 1. Machine Learning (ML):
-ML mein machine data se patterns learn karke predictions ya decisions leti hai.
+In ML, a machine learns patterns from data to make predictions or decisions.
 
 2. AI vs ML vs Deep Learning:
-AI broad field hai, ML AI ka subset hai aur Deep Learning ML ka subset hai jo neural networks use karta hai.
+AI is the broad field, ML is a subset of AI, and Deep Learning is a subset of ML that uses neural networks.
 
-3. Supervised Learning:
-Labeled data se model train karna, jaise house price prediction.
+3. Supervised ML Learning:
+Training a model on labeled data, such as house price prediction.
 
 4. Unsupervised Learning:
-Unlabeled data mein patterns aur groups find karna, jaise customer segmentation.
+Finding patterns and groups in unlabeled data, such as customer segmentation.
 
 5. Reinforcement Learning:
-Agent environment se actions, rewards aur feedback ke through learn karta hai.
+An agent learns through actions, rewards and feedback from an environment.
 
 6. Classification:
-Discrete class predict karna, jaise fraud ya not fraud.
+Predicting a discrete class, such as fraud or not fraud.
 
 7. Regression:
-Continuous numerical value predict karna, jaise sales ya house price.
+Predicting a continuous numerical value, such as sales or house price.
 
 8. Train, Validation, Test Split:
-Training model learn karta hai, validation tuning ke liye aur test final evaluation ke liye hota hai.
+The model learns on the training set, the validation set is used for tuning, and the test set is used for final evaluation.
 
 9. Overfitting:
-Model training data ko bahut closely learn karta hai aur unseen data par poor perform karta hai.
+The model learns the training data too closely and performs poorly on unseen data.
 
 10. Underfitting:
-Model data ke important patterns bhi learn nahi kar pata.
+The model fails to learn even the important patterns in the data.
 
 11. Bias-Variance Tradeoff:
-Bias simple assumptions ki error hai aur variance training data changes ke prati model ki sensitivity hai.
+Bias is error from overly simple assumptions; variance is the model's sensitivity to changes in the training data.
 
 12. Generalization:
-Unseen real-world data par model ka achha perform karna.
+The model performing well on unseen real-world data.
 
 13. Features:
-Input variables jinse model prediction karta hai, jaise age, income aur transaction amount.
+Input variables the model uses to predict, such as age, income and transaction amount.
 
 14. Labels/Targets:
-Woh output jise model predict karna seekhta hai.
+The output the model learns to predict.
 
 15. Baseline Model:
-Simple reference model jiske against advanced models ki performance compare hoti hai.
+A simple reference model against which the performance of advanced models is compared.
 
 16. Parametric vs Non-parametric:
-Parametric models fixed-form parameters use karte hain; non-parametric models ki effective complexity data ke saath badal sakti hai.
+Parametric models use a fixed form with a fixed set of parameters; the effective complexity of non-parametric models can grow with the data.
 
 17. Batch Learning:
-Collected dataset par model train karna, generally scheduled process mein.
+Training a model on a collected dataset, generally as a scheduled process.
 
 18. Online Learning:
-Incoming data ke saath model ko incrementally update karna.
+Updating the model incrementally as new data arrives.
 
 19. Transfer Learning:
-Pretrained model ki learned representations ko naye task mein reuse karna.
+Reusing the learned representations of a pretrained model for a new task.
 
 20. Reproducibility:
-Same code, data version, configuration aur environment se results reproduce kar pana.
+Being able to reproduce results with the same code, data version, configuration and environment.
 
 ==============================
 SECTION 2: STATISTICS & MATHEMATICS
 ==============================
 
 21. Mean, Median, Mode:
-Mean average hai, median middle value hai aur mode most frequent value hai.
+Mean is the average, median is the middle value, and mode is the most frequent value.
 
 22. Variance:
-Data points mean se kitne spread hain, uska squared-deviation based measure.
+A squared-deviation-based measure of how spread out data points are from the mean.
 
 23. Standard Deviation:
-Variance ka square root, jo data ka spread original units mein batata hai.
+The square root of variance; it shows the spread of the data in the original units.
 
 24. Probability:
-Kisi event ke hone ki likelihood, 0 se 1 ke beech.
+The likelihood of an event occurring, between 0 and 1.
 
 25. Conditional Probability:
-Kisi event ki probability jab doosra event already known ho.
+The probability of an event given that another event is already known to have occurred.
 
 26. Bayes' Theorem:
-New evidence milne par probability update karne ka mathematical rule.
+The mathematical rule for updating probability when new evidence arrives.
 
 27. Normal Distribution:
-Bell-shaped aur symmetric distribution jo mean ke around hoti hai.
+A bell-shaped, symmetric distribution centered around the mean.
 
 28. Skewness:
-Distribution ki asymmetry measure karta hai.
+Measures the asymmetry of a distribution.
 
 29. Correlation:
-Do variables ke relationship ki strength aur direction measure karta hai; correlation causation nahi hai.
+Measures the strength and direction of the relationship between two variables; correlation is not causation.
 
 30. Covariance:
-Do variables ek saath kaise vary karte hain, uska measure.
+A measure of how two variables vary together.
 
 31. Hypothesis Testing:
-Data aur statistical assumptions ke basis par kisi claim ko evaluate karna.
+Evaluating a claim based on data and statistical assumptions.
 
 32. P-value:
-Null hypothesis true maan kar observed ya usse zyada extreme result ki probability.
+The probability of observing a result as extreme as, or more extreme than, the one seen, assuming the null hypothesis is true.
 
 33. Confidence Interval:
-Repeated sampling ke framework mein specified coverage wala parameter-estimation interval.
+A parameter-estimation interval with a specified coverage level, in a repeated-sampling framework.
 
 34. Central Limit Theorem:
-Conditions ke under sample mean ki sampling distribution sample size badhne par approximately normal ho sakti hai.
+Under certain conditions, the sampling distribution of the sample mean becomes approximately normal as the sample size grows.
 
 35. Maximum Likelihood Estimation:
-Woh parameters estimate karna jo observed data ko maximum likelihood dete hain.
+Estimating the parameters that give the observed data the highest likelihood.
 
 36. Gradient:
-Function kis direction mein sabse tezi se increase hota hai, uska vector.
+The vector pointing in the direction in which a function increases fastest.
 
 37. Gradient Descent:
-Loss reduce karne ke liye parameters ko negative gradient direction mein update karna.
+Updating parameters in the direction of the negative gradient to reduce the loss.
 
 38. Partial Derivative:
-Multiple-variable function mein ek variable ke respect mein rate of change.
+The rate of change with respect to one variable in a multi-variable function.
 
 39. Matrix and Tensor:
-Matrix 2D numerical structure hai; tensor multidimensional numerical structure hai.
+A matrix is a 2D numerical structure; a tensor is a multidimensional numerical structure.
 
 40. Eigenvalues and Eigenvectors:
-Linear transformations ke important directions aur PCA jaise algorithms ko samajhne mein useful hain.
+They capture the important directions of linear transformations and help in understanding algorithms such as PCA.
 
 ==============================
 SECTION 3: DATA CLEANING & FEATURES
 ==============================
 
 41. Missing Values:
-Deletion, median/mode imputation, model-based imputation ya missing indicators use kar sakte hain.
+You can use deletion, median/mode imputation, model-based imputation, or missing-value indicators.
 
 42. Duplicate Records:
-Business keys aur data rules ke basis par duplicates identify karke remove karein.
+Identify and remove duplicates based on business keys and data rules.
 
 43. Outliers:
-Aise observations jo data ke overall pattern se kaafi different hote hain.
+Observations that differ greatly from the overall pattern of the data.
 
 44. Outlier Handling:
-Data errors verify karein; valid extreme values ko blindly delete na karein. Robust models ya transformations consider karein.
+Verify whether they are data errors; do not blindly delete valid extreme values. Consider robust models or transformations.
 
 45. Standardization:
-Feature ko generally zero mean aur unit standard deviation par transform karna.
+Transforming a feature to generally have zero mean and unit standard deviation.
 
 46. Normalization:
-Feature values ko specified scale, jaise 0 se 1, mein transform karna.
+Transforming feature values to a specified scale, such as 0 to 1.
 
 47. Label Encoding:
-Categories ko numerical codes assign karna.
+Assigning numerical codes to categories.
 
 48. One-Hot Encoding:
-Har category ke liye separate binary indicator banana.
+Creating a separate binary indicator for each category.
 
 49. Target Encoding:
-Categories ko target statistics se encode karna; leakage avoid karne ke liye out-of-fold strategy use karein.
+Encoding categories using target statistics; use an out-of-fold strategy to avoid leakage.
 
 50. Feature Selection:
-Useful features choose karke noise aur unnecessary complexity reduce karna.
+Choosing useful features to reduce noise and unnecessary complexity.
 
 51. Feature Extraction:
-Existing inputs se naye useful features ya representations banana.
+Creating new useful features or representations from existing inputs.
 
 52. Multicollinearity:
-Features ka ek-doosre ke saath strong linear relationship.
+A strong linear relationship between features.
 
 53. VIF:
-Variance Inflation Factor regression mein multicollinearity assess karne ka measure hai.
+Variance Inflation Factor is a measure used to assess multicollinearity in regression.
 
 54. Data Leakage:
-Training mein aisi information use hona jo prediction time par available nahi hoti.
+Using information in training that will not be available at prediction time.
 
 55. Leakage Prevention:
-Pehle split karein; preprocessing aur feature selection sirf training data par fit karein.
+Split first; fit preprocessing and feature selection on the training data only.
 
 56. Data Drift:
-Time ke saath incoming input data ki distribution change hona.
+The distribution of incoming input data changing over time.
 
 57. Concept Drift:
-Input aur target ke relationship mein time ke saath change hona.
+The relationship between inputs and the target changing over time.
 
 58. Class Imbalance:
-Jab ek class ke examples doosri class se bahut zyada hote hain.
+When one class has far more examples than another.
 
 59. SMOTE:
-Minority class ke synthetic examples banata hai; sirf training folds par apply karein.
+Creates synthetic examples of the minority class; apply it on training folds only.
 
 60. Feature Store:
-Features ko consistently define, manage, serve aur reuse karne ka system.
+A system to consistently define, manage, serve and reuse features.
 
 ==============================
 SECTION 4: CORE ML ALGORITHMS
 ==============================
 
 61. Linear Regression:
-Continuous target ko linear relationship ke through predict karta hai.
+Predicts a continuous target through a linear relationship.
 
 62. Logistic Regression:
-Classification ke liye use hota hai aur probabilities estimate kar sakta hai.
+Used for classification and can estimate probabilities.
 
 63. Decision Tree:
-Feature-based conditions se data split karke prediction karta hai.
+Makes predictions by splitting data using feature-based conditions.
 
 64. Random Forest:
-Multiple randomized decision trees ko combine karke prediction aur variance control improve karta hai.
+Combines multiple randomized decision trees to improve predictions and control variance.
 
 65. Bagging:
-Bootstrap samples par models train karke predictions aggregate karna.
+Training models on bootstrap samples and aggregating their predictions.
 
 66. Boosting:
-Sequentially models build karna jahan later models previous errors improve karne ki koshish karte hain.
+Building models sequentially, where later models try to correct the errors of earlier ones.
 
 67. XGBoost:
-Regularization aur efficient tree boosting support karne wali popular library.
+A popular library that supports regularization and efficient tree boosting.
 
 68. LightGBM:
-Efficient gradient boosting framework jo large tabular datasets par useful ho sakta hai.
+An efficient gradient boosting framework that can be useful on large tabular datasets.
 
 69. CatBoost:
-Gradient boosting library jo categorical features ko conveniently handle kar sakti hai.
+A gradient boosting library that can handle categorical features conveniently.
 
 70. SVM:
-Support Vector Machine decision boundary ya margin maximize karke classification aur regression solve kar sakti hai.
+A Support Vector Machine can solve classification and regression by maximizing the decision boundary or margin.
 
 71. KNN:
-Nearby training examples ke basis par prediction karne wala algorithm.
+An algorithm that predicts based on nearby training examples.
 
 72. K-Means:
-Data ko K clusters mein partition karta hai.
+Partitions data into K clusters.
 
 73. DBSCAN:
-Density ke basis par clusters identify karta hai aur noise points separate kar sakta hai.
+Identifies clusters based on density and can separate out noise points.
 
 74. Hierarchical Clustering:
-Clusters ko progressively merge ya split karke hierarchy create karna.
+Creating a hierarchy by progressively merging or splitting clusters.
 
 75. PCA:
-Principal Component Analysis high-dimensional data ko lower-dimensional representation mein transform karta hai.
+Principal Component Analysis transforms high-dimensional data into a lower-dimensional representation.
 
 76. Naive Bayes:
-Bayes' theorem par based probabilistic classifier jo conditional independence assumption use karta hai.
+A probabilistic classifier based on Bayes' theorem that uses a conditional independence assumption.
 
 77. Random Forest vs Boosting:
-Random Forest trees ko largely independently train karta hai; boosting trees ko sequentially add karta hai.
+Random Forest trains trees largely independently; boosting adds trees sequentially.
 
 78. Regularization:
-Model complexity control karne ke liye objective function mein penalty add karna.
+Adding a penalty to the objective function to control model complexity.
 
 79. L1 vs L2:
-L1 absolute coefficients penalize karke sparsity create kar sakta hai; L2 squared coefficients penalize karta hai.
+L1 penalizes absolute coefficients and can create sparsity; L2 penalizes squared coefficients.
 
 80. Algorithm Selection:
-Dataset, latency, interpretability, compute budget aur validation performance ke basis par choose karein.
+Choose based on the dataset, latency, interpretability, compute budget and validation performance.
 
 ==============================
 SECTION 5: MODEL EVALUATION
 ==============================
 
 81. Confusion Matrix:
-Classification results ko TP, TN, FP aur FN mein summarize karti hai.
+Summarizes classification results into TP, TN, FP and FN.
 
 82. Accuracy:
 Correct predictions / Total predictions.
 
 83. Precision:
-TP / (TP + FP). Predicted positive cases mein kitne correct the.
+TP / (TP + FP). Of the predicted positive cases, how many were correct.
 
 84. Recall:
-TP / (TP + FN). Actual positive cases mein kitne identify hue.
+TP / (TP + FN). Of the actual positive cases, how many were identified.
 
 85. F1-Score:
-Precision aur recall ka harmonic mean.
+The harmonic mean of precision and recall.
 
 86. Specificity:
-TN / (TN + FP). Actual negative cases mein kitne correctly identify hue.
+TN / (TN + FP). Of the actual negative cases, how many were correctly identified.
 
 87. ROC-AUC:
-Thresholds ke across ranking performance measure karta hai.
+Measures ranking performance across thresholds.
 
 88. PR-AUC:
-Precision-Recall curve ke area se positive-class retrieval performance assess hoti hai.
+The area under the Precision-Recall curve assesses positive-class retrieval performance.
 
 89. MAE:
-Actual aur predicted values ke absolute errors ka average.
+The average of the absolute errors between actual and predicted values.
 
 90. MSE:
-Prediction errors ke squares ka average.
+The average of the squared prediction errors.
 
 91. RMSE:
-MSE ka square root; error original target units mein hota hai.
+The square root of MSE; the error is in the original target units.
 
 92. R-squared:
-Regression mein mean-baseline ke comparison mein explained variation ka measure.
+A measure of explained variation in regression compared with the mean baseline.
 
 93. Cross-Validation:
-Multiple folds par model train aur evaluate karke stability assess karna.
+Assessing stability by training and evaluating the model on multiple folds.
 
 94. Stratified K-Fold:
-Har fold mein class proportions approximately preserve karta hai.
+Approximately preserves class proportions in each fold.
 
 95. Time Series Validation:
-Chronological split aur rolling windows use karein; future data training mein leak nahi hona chahiye.
+Use chronological splits and rolling windows; future data must not leak into training.
 
 96. Hyperparameter Tuning:
-Validation performance ke basis par model settings optimize karna.
+Optimizing model settings based on validation performance.
 
 97. Grid Search vs Random Search:
-Grid Search specified combinations test karta hai; Random Search combinations sample karta hai.
+Grid Search tests specified combinations; Random Search samples combinations.
 
 98. Bayesian Optimization:
-Previous trials ke results se promising hyperparameter configurations choose karna.
+Choosing promising hyperparameter configurations based on the results of previous trials.
 
 99. A/B Testing:
-Controlled variants compare karke real-world impact evaluate karna.
+Evaluating real-world impact by comparing controlled variants.
 
 100. Statistical vs Business Significance:
-Statistical significance uncertainty ko address karti hai; business significance actual impact aur cost ko.
+Statistical significance addresses uncertainty; business significance addresses actual impact and cost.
 
 ==============================
 SECTION 6: DEEP LEARNING
 ==============================
 
 101. Neural Network:
-Layers of interconnected units se bana model jo complex patterns learn karta hai.
+A model made of layers of interconnected units that learns complex patterns.
 
 102. Neuron:
-Inputs ka weighted combination aur activation function apply karke output generate karta hai.
+Generates an output by taking a weighted combination of inputs and applying an activation function.
 
 103. Activation Function:
-Network mein non-linearity introduce karti hai; examples ReLU, sigmoid aur tanh.
+Introduces non-linearity into the network; examples are ReLU, sigmoid and tanh.
 
 104. ReLU:
-f(x) = max(0, x). Positive values preserve aur negative values zero karta hai.
+f(x) = max(0, x). It preserves positive values and sets negative values to zero.
 
 105. Sigmoid:
-Input ko 0 se 1 ke beech map karta hai.
+Maps the input to a value between 0 and 1.
 
 106. Softmax:
-Logits ko normalized class probabilities mein convert karta hai.
+Converts logits into normalized class probabilities.
 
 107. Forward Propagation:
-Inputs se layers ke through output calculate karna.
+Calculating the output from the inputs through the layers.
 
 108. Backpropagation:
-Chain rule se loss gradients calculate karna.
+Calculating loss gradients using the chain rule.
 
 109. Epoch:
-Training dataset ka ek complete pass.
+One complete pass over the training dataset.
 
 110. Batch Size:
-Ek parameter update se pehle process kiye jaane wale examples ki count.
+The number of examples processed before one parameter update.
 
 111. Learning Rate:
-Optimizer ke parameter updates ka step size control karta hai.
+Controls the step size of the optimizer's parameter updates.
 
 112. Adam Optimizer:
-First aur second gradient moments estimate karke adaptive updates karta hai.
+Makes adaptive updates by estimating the first and second moments of the gradients.
 
 113. Vanishing Gradient:
-Gradients bahut small ho jaate hain aur early layers slow learn karti hain.
+Gradients become very small and the early layers learn slowly.
 
 114. Exploding Gradient:
-Gradients bahut large ho jaate hain aur training unstable ho sakti hai.
+Gradients become very large and training can become unstable.
 
 115. Dropout:
-Training mein randomly kuch activations disable karke regularization apply karta hai.
+Applies regularization by randomly disabling some activations during training.
 
 116. Batch Normalization:
-Mini-batch activations ko normalize aur learnable parameters se transform karta hai.
+Normalizes mini-batch activations and transforms them with learnable parameters.
 
 117. CNN:
-Convolutional Neural Network images aur spatial patterns ke liye useful hai.
+A Convolutional Neural Network is useful for images and spatial patterns.
 
 118. RNN:
-Recurrent Neural Network sequential inputs ko hidden state ke through process karta hai.
+A Recurrent Neural Network processes sequential inputs through a hidden state.
 
 119. LSTM and GRU:
-Gated recurrent architectures jo sequence information manage karne mein help karti hain.
+Gated recurrent architectures that help manage sequence information.
 
 120. Transformer:
-Attention-based architecture jo sequence elements ke beech relationships model karti hai.
+An attention-based architecture that models relationships between sequence elements.
 
 ==============================
 SECTION 7: MLOPS & DEPLOYMENT
 ==============================
 
 121. MLOps:
-ML development, deployment, monitoring aur lifecycle management ko reliable banane ki practices.
+Practices that make ML development, deployment, monitoring and lifecycle management reliable.
 
 122. ML Pipeline:
-Data ingestion se preprocessing, training, evaluation aur deployment tak automated workflow.
+An automated workflow from data ingestion through preprocessing, training, evaluation and deployment.
 
 123. CI/CD:
-Continuous Integration aur Continuous Delivery/Deployment software changes ko test aur release karte hain.
+Continuous Integration and Continuous Delivery/Deployment test and release software changes.
 
 124. Data Versioning:
-Datasets aur snapshots ko track karna taaki experiments reproduce ho sakein.
+Tracking datasets and snapshots so that experiments can be reproduced.
 
 125. Model Versioning:
-Model artifacts, configurations aur metadata ke versions track karna.
+Tracking versions of model artifacts, configurations and metadata.
 
 126. MLflow:
-Experiments, metrics, parameters aur model artifacts track karne ka platform.
+A platform for tracking experiments, metrics, parameters and model artifacts.
 
 127. Model Registry:
-Model versions, metadata, approval aur deployment lifecycle manage karta hai.
+Manages model versions, metadata, approval and the deployment lifecycle.
 
 128. Docker:
-Application aur dependencies ko container image mein package karta hai.
+Packages an application and its dependencies into a container image.
 
 129. Kubernetes:
-Containerized applications ko deploy, scale aur manage karta hai.
+Deploys, scales and manages containerized applications.
 
 130. FastAPI:
-Trained ML model ko REST API ke through serve karne ke liye useful framework.
+A framework useful for serving a trained ML model through a REST API.
 
 131. Batch Inference:
-Bahut saare records par scheduled ya grouped predictions run karna.
+Running scheduled or grouped predictions on many records.
 
 132. Real-Time Inference:
-Request aane par prediction generate karna.
+Generating a prediction when a request arrives.
 
 133. Model Serialization:
-Trained model ko save karna taaki supported environment mein reload ho sake.
+Saving a trained model so it can be reloaded in a supported environment.
 
 134. Canary Deployment:
-New model ko initially limited traffic dekar evaluate karna.
+Evaluating a new model by initially giving it limited traffic.
 
 135. Blue-Green Deployment:
-Do environments maintain karke traffic ko old version se new version par switch karna.
+Maintaining two environments and switching traffic from the old version to the new one.
 
 136. Shadow Deployment:
-Production inputs ko new model par test karna bina uske outputs ko user-facing decisions banaye.
+Testing a new model on production inputs without using its outputs for user-facing decisions.
 
 137. Rollback:
-Issue hone par previous stable version restore karna.
+Restoring the previous stable version when an issue occurs.
 
 138. Training-Serving Skew:
-Training aur serving mein features ki computation ya representation inconsistent hona.
+Inconsistency in how features are computed or represented between training and serving.
 
 139. Model Monitoring:
-Latency, errors, input drift, prediction quality aur operational metrics track karna.
+Tracking latency, errors, input drift, prediction quality and operational metrics.
 
 140. Model Retraining:
-Performance degradation, meaningful drift, new labeled data ya scheduled requirements ke basis par retrain karna.
+Retraining based on performance degradation, meaningful drift, new labeled data or scheduled requirements.
 
 ==============================
 SECTION 8: ML SYSTEM DESIGN
 ==============================
 
 141. System Design First Step:
-Business problem, users, prediction target aur measurable success criteria define karein.
+Define the business problem, users, prediction target and measurable success criteria.
 
 142. Functional vs Non-Functional Requirements:
-Functional requirements batati hain system kya karega; non-functional requirements latency, security aur scalability define karti hain.
+Functional requirements state what the system will do; non-functional requirements define latency, security and scalability.
 
 143. Training vs Serving:
-Training pipeline model build karti hai; serving system model load karke predictions return karta hai.
+The training pipeline builds the model; the serving system loads the model and returns predictions.
 
 144. Data Ingestion:
-APIs, databases, files ya streams se validated data pipeline mein lana.
+Bringing validated data into the pipeline from APIs, databases, files or streams.
 
 145. Data Validation:
-Schema, types, missingness aur business constraints check karna.
+Checking schema, types, missingness and business constraints.
 
 146. Offline vs Online Features:
-Offline features training/batch processing ke liye aur online features low-latency predictions ke liye use hote hain.
+Offline features are used for training/batch processing; online features are used for low-latency predictions.
 
 147. Synchronous vs Asynchronous Inference:
-Synchronous request response ka wait karti hai; asynchronous processing background workflow ya queue se ho sakti hai.
+Synchronous requests wait for the response; asynchronous processing can happen through a background workflow or queue.
 
 148. Message Queue:
-Requests buffer karna, producers-consumers decouple karna aur traffic spikes manage karna.
+Buffers requests, decouples producers and consumers, and manages traffic spikes.
 
 149. Caching:
-Repeated computations ya results reuse karke latency aur compute cost reduce karna.
+Reusing repeated computations or results to reduce latency and compute cost.
 
 150. Horizontal vs Vertical Scaling:
-Horizontal scaling instances add karta hai; vertical scaling machine resources increase karta hai.
+Horizontal scaling adds instances; vertical scaling increases machine resources.
 
 151. Autoscaling:
-Traffic, queue depth ya resource utilization ke basis par capacity automatically adjust karna.
+Automatically adjusting capacity based on traffic, queue depth or resource utilization.
 
 152. Load Balancer:
-Incoming traffic ko multiple healthy instances mein distribute karna.
+Distributes incoming traffic across multiple healthy instances.
 
 153. Rate Limiting:
-Client ya user ke requests ko defined time window mein restrict karna.
+Restricting a client's or user's requests within a defined time window.
 
 154. Circuit Breaker:
-Repeated failures ke baad dependency calls temporarily stop karke cascading failures reduce karna.
+Temporarily stops calls to a dependency after repeated failures to reduce cascading failures.
 
 155. Retry and Timeout:
-Bounded timeouts, limited retries aur exponential backoff with jitter use karein.
+Use bounded timeouts, limited retries and exponential backoff with jitter.
 
 156. Idempotency:
-Same operation repeat hone par unintended duplicate side effects nahi hone chahiye.
+Repeating the same operation should not cause unintended duplicate side effects.
 
 157. High Availability:
-Redundancy, health checks, failure isolation aur recovery procedures implement karna.
+Implementing redundancy, health checks, failure isolation and recovery procedures.
 
 158. Disaster Recovery:
-Failure ke baad service aur data restore karna; RTO aur RPO define karna.
+Restoring service and data after a failure; define RTO and RPO.
 
 159. SLO, SLA and SLI:
-SLI actual service metric hai, SLO target hai aur SLA formal service commitment hai.
+An SLI is the actual service metric, an SLO is the target, and an SLA is a formal service commitment.
 
 160. End-to-End ML Architecture:
 Data Sources -> Validation -> Feature Pipeline -> Training -> Evaluation -> Registry -> Deployment -> Monitoring -> Retraining.
@@ -518,125 +517,125 @@ SECTION 9: ADVANCED ML & GENAI
 ==============================
 
 161. Quantization:
-Model weights ya activations ko lower precision mein represent karke memory aur compute requirements reduce karna.
+Representing model weights or activations in lower precision to reduce memory and compute requirements.
 
 162. Pruning:
-Less important weights, neurons ya structures remove karke model size ya computation reduce karna.
+Removing less important weights, neurons or structures to reduce model size or computation.
 
 163. Knowledge Distillation:
-Large teacher model ke behavior se smaller student model train karna.
+Training a smaller student model from the behavior of a large teacher model.
 
 164. Mixed Precision Training:
-Supported operations mein FP16/BF16 aur zaroorat par higher precision use karke performance aur memory optimize karna.
+Optimizing performance and memory by using FP16/BF16 where supported and higher precision where needed.
 
 165. GPU Memory Optimization:
-Batch size tune karein, mixed precision use karein, unnecessary tensors free karein aur activation checkpointing consider karein.
+Tune batch size, use mixed precision, free unnecessary tensors and consider activation checkpointing.
 
 166. Distributed Training:
-Training workload ko multiple devices ya machines mein divide karna.
+Dividing the training workload across multiple devices or machines.
 
 167. Data Parallelism:
-Model replicas different data batches process karte hain aur gradients synchronize karte hain.
+Model replicas process different data batches and synchronize gradients.
 
 168. Model Parallelism:
-Model ke different parts multiple devices par place kiye jaate hain.
+Different parts of the model are placed on multiple devices.
 
 169. Hyperparameter Optimization Cost:
-Trials x Average Runtime x Compute Cost per Time Unit se estimate karein; overhead aur failed runs bhi consider karein.
+Estimate as Trials x Average Runtime x Compute Cost per Time Unit; also consider overhead and failed runs.
 
 170. GPU Hours:
 GPU Hours = Number of GPUs x Runtime in Hours.
 
 171. TFLOPS:
-Trillion floating-point operations per second ki compute-throughput measure.
+A measure of compute throughput in trillions of floating-point operations per second.
 
 172. LoRA:
-Low-Rank Adaptation pretrained model ke saath trainable low-rank matrices add karke fine-tuning cost reduce kar sakti hai.
+Low-Rank Adaptation can reduce fine-tuning cost by adding trainable low-rank matrices alongside a pretrained model.
 
 173. Fine-Tuning vs RAG:
-Fine-tuning model behavior adapt karti hai; RAG inference ke waqt external knowledge retrieve karta hai.
+Fine-tuning adapts model behavior; RAG retrieves external knowledge at inference time.
 
 174. Embeddings:
-Text, images ya other inputs ki numerical vector representations.
+Numerical vector representations of text, images or other inputs.
 
 175. Vector Database:
-Embeddings store aur similarity search karne ke liye optimized database.
+A database optimized for storing embeddings and running similarity search.
 
 176. Semantic Search:
-Meaning-related representations ke through relevant results find karna.
+Finding relevant results through meaning-related representations.
 
 177. RAG Pipeline:
 Documents -> Chunking -> Embeddings -> Retrieval -> Context Assembly -> LLM -> Response.
 
 178. Hallucination:
-Jab model unsupported, incorrect ya fabricated information generate karta hai.
+When a model generates unsupported, incorrect or fabricated information.
 
 179. LLM Evaluation:
-Task quality, factuality, relevance, groundedness, latency, token cost aur safety evaluate karna.
+Evaluating task quality, factuality, relevance, groundedness, latency, token cost and safety.
 
 180. AI Guardrails:
-Input validation, access control, output checks aur policy enforcement se unsafe behavior limit karna.
+Limiting unsafe behavior through input validation, access control, output checks and policy enforcement.
 
 ==============================
 SECTION 10: SENIOR ENGINEERING & SECURITY
 ==============================
 
 181. Business Impact:
-Revenue, avoided loss, conversion, customer experience aur operational cost jaise metrics track karna.
+Tracking metrics such as revenue, avoided loss, conversion, customer experience and operational cost.
 
 182. Cost-Performance Tradeoff:
-Accuracy, latency, reliability aur operating cost ko business priorities ke according balance karna.
+Balancing accuracy, latency, reliability and operating cost according to business priorities.
 
 183. Model Latency Optimization:
-Profiling, batching, caching, quantization aur efficient serving use karna.
+Use profiling, batching, caching, quantization and efficient serving.
 
 184. Throughput:
-System ek unit time mein kitni requests ya records process karta hai.
+How many requests or records the system processes per unit of time.
 
 185. P95/P99 Latency:
-P95 aur P99 woh latency thresholds hain jinse 95% aur 99% measured requests respectively neeche complete hoti hain.
+P95 and P99 are the latency thresholds under which 95% and 99% of measured requests complete, respectively.
 
 186. Explainability:
-Stakeholders ko predictions aur important influencing factors samajhne mein help karna.
+Helping stakeholders understand predictions and the important factors influencing them.
 
 187. SHAP:
-Shapley values ke through feature contributions explain karne ka framework.
+A framework that explains feature contributions through Shapley values.
 
 188. Model Fairness:
-Relevant groups ke metrics compare karein aur context-appropriate fairness criteria evaluate karein.
+Compare metrics across relevant groups and evaluate context-appropriate fairness criteria.
 
 189. Threat Modeling:
-Assets, trust boundaries, attackers aur possible attack paths identify karke security controls design karna.
+Designing security controls by identifying assets, trust boundaries, attackers and possible attack paths.
 
 190. Adversarial Attack:
-Inputs ko deliberately modify karke model prediction manipulate karne ki koshish.
+Deliberately modifying inputs to try to manipulate a model's prediction.
 
 191. Data Privacy:
-Data minimization, encryption, access control, retention policies aur suitable de-identification apply karna.
+Applying data minimization, encryption, access control, retention policies and suitable de-identification.
 
 192. Secrets Management:
-API keys, credentials aur tokens ko secure secret stores ya appropriate secret management se handle karna.
+Handling API keys, credentials and tokens with secure secret stores or appropriate secret management.
 
 193. Model Artifact Security:
-Artifacts ka provenance verify karein, access restrict karein aur untrusted serialized models load karne se bachein.
+Verify artifact provenance, restrict access and avoid loading untrusted serialized models.
 
 194. ML Incident Response:
-Issue detect karein, impact assess karein, safe fallback ya rollback apply karein aur incident document karein.
+Detect the issue, assess impact, apply a safe fallback or rollback, and document the incident.
 
 195. Root Cause Analysis:
-Failure ka underlying reason identify karke recurrence prevent karna.
+Identifying the underlying reason for a failure to prevent recurrence.
 
 196. Technical Debt:
-Shortcuts aur design compromises jo future maintenance, reliability ya delivery cost badha sakte hain.
+Shortcuts and design compromises that can increase future maintenance, reliability or delivery cost.
 
 197. Architecture Decision Record:
-Important technical decision, alternatives aur rationale document karna.
+Documenting an important technical decision, the alternatives and the rationale.
 
 198. Code Review:
-Correctness, tests, readability, security, edge cases, performance aur maintainability check karna.
+Checking correctness, tests, readability, security, edge cases, performance and maintainability.
 
 199. Senior ML Engineer Responsibilities:
-Reliable ML systems design karna, tradeoffs justify karna, production ownership lena aur team ko technically guide karna.
+Designing reliable ML systems, justifying tradeoffs, taking production ownership and technically guiding the team.
 
 200. Senior ML Engineer Mindset:
 Business Problem -> Data Validation -> Baseline -> Model Evaluation -> Production Deployment -> Monitoring -> Cost and Quality Improvement.
@@ -645,14 +644,14 @@ Business Problem -> Data Validation -> Baseline -> Model Evaluation -> Productio
 INTERVIEW PREPARATION FORMULA
 ==============================
 
-Har topic ke liye ye 5 cheezein prepare karein:
+Prepare these 5 things for every topic:
 
-1. Definition: Concept kya hai?
-2. Example: Real-world example kya hai?
-3. Coding: Python mein implement kaise karenge?
-4. Production: Real application mein use kaise hoga?
-5. Trade-offs: Is approach ke advantages, limitations aur alternatives kya hain?
+1. Definition: What is the concept?
+2. Example: What is a real-world example?
+3. Coding: How would you implement it in Python?
+4. Production: How will it be used in a real application?
+5. Trade-offs: What are the advantages, limitations and alternatives of this approach?
 
 FINAL GOAL:
-Sirf definitions yaad mat karein.
-Practical coding, model evaluation, ML system design, MLOps, production troubleshooting aur business impact explain karna seekhein.
+Do not just memorize definitions.
+Learn to explain practical coding, model evaluation, ML system design, MLOps, production troubleshooting and business impact.
