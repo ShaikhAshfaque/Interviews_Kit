@@ -1,0 +1,325 @@
+TERRAFORM - TOP 50 INTERVIEW Q&A (AI / GenAI ENGINEER) - HINGLISH
+
+==================== PART 1: BASICS (Q1-Q10) ====================
+
+Q1. Terraform kya hai?
+A: Terraform HashiCorp ka open-source Infrastructure as Code (IaC) tool hai. Hum .tf files me HCL language me likhte hain ki kaunsa infra chahiye (GPU server, S3, SageMaker, EKS), aur Terraform wo cloud pe bana deta hai. Multi-cloud support hai (AWS, Azure, GCP).
+
+Q2. IaC kya hota hai aur AI projects me kyu zaroori hai?
+A: IaC matlab infra ko code se manage karna, manually console se click nahi. AI me GPU clusters, vector DB, model endpoints baar-baar banane padte hain (dev/stage/prod). Code se infra repeatable, versioned aur reviewable ho jata hai.
+
+Q3. Declarative vs Imperative approach?
+A: Terraform declarative hai: tum batate ho "kya chahiye" (end state), "kaise banana hai" Terraform khud decide karta hai. Imperative (shell script) me step-by-step likhna padta hai.
+
+Q4. Provider kya hota hai?
+A: Provider ek plugin hai jo Terraform ko cloud API se baat karne deta hai.
+
+    provider "aws" {
+      region = "ap-south-1"   # Mumbai region
+    }
+
+Q5. Resource kya hai?
+A: Resource wo actual infra object hai jo banta hai (EC2, S3 bucket, etc).
+
+    resource "aws_s3_bucket" "datasets" {
+      bucket = "my-ml-datasets"   # bucket ka naam
+    }
+
+Q6. Data source kya hai aur resource se kaise alag hai?
+A: Data source existing cheez ko READ karta hai (create nahi karta). Resource nayi cheez CREATE/manage karta hai.
+
+    data "aws_ami" "gpu" {
+      most_recent = true
+      owners      = ["amazon"]   # Amazon ki AMI use karo
+    }
+
+Q7. Variables kya hote hain?
+A: Variables se code reusable banta hai. Hardcode karne ki jagah input lete hain.
+
+    variable "instance_type" {
+      type    = string
+      default = "g5.xlarge"   # GPU instance
+    }
+
+Q8. Outputs kya hote hain?
+A: Apply ke baad jo values dikhani hain (endpoint URL, bucket name) wo outputs se milti hain. Dusre modules bhi inhe use kar sakte hain.
+
+    output "bucket_name" {
+      value = aws_s3_bucket.datasets.bucket
+    }
+
+Q9. Locals kya hain?
+A: Locals file ke andar ke temporary named values hain, DRY code ke liye (jaise common tags).
+
+    locals {
+      tags = { project = "genai", env = "dev" }
+    }
+
+Q10. State file (terraform.tfstate) kya hai?
+A: State file Terraform ka "memory" hai. Isme likha hota hai ki cloud pe kya-kya bana hai aur kaun si resource kis code se mapped hai. Iske bina Terraform ko pata nahi chalega ki kya change karna hai.
+
+==================== PART 2: CORE COMMANDS (Q11-Q16) ====================
+
+Q11. terraform init kya karta hai?
+A: Working directory initialize karta hai: providers aur modules download karta hai, backend setup karta hai. Sabse pehle yehi chalate hain.
+
+Q12. terraform plan kya karta hai?
+A: Dry run hai. Dikhata hai ki kya add (+), change (~), destroy (-) hoga, bina kuch banaye. Production me plan review zaroori hai.
+
+Q13. terraform apply kya karta hai?
+A: Plan ko actually execute karke infra banata/update karta hai. CI me hum saved plan use karte hain: terraform apply tfplan.
+
+Q14. terraform destroy kab use karte hain?
+A: Saara managed infra delete karne ke liye. AI me costly GPU test environment kaam ke baad destroy karte hain taaki bill na bane.
+
+Q15. terraform validate aur fmt me kya farak hai?
+A: validate syntax aur config sahi hai ya nahi check karta hai. fmt code ko standard style me format karta hai.
+
+Q16. terraform refresh / apply -refresh-only kya hai?
+A: Ye state ko real cloud ke saath sync karta hai bina infra change kiye. Drift detect karne me kaam aata hai.
+
+==================== PART 3: STATE MANAGEMENT (Q17-Q22) ====================
+
+Q17. Remote state kyu use karte hain?
+A: Local state team me share nahi hota aur kho sakta hai. Remote backend (S3, Terraform Cloud) me state safe, shared aur backed up rehta hai.
+
+    terraform {
+      backend "s3" {
+        bucket         = "my-tf-state"
+        key            = "genai/terraform.tfstate"
+        region         = "ap-south-1"
+        dynamodb_table = "tf-lock"   # locking ke liye
+        encrypt        = true        # state encrypted rahe
+      }
+    }
+
+Q18. State locking kya hai?
+A: Jab ek banda apply chala raha ho, dusra same time pe nahi chala sakta. Isse state corrupt nahi hota. S3 ke saath DynamoDB table (ya naye versions me S3 native locking) use hoti hai.
+
+Q19. State me sensitive data hota hai kya?
+A: Haan, passwords/keys plain text me state me aa sakte hain. Isliye state encrypted bucket me rakho, access restrict karo, aur kabhi Git me commit mat karo.
+
+Q20. terraform import kya karta hai?
+A: Jo resource manually bana hai usko Terraform state me laata hai taaki aage Terraform manage kare.
+
+    terraform import aws_s3_bucket.datasets my-ml-datasets
+
+Q21. Important state commands kaun se hain?
+A: terraform state list (resources dekho), state show (detail), state mv (rename/move), state rm (state se hatao bina cloud se delete kiye).
+
+Q22. Drift kya hota hai aur kaise handle karte hain?
+A: Jab koi console se manually infra badal de to real infra aur code alag ho jate hain, ise drift kehte hain. terraform plan se detect karte hain aur apply se wapas code ke jaisa kar dete hain.
+
+==================== PART 4: MODULES & STRUCTURE (Q23-Q28) ====================
+
+Q23. Module kya hota hai?
+A: Module reusable infra ka package hai (folder of .tf files). Jaise "vpc" module ya "sagemaker-endpoint" module jo multiple projects me use ho.
+
+    module "vpc" {
+      source = "./modules/vpc"
+      cidr   = "10.0.0.0/16"
+    }
+
+Q24. Root module vs child module?
+A: Root module wo hai jaha tum terraform run karte ho. Child module wo hai jo root se call hota hai.
+
+Q25. Module versioning kaise karte hain?
+A: Registry/Git source me version pin karte hain taaki unexpected change na aaye.
+
+    module "eks" {
+      source  = "terraform-aws-modules/eks/aws"
+      version = "~> 20.0"   # 20.x tak allowed
+    }
+
+Q26. Workspaces kya hain?
+A: Ek hi code se multiple state files (dev/stage/prod). Commands: terraform workspace new dev, workspace select dev. Bade projects me log alag folders/backends ko prefer karte hain.
+
+Q27. Dev/Stage/Prod ke liye best structure kya hai?
+A: Alag environment folders ya alag tfvars files + alag state keys, aur common code modules me. Isse prod ka galti se dev se touch hone ka risk kam hota hai.
+
+Q28. terraform.tfvars kya hai?
+A: Variable values ki file. Environment-wise alag file banate hain.
+
+    # dev.tfvars
+    instance_type = "g5.xlarge"
+    # prod.tfvars
+    instance_type = "p4d.24xlarge"
+
+    terraform apply -var-file="dev.tfvars"
+
+==================== PART 5: LANGUAGE FEATURES (Q29-Q36) ====================
+
+Q29. count kya karta hai?
+A: Ek resource ke multiple copies banata hai number se.
+
+    resource "aws_instance" "worker" {
+      count         = 3            # 3 servers
+      ami           = "ami-123"
+      instance_type = "g5.xlarge"
+    }
+
+Q30. for_each kya hai?
+A: Map ya set ke upar loop karke resources banata hai, har ek ki unique key hoti hai.
+
+    resource "aws_s3_bucket" "b" {
+      for_each = toset(["raw", "clean", "models"])
+      bucket   = "ml-${each.key}"   # ml-raw, ml-clean, ml-models
+    }
+
+Q31. count vs for_each me kya farak hai aur kaun better hai?
+A: count index (0,1,2) se kaam karta hai, beech ka item hatane par baaki resources recreate ho sakte hain. for_each key se kaam karta hai, isliye safe hai. Mostly for_each prefer karte hain.
+
+Q32. Dynamic block kya hai?
+A: Repeated nested blocks (jaise security group rules) ko loop se generate karta hai.
+
+    dynamic "ingress" {
+      for_each = var.ports
+      content {
+        from_port = ingress.value
+        to_port   = ingress.value
+        protocol  = "tcp"
+      }
+    }
+
+Q33. Conditional expression kaise likhte hain?
+A: condition ? true_value : false_value
+
+    instance_type = var.env == "prod" ? "p4d.24xlarge" : "g5.xlarge"
+
+Q34. Kuch common built-in functions batao.
+A: merge (maps jodna), lookup (map se value), join, split, length, toset, tolist, file, format, cidrsubnet.
+
+    tags = merge(local.tags, { Name = "gpu-node" })
+
+Q35. depends_on kab use karte hain?
+A: Terraform dependency khud samajh leta hai (implicit) jab ek resource dusre ka attribute use kare. Jab dependency hidden ho tab depends_on se explicitly batate hain.
+
+Q36. lifecycle block kya hota hai?
+A: Resource ke behavior ko control karta hai.
+
+    lifecycle {
+      prevent_destroy       = true      # galti se delete na ho (model bucket)
+      create_before_destroy = true      # pehle naya banao phir purana hatao
+      ignore_changes        = [tags]    # tags ke changes ignore karo
+    }
+
+==================== PART 6: SECURITY & GOVERNANCE (Q37-Q42) ====================
+
+Q37. Secrets (API keys) Terraform me kaise handle karte hain?
+A: Code me hardcode kabhi nahi. AWS Secrets Manager/SSM/Vault use karo, variable ko sensitive = true mark karo, aur state ko encrypt karo.
+
+    variable "db_password" {
+      type      = string
+      sensitive = true   # output/plan me hidden rahega
+    }
+
+Q38. Provider version constraints kyu zaroori hain?
+A: Naye provider version se code toot sakta hai, isliye version pin karte hain.
+
+    terraform {
+      required_version = ">= 1.5.0"
+      required_providers {
+        aws = { source = "hashicorp/aws", version = "~> 5.0" }
+      }
+    }
+
+Q39. .terraform.lock.hcl file kya hai?
+A: Ye exact provider versions aur hashes lock karti hai taaki sabke machine/CI pe same version chale. Isko Git me commit karte hain.
+
+Q40. Multi-region ya multi-account ke liye provider alias kaise use hota hai?
+A: Ek hi code me alag region/account ke liye alias dete hain.
+
+    provider "aws" {
+      alias  = "us"
+      region = "us-east-1"   # GPU availability ke liye
+    }
+    resource "aws_s3_bucket" "x" {
+      provider = aws.us
+      bucket   = "us-bucket"
+    }
+
+Q41. Policy as Code (Sentinel / OPA) kya hai?
+A: Rules jaise "GPU instance sirf approved types ho" ya "S3 public na ho" ko code me likhkar apply se pehle automatically enforce karte hain. Terraform Cloud me Sentinel, ya OPA/Checkov/tfsec use hota hai.
+
+Q42. Provisioners kya hain aur kyu avoid karte hain?
+A: Provisioners (local-exec, remote-exec) resource banne ke baad scripts chalate hain. Ye last resort hain kyunki declarative nahi hote aur fail hone par debug mushkil hai. Better: user_data, cloud-init ya Ansible.
+
+==================== PART 7: AI / GenAI INFRA WITH TERRAFORM (Q43-Q50) ====================
+
+Q43. GPU instance Terraform se kaise banate hain?
+A: aws_instance me GPU type (g5, p4d) aur Deep Learning AMI dete hain.
+
+    resource "aws_instance" "trainer" {
+      ami           = data.aws_ami.gpu.id
+      instance_type = "g5.2xlarge"   # NVIDIA A10G GPU
+      key_name      = "my-key"
+      tags          = { Name = "llm-trainer" }
+    }
+
+Q44. SageMaker endpoint Terraform se kaise deploy karte hain?
+A: Teen resources lagte hain: model, endpoint configuration, endpoint.
+
+    resource "aws_sagemaker_model" "m" {
+      name               = "llm-model"
+      execution_role_arn = aws_iam_role.sm.arn   # SageMaker ka role
+      primary_container {
+        image          = var.image_uri           # inference container
+        model_data_url = var.model_s3_path       # model artifacts
+      }
+    }
+    resource "aws_sagemaker_endpoint_configuration" "c" {
+      name = "llm-config"
+      production_variants {
+        variant_name           = "v1"
+        model_name             = aws_sagemaker_model.m.name
+        instance_type          = "ml.g5.2xlarge"
+        initial_instance_count = 1
+      }
+    }
+    resource "aws_sagemaker_endpoint" "e" {
+      name                 = "llm-endpoint"
+      endpoint_config_name = aws_sagemaker_endpoint_configuration.c.name
+    }
+
+Q45. Bedrock ke liye Terraform me kya manage karte hain?
+A: Bedrock models AWS manage karta hai, hum Terraform se IAM permissions, guardrails, knowledge base, logging aur VPC endpoints manage karte hain. Jaise bedrock:InvokeModel ki permission wali IAM policy aur aws_bedrock_guardrail resource.
+
+Q46. LLM serving ke liye EKS cluster aur GPU node group kaise banate hain?
+A: EKS module use karke cluster banate hain, aur GPU instance wala managed node group add karte hain. Scheduling ke liye taints/labels lagate hain taaki sirf GPU pods un nodes pe chalein.
+
+    eks_managed_node_groups = {
+      gpu = {
+        instance_types = ["g5.xlarge"]
+        min_size       = 0     # use na ho to zero (cost saving)
+        max_size       = 4
+        desired_size   = 1
+        labels         = { workload = "gpu" }
+      }
+    }
+
+Q47. Vector database ka infra Terraform se kaise banate hain?
+A: RAG ke liye options: OpenSearch Serverless (vector collection), RDS/Aurora PostgreSQL with pgvector, ya managed Pinecone provider. Network (VPC, subnets, security groups), encryption aur access policies sab Terraform me define karte hain.
+
+Q48. ML data lake S3 ke liye best practices kya hain?
+A: Versioning ON, encryption (KMS), public access block, lifecycle rules (purana data Glacier me), aur separate buckets raw/clean/models ke liye.
+
+    resource "aws_s3_bucket_versioning" "v" {
+      bucket = aws_s3_bucket.datasets.id
+      versioning_configuration { status = "Enabled" }   # dataset versions safe
+    }
+
+Q49. ML workloads ke liye IAM least privilege kaise lagate hain?
+A: Har service ko sirf zaroori permission do: training role ko sirf specific S3 prefix ka read/write, endpoint role ko sirf model bucket ka read. Wildcard (*) avoid karo, aur IRSA (EKS pod ke liye IAM role) use karo.
+
+Q50. AI infra me cost control aur CI/CD best practices kya hain?
+A:
+  - Cost: Spot instances training ke liye, autoscaling, scale-to-zero, budgets/alerts, aur tags (project, owner, env) har resource pe.
+  - CI/CD: Pull request pe fmt, validate, tflint, checkov chalao, phir plan comment me dikhao, merge ke baad approval ke saath apply.
+  - Testing: Terratest ya terraform test se modules test karo.
+  - Safety: prevent_destroy model/data buckets pe, remote state with locking, aur prod me manual approval.
+
+==================== QUICK REVISION TIPS ====================
+- Flow yaad rakho: init -> validate -> plan -> apply -> destroy.
+- Interview me hamesha "state, modules, for_each, remote backend, secrets" pe sawal aate hain.
+- AI roles me SageMaker, EKS GPU, S3, IAM, vector DB wale examples zaroor batao.
+- Hamesha bolo: "Maine infra ko version control, plan review aur policy checks ke saath manage kiya."

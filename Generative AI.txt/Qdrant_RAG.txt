@@ -1,0 +1,321 @@
+Qdrant + RAG: 100 Concepts (Basic to Intermediate)
+
+📚 BASIC LEVEL (1–25)
+Qdrant Fundamentals + RAG Basics
+
+
+1. RAG (Retrieval Augmented Generation)
+RAG ek technique hai jisme LLM answer generate karne se pehle external knowledge retrieve karta hai. Isse model relevant information ke basis par answer deta hai aur hallucination reduce ho sakti hai.
+
+2. Qdrant
+Qdrant ek vector database hai jo embeddings ko store karta hai aur similarity search ke through relevant information retrieve karta hai.
+
+3. Vector Database
+Vector database numerical vectors ko store aur search karta hai. Ye semantic similarity ke basis par similar information find kar sakta hai.
+
+4. Embeddings
+Embeddings text, images ya doosre data ko numerical vectors mein convert karte hain, jisse semantic similarity calculate ki ja sakti hai.
+
+5. Semantic Search
+Semantic search query ka meaning samajhkar relevant documents retrieve karta hai, sirf exact keywords match nahi karta.
+
+6. Traditional Search vs Semantic Search
+Traditional search keywords par depend karta hai, jabki semantic search meaning aur context ke basis par relevant results find karta hai.
+
+7. LLM (Large Language Model)
+LLM ek AI model hai jo text understand aur generate karta hai. RAG mein LLM retrieved context ka use karke answer generate karta hai.
+
+8. RAG Pipeline
+RAG pipeline mein data ingestion, document chunking, embedding generation, vector storage, retrieval aur answer generation steps hote hain.
+
+9. Document Ingestion
+Document ingestion process mein PDF, TXT, DOCX ya other sources se data collect aur extract kiya jata hai.
+
+10. Text Chunking
+Text chunking mein large documents ko smaller meaningful pieces mein divide kiya jata hai, jisse retrieval efficient hota hai.
+
+11. Chunk Size
+Chunk size decide karta hai ki document ka ek piece kitna bada hoga. Small chunks precise retrieval de sakte hain, jabki large chunks more context provide karte hain.
+
+12. Chunk Overlap
+Chunk overlap adjacent chunks ke beech common text rakhta hai, taaki important context split hone par lose na ho.
+
+13. Embedding Model
+Embedding model text ko vector representation mein convert karta hai. Example: Sentence Transformers, OpenAI embeddings aur FastEmbed.
+
+14. Vector Dimension
+Vector dimension embedding mein numerical values ki count hoti hai. Qdrant collection ke vector configuration ko embedding dimension se match karna zaroori hai.
+
+15. Collection
+Qdrant collection vectors aur unke related data ko organize karne ka container hota hai.
+
+16. Point
+Qdrant point ek record hota hai jisme ID, vector aur optional payload hota hai.
+
+17. Point ID
+Point ID ek unique identifier hota hai jo Qdrant ke record ko identify karta hai.
+
+18. Payload
+Payload point ke saath associated metadata ya original information hoti hai, jaise document name, category, page number aur text.
+
+19. Similarity Search
+Similarity search query vector aur stored vectors ke beech similarity calculate karke relevant results return karta hai.
+
+20. Cosine Similarity
+Cosine similarity do vectors ke direction ke beech similarity measure karti hai. Iska use semantic retrieval mein common hai.
+
+21. Euclidean Distance
+Euclidean distance do vectors ke beech straight-line distance calculate karti hai. Distance jitni kam ho, vectors utne close hote hain.
+
+22. Dot Product
+Dot product do vectors ke corresponding values multiply karke sum karta hai. Iska use vector similarity scoring mein hota hai.
+
+23. Top-K Retrieval
+Top-K retrieval query ke liye highest-ranked K documents return karta hai, jaise top 5 ya top 10 results.
+
+24. Query Embedding
+Query embedding user ke question ko vector mein convert karta hai, jisse Qdrant relevant document vectors search kar sakta hai.
+
+25. Context
+Context retrieved documents ki information hoti hai jo LLM ko answer generate karne ke liye provide ki jati hai.
+
+
+🧠 BASIC TO PRACTICAL (26–50)
+Qdrant Operations + Retrieval Workflow
+
+26. Qdrant Client
+Qdrant client Python application ko Qdrant database se connect aur interact karne ke liye use hota hai.
+
+27. Local Qdrant
+Local Qdrant development aur testing ke liye apne computer par database run karne ka option hai.
+
+28. Qdrant Cloud
+Qdrant Cloud managed vector database service hai jahan database infrastructure ko cloud mein host kiya ja sakta hai.
+
+29. Create Collection
+Create collection operation Qdrant mein ek naya collection banata hai jisme vector configuration define hoti hai.
+
+30. Vector Configuration
+Vector configuration mein vector size aur distance metric define kiye jate hain.
+
+31. Upsert
+Upsert operation Qdrant mein points insert karta hai ya existing point ko update karta hai.
+
+32. Retrieve
+Retrieve operation known point ID ke through stored point ko fetch karne ke liye use hota hai.
+
+33. Scroll
+Scroll operation collection ke points ko sequentially retrieve karne ke liye use hota hai. Ye data inspection aur batch processing mein useful hai.
+
+34. Delete Points
+Delete operation selected point IDs ya filter conditions ke basis par records remove karta hai.
+
+35. Update Payload
+Update payload operation existing points ke metadata ko modify karta hai bina necessarily vector ko change kiye.
+
+36. Payload Filtering
+Payload filtering metadata conditions ke basis par relevant records select karta hai, jaise category = Python ya document_type = PDF.
+
+37. Filter Conditions
+Qdrant filters mein must, should aur must_not conditions use karke complex retrieval rules banaye ja sakte hain.
+
+38. Metadata
+Metadata document ke additional attributes hote hain, jaise source, author, date, language aur topic.
+
+39. Document ID
+Document ID original document ko identify karta hai aur uske multiple chunks ko associate karne mein help karta hai.
+
+40. Source Tracking
+Source tracking retrieved chunks ka original document, page ya URL identify karne mein help karta hai.
+
+41. RAG Prompt
+RAG prompt mein user question aur retrieved context combine karke LLM ko answer generate karne ke instructions diye jate hain.
+
+42. Grounded Answer
+Grounded answer retrieved context par based hota hai, na ki sirf model ki general knowledge par.
+
+43. Hallucination
+Hallucination tab hoti hai jab model incorrect ya unsupported information generate karta hai. RAG ise reduce kar sakta hai, completely eliminate nahi.
+
+44. Retrieval Relevance
+Retrieval relevance measure karti hai ki retrieved documents user ke question se kitne related hain.
+
+45. Similarity Score
+Similarity score query aur retrieved vector ke beech similarity ya distance represent karta hai. Score ko metric ke according interpret karna chahiye.
+
+46. Search Limit
+Search limit define karti hai ki Qdrant query maximum kitne results return karegi.
+
+47. Search Threshold
+Threshold low-quality results ko filter karne mein help karta hai. Threshold ka meaning similarity metric aur score convention par depend karta hai.
+
+48. Batch Embeddings
+Batch embeddings multiple texts ko ek saath embedding model se process karte hain, jisse ingestion efficient ho sakti hai.
+
+49. Batch Upsert
+Batch upsert multiple points ko ek request mein Qdrant mein insert ya update karta hai.
+
+50. End-to-End RAG
+End-to-end RAG mein documents load hote hain, chunks create hote hain, embeddings generate hoti hain, Qdrant retrieval karta hai aur LLM answer generate karta hai.
+
+
+⚙️ INTERMEDIATE LEVEL (51–75)
+Retrieval Optimization + Advanced Search
+
+
+51. Dense Vector Search
+Dense vector search embedding vectors ke semantic relationships use karke relevant documents retrieve karta hai.
+
+52. Sparse Vector Search
+Sparse vector search keyword-related features aur sparse representations ke through relevant documents retrieve karta hai.
+
+53. Hybrid Search
+Hybrid search dense semantic search aur sparse keyword search ko combine karta hai, jisse meaning aur exact terms dono capture ho sakte hain.
+
+54. BM25
+BM25 ek keyword-based ranking algorithm hai jo query terms aur document relevance ke basis par results rank karta hai.
+
+55. Reciprocal Rank Fusion (RRF)
+RRF multiple ranked result lists ko combine karke unified ranking generate karta hai. Hybrid search mein useful hai.
+
+56. Reranking
+Reranking initial retrieved documents ko stronger relevance model se dobara rank karta hai, taaki best context top par aaye.
+
+57. Cross-Encoder
+Cross-encoder query aur document ko jointly process karke relevance score calculate karta hai. Ye reranking mein use hota hai.
+
+58. Query Expansion
+Query expansion original question ko related terms ya additional queries ke saath expand karta hai, jisse relevant documents retrieve hone ke chances badh sakte hain.
+
+59. Query Rewriting
+Query rewriting user question ko clearer retrieval query mein convert karta hai, especially ambiguous ya conversational questions ke liye.
+
+60. Multi-Query Retrieval
+Multi-query retrieval ek user question se multiple search queries generate karta hai aur unke results combine karta hai.
+
+61. Parent-Child Chunking
+Parent-child chunking mein small child chunks precise retrieval ke liye aur larger parent chunks context provide karne ke liye use hote hain.
+
+62. Hierarchical Retrieval
+Hierarchical retrieval documents ko multiple levels par organize karta hai, jaise document, section aur chunk level.
+
+63. Context Window
+Context window LLM ki ek request mein process ki ja sakne wali information ki limit hoti hai. Retrieved context ko is limit ke andar manage karna zaroori hai.
+
+64. Context Compression
+Context compression retrieved information ko concise banata hai, taaki relevant facts preserve rahein aur prompt mein unnecessary text kam ho.
+
+65. MMR (Maximal Marginal Relevance)
+MMR relevant aur diverse documents select karta hai, jisse retrieval results mein duplicate ya highly similar chunks reduce ho sakte hain.
+
+66. Duplicate Chunk Detection
+Duplicate chunk detection repeated content identify karta hai, jisse unnecessary storage aur repetitive retrieval reduce ho sakta hai.
+
+67. Payload Index
+Payload index metadata fields par filtering ko efficient banane mein help karta hai. Frequently filtered fields ke liye useful hai.
+
+68. HNSW
+HNSW ek approximate nearest neighbor search algorithm hai jo large vector collections mein efficient similarity search support karta hai.
+
+69. Exact Search
+Exact search vectors ko exhaustive comparison ke through search karta hai. Ye accuracy-oriented evaluation mein useful hai, lekin large datasets par expensive ho sakta hai.
+
+70. Approximate Nearest Neighbor (ANN)
+ANN algorithms fast similarity search ke liye approximate results return karte hain, jahan speed aur recall ke beech trade-off hota hai.
+
+71. Search Recall
+Search recall measure karta hai ki retrieved results mein actual relevant ya expected nearest neighbors kitne successfully find hue.
+
+72. Search Latency
+Search latency query execute hone aur result return hone ke beech ka time hota hai.
+
+73. Retrieval Evaluation
+Retrieval evaluation relevant documents ko measure karne ke liye Recall@K, Precision@K aur MRR jaise metrics use karti hai.
+
+74. Precision@K
+Precision@K top K retrieved documents mein relevant documents ka proportion measure karta hai.
+
+75. Recall@K
+Recall@K total relevant documents mein se top K results mein retrieve hue relevant documents ka proportion measure karta hai.
+
+
+🔥 INTERMEDIATE RAG PROJECT CONCEPTS (76–100)
+Production Thinking + Practical Applications
+
+
+76. RAG Evaluation
+RAG evaluation retrieval quality aur generated answer quality dono assess karti hai. Isse system ki weaknesses identify hoti hain.
+
+77. Faithfulness
+Faithfulness measure karti hai ki generated answer retrieved context ke facts ko follow karta hai ya unsupported claims add karta hai.
+
+78. Answer Relevance
+Answer relevance measure karti hai ki generated response user ke actual question ka kitna relevant answer deta hai.
+
+79. Context Precision
+Context precision check karti hai ki retrieved context mein relevant information kitni effectively ranked hai.
+
+80. Context Recall
+Context recall check karti hai ki answer ke liye required relevant information retrieval results mein present hai ya nahi.
+
+81. No-Answer Handling
+No-answer handling tab use hoti hai jab retrieved context sufficient nahi hota. System ko unsupported answer dene ke bajaye uncertainty express karni chahiye.
+
+82. Citation-Based RAG
+Citation-based RAG generated answer ke saath document source, page number ya chunk reference provide karta hai.
+
+83. Multi-Tenant RAG
+Multi-tenant RAG multiple users ya organizations ka data logically separate rakhta hai, usually tenant metadata aur access controls ke through.
+
+84. Access Control
+Access control ensure karta hai ki user sirf authorized documents retrieve kar sake. Filtering ko trusted authorization logic ke saath implement karna chahiye.
+
+85. Incremental Ingestion
+Incremental ingestion sirf new ya changed documents ko process karta hai, instead of complete dataset ko dobara ingest karna.
+
+86. Document Versioning
+Document versioning multiple document versions track karti hai, jisse latest ya specific version retrieve kiya ja sakta hai.
+
+87. Delete and Reindex
+Delete and reindex workflow outdated chunks remove karke updated document embeddings aur metadata ko Qdrant mein store karta hai.
+
+88. RAG Caching
+RAG caching repeated queries ya expensive intermediate results store karta hai, jisse latency aur compute cost reduce ho sakti hai.
+
+89. Semantic Cache
+Semantic cache similar meaning wali queries ke previous answers ya retrieval results reuse karne ki technique hai. Cache validity aur answer freshness carefully manage karni hoti hai.
+
+90. Conversation Memory
+Conversation memory previous conversation context maintain karti hai, jisse follow-up questions ko better understand kiya ja sakta hai.
+
+91. Conversational RAG
+Conversational RAG previous messages aur current question ko combine karke relevant documents retrieve karta hai aur conversational answer generate karta hai.
+
+92. Streaming RAG
+Streaming RAG generated answer ko incremental chunks mein user tak send karta hai, jisse response generation complete hone ka wait kam hota hai.
+
+93. Async Ingestion
+Async ingestion concurrent document processing aur embedding operations support karti hai, jisse throughput improve ho sakta hai.
+
+94. FastAPI + Qdrant
+FastAPI aur Qdrant use karke REST API banayi ja sakti hai jo documents ingest kare aur user queries par retrieval provide kare.
+
+95. LangChain + Qdrant
+LangChain Qdrant ko retriever aur vector store ke roop mein integrate kar sakta hai, jisse RAG chains build karna convenient hota hai.
+
+96. LlamaIndex + Qdrant
+LlamaIndex document ingestion, indexing aur retrieval workflows ko Qdrant ke saath integrate karne mein help karta hai.
+
+97. Qdrant Backup
+Backup collection data aur configuration ko preserve karne mein help karta hai, taaki recovery aur migration possible ho.
+
+98. Qdrant Quantization
+Quantization vector storage memory requirements reduce kar sakti hai aur search performance improve kar sakti hai, with possible accuracy trade-offs.
+
+99. RAG Monitoring
+RAG monitoring retrieval latency, answer latency, errors, token usage aur retrieval quality ko track karti hai.
+
+100. Production RAG Architecture
+Production RAG architecture mein document ingestion, chunking, embedding, Qdrant storage, hybrid retrieval, reranking, LLM generation, citations, evaluation, monitoring aur access control combine hote hain.
+
+

@@ -1,6 +1,7 @@
 ================================================================DOCKER ===================================================================
 
 🐳 Docker for AI / GenAI Engineers — 100 Important One-Liners
+
 🟢 Beginner — Docker Fundamentals
 1. Docker application aur uski dependencies ko isolated container mein package aur run karne ka platform hai.
 2. Container ek lightweight isolated environment hai jisme AI application run hoti hai.
@@ -12,6 +13,7 @@
 8. Docker Registry Docker images ko store aur distribute karne ke liye use hoti hai.
 9. Docker Hub ek popular public container registry hai.
 10. Docker ka major benefit hai consistent environment across development, testing aur production.
+
 🟢 Docker Commands
 11. docker pull registry se image download karta hai.
 12. docker build Dockerfile se image create karta hai.
@@ -45,6 +47,7 @@
 38. AI dependencies ko version-pin karna reproducibility improve karta hai.
 39. PyTorch, TensorFlow aur Transformers jaise libraries image size significantly increase kar sakti hain.
 40. Model weights ko Docker image mein blindly include karna image ko unnecessarily huge bana sakta hai.
+
 🟡 Intermediate — AI/ML Dockerization
 41. Docker AI application ke liye reproducible ML environment create karta hai.
 42. Local machine aur production machine ke Python/dependency mismatch ko Docker reduce karta hai.
@@ -56,6 +59,7 @@
 48. PostgreSQL jaise databases development environment mein Docker ke through easily run kiye ja sakte hain.
 49. Vector databases ko local development mein Docker ke through run karna convenient hota hai.
 50. Docker Compose multiple AI services ko ek saath manage karne ke liye useful hai.
+
 🟡 Docker Networking
 51. Docker containers isolated networks ke through ek doosre se communicate kar sakte hain.
 52. -p host port ko container port ke saath map karta hai.
@@ -67,6 +71,7 @@
 58. Production containers mein unnecessary ports expose nahi karne chahiye.
 59. Docker DNS service-name-based communication enable kar sakta hai.
 60. Networking isolation AI systems ki security improve kar sakti hai.
+
 🟡 Storage + Models + Data
 61. Container ka writable filesystem generally ephemeral nature ka hota hai.
 62. Docker Volume persistent data store karne ke liye use hota hai.
@@ -78,6 +83,7 @@
 68. Development mein source-code bind mounts rapid iteration ke liye useful hain.
 69. Production AI systems mein models ko object storage ya model registry se load karna common approach hai.
 70. Large model loading performance storage throughput se strongly impact ho sakti hai.
+
 🟠 Advanced — GPU + CUDA
 71. Docker GPU-based AI workloads ko isolated container environment mein run kar sakta hai.
 72. NVIDIA GPU containers ke liye NVIDIA Container Toolkit commonly used hota hai.
@@ -89,6 +95,7 @@
 78. AI containerization mein host driver aur container CUDA compatibility critical hai.
 79. GPU memory constraints ko model deployment se pehle understand karna important hai.
 80. Production GPU containers mein unnecessary CUDA libraries/include files image size increase kar sakte hain.
+
 🔴 Advanced — GenAI / LLM Docker
 81. LLM inference ke liye Docker image mein model server, runtime aur required dependencies package ki ja sakti hain.
 82. vLLM ko Docker container ke andar run karke scalable LLM inference setup kiya ja sakta hai.
@@ -100,6 +107,7 @@
 88. LLM serving mein batching GPU utilization improve kar sakti hai.
 89. Continuous batching multiple incoming LLM requests ko efficiently process karne mein help karta hai.
 90. LLM container mein model weights ko image se separate rakhna deployment flexibility improve kar sakta hai.
+
 🔴 Production — Optimization, Security & MLOps
 91. Multi-stage Docker builds final image size reduce karne mein help karte hain.
 92. Docker layer caching build process ko significantly faster bana sakti hai.

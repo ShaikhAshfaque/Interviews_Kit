@@ -53,7 +53,6 @@
 # ============================================================
 # 04. QUESTION:
 # Path parameter aur query parameter mein kya difference hai?
-#
 # ANSWER:
 # Path parameter URL ka required part hota hai.
 #
@@ -160,7 +159,7 @@ def User_get("user": int):
 # HTTPException kya hai?
 #
 # ANSWER:
-# HTTPException API mein HTTP error return karne ke liye use hota hai.
+# HTTPException API mein HTTP error return ka   rne ke liye use hota hai.
 #
 # Example:
 #
