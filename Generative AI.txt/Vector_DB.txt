@@ -1,0 +1,251 @@
+VECTOR DATABASE (QDRANT + PINECONE) - TOP 50 INTERVIEW Q&A (AI / GenAI ENGINEER) - HINGLISH
+
+==================== PART 1: BASICS (Q1-Q10) ====================
+
+Q1. Vector database kya hai?
+A: Vector database ek aisa database hai jo embeddings (numbers ki list) ko store karta hai aur "similar" vectors ko fast search karta hai. Normal DB exact match dhundta hai, vector DB meaning ke basis pe match dhundta hai (semantic search).
+
+Q2. Embedding kya hota hai?
+A: Text, image ya audio ko ek numeric vector me convert karna, jaise 768 ya 1536 numbers. Similar meaning wale items ke vectors paas-paas hote hain. Embedding model (OpenAI, Cohere, sentence-transformers) ye banata hai.
+
+Q3. Vector DB ki GenAI me zaroorat kyu padti hai?
+A: LLM ke paas tumhara private data nahi hota. RAG me hum documents ko embeddings bana ke vector DB me rakhte hain, query ke time pe relevant chunks nikaalte hain aur LLM ko context me dete hain. Isse hallucination kam hota hai.
+
+Q4. Similarity metrics kaun se hain?
+A: Cosine similarity (angle dekhta hai), Dot product (angle + magnitude), Euclidean distance (seedhi doori). Text embeddings me mostly cosine ya dot product use hota hai.
+
+Q5. Cosine vs Dot product vs Euclidean kab use karein?
+A: Rule yaad rakho: jo metric embedding model ke saath train hua hai wahi use karo (model card dekho). Normalized vectors par cosine aur dot product same result dete hain. Euclidean zyada image/geometry type data me aata hai.
+
+Q6. Vector search aur keyword search me kya farak hai?
+A: Keyword search (BM25) exact words match karta hai. Vector search meaning match karta hai ("car" aur "automobile" paas honge). Dono ki apni strength hai, isliye production me hybrid search use karte hain.
+
+Q7. Dimension kya hota hai aur kitna rakhein?
+A: Vector me kitne numbers hain wo dimension hai. Ye embedding model decide karta hai (jaise 384, 768, 1536). Dimension zyada matlab zyada memory aur cost. Index banate waqt dimension model ke barabar hi rakhna padta hai, warna error aata hai.
+
+Q8. Exact search (KNN) vs Approximate search (ANN)?
+A: KNN har vector se compare karta hai, accurate hai par slow. ANN thoda accuracy chhodke bahut fast hota hai. Million-billion vectors par ANN hi practical hai.
+
+Q9. Recall aur latency ka trade-off kya hai?
+A: Recall matlab ANN ne kitne sahi neighbors dhundhe (exact result ke comparison me). Recall badhane ke liye zyada search karna padta hai, to latency badhti hai. Tuning me hum dono ka balance banate hain.
+
+Q10. Metadata (payload) kya hota hai?
+A: Vector ke saath extra info jaise source, page number, user_id, date, category. Isse hum filtering karte hain, aur result me original text bhi return karte hain.
+
+==================== PART 2: INDEXING & ANN (Q11-Q18) ====================
+
+Q11. HNSW kya hai?
+A: Hierarchical Navigable Small World, ek graph-based ANN algorithm. Vectors ko multi-layer graph me connect karta hai. Upar ki layers se jaldi sahi area me pahunchte hain, neeche ki layer me detail search hoti hai. Fast aur high recall hota hai, isliye Qdrant aur Pinecone jaise systems me popular hai.
+
+Q12. HNSW ke main parameters kaun se hain?
+A: M (har node ke kitne connections), ef_construct (index banate waqt search width), ef/hnsw_ef (query time search width). Bade values se recall badhta hai par memory aur time bhi badhta hai.
+
+Q13. IVF (Inverted File) index kya hai?
+A: Vectors ko clusters me baant deta hai. Query aane par sirf nearest kuch clusters (nprobe) me search karta hai. Memory kam lagti hai par HNSW se recall thoda kam ho sakta hai.
+
+Q14. Flat index kab use karte hain?
+A: Chhota dataset ho ya 100% exact result chahiye ho. Brute force hota hai, isliye bade data par slow hai.
+
+Q15. Quantization kya hai?
+A: Vectors ko compress karna (jaise float32 se int8 ya binary) taaki memory aur cost kam ho. Thoda accuracy loss hota hai, jise rescoring se kam kiya ja sakta hai. Types: Scalar, Product (PQ), Binary quantization.
+
+Q16. Product Quantization (PQ) kaise kaam karta hai?
+A: Vector ko chhote sub-vectors me todta hai, har sub-vector ko codebook ke nearest code se replace karta hai. Isse memory bahut kam ho jati hai, par accuracy loss zyada ho sakta hai.
+
+Q17. Index build vs query time memory me kya farak hai?
+A: HNSW me graph aur vectors RAM me rakhne se speed milti hai. Bada data ho to vectors disk pe aur graph RAM me (ya mmap) rakhte hain taaki cost kam ho.
+
+Q18. Curse of dimensionality kya hai?
+A: Bahut high dimensions me sab points lagbhag same doori par lagte hain, isse similarity ka difference kam ho jata hai. Isliye acchi quality ka embedding model aur sahi dimension choose karna zaroori hai.
+
+==================== PART 3: QDRANT (Q19-Q30) ====================
+
+Q19. Qdrant kya hai?
+A: Qdrant ek open-source vector database hai jo Rust me likha gaya hai. Fast, filtering me strong aur self-host (Docker) ya Qdrant Cloud dono options deta hai.
+
+Q20. Qdrant me Collection kya hota hai?
+A: Collection points ka group hai, jaise SQL me table. Collection banate waqt vector size aur distance metric decide karte hain.
+
+    from qdrant_client import QdrantClient
+    from qdrant_client.models import VectorParams, Distance
+
+    client = QdrantClient(url="http://localhost:6333")   # Qdrant server se connect
+
+    client.create_collection(
+        collection_name="docs",                                         # collection ka naam
+        vectors_config=VectorParams(size=768, distance=Distance.COSINE) # dimension + metric
+    )
+
+Q21. Qdrant me Point kya hota hai?
+A: Point = id + vector + payload. Ye Qdrant ki basic unit hai.
+
+    from qdrant_client.models import PointStruct
+
+    client.upsert(
+        collection_name="docs",
+        points=[
+            PointStruct(
+                id=1,                                          # unique id
+                vector=[0.1] * 768,                            # embedding (example)
+                payload={"source": "hr.pdf", "page": 3}        # metadata
+            )
+        ]
+    )
+
+Q22. Qdrant me search kaise karte hain?
+A: query vector dete hain aur top-k similar points milte hain.
+
+    results = client.query_points(
+        collection_name="docs",
+        query=[0.1] * 768,     # query ka embedding
+        limit=5                # top 5 results
+    )
+    for p in results.points:
+        print(p.id, p.score, p.payload)   # id, similarity score, metadata
+
+Q23. Qdrant me filtering kaise hoti hai?
+A: Payload par condition lagake search ke saath filter karte hain (must, should, must_not).
+
+    from qdrant_client.models import Filter, FieldCondition, MatchValue
+
+    results = client.query_points(
+        collection_name="docs",
+        query=[0.1] * 768,
+        query_filter=Filter(
+            must=[FieldCondition(key="source", match=MatchValue(value="hr.pdf"))]   # sirf hr.pdf ke results
+        ),
+        limit=5
+    )
+
+Q24. Payload index kya hai aur kyu banate hain?
+A: Jis payload field par baar-baar filter lagta hai uspe index banate hain, taaki filtered search fast ho. Qdrant ka filterable HNSW filter ke saath bhi accha recall deta hai.
+
+    from qdrant_client.models import PayloadSchemaType
+
+    client.create_payload_index(
+        collection_name="docs",
+        field_name="source",                           # is field par index
+        field_schema=PayloadSchemaType.KEYWORD
+    )
+
+Q25. Qdrant me Named vectors / multi-vector kya hai?
+A: Ek hi point me alag-alag vectors rakh sakte ho (jaise "text" aur "image" embedding) alag size aur metric ke saath. Multimodal search me kaam aata hai.
+
+Q26. Qdrant me Sparse vectors aur Hybrid search kaise hota hai?
+A: Sparse vectors (BM25/SPLADE jaise) keyword-type matching dete hain aur dense vectors meaning-type. Qdrant ki Query API me dono ko combine (prefetch + fusion jaise RRF) karke hybrid search hota hai.
+
+Q27. Qdrant me Quantization kaise use hota hai?
+A: Collection ke config me scalar/product/binary quantization enable karte hain, aur original vectors disk pe rakh sakte hain. Memory bahut kam hoti hai, rescore option se accuracy bachti hai.
+
+Q28. Qdrant me Sharding aur Replication kya hai?
+A: Sharding: collection ko multiple shards me baantna taaki data aur load distribute ho (horizontal scaling). Replication: shard ki copies rakhna taaki fault tolerance aur read throughput mile. Cluster mode me ye configure hota hai.
+
+Q29. Qdrant me multi-tenancy kaise karte hain?
+A: Aam recommended approach: ek hi collection me payload field (jaise tenant_id) rakho aur filter lagao, aur us field par index banao. Har tenant ke liye alag collection banana bahut zyada ho jaye to overhead badhta hai.
+
+Q30. Qdrant me Snapshots aur Backup kya hain?
+A: Snapshot collection ya cluster ka backup hai, jisse restore ya migration kar sakte hain. Production me regular snapshots schedule karte hain.
+
+==================== PART 4: PINECONE (Q31-Q40) ====================
+
+Q31. Pinecone kya hai?
+A: Pinecone ek fully managed (cloud-only) vector database hai. Infra, scaling, upgrades Pinecone khud sambhalta hai, tum sirf API use karte ho. Isliye setup fast hota hai.
+
+Q32. Pinecone Serverless vs Pod-based index?
+A: Serverless me storage aur compute alag hote hain, capacity manage nahi karni padti aur usage ke hisaab se bill hota hai. Pod-based me tum pod type/size/replicas khud choose karte ho. Naye projects me mostly serverless prefer hota hai.
+
+Q33. Pinecone me Index kaise banate hain?
+A: Dimension aur metric dena zaroori hai.
+
+    from pinecone import Pinecone, ServerlessSpec
+
+    pc = Pinecone(api_key="YOUR_API_KEY")   # API key env variable se lena better hai
+
+    pc.create_index(
+        name="docs",
+        dimension=768,                                          # embedding model ke barabar
+        metric="cosine",                                        # similarity metric
+        spec=ServerlessSpec(cloud="aws", region="us-east-1")    # serverless config
+    )
+
+Q34. Pinecone me Upsert kaise karte hain?
+A: Upsert matlab insert ya update. Har record me id, values (vector) aur metadata hota hai. Bade data ko batches me bhejna chahiye.
+
+    index = pc.Index("docs")
+
+    index.upsert(
+        vectors=[
+            {"id": "doc1", "values": [0.1] * 768, "metadata": {"source": "hr.pdf", "page": 3}}
+        ],
+        namespace="company-a"     # namespace me store hoga
+    )
+
+Q35. Pinecone me Query kaise karte hain?
+A: Query vector, top_k aur optional filter dete hain.
+
+    res = index.query(
+        vector=[0.1] * 768,
+        top_k=5,                              # top 5 results
+        include_metadata=True,                # metadata bhi chahiye
+        namespace="company-a",
+        filter={"source": {"$eq": "hr.pdf"}}  # metadata filter
+    )
+    for m in res["matches"]:
+        print(m["id"], m["score"], m["metadata"])
+
+Q36. Namespace kya hai?
+A: Namespace ek index ke andar logical partition hai. Query sirf ek namespace me chalti hai. Multi-tenancy ke liye best hai (har customer ka alag namespace), aur isse queries fast aur data isolated rehta hai.
+
+Q37. Pinecone me Metadata filtering kaise hoti hai?
+A: MongoDB jaisi syntax hoti hai: $eq, $ne, $in, $gt, $lt, $and, $or. Filter ke saath search hoti hai, par metadata size limit hoti hai, isliye bada text metadata me na rakho, balki alag DB me rakho aur id se fetch karo.
+
+Q38. Pinecone me Hybrid search (dense + sparse) kaise hota hai?
+A: Dense vector meaning pakadta hai aur sparse vector (BM25/SPLADE) keywords. Dono ko combine karke score nikalte hain, aur alpha jaisa weight dense aur sparse ka balance control karta hai. Isse jargon, product codes aur names wali queries me accuracy badhti hai.
+
+Q39. Pinecone me Eventual consistency ka kya matlab hai?
+A: Upsert ke turant baad kabhi-kabhi naya data query me nahi dikhta, kuch der lagti hai. Isliye testing me thoda wait ya fresh-read check lagate hain, aur design me ye assumption rakhte hain.
+
+Q40. Pinecone ke Fetch, Update, Delete operations kaise hote hain?
+A: Fetch id se vector aur metadata deta hai. Update vector ya metadata change karta hai. Delete id se, filter se, ya poore namespace ko delete kar sakta hai. Ye sab operations namespace ke scope me chalte hain.
+
+==================== PART 5: RAG & PRODUCTION (Q41-Q50) ====================
+
+Q41. RAG pipeline me vector DB ka flow kya hai?
+A: Documents load -> chunking -> embedding -> vector DB me upsert. Query time: user query ka embedding -> top-k search -> (rerank) -> context banake LLM ko do -> answer.
+
+Q42. Chunking strategy kaisi honi chahiye?
+A: Bahut bada chunk noise laata hai, bahut chhota chunk context kho deta hai. Aam shuruaat: 300-800 tokens aur 10-20% overlap. Semantic ya structure-based chunking (headings, paragraphs) aur acchi hoti hai. Hamesha apne data par evaluate karo.
+
+Q43. Embedding model kaise choose karte hain?
+A: Language support (Hindi/multilingual), dimension, cost, latency, aur benchmark (MTEB) dekhte hain. Index banane aur query karne me same model use hona zaroori hai. Model badla to poora data dobara embed karna padta hai.
+
+Q44. Reranking kya hai aur kyu karte hain?
+A: Vector search se top 20-50 candidates nikalte hain, phir cross-encoder ya reranker model unhe query ke saath score karke best 3-5 chunk chunta hai. Isse answer ki quality kaafi badhti hai.
+
+Q45. MMR (Maximal Marginal Relevance) kya hai?
+A: Ye results me relevance ke saath diversity bhi laata hai, taaki top results ek jaise duplicate na ho.
+
+Q46. Metadata filtering aur pre-filter vs post-filter me kya farak hai?
+A: Pre-filter me pehle filter lagake phir ANN search hota hai. Post-filter me pehle ANN search karke phir filter lagta hai, jisse kabhi results kam ya zero reh sakte hain. Qdrant filtering ke time hi graph traversal me use karta hai, isliye accuracy accha rehta hai.
+
+Q47. Vector DB ka performance kaise improve karte hain?
+A: Sahi dimension aur quantization, payload index sirf kaam ke fields par, HNSW params tuning, batch upsert, caching, aur hybrid search + reranking. Hamesha recall aur p95 latency measure karke tune karo.
+
+Q48. Qdrant vs Pinecone me kaise choose karein?
+A: Qdrant: open-source, self-host ya cloud, strong filtering, zyada control, data control/compliance ke liye accha. Pinecone: fully managed, setup aur scaling asaan, ops kam. Tradeoff: control vs convenience. Cost, data residency, team ki skill aur scale dekhke decide karte hain.
+
+Q49. Vector DB me data security kaise handle karte hain?
+A: API keys secret manager me rakho, TLS/encryption in transit aur at rest, role-based access, private network/VPC endpoints jahan available ho, aur PII embeddings me dalne se pehle sochke handle karo. Multi-tenant me tenant filter ya namespace har query me laga ho ye ensure karo.
+
+Q50. Vector DB RAG ki quality kaise evaluate karte hain?
+A:
+  - Retrieval metrics: Recall@k, Precision@k, MRR, nDCG (labeled query-document pairs se).
+  - Generation metrics: faithfulness (answer context se hai ya nahi), answer relevance, context relevance (RAGAS jaise tools).
+  - Operations: p95 latency, cost per query, index freshness.
+  - Process: chhota golden test set banao, change karne ke baad dobara run karo.
+
+==================== QUICK REVISION TIPS ====================
+- Flow yaad rakho: Embed -> Index (HNSW) -> Filter -> Search -> Rerank -> LLM.
+- Interview me hamesha HNSW, cosine vs dot, hybrid search, filtering, chunking, reranking, multi-tenancy puchte hain.
+- Qdrant: collection, point, payload, named vectors, quantization. Pinecone: index, namespace, upsert, serverless, metadata filter.
+- Bolo: "Maine retrieval ko recall aur latency dono par measure karke tune kiya."
