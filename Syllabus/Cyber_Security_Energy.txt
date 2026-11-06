@@ -1,0 +1,777 @@
+# INDUSTRIAL CYBERSECURITY EXPERT
+## Complete Learning Syllabus – Basic to Advanced
+### Target Company: Siemens Energy
+### Job ID: 305132
+### Location: Gurugram, India
+
+OBJECTIVE:
+
+Become an Industrial Cybersecurity Expert capable of securing manufacturing infrastructure, Operational Technology (OT), Industrial Control Systems (ICS), Industrial IoT (IIoT), connected factories and critical industrial environments.
+
+---
+
+# SERIES 01: CYBERSECURITY FUNDAMENTALS
+
+1. Introduction to Cybersecurity
+2. Information Security vs Cybersecurity
+3. CIA Triad (Confidentiality, Integrity, Availability)
+4. Authentication and Authorization
+5. Identification and Accounting
+6. Security Principles
+7. Defense in Depth
+8. Zero Trust Architecture
+9. Least Privilege Principle
+10. Security by Design
+11. Security by Default
+12. Attack Surface
+13. Threat, Vulnerability and Risk
+14. Cybersecurity Controls
+15. Preventive, Detective and Corrective Controls
+16. Security Policies and Procedures
+17. Security Governance
+18. Cybersecurity Lifecycle
+19. Enterprise Security Architecture
+20. Cybersecurity Best Practices
+
+# SERIES 02: COMPUTER NETWORKING FUNDAMENTALS
+
+1. Introduction to Computer Networks
+2. OSI Model
+3. TCP/IP Model
+4. TCP and UDP
+5. IP Addressing
+6. IPv4 and IPv6
+7. Public and Private IP
+8. Subnetting
+9. MAC Address
+10. ARP Protocol
+11. DNS
+12. DHCP
+13. HTTP and HTTPS
+14. SSH
+15. FTP and SFTP
+16. SMTP
+17. ICMP
+18. Routing and Switching
+19. VLAN
+20. Trunking
+21. NAT
+22. Static and Dynamic Routing
+23. Firewalls
+24. VPN
+25. Network Troubleshooting
+
+# SERIES 03: LINUX AND WINDOWS ADMINISTRATION
+
+1. Introduction to Linux
+2. Linux Architecture
+3. Linux File System
+4. Linux Commands
+5. File Permissions
+6. Users and Groups
+7. Process Management
+8. Service Management
+9. System Logs
+10. SSH Configuration
+11. Linux Firewall
+12. Windows Server Fundamentals
+13. Active Directory
+14. Domain Controllers
+15. Group Policy
+16. Windows Authentication
+17. Windows Event Logs
+18. Windows Defender
+19. Windows Firewall
+20. PowerShell Fundamentals
+21. Patch Management
+22. System Hardening
+23. Endpoint Security
+24. Backup and Recovery
+25. System Administration Best Practices
+
+# SERIES 04: NETWORK SECURITY
+
+1. Introduction to Network Security
+2. Network Security Architecture
+3. Firewall Architecture
+4. Stateful and Stateless Firewalls
+5. Next-Generation Firewalls
+6. IDS Fundamentals
+7. IPS Fundamentals
+8. IDS vs IPS
+9. Network Segmentation
+10. VLAN Security
+11. DMZ Architecture
+12. Secure Remote Access
+13. VPN Technologies
+14. IPsec
+15. SSL/TLS
+16. Network Access Control
+17. Port Security
+18. Network Monitoring
+19. Packet Analysis
+20. Wireshark
+21. Nmap
+22. Network Vulnerability Scanning
+23. Network Hardening
+24. Secure Network Design
+25. Network Security Troubleshooting
+
+# SERIES 05: INDUSTRIAL AUTOMATION FUNDAMENTALS
+
+1. Introduction to Industrial Automation
+2. Manufacturing Infrastructure
+3. Industrial Manufacturing Processes
+4. Introduction to Operational Technology (OT)
+5. IT vs OT
+6. IT/OT Convergence
+7. Industrial Automation Architecture
+8. Sensors and Actuators
+9. Industrial Controllers
+10. PLC Fundamentals
+11. DCS Fundamentals
+12. SCADA Fundamentals
+13. HMI Fundamentals
+14. RTU Fundamentals
+15. Industrial Robotics
+16. Industrial Machines
+17. Industrial Ethernet
+18. Industrial Control Networks
+19. Manufacturing Execution Systems (MES)
+20. Enterprise Resource Planning (ERP)
+21. Industrial Data Acquisition
+22. Industrial Monitoring
+23. Shopfloor Infrastructure
+24. Industrial Equipment Lifecycle
+25. Industrial Automation Use Cases
+
+# SERIES 06: INDUSTRIAL CONTROL SYSTEMS (ICS)
+
+1. Introduction to ICS
+2. ICS Architecture
+3. ICS Components
+4. PLC Architecture
+5. PLC Programming Fundamentals
+6. SCADA Architecture
+7. DCS Architecture
+8. HMI Architecture
+9. RTU Architecture
+10. Industrial Controllers
+11. Industrial Communication
+12. Control Loops
+13. Process Control Systems
+14. Safety Instrumented Systems (SIS)
+15. Engineering Workstations
+16. Operator Workstations
+17. Historian Servers
+18. Industrial Servers
+19. Industrial Network Architecture
+20. ICS Deployment Models
+21. ICS Lifecycle Management
+22. ICS Security Challenges
+23. ICS Availability Requirements
+24. ICS Failure Scenarios
+25. ICS Security Best Practices
+
+# SERIES 07: INDUSTRIAL COMMUNICATION PROTOCOLS
+
+1. Introduction to Industrial Protocols
+2. Modbus
+3. Modbus TCP
+4. Modbus RTU
+5. OPC Classic
+6. OPC UA
+7. PROFINET
+8. PROFIBUS
+9. EtherNet/IP
+10. DNP3
+11. IEC 60870-5-104
+12. IEC 61850
+13. MQTT
+14. BACnet Fundamentals
+15. CAN Bus
+16. Industrial Ethernet
+17. Serial Communication
+18. Protocol Security
+19. Protocol Inspection
+20. Industrial Packet Analysis
+21. Protocol Anomaly Detection
+22. Secure Industrial Communication
+23. Industrial Protocol Attack Scenarios
+
+# SERIES 08: OT CYBERSECURITY FUNDAMENTALS
+
+1. Introduction to OT Security
+2. IT Security vs OT Security
+3. OT Security Architecture
+4. OT Threat Landscape
+5. OT Attack Surface
+6. Industrial Cyber Threats
+7. OT Vulnerabilities
+8. Industrial Malware
+9. Ransomware in Manufacturing
+10. PLC Attacks
+11. SCADA Attacks
+12. HMI Attacks
+13. Engineering Workstation Attacks
+14. Industrial Network Attacks
+15. Insider Threats
+16. Supply Chain Attacks
+17. Remote Access Risks
+18. Legacy System Security
+19. OT Asset Protection
+20. OT Security Controls
+21. OT Security Monitoring
+22. OT Security Operations
+23. OT Security Best Practices
+
+# SERIES 09: IT/OT SECURITY ARCHITECTURE
+
+1. Introduction to IT/OT Architecture
+2. IT/OT Convergence
+3. Connected Factory Architecture
+4. Industrial Network Segmentation
+5. Purdue Enterprise Reference Architecture
+6. Purdue Levels 0–5
+7. Industrial DMZ
+8. OT Network Zones
+9. Conduits
+10. IEC 62443 Zone and Conduit Model
+11. Secure Remote Access Architecture
+12. Jump Servers
+13. Bastion Hosts
+14. Industrial Firewalls
+15. Data Diodes
+16. OT Network Isolation
+17. Secure Data Exchange
+18. Industrial Identity Management
+19. OT Asset Inventory
+20. IT/OT Architecture Design
+21. Secure-by-Design Architecture
+22. High Availability
+23. OT Resilience
+24. Architecture Documentation
+25. IT/OT Security Assessment
+
+# SERIES 10: INDUSTRIAL CYBERSECURITY STANDARDS AND FRAMEWORKS
+
+1. Introduction to Cybersecurity Standards
+2. NIST Cybersecurity Framework
+3. NIST SP 800-82
+4. NIST SP 800-53
+5. IEC 62443
+6. IEC 62443-1-1
+7. IEC 62443-2-1
+8. IEC 62443-2-4
+9. IEC 62443-3-2
+10. IEC 62443-3-3
+11. IEC 62443-4-1
+12. IEC 62443-4-2
+13. ISO 27001
+14. ISO 27002
+15. ISO 27005
+16. ISO 31000
+17. CIS Controls
+18. CIS Benchmarks
+19. MITRE ATT&CK
+20. MITRE ATT&CK for ICS
+21. ISA/IEC Standards
+22. Cybersecurity Governance
+23. Regulatory Requirements
+24. Compliance Auditing
+25. Industrial Security Framework Implementation
+
+# SERIES 11: THREAT MODELING AND RISK ASSESSMENT
+
+1. Introduction to Threat Modeling
+2. Threat vs Vulnerability vs Risk
+3. Threat Identification
+4. Attack Surface Analysis
+5. Asset Identification
+6. Asset Classification
+7. Threat Intelligence
+8. STRIDE Methodology
+9. PASTA Methodology
+10. MITRE ATT&CK Mapping
+11. Attack Tree Analysis
+12. Attack Path Analysis
+13. Threat Scenario Development
+14. Risk Assessment Fundamentals
+15. Risk Identification
+16. Risk Analysis
+17. Risk Evaluation
+18. Likelihood Assessment
+19. Impact Assessment
+20. Risk Scoring
+21. Risk Treatment
+22. Risk Acceptance
+23. Risk Mitigation
+24. Threat and Risk Assessment (TRA)
+25. Industrial Risk Assessment Documentation
+
+# SERIES 12: VULNERABILITY MANAGEMENT
+
+1. Introduction to Vulnerability Management
+2. Vulnerability Lifecycle
+3. CVE
+4. CVSS
+5. CWE
+6. Vulnerability Identification
+7. Vulnerability Scanning
+8. Authenticated Scanning
+9. Unauthenticated Scanning
+10. Nessus
+11. Qualys
+12. OpenVAS
+13. OT Vulnerability Assessment
+14. Passive OT Monitoring
+15. Asset Discovery
+16. Vulnerability Prioritization
+17. Risk-Based Vulnerability Management
+18. Patch Management
+19. Compensating Controls
+20. Configuration Assessment
+21. Remediation Planning
+22. Vulnerability Reporting
+23. Exception Management
+24. Vulnerability Tracking
+25. Continuous Vulnerability Management
+
+# SERIES 13: INDUSTRIAL SYSTEM HARDENING
+
+1. Introduction to System Hardening
+2. Secure Configuration Baselines
+3. Windows Server Hardening
+4. Linux Hardening
+5. Workstation Hardening
+6. Server Hardening
+7. PLC Security Configuration
+8. SCADA Security Configuration
+9. HMI Hardening
+10. Engineering Workstation Hardening
+11. Disable Unnecessary Services
+12. Secure User Accounts
+13. Password Policies
+14. Multi-Factor Authentication
+15. Access Control
+16. Application Whitelisting
+17. Endpoint Protection
+18. USB Device Control
+19. Removable Media Security
+20. Secure Remote Access
+21. Patch Management Policies
+22. Backup and Recovery
+23. Configuration Management
+24. Hardening Validation
+25. Secure Configuration Documentation
+
+# SERIES 14: INDUSTRIAL INTERNET OF THINGS (IIOT)
+
+1. Introduction to IIoT
+2. IIoT Architecture
+3. IIoT vs IoT
+4. Connected Factory
+5. Smart Manufacturing
+6. Industrial Sensors
+7. Smart Devices
+8. Edge Computing
+9. Industrial Gateways
+10. Cloud Connectivity
+11. Industrial Data Collection
+12. MQTT Communication
+13. OPC UA Integration
+14. Industrial Data Pipelines
+15. IIoT Security Architecture
+16. Device Authentication
+17. Device Identity
+18. Secure Device Communication
+19. Firmware Security
+20. Device Lifecycle Management
+21. IIoT Vulnerabilities
+22. Edge Device Hardening
+23. Connected Factory Security
+24. IIoT Threat Modeling
+25. IIoT Risk Assessment
+
+# SERIES 15: INDUSTRIAL CYBERSECURITY INCIDENT RESPONSE
+
+1. Introduction to Incident Response
+2. Incident Response Lifecycle
+3. Incident Identification
+4. Incident Classification
+5. Incident Prioritization
+6. Incident Containment
+7. Incident Eradication
+8. Incident Recovery
+9. Post-Incident Analysis
+10. OT Incident Response
+11. Industrial Ransomware Response
+12. PLC Compromise Scenarios
+13. SCADA Security Incidents
+14. Network Intrusion Detection
+15. Security Event Monitoring
+16. Log Collection
+17. Windows Event Logs
+18. Linux System Logs
+19. Network Traffic Analysis
+20. Incident Escalation
+21. Forensic Fundamentals
+22. Evidence Preservation
+23. Business Continuity
+24. Disaster Recovery
+25. OT Incident Response Playbooks
+
+# SERIES 16: INDUSTRIAL CYBERSECURITY MONITORING AND DETECTION
+
+1. Introduction to Security Monitoring
+2. SIEM Fundamentals
+3. SOC Fundamentals
+4. OT Security Monitoring
+5. Network Traffic Monitoring
+6. Passive Network Monitoring
+7. Industrial Asset Discovery
+8. Protocol Monitoring
+9. Anomaly Detection
+10. Behavioral Analysis
+11. IDS and IPS
+12. Network Detection and Response
+13. OT Threat Detection
+14. Industrial Security Alerts
+15. Security Event Correlation
+16. Log Management
+17. Threat Intelligence Integration
+18. MITRE ATT&CK Mapping
+19. Detection Engineering
+20. Security Dashboards
+21. Incident Investigation
+22. OT Monitoring Limitations
+23. Industrial Security Reporting
+
+# SERIES 17: INDUSTRIAL CYBERSECURITY GOVERNANCE
+
+1. Introduction to Security Governance
+2. Cybersecurity Policies
+3. Corporate Security Standards
+4. Manufacturing Security Policies
+5. IT/OT Governance
+6. Security Control Frameworks
+7. Security Requirements
+8. Security Control Mapping
+9. Control Implementation
+10. Security Exceptions
+11. Risk Acceptance
+12. Security Audits
+13. Compliance Assessments
+14. Internal Auditing
+15. External Auditing
+16. Third-Party Risk Management
+17. Supplier Security
+18. Supply Chain Security
+19. Security Documentation
+20. Policy Review
+21. Security KPI and KRI
+22. Continuous Improvement
+23. Cybersecurity Maturity Assessment
+
+# SERIES 18: SECURE-BY-DESIGN AND SECURE DEVELOPMENT
+
+1. Introduction to Secure-by-Design
+2. Security-by-Default
+3. Security Requirements Engineering
+4. Secure Architecture Design
+5. Secure System Development Lifecycle
+6. Security Design Reviews
+7. Threat Modeling During Design
+8. Secure Configuration
+9. Secure Coding Fundamentals
+10. Application Security
+11. API Security
+12. Authentication and Authorization
+13. Secrets Management
+14. Encryption
+15. Secure Software Deployment
+16. Security Testing
+17. Penetration Testing Fundamentals
+18. Security Validation
+19. Secure Release Management
+20. Product Security Lifecycle
+21. Third-Party Component Security
+22. Software Bill of Materials (SBOM)
+23. Secure Product Documentation
+
+# SERIES 19: INDUSTRIAL HARDWARE AND PRODUCT SECURITY
+
+1. Introduction to Industrial Hardware Security
+2. Industrial Hardware Architecture
+3. PLC Hardware
+4. SCADA Hardware
+5. Industrial Servers
+6. Industrial Switches
+7. Industrial Routers
+8. Sensors and Controllers
+9. Embedded Systems Fundamentals
+10. Firmware Security
+11. Boot Security
+12. Secure Boot
+13. Firmware Updates
+14. Hardware Access Control
+15. Physical Security
+16. USB and Removable Media
+17. Industrial Equipment Configuration
+18. Product Security Assessment
+19. Third-Party Component Assessment
+20. Industrial Hardware Hardening
+
+# SERIES 20: MANUFACTURING CYBERSECURITY
+
+1. Introduction to Manufacturing Security
+2. Manufacturing Infrastructure
+3. Factory Network Architecture
+4. Production Systems
+5. Shopfloor Security
+6. Connected Factory
+7. Industrial Automation Security
+8. Production Line Security
+9. Engineering Network Security
+10. Manufacturing Execution Systems
+11. Industrial Data Protection
+12. Production Availability
+13. Production Continuity
+14. Manufacturing Risk Assessment
+15. Manufacturing Vulnerability Management
+16. Factory Security Baselines
+17. Industrial Access Management
+18. Manufacturing Incident Response
+19. Factory Security Audits
+20. Manufacturing Security Architecture
+
+# SERIES 21: POWER GRID AND TRANSFORMER CYBERSECURITY
+
+1. Introduction to Power Grid Infrastructure
+2. Electrical Power Systems Fundamentals
+3. Power Generation
+4. Power Transmission
+5. Power Distribution
+6. Transformer Fundamentals
+7. Transformer Architecture
+8. Substation Architecture
+9. Digital Substations
+10. Substation Automation
+11. IEC 61850
+12. SCADA in Power Systems
+13. Industrial Control Systems in Energy
+14. Grid Communication Protocols
+15. HVDC Fundamentals
+16. Grid Stabilization
+17. Grid Monitoring
+18. Smart Grid Architecture
+19. OT Security in Power Infrastructure
+20. Transformer Monitoring Systems
+21. Critical Infrastructure Protection
+22. Power Grid Threat Landscape
+23. Energy Sector Cybersecurity
+24. Grid Resilience
+25. Power Infrastructure Incident Response
+
+# SERIES 22: THIRD-PARTY AND SUPPLY CHAIN SECURITY
+
+1. Introduction to Supply Chain Security
+2. Third-Party Risk Management
+3. Vendor Risk Assessment
+4. Supplier Security Requirements
+5. Vendor Security Questionnaires
+6. Third-Party Component Assessment
+7. Software Supply Chain Security
+8. Hardware Supply Chain Security
+9. SBOM
+10. Firmware Integrity
+11. Software Integrity
+12. Secure Procurement
+13. Vendor Access Management
+14. Remote Vendor Access
+15. Supplier Vulnerability Management
+16. Contractual Security Requirements
+17. Supply Chain Threat Modeling
+18. Risk-Based Supplier Assessment
+19. Vendor Compliance
+20. Continuous Supplier Monitoring
+
+# SERIES 23: INDUSTRIAL CYBERSECURITY DOCUMENTATION
+
+1. Security Requirements Specifications
+2. Functional Security Requirements
+3. Non-Functional Security Requirements
+4. Technical Architecture Documents
+5. Security Architecture Documents
+6. Network Architecture Diagrams
+7. Data Flow Diagrams
+8. Threat Models
+9. Risk Assessment Reports
+10. Vulnerability Assessment Reports
+11. Configuration Baselines
+12. Hardening Guidelines
+13. Implementation Guidelines
+14. Security Testing Procedures
+15. Security Validation Reports
+16. Incident Response Procedures
+17. Standard Operating Procedures
+18. Security Policies
+19. Audit Documentation
+20. User Documentation
+21. Security Exception Reports
+22. Risk Treatment Plans
+
+# SERIES 24: STAKEHOLDER MANAGEMENT AND CONSULTING
+
+1. Introduction to Stakeholder Management
+2. Business Requirement Gathering
+3. Technical Requirement Gathering
+4. Factory Stakeholder Communication
+5. Engineering Team Collaboration
+6. Manufacturing Team Collaboration
+7. Global Team Collaboration
+8. Cross-Functional Communication
+9. Technical Consulting
+10. Security Advisory
+11. Cybersecurity Awareness
+12. Security Workshops
+13. Security Training
+14. Technical Presentations
+15. Risk Communication
+16. Business Impact Analysis
+17. Problem Solving
+18. Decision Making
+19. Project Coordination
+20. Continuous Improvement
+
+# SERIES 25: INDUSTRIAL CYBERSECURITY TOOLS – HANDS-ON
+
+1. Wireshark
+2. Nmap
+3. Nessus
+4. OpenVAS
+5. Qualys
+6. Microsoft Defender
+7. Microsoft Sentinel
+8. Sysmon
+9. Splunk Fundamentals
+10. Wazuh
+11. Kali Linux Fundamentals
+12. Windows Event Viewer
+13. PowerShell
+14. Linux Security Tools
+15. Firewall Management
+16. Network Monitoring Tools
+17. OT Asset Discovery Tools
+18. Passive OT Network Monitoring
+19. Industrial Protocol Analysis
+20. Configuration Compliance Tools
+
+# SERIES 26: INDUSTRIAL CYBERSECURITY CAPSTONE PROJECTS
+
+PROJECT 1: SECURE IT/OT NETWORK ARCHITECTURE
+
+- Design an industrial network.
+- Implement Purdue Architecture.
+- Create OT zones and conduits.
+- Design an Industrial DMZ.
+- Configure firewall rules.
+- Define secure remote access.
+- Document the security architecture.
+
+PROJECT 2: INDUSTRIAL THREAT AND RISK ASSESSMENT
+
+- Identify industrial assets.
+- Classify assets.
+- Identify threats.
+- Identify vulnerabilities.
+- Develop threat scenarios.
+- Perform likelihood and impact analysis.
+- Calculate risk scores.
+- Recommend security controls.
+- Prepare a TRA report.
+
+PROJECT 3: INDUSTRIAL SYSTEM HARDENING
+
+- Create Windows Server security baseline.
+- Create Linux security baseline.
+- Define workstation hardening.
+- Define PLC and SCADA security requirements.
+- Define USB control policies.
+- Define patch management guidelines.
+- Prepare configuration compliance documentation.
+
+PROJECT 4: OT SECURITY MONITORING
+
+- Create an isolated OT lab.
+- Simulate industrial network traffic.
+- Analyze traffic using Wireshark.
+- Identify suspicious communication.
+- Configure monitoring.
+- Create detection use cases.
+- Prepare incident response procedures.
+
+PROJECT 5: CONNECTED FACTORY SECURITY
+
+- Design IIoT architecture.
+- Identify industrial sensors and gateways.
+- Define device authentication.
+- Secure industrial communication.
+- Implement network segmentation.
+- Perform threat modeling.
+- Document security requirements.
+
+# FINAL INTERVIEW PREPARATION SERIES
+
+1. Cybersecurity Fundamentals Interview Questions
+2. Networking Interview Questions
+3. Linux and Windows Interview Questions
+4. Network Security Interview Questions
+5. OT Security Interview Questions
+6. IT vs OT Interview Questions
+7. ICS Interview Questions
+8. PLC and SCADA Interview Questions
+9. Industrial Protocol Interview Questions
+10. Purdue Model Interview Questions
+11. IEC 62443 Interview Questions
+12. NIST Framework Interview Questions
+13. Threat Modeling Interview Questions
+14. Threat and Risk Assessment Interview Questions
+15. Vulnerability Management Interview Questions
+16. System Hardening Interview Questions
+17. IIoT Security Interview Questions
+18. Incident Response Interview Questions
+19. Industrial Security Monitoring Interview Questions
+20. Manufacturing Cybersecurity Interview Questions
+21. Transformer and Power Grid Security Interview Questions
+22. Supply Chain Security Interview Questions
+23. Secure-by-Design Interview Questions
+24. Industrial Security Architecture Interview Questions
+25. Scenario-Based Siemens Energy Interview Questions
+26. Stakeholder Management Interview Questions
+27. Technical Documentation Interview Questions
+
+---
+
+# RECOMMENDED LEARNING ORDER
+
+LEVEL 1 – FOUNDATION
+Series 01–04: Cybersecurity, Networking, Linux, Windows and Network Security.
+
+LEVEL 2 – INDUSTRIAL FUNDAMENTALS
+Series 05–08: Industrial Automation, ICS, Industrial Protocols and OT Security.
+
+LEVEL 3 – SECURITY ARCHITECTURE
+Series 09–13: IT/OT Architecture, Standards, Threat Modeling, Vulnerability Management and Hardening.
+
+LEVEL 4 – ADVANCED INDUSTRIAL SECURITY
+Series 14–22: IIoT, Incident Response, Monitoring, Governance, Secure-by-Design, Hardware, Manufacturing, Power Grid and Supply Chain Security.
+
+LEVEL 5 – PROFESSIONAL IMPLEMENTATION
+Series 23–26: Documentation, Consulting, Tools, Capstone Projects and Interviews.
+
+FINAL OBJECTIVE:
+
+Become capable of independently assessing, designing, implementing, documenting and advising on cybersecurity controls for industrial manufacturing and OT environments.
+
+TARGET ROLE: INDUSTRIAL CYBERSECURITY EXPERT – SIEMENS ENERGY

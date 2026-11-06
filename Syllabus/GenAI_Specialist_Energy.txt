@@ -1,0 +1,730 @@
+# GEN AI SPECIALIST – COMPLETE LEARNING SYLLABUS
+## Siemens Energy | Gurugram | Job ID: 304788
+### Preparation Level: Basic to Advanced
+
+OBJECTIVE:
+Become an enterprise-ready GenAI Specialist with expertise in Python, Azure OpenAI, RAG, Multimodal AI, Azure Cloud, AI Security and Production Deployment.
+
+---
+
+# SERIES 01: PYTHON PROGRAMMING – BASIC TO ADVANCED
+
+1. Introduction to Python
+2. Variables and Data Types
+3. Operators
+4. Conditional Statements
+5. Loops (For, While)
+6. Strings and String Methods
+7. Lists, Tuples, Sets and Dictionaries
+8. List Comprehension
+9. Functions and Lambda Functions
+10. *args and **kwargs
+11. Exception Handling
+12. File Handling (TXT, CSV, JSON)
+13. Object-Oriented Programming
+14. Classes and Objects
+15. Inheritance, Polymorphism and Encapsulation
+16. Decorators
+17. Generators and Iterators
+18. Modules and Packages
+19. Virtual Environments
+20. Advanced Python
+21. Multithreading and Multiprocessing
+22. Asyncio and Async/Await
+23. API Integration
+24. Logging and Debugging
+25. Python Best Practices
+
+# SERIES 02: DATA ANALYSIS AND DATA PROCESSING
+
+1. NumPy Fundamentals
+2. Pandas Fundamentals
+3. Series and DataFrames
+4. Data Cleaning
+5. Missing Value Handling
+6. Duplicate Handling
+7. Data Transformation
+8. Data Aggregation
+9. GroupBy and Pivot Tables
+10. Data Visualization
+11. Matplotlib and Plotly
+12. CSV and Excel Processing
+13. JSON Processing
+14. PDF and DOCX Processing
+15. Large Dataset Processing
+16. Data Modeling
+17. SQL Fundamentals
+18. Joins and Subqueries
+19. CTEs and Window Functions
+20. Query Optimization
+
+# SERIES 03: STATISTICS AND MACHINE LEARNING
+
+1. Descriptive Statistics
+2. Probability
+3. Probability Distributions
+4. Mean, Median and Mode
+5. Variance and Standard Deviation
+6. Hypothesis Testing
+7. Correlation and Covariance
+8. Linear Regression
+9. Logistic Regression
+10. Decision Trees
+11. Random Forest
+12. XGBoost and Gradient Boosting
+13. KNN
+14. SVM
+15. K-Means Clustering
+16. PCA
+17. Feature Engineering
+18. Feature Selection
+19. Model Training and Testing
+20. Cross Validation
+21. Hyperparameter Tuning
+22. Classification Metrics
+23. Regression Metrics
+24. Model Deployment
+25. Model Monitoring
+
+# SERIES 04: DEEP LEARNING AND NLP
+
+1. Introduction to Deep Learning
+2. Artificial Neural Networks
+3. Perceptron
+4. Activation Functions
+5. Forward Propagation
+6. Backpropagation
+7. Gradient Descent
+8. Loss Functions
+9. Optimizers
+10. TensorFlow and PyTorch
+11. CNN
+12. RNN
+13. LSTM and GRU
+14. NLP Fundamentals
+15. Text Preprocessing
+16. Tokenization
+17. Stopword Removal
+18. Stemming and Lemmatization
+19. POS Tagging
+20. Named Entity Recognition
+21. Sentiment Analysis
+22. Text Classification
+23. TF-IDF
+24. Bag of Words
+25. Word2Vec
+26. GloVe
+27. Word Embeddings
+28. Contextual Embeddings
+
+# SERIES 05: GENERATIVE AI FUNDAMENTALS
+
+1. Introduction to Generative AI
+2. Traditional AI vs Generative AI
+3. Discriminative vs Generative Models
+4. What is an LLM?
+5. How LLMs Work
+6. GPT Architecture
+7. Transformer Architecture
+8. Encoder and Decoder
+9. Self-Attention Mechanism
+10. Multi-Head Attention
+11. Positional Encoding
+12. Tokenization
+13. BPE and WordPiece
+14. Context Window
+15. Parameters and Hyperparameters
+16. Temperature
+17. Top-K Sampling
+18. Top-P Sampling
+19. Hallucinations
+20. LLM Limitations
+21. Model Selection
+22. GPT vs Gemini vs Claude vs Llama
+
+# SERIES 06: PROMPT ENGINEERING AND LLM APPLICATIONS
+
+1. Introduction to Prompt Engineering
+2. Zero-Shot Prompting
+3. One-Shot Prompting
+4. Few-Shot Prompting
+5. Role-Based Prompting
+6. Contextual Prompting
+7. Instruction-Based Prompting
+8. Structured Output
+9. JSON Output
+10. Prompt Templates
+11. System and User Messages
+12. Prompt Chaining
+13. Prompt Optimization
+14. Function Calling
+15. Tool Calling
+16. Structured Data Extraction
+17. Text Summarization
+18. Question Answering
+19. Classification Using LLMs
+20. Prompt Injection Fundamentals
+
+# SERIES 07: AZURE CLOUD FUNDAMENTALS
+
+1. Introduction to Microsoft Azure
+2. Azure Portal
+3. Azure Regions and Availability Zones
+4. Azure Subscriptions
+5. Resource Groups
+6. Azure Resource Manager
+7. Azure Virtual Machines
+8. Azure App Service
+9. Azure Functions
+10. Azure Storage Accounts
+11. Blob Storage
+12. Data Lake Storage
+13. Azure SQL Database
+14. Microsoft Entra ID
+15. Azure RBAC
+16. Managed Identities
+17. Azure Key Vault
+18. Azure Monitor
+19. Log Analytics
+20. Application Insights
+21. Azure Pricing and Cost Management
+
+# SERIES 08: AZURE NETWORKING AND SECURITY
+
+1. Networking Fundamentals
+2. IP Addressing
+3. Public and Private IP
+4. Virtual Networks (VNet)
+5. Subnets
+6. Network Security Groups
+7. Azure Firewall
+8. Load Balancers
+9. Application Gateway
+10. VPN Gateway
+11. ExpressRoute
+12. Private Endpoints
+13. Private DNS
+14. VNet Integration
+15. Identity and Access Management
+16. RBAC
+17. Managed Identity
+18. Key Vault Integration
+19. Encryption at Rest
+20. Encryption in Transit
+21. Data Privacy
+22. PII Detection and Masking
+23. Enterprise Security Best Practices
+
+# SERIES 09: AZURE AI FOUNDRY AND AZURE OPENAI
+
+1. Introduction to Azure AI
+2. Azure AI Foundry
+3. Azure AI Foundry Projects
+4. Model Catalog
+5. Model Deployment
+6. Azure OpenAI Service
+7. Azure OpenAI Resource Setup
+8. GPT Model Deployment
+9. Model Endpoints
+10. API Authentication
+11. Microsoft Entra Authentication
+12. Chat Completions
+13. Responses API
+14. System and User Prompts
+15. Embedding Models
+16. Text Embeddings
+17. Vector Dimensions
+18. Function Calling
+19. Tool Integration
+20. Streaming Responses
+21. Multimodal Model Integration
+22. Content Safety
+23. Responsible AI
+24. Token Usage Monitoring
+25. Azure OpenAI Cost Optimization
+
+# SERIES 10: AZURE AI SERVICES
+
+1. Introduction to Azure AI Services
+2. Azure AI Language
+3. Text Analytics
+4. Sentiment Analysis
+5. Key Phrase Extraction
+6. Named Entity Recognition
+7. Text Classification
+8. Translator Service
+9. Language Detection
+10. Azure AI Speech
+11. Speech-to-Text
+12. Text-to-Speech
+13. Azure AI Document Intelligence
+14. Form Recognizer
+15. OCR
+16. Document Extraction
+17. Layout Analysis
+18. Tables and Key-Value Extraction
+19. Document Processing Pipelines
+20. Integration with Azure OpenAI
+
+# SERIES 11: EMBEDDINGS AND VECTOR DATABASES
+
+1. Introduction to Embeddings
+2. What are Vector Embeddings?
+3. How Embeddings Work
+4. Word vs Sentence Embeddings
+5. Semantic Similarity
+6. Cosine Similarity
+7. Euclidean Distance
+8. Dot Product
+9. Embedding Models
+10. OpenAI Embeddings
+11. Gemini Embedding 2
+12. Multimodal Embeddings
+13. Vector Indexing
+14. Vector Search
+15. FAISS
+16. ChromaDB
+17. Pinecone
+18. Qdrant
+19. Metadata Filtering
+20. Similarity Search Optimization
+
+# SERIES 12: RETRIEVAL-AUGMENTED GENERATION (RAG)
+
+1. Introduction to RAG
+2. Why RAG is Required
+3. RAG Architecture
+4. RAG vs Fine-Tuning
+5. Data Ingestion
+6. PDF Processing
+7. DOCX Processing
+8. CSV and Excel Processing
+9. Document Preprocessing
+10. Text Cleaning
+11. Chunking Strategies
+12. Fixed-Size Chunking
+13. Recursive Chunking
+14. Semantic Chunking
+15. Overlapping Chunks
+16. Metadata Extraction
+17. Embedding Generation
+18. Vector Database Integration
+19. Retriever Architecture
+20. Top-K Retrieval
+21. Similarity Search
+22. Context Injection
+23. Grounded Generation
+24. Source Citations
+25. RAG Evaluation
+
+# SERIES 13: ADVANCED RAG AND AZURE AI SEARCH
+
+1. Introduction to Azure AI Search
+2. Azure AI Search Architecture
+3. Search Services
+4. Indexes and Indexers
+5. Data Sources
+6. Skillsets
+7. Blob Storage Integration
+8. Vector Search
+9. Keyword Search
+10. Hybrid Search
+11. Semantic Search
+12. Semantic Reranking
+13. Metadata Filtering
+14. Query Rewriting
+15. Multi-Query Retrieval
+16. Parent-Child Retrieval
+17. Contextual Retrieval
+18. Advanced Chunking
+19. RAG with Azure OpenAI
+20. RAG with Azure AI Search
+21. Agentic Retrieval
+22. Graph RAG Fundamentals
+23. Multimodal RAG
+24. Retrieval Evaluation
+25. RAG Performance Optimization
+
+# SERIES 14: FINE-TUNING AND LLM OPTIMIZATION
+
+1. Introduction to Fine-Tuning
+2. Pretraining vs Fine-Tuning
+3. Supervised Fine-Tuning
+4. Instruction Tuning
+5. Dataset Preparation
+6. Training Data Formatting
+7. LoRA
+8. QLoRA
+9. PEFT
+10. Parameter-Efficient Fine-Tuning
+11. Hugging Face
+12. Model Quantization
+13. Model Compression
+14. Inference Optimization
+15. Fine-Tuning Evaluation
+16. When to Use RAG vs Fine-Tuning
+
+# SERIES 15: AGENTIC AI AND MULTI-AGENT SYSTEMS
+
+1. Introduction to AI Agents
+2. Agent Architecture
+3. Agent Reasoning
+4. Tool Calling
+5. Function Calling
+6. Agent Memory
+7. Short-Term Memory
+8. Long-Term Memory
+9. LangChain
+10. LangGraph
+11. State Management
+12. Conditional Routing
+13. Workflow Orchestration
+14. Multi-Agent Architecture
+15. Supervisor Agent
+16. Worker Agents
+17. CrewAI
+18. AutoGen
+19. Microsoft Semantic Kernel
+20. Human-in-the-Loop
+21. MCP Fundamentals
+22. MCP Servers and Clients
+23. A2A Protocol Fundamentals
+24. Agent Evaluation
+25. Agent Security
+
+# SERIES 16: MULTIMODAL GENERATIVE AI
+
+1. Introduction to Multimodal AI
+2. Text-Based AI
+3. Image Understanding
+4. Image Classification
+5. Image Captioning
+6. Visual Question Answering
+7. OCR
+8. Image Generation
+9. Diffusion Models
+10. Text-to-Image
+11. Image Embeddings
+12. CLIP
+13. Gemini Multimodal Models
+14. Video Understanding
+15. Video Frame Extraction
+16. Scene Detection
+17. Video Summarization
+18. Audio Processing
+19. Speech Recognition
+20. Text-to-Speech
+21. Multimodal Embeddings
+22. Multimodal RAG
+23. Text-Image Retrieval
+24. Video-Text Retrieval
+25. Multimodal Application Development
+
+# SERIES 17: BACKEND DEVELOPMENT USING FASTAPI
+
+1. Introduction to Backend Development
+2. REST API Fundamentals
+3. HTTP Methods
+4. FastAPI Installation
+5. Routes and Endpoints
+6. Path and Query Parameters
+7. Request and Response Models
+8. Pydantic
+9. Data Validation
+10. CRUD Operations
+11. Database Integration
+12. PostgreSQL
+13. MongoDB
+14. SQLAlchemy
+15. Authentication
+16. JWT
+17. OAuth2
+18. Middleware
+19. Exception Handling
+20. Async API Development
+21. Background Tasks
+22. Streaming Responses
+23. WebSockets
+24. API Documentation
+25. FastAPI + Azure OpenAI Integration
+
+# SERIES 18: FRONTEND DEVELOPMENT USING REACT
+
+1. HTML Fundamentals
+2. CSS Fundamentals
+3. JavaScript Fundamentals
+4. ES6
+5. React Introduction
+6. Components
+7. Props
+8. State
+9. Hooks
+10. useState
+11. useEffect
+12. API Integration
+13. Axios and Fetch
+14. React Forms
+15. Authentication
+16. Chat UI Development
+17. Streaming Chat Responses
+18. React + FastAPI Integration
+19. Frontend Deployment
+20. Building Enterprise AI Interfaces
+
+# SERIES 19: DOCKER, KUBERNETES AND CI/CD
+
+1. Introduction to DevOps
+2. Git Fundamentals
+3. GitHub and GitLab
+4. Branching and Merging
+5. Pull Requests
+6. GitHub Actions
+7. CI/CD Fundamentals
+8. Docker Introduction
+9. Docker Images
+10. Docker Containers
+11. Dockerfile
+12. Docker Compose
+13. Container Networking
+14. Kubernetes Fundamentals
+15. Pods
+16. Deployments
+17. Services
+18. ConfigMaps
+19. Secrets
+20. Ingress
+21. Container Registry
+22. Azure Container Apps
+23. Azure Kubernetes Service (AKS)
+24. Application Deployment
+25. Production Monitoring
+
+# SERIES 20: AZURE ML, LLMOPS AND MONITORING
+
+1. Introduction to MLOps
+2. Introduction to LLMOps
+3. Azure Machine Learning
+4. Azure ML Workspace
+5. Experiments
+6. Model Registry
+7. Model Endpoints
+8. Model Deployment
+9. Prompt Versioning
+10. Model Versioning
+11. Dataset Versioning
+12. Experiment Tracking
+13. LLM Evaluation
+14. Prompt Evaluation
+15. Retrieval Evaluation
+16. Latency Monitoring
+17. Token Usage Monitoring
+18. Cost Monitoring
+19. Application Insights
+20. Distributed Tracing
+21. Logging and Metrics
+22. Error Monitoring
+23. Reliability and Scalability
+
+# SERIES 21: GENAI SECURITY, PRIVACY AND GOVERNANCE
+
+1. Introduction to AI Security
+2. LLM Security Fundamentals
+3. Prompt Injection
+4. Jailbreak Attacks
+5. Data Leakage
+6. Sensitive Data Protection
+7. PII Detection
+8. Data Masking
+9. Secure Prompt Design
+10. Secure RAG Architecture
+11. Document-Level Access Control
+12. Role-Based Access Control
+13. Authentication and Authorization
+14. Managed Identity
+15. Key Vault
+16. Private Endpoints
+17. Network Security
+18. Encryption
+19. Content Safety
+20. Responsible AI
+21. AI Governance
+22. Audit Logging
+23. Compliance Requirements
+24. Human Approval Workflows
+25. Enterprise AI Security Best Practices
+
+# SERIES 22: ENTERPRISE DATA INTEGRATION
+
+1. Introduction to Enterprise Data Platforms
+2. Data Engineering Fundamentals
+3. ETL and ELT
+4. Data Pipelines
+5. Snowflake Fundamentals
+6. Snowflake Architecture
+7. Snowflake SQL
+8. Snowflake Integration with Python
+9. AWS Fundamentals
+10. Amazon S3
+11. AWS Lambda
+12. AWS IAM
+13. AWS Bedrock Fundamentals
+14. OCI Fundamentals
+15. OCI Object Storage
+16. OCI IAM
+17. OCI Generative AI
+18. Cross-Cloud Integration
+19. REST API Integration
+20. Enterprise Data Integration
+
+# SERIES 23: SIEMENS ENERGY INDUSTRIAL AI USE CASES
+
+1. Introduction to Industrial AI
+2. Industrial IoT (IIoT)
+3. Industrial Data Architecture
+4. Time-Series Data
+5. Sensor Data Processing
+6. Predictive Maintenance
+7. Anomaly Detection
+8. Equipment Failure Prediction
+9. Root Cause Analysis
+10. Turbine Operations Fundamentals
+11. Turbine Maintenance Documentation
+12. Technical Manual Processing
+13. Engineering Document Search
+14. Digital Twin Fundamentals
+15. Industrial Computer Vision
+16. Equipment Image Analysis
+17. Maintenance Video Summarization
+18. Sensor Data + GenAI Integration
+19. Maintenance Knowledge Assistant
+20. AI-Based Troubleshooting
+21. Human-in-the-Loop for Safety-Critical Decisions
+
+# SERIES 24: BUSINESS ANALYSIS AND STAKEHOLDER MANAGEMENT
+
+1. Requirement Gathering
+2. Business Problem Identification
+3. Functional Requirements
+4. Non-Functional Requirements
+5. Translating Business Needs into Technical Specifications
+6. AI Solution Architecture
+7. Technical Design Documents
+8. Proof of Concept (POC)
+9. Minimum Viable Product (MVP)
+10. Cost-Benefit Analysis
+11. AI ROI
+12. Stakeholder Communication
+13. Technical Presentations
+14. AI Workshops
+15. User Training
+16. Documentation
+17. Knowledge Transfer
+18. Enterprise AI Adoption
+
+# SERIES 25: END-TO-END CAPSTONE PROJECTS
+
+PROJECT 1: ENTERPRISE RAG ASSISTANT
+- Azure OpenAI
+- Azure AI Search
+- Azure Blob Storage
+- Python
+- FastAPI
+- Vector Search
+- Hybrid Search
+- Reranking
+- RBAC
+- Monitoring
+
+PROJECT 2: AI-POWERED TURBINE MAINTENANCE ASSISTANT
+- Industrial Data
+- Sensor Data
+- Technical Manuals
+- Document Intelligence
+- Azure OpenAI
+- RAG
+- Predictive Maintenance
+- Anomaly Detection
+- Source Citations
+- Human Approval
+
+PROJECT 3: MULTIMODAL AI PLATFORM
+- Text Understanding
+- Image Understanding
+- Image Embeddings
+- Video Summarization
+- Audio Processing
+- Multimodal RAG
+- Azure AI Services
+- FastAPI
+- React
+
+PROJECT 4: PRODUCTION-READY GENAI APPLICATION
+- Azure OpenAI
+- Azure AI Search
+- Python
+- FastAPI
+- React
+- PostgreSQL
+- Docker
+- Kubernetes
+- CI/CD
+- Key Vault
+- Managed Identity
+- Application Insights
+- Security and Monitoring
+
+---
+
+# FINAL INTERVIEW PREPARATION SERIES
+
+1. Python Interview Questions
+2. SQL Interview Questions
+3. Statistics and ML Interview Questions
+4. NLP Interview Questions
+5. Deep Learning Interview Questions
+6. Generative AI Interview Questions
+7. Transformer Architecture Interview Questions
+8. LLM Interview Questions
+9. Prompt Engineering Interview Questions
+10. Azure Fundamentals Interview Questions
+11. Azure OpenAI Interview Questions
+12. Azure AI Foundry Interview Questions
+13. Azure AI Services Interview Questions
+14. RAG Interview Questions
+15. Azure AI Search Interview Questions
+16. Embeddings and Vector Database Interview Questions
+17. Agentic AI Interview Questions
+18. Multimodal AI Interview Questions
+19. FastAPI Interview Questions
+20. React Interview Questions
+21. Docker and Kubernetes Interview Questions
+22. MLOps and LLMOps Interview Questions
+23. Azure Security Interview Questions
+24. Enterprise Architecture Interview Questions
+25. Siemens Energy Scenario-Based Interview Questions
+26. System Design and GenAI Architecture
+27. Stakeholder and Behavioral Interview Questions
+
+---
+
+# PREPARATION STRATEGY
+
+LEVEL 1: BASIC
+Python, SQL, Statistics, NLP, ML and Deep Learning.
+
+LEVEL 2: INTERMEDIATE
+LLMs, Transformers, Prompt Engineering, Embeddings, Azure Fundamentals and Azure OpenAI.
+
+LEVEL 3: ADVANCED
+RAG, Azure AI Search, Fine-Tuning, Agentic AI and Multimodal AI.
+
+LEVEL 4: PRODUCTION
+FastAPI, React, Docker, Kubernetes, CI/CD, LLMOps, Monitoring and Security.
+
+LEVEL 5: ENTERPRISE
+Cross-Cloud Integration, Industrial AI, Business Requirements, Architecture and Stakeholder Management.
+
+FINAL GOAL:
+Become capable of independently designing, developing, deploying, securing, monitoring and explaining enterprise-grade Generative AI applications using Microsoft Azure.
+
+TARGET ROLE: GEN AI SPECIALIST – SIEMENS ENERGY
