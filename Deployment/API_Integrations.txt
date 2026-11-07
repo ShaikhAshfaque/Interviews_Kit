@@ -1,0 +1,986 @@
+# 100 API INTEGRATION CONCEPTS
+## AI Engineer | GenAI Engineer | Data Scientist | FDE Interview Preparation
+
+Each concept includes a one-line explanation, an interview question, and a short interview-ready answer.
+
+---
+
+# SECTION 1: API FUNDAMENTALS (1–15)
+
+**1. API (Application Programming Interface)**
+
+Concept: Allows two software applications to communicate.
+
+Q: What is an API?
+
+A: An API is an interface that enables applications to exchange data and functionality.
+
+**2. REST API**
+
+Concept: Uses HTTP methods to interact with resources.
+
+Q: What is REST API?
+
+A: REST is an architectural style that uses HTTP methods and resource-based URLs for communication.
+
+**3. HTTP**
+
+Concept: Protocol used for communication between clients and servers.
+
+Q: What is HTTP?
+
+A: HTTP is a request-response protocol used to transfer data between clients and servers.
+
+**4. HTTPS**
+
+Concept: Secures HTTP communication using TLS encryption.
+
+Q: Difference between HTTP and HTTPS?
+
+A: HTTPS encrypts communication using TLS, protecting transmitted data.
+
+**5. GET Method**
+
+Concept: Retrieves information from an API.
+
+Q: What does GET do?
+
+A: GET retrieves resources without intentionally modifying server data.
+
+**6. POST Method**
+
+Concept: Creates resources or submits data for processing.
+
+Q: When do you use POST?
+
+A: I use POST to create records, submit payloads, or trigger processing operations.
+
+**7. PUT Method**
+
+Concept: Replaces an existing resource.
+
+Q: Difference between PUT and POST?
+
+A: PUT generally replaces a resource at a known URL, whereas POST submits data for processing or resource creation.
+
+**8. PATCH Method**
+
+Concept: Updates selected resource fields.
+
+Q: What is PATCH?
+
+A: PATCH performs partial updates without replacing the entire resource.
+
+**9. DELETE Method**
+
+Concept: Removes a resource.
+
+Q: What is DELETE?
+
+A: DELETE requests removal of a specified resource.
+
+**10. Request Headers**
+
+Concept: Carry metadata such as authentication and content type.
+
+Q: What are HTTP headers?
+
+A: Headers communicate metadata such as authorization, content type, and accepted response formats.
+
+**11. Request Body**
+
+Concept: Contains data sent to an API.
+
+Q: What is a request body?
+
+A: It contains the payload sent to the server, commonly in JSON format.
+
+**12. Query Parameters**
+
+Concept: Pass filters, sorting, and pagination information through URLs.
+
+Q: What are query parameters?
+
+A: They provide optional inputs to filter or customize API responses.
+
+**13. Path Parameters**
+
+Concept: Identify a specific resource within an endpoint.
+
+Q: Query parameter vs path parameter?
+
+A: Path parameters identify resources, while query parameters modify how resources are retrieved.
+
+**14. JSON**
+
+Concept: Lightweight data-interchange format.
+
+Q: Why is JSON used in APIs?
+
+A: JSON is human-readable, lightweight, and easily processed by Python and JavaScript.
+
+**15. XML**
+
+Concept: Structured markup format used for exchanging data.
+
+Q: JSON vs XML?
+
+A: JSON is generally simpler and more compact, while XML supports document structures and attributes.
+
+---
+
+# SECTION 2: API STATUS CODES AND RELIABILITY (16–30)
+
+**16. 200 OK**
+
+Concept: Request completed successfully.
+
+Q: What does status code 200 mean?
+
+A: The server successfully processed the request.
+
+**17. 201 Created**
+
+Concept: A new resource was successfully created.
+
+Q: When do you return 201?
+
+A: After successfully creating a new resource.
+
+**18. 204 No Content**
+
+Concept: Successful request with no response body.
+
+Q: What does 204 mean?
+
+A: The request succeeded, but the server has no content to return.
+
+**19. 400 Bad Request**
+
+Concept: Client submitted an invalid request.
+
+Q: What does 400 indicate?
+
+A: The request contains invalid syntax, parameters, or data.
+
+**20. 401 Unauthorized**
+
+Concept: Authentication is missing or invalid.
+
+Q: What does 401 mean?
+
+A: The client must provide valid authentication credentials.
+
+**21. 403 Forbidden**
+
+Concept: Authenticated client lacks permission.
+
+Q: Difference between 401 and 403?
+
+A: 401 means authentication is invalid or missing; 403 means access is not permitted.
+
+**22. 404 Not Found**
+
+Concept: Requested resource does not exist.
+
+Q: What causes a 404 error?
+
+A: The requested endpoint or resource cannot be found.
+
+**23. 409 Conflict**
+
+Concept: Request conflicts with current resource state.
+
+Q: When is 409 returned?
+
+A: When an operation conflicts with existing data or resource state.
+
+**24. 422 Unprocessable Entity**
+
+Concept: Request structure is valid but its data fails validation.
+
+Q: What does 422 mean?
+
+A: The server understands the request but cannot process its validation rules.
+
+**25. 429 Too Many Requests**
+
+Concept: Client exceeded API rate limits.
+
+Q: How do you handle 429?
+
+A: I implement exponential backoff, respect Retry-After, and control request frequency.
+
+**26. 500 Internal Server Error**
+
+Concept: Unexpected server-side failure.
+
+Q: What does 500 indicate?
+
+A: An unexpected error occurred while processing the request.
+
+**27. 502 Bad Gateway**
+
+Concept: Gateway received an invalid upstream response.
+
+Q: What causes 502?
+
+A: An upstream server returned an invalid response to the gateway.
+
+**28. 503 Service Unavailable**
+
+Concept: Server temporarily cannot handle requests.
+
+Q: How do you handle 503?
+
+A: I use bounded retries with backoff and monitor service availability.
+
+**29. Timeout**
+
+Concept: Request exceeds its allowed execution time.
+
+Q: Why are API timeouts important?
+
+A: They prevent applications from waiting indefinitely for unavailable services.
+
+**30. Retry Mechanism**
+
+Concept: Reattempts failed requests under controlled conditions.
+
+Q: What is exponential backoff?
+
+A: It increases the delay between retries to reduce pressure on an overloaded service.
+
+---
+
+# SECTION 3: AUTHENTICATION AND API SECURITY (31–45)
+
+**31. API Key**
+
+Concept: Identifies an application making API requests.
+
+Q: What is an API key?
+
+A: It is a credential used to identify and authorize an application.
+
+**32. Bearer Token**
+
+Concept: Authentication token sent in the Authorization header.
+
+Q: How do you send a bearer token?
+
+A: Using Authorization: Bearer <token>.
+
+**33. OAuth 2.0**
+
+Concept: Authorization framework for delegated access.
+
+Q: What is OAuth 2.0?
+
+A: It allows applications to access protected resources using delegated authorization.
+
+**34. JWT**
+
+Concept: Compact token format containing signed claims.
+
+Q: What is JWT?
+
+A: JSON Web Token carries claims that can be cryptographically verified.
+
+**35. Basic Authentication**
+
+Concept: Sends Base64-encoded username and password.
+
+Q: Is Base64 encryption?
+
+A: No, Base64 is encoding, so Basic Authentication should only be used over HTTPS.
+
+**36. Refresh Token**
+
+Concept: Obtains a new access token.
+
+Q: Why use refresh tokens?
+
+A: They allow clients to obtain new access tokens without repeating the full authentication flow.
+
+**37. Access Token Expiry**
+
+Concept: Defines how long a token remains valid.
+
+Q: Why should access tokens expire?
+
+A: Expiry limits the impact of stolen or compromised tokens.
+
+**38. RBAC**
+
+Concept: Role-Based Access Control.
+
+Q: What is RBAC?
+
+A: It assigns permissions based on user roles.
+
+**39. CORS**
+
+Concept: Controls which browser origins can access a server.
+
+Q: What is CORS?
+
+A: Cross-Origin Resource Sharing is a browser security mechanism that controls cross-origin requests.
+
+**40. Rate Limiting**
+
+Concept: Restricts requests within a time window.
+
+Q: Why implement rate limiting?
+
+A: To prevent abuse, protect infrastructure, and manage API consumption.
+
+**41. IP Whitelisting**
+
+Concept: Allows requests only from approved IP addresses.
+
+Q: What is IP whitelisting?
+
+A: It restricts API access to predefined trusted IP addresses.
+
+**42. Secrets Management**
+
+Concept: Stores sensitive credentials securely.
+
+Q: Where should API keys be stored?
+
+A: In environment variables or a dedicated secrets manager, never hardcoded in source code.
+
+**43. TLS Encryption**
+
+Concept: Protects data during network transmission.
+
+Q: What does TLS protect?
+
+A: It provides encryption, integrity, and server authentication during communication.
+
+**44. Input Validation**
+
+Concept: Checks incoming data before processing.
+
+Q: Why validate API inputs?
+
+A: To prevent invalid data, injection attacks, and unexpected application failures.
+
+**45. Audit Logging**
+
+Concept: Records security-relevant application activity.
+
+Q: What should API audit logs capture?
+
+A: They should capture relevant identities, timestamps, actions, outcomes, and request identifiers without exposing secrets.
+
+---
+
+# SECTION 4: PYTHON API INTEGRATION (46–60)
+
+**46. Python Requests Library**
+
+Concept: Connects Python applications to HTTP APIs.
+
+Q: How do you call an API using Python?
+
+A: I use the requests library with methods such as get(), post(), put(), and delete().
+
+**47. GET Request in Python**
+
+Concept: Retrieves API data.
+
+Q: How do you make a GET request?
+
+A: requests.get(url, params=params, timeout=30).
+
+**48. POST Request in Python**
+
+Concept: Sends JSON data to an endpoint.
+
+Q: How do you send JSON?
+
+A: requests.post(url, json=payload, headers=headers, timeout=30).
+
+**49. Response Object**
+
+Concept: Contains API response status, headers, and content.
+
+Q: How do you extract JSON?
+
+A: Use response.json() to convert a JSON response into Python objects.
+
+**50. Raise for Status**
+
+Concept: Raises an exception for unsuccessful HTTP responses.
+
+Q: How do you handle HTTP errors?
+
+A: Use response.raise_for_status() inside a try-except block.
+
+**51. Exception Handling**
+
+Concept: Handles API failures without crashing the application.
+
+Q: Which exceptions do you handle?
+
+A: I handle connection errors, timeouts, HTTP errors, and JSON decoding errors.
+
+**52. Session Management**
+
+Concept: Reuses HTTP connections across multiple requests.
+
+Q: Why use requests.Session()?
+
+A: It supports connection pooling and persistent headers, cookies, and authentication.
+
+**53. Environment Variables**
+
+Concept: Store configuration and API credentials outside source code.
+
+Q: How do you load an API key?
+
+A: I use os.getenv() or python-dotenv to load environment variables.
+
+**54. Asynchronous API Calls**
+
+Concept: Execute network operations without blocking the event loop.
+
+Q: What is the benefit of async APIs?
+
+A: Async improves concurrency for I/O-bound operations.
+
+**55. HTTPX**
+
+Concept: Supports synchronous and asynchronous HTTP requests in Python.
+
+Q: Requests vs HTTPX?
+
+A: Requests is primarily synchronous, whereas HTTPX supports both synchronous and asynchronous clients.
+
+**56. API Pagination**
+
+Concept: Retrieves large datasets in smaller batches.
+
+Q: Why is pagination important?
+
+A: It reduces response size, memory usage, and server load.
+
+**57. Cursor-Based Pagination**
+
+Concept: Uses continuation tokens to retrieve subsequent records.
+
+Q: Offset vs cursor pagination?
+
+A: Offset uses record positions; cursor pagination uses continuation markers and is often better for changing datasets.
+
+**58. API Filtering**
+
+Concept: Retrieves records matching specified conditions.
+
+Q: How do you filter API data?
+
+A: I pass supported query parameters such as date, status, category, or customer ID.
+
+**59. API Data Transformation**
+
+Concept: Converts external responses into an internal data structure.
+
+Q: How do you clean API data?
+
+A: I validate fields, handle missing values, standardize types, and transform data using Python or Pandas.
+
+**60. API Integration Testing**
+
+Concept: Verifies that application components communicate correctly with external APIs.
+
+Q: How do you test API integrations?
+
+A: I use Pytest, mocked responses, test environments, and actual integration tests.
+
+---
+
+# SECTION 5: FASTAPI AND BACKEND INTEGRATION (61–70)
+
+**61. FastAPI**
+
+Concept: Python framework for building high-performance APIs.
+
+Q: Why use FastAPI?
+
+A: It provides asynchronous support, automatic documentation, validation, and strong Python type integration.
+
+**62. API Endpoint**
+
+Concept: URL and HTTP method combination that exposes functionality.
+
+Q: What is an endpoint?
+
+A: An endpoint is a specific API address through which clients access a resource or operation.
+
+**63. Pydantic**
+
+Concept: Validates and structures incoming and outgoing data.
+
+Q: Why use Pydantic?
+
+A: It validates data using Python type annotations and provides structured models.
+
+**64. Dependency Injection**
+
+Concept: Provides reusable services and dependencies to API routes.
+
+Q: What is dependency injection in FastAPI?
+
+A: It manages reusable components such as database connections, authentication, and configuration.
+
+**65. Middleware**
+
+Concept: Processes requests or responses globally.
+
+Q: What is middleware?
+
+A: Middleware executes before or after route handling for logging, authentication, CORS, and other cross-cutting tasks.
+
+**66. Background Tasks**
+
+Concept: Executes additional work after returning an API response.
+
+Q: When do you use background tasks?
+
+A: For lightweight operations such as sending notifications or processing small jobs.
+
+**67. WebSockets**
+
+Concept: Enables persistent two-way communication.
+
+Q: REST vs WebSocket?
+
+A: REST uses individual request-response interactions; WebSockets support continuous bidirectional communication.
+
+**68. File Upload API**
+
+Concept: Receives files for further processing.
+
+Q: How do you upload documents through FastAPI?
+
+A: I use UploadFile and File to receive uploaded files efficiently.
+
+**69. API Versioning**
+
+Concept: Maintains compatibility across different API releases.
+
+Q: Why version APIs?
+
+A: It allows new functionality without breaking existing client integrations.
+
+**70. OpenAPI / Swagger**
+
+Concept: Documents API endpoints, schemas, and operations.
+
+Q: How does FastAPI generate Swagger documentation?
+
+A: FastAPI generates an OpenAPI schema automatically from route definitions and Pydantic models.
+
+---
+
+# SECTION 6: DATA SCIENCE AND ML API INTEGRATIONS (71–80)
+
+**71. External Data API**
+
+Concept: Retrieves third-party datasets for analytics.
+
+Q: How do you collect external data?
+
+A: I integrate authorized APIs, extract JSON responses, validate records, and load them into a data pipeline.
+
+**72. ETL API Integration**
+
+Concept: Extracts, transforms, and loads API data.
+
+Q: How do you build an API-based ETL pipeline?
+
+A: I extract paginated API records, transform them, validate data quality, and load them into a database or warehouse.
+
+**73. Data Validation**
+
+Concept: Checks dataset quality and consistency.
+
+Q: How do you validate API data?
+
+A: I check schemas, data types, null values, duplicates, ranges, and business rules.
+
+**74. Pandas Integration**
+
+Concept: Converts API responses into DataFrames.
+
+Q: How do you convert API JSON into Pandas?
+
+A: Use pd.DataFrame(response.json()) when the response contains a list of records.
+
+**75. SQL Database Integration**
+
+Concept: Stores API data in relational databases.
+
+Q: How do you store API data in MySQL?
+
+A: I use SQLAlchemy or a database connector with parameterized queries and transaction management.
+
+**76. NoSQL Integration**
+
+Concept: Stores flexible document-based data.
+
+Q: When would you use MongoDB with APIs?
+
+A: When records have flexible structures or document-oriented access patterns.
+
+**77. Feature Engineering API**
+
+Concept: Generates model-ready features from incoming data.
+
+Q: What is feature engineering in an ML API?
+
+A: It transforms raw input into relevant numerical or categorical features for model inference.
+
+**78. Model Inference API**
+
+Concept: Exposes a trained ML model through an endpoint.
+
+Q: How do you deploy an ML model as an API?
+
+A: I load the trained model in a FastAPI service, validate inputs, perform predictions, and return structured outputs.
+
+**79. Model Serialization**
+
+Concept: Saves trained models for later inference.
+
+Q: How do you save a machine learning model?
+
+A: Depending on the model, I use Joblib, Pickle, or the framework's native serialization format.
+
+**80. Model Monitoring API**
+
+Concept: Collects inference metrics and prediction information.
+
+Q: What do you monitor after model deployment?
+
+A: I monitor latency, errors, throughput, data drift, prediction distributions, and model performance when labels become available.
+
+---
+
+# SECTION 7: GENAI AND LLM API INTEGRATIONS (81–90)
+
+**81. LLM API Integration**
+
+Concept: Connects applications to Large Language Models.
+
+Q: How do you integrate an LLM into Python?
+
+A: I use an LLM provider's SDK or HTTP API, send prompts, and process the generated response.
+
+**82. OpenAI API**
+
+Concept: Provides access to GPT models through API endpoints.
+
+Q: What is the purpose of an OpenAI API?
+
+A: It enables applications to use language models for text generation, reasoning, structured outputs, and other supported tasks.
+
+**83. Gemini API**
+
+Concept: Integrates Google's Gemini models into applications.
+
+Q: How can Gemini be integrated into Python?
+
+A: I use Google's GenAI SDK, configure authentication, submit model requests, and process responses.
+
+**84. EURI API**
+
+Concept: Provides access to supported AI models through an API interface.
+
+Q: How do you integrate EURI with Python?
+
+A: I configure the EURI API key, initialize the client, select a supported model, and call the required endpoint.
+
+**85. Embedding API**
+
+Concept: Converts text or supported inputs into numerical vectors.
+
+Q: What is an embedding API?
+
+A: It converts input data into dense vector representations that capture semantic information.
+
+**86. Vector Database API**
+
+Concept: Stores and searches vector embeddings.
+
+Q: How do you integrate a vector database?
+
+A: I generate embeddings, store vectors with metadata, and query similar vectors using a vector database SDK or API.
+
+**87. RAG API Integration**
+
+Concept: Connects retrieval systems with LLMs to generate grounded answers.
+
+Q: How does RAG work?
+
+A: RAG retrieves relevant context from external knowledge sources and passes it to an LLM to generate a contextual answer.
+
+**88. LLM Streaming API**
+
+Concept: Returns generated content incrementally.
+
+Q: Why use streaming in GenAI?
+
+A: Streaming improves perceived response speed by displaying generated tokens as they arrive.
+
+**89. Function Calling / Tool Calling**
+
+Concept: Allows an LLM to request execution of external functions.
+
+Q: What is function calling?
+
+A: The model generates structured tool arguments, and the application executes the corresponding function and returns its result.
+
+**90. Multimodal API**
+
+Concept: Processes multiple input modalities such as text, images, and audio.
+
+Q: What is a multimodal API?
+
+A: It allows AI applications to process or generate multiple types of content through a supported model interface.
+
+---
+
+# SECTION 8: ADVANCED AI INTEGRATIONS AND PRODUCTION (91–100)
+
+**91. Agent API Integration**
+
+Concept: Connects AI agents with external tools and services.
+
+Q: What is an AI agent?
+
+A: An AI agent uses a model, tools, and control logic to perform tasks toward a defined objective.
+
+**92. MCP (Model Context Protocol)**
+
+Concept: Standardizes how AI applications connect with external tools and context.
+
+Q: Why use MCP?
+
+A: MCP provides a standardized way for AI applications to discover and interact with supported tools and resources.
+
+**93. LangChain Integration**
+
+Concept: Connects LLMs, prompts, retrievers, and tools into application workflows.
+
+Q: Why use LangChain?
+
+A: It provides reusable abstractions for building LLM-powered applications and integrations.
+
+**94. LangGraph Integration**
+
+Concept: Builds stateful, controlled agent workflows.
+
+Q: LangChain vs LangGraph?
+
+A: LangChain provides components for LLM applications, while LangGraph focuses on stateful orchestration and control flow.
+
+**95. Webhook Integration**
+
+Concept: Receives event notifications from external services.
+
+Q: API vs webhook?
+
+A: An API generally requires a client request, whereas a webhook pushes event notifications to a configured endpoint.
+
+**96. Redis Integration**
+
+Concept: Provides caching and fast data access.
+
+Q: Why use Redis in GenAI applications?
+
+A: Redis can cache responses, store session state, manage queues, and reduce repeated computation.
+
+**97. Dockerized API Deployment**
+
+Concept: Packages an API and its dependencies into a container.
+
+Q: Why deploy FastAPI using Docker?
+
+A: Docker provides consistent environments and simplifies deployment and scaling.
+
+**98. Cloud API Integration**
+
+Concept: Connects applications with AWS, Azure, or Google Cloud services.
+
+Q: How do you integrate cloud services?
+
+A: I use provider SDKs, secure IAM credentials, service endpoints, and monitoring.
+
+**99. API Observability**
+
+Concept: Tracks API performance, errors, logs, and traces.
+
+Q: How do you monitor production APIs?
+
+A: I track request latency, error rates, throughput, resource usage, and distributed traces.
+
+**100. API Gateway**
+
+Concept: Provides centralized routing, authentication, throttling, and API management.
+
+Q: Why use an API Gateway in AI systems?
+
+A: It centralizes access control, request routing, rate limiting, and monitoring across multiple backend services.
+
+---
+
+# SECTION 9: PRACTICAL INTERVIEW SCENARIOS
+
+**1. How would you build an API for transaction fraud detection?**
+
+Answer: FastAPI receives transactions, validates data, applies feature engineering, calls an ML model, and returns fraud probability.
+
+**2. How would you build a PDF-based RAG application?**
+
+Answer: Upload PDF → Extract text → Chunk → Embed → Store in vector DB → Retrieve → LLM response.
+
+**3. How do you integrate multiple APIs?**
+
+Answer: Use modular clients, authentication, timeout handling, retries, validation, and centralized logging.
+
+**4. How do you handle millions of API records?**
+
+Answer: Use pagination, batch processing, asynchronous requests, queues, and incremental database loading.
+
+**5. How do you secure a production GenAI API?**
+
+Answer: Use authentication, authorization, secret management, input validation, rate limiting, and monitoring.
+
+---
+
+# SECTION 10: HANDS-ON PROJECTS
+
+**PROJECT 1: Transaction Fraud Detection API**
+
+Technology Stack:
+- Python
+- FastAPI
+- Scikit-learn
+- Pandas
+- MySQL / MongoDB
+- Docker
+
+Workflow:
+1. Receive transaction data through POST API.
+2. Validate input using Pydantic.
+3. Perform feature engineering.
+4. Load the trained ML model.
+5. Predict fraud probability.
+6. Return prediction through JSON.
+7. Store transaction and prediction records.
+8. Monitor API performance.
+
+Target Role: Data Scientist / AI Engineer.
+
+**PROJECT 2: Document Intelligence RAG API**
+
+Technology Stack:
+- Python
+- FastAPI
+- Gemini / OpenAI
+- Embedding Models
+- Qdrant / FAISS
+- LangChain
+
+Workflow:
+1. Upload PDF documents.
+2. Extract document text.
+3. Split text into chunks.
+4. Generate embeddings.
+5. Store vectors in a vector database.
+6. Receive user questions.
+7. Retrieve relevant chunks.
+8. Send context to the LLM.
+9. Return grounded answers with sources.
+
+Target Role: GenAI Engineer.
+
+**PROJECT 3: Multi-Agent API Integration**
+
+Technology Stack:
+- Python
+- FastAPI
+- LangGraph
+- MCP
+- External APIs
+- Redis
+- Docker
+
+Workflow:
+1. Receive user requests.
+2. Identify the required task.
+3. Route tasks to appropriate agents.
+4. Integrate external APIs through tools.
+5. Execute agent workflows.
+6. Maintain state and conversation context.
+7. Validate tool outputs.
+8. Return final results.
+
+Target Role: Forward Deployed Engineer / AI Engineer.
+
+---
+
+# SECTION 11: 10-DAY INTERVIEW PREPARATION ROADMAP
+
+Day 1: API fundamentals and HTTP methods.
+
+Day 2: HTTP status codes, error handling, and reliability.
+
+Day 3: Authentication, OAuth, JWT, and API security.
+
+Day 4: Python Requests, HTTPX, JSON, and API integrations.
+
+Day 5: FastAPI, Pydantic, middleware, and WebSockets.
+
+Day 6: SQL, MongoDB, Pandas, ETL, and data validation.
+
+Day 7: ML model deployment and inference APIs.
+
+Day 8: OpenAI, Gemini, EURI, embeddings, and vector databases.
+
+Day 9: RAG, LangChain, LangGraph, MCP, and AI agents.
+
+Day 10: Docker, cloud deployment, monitoring, and mock interviews.
+
+---
+
+# FINAL INTERVIEW ADVICE
+
+Do not memorize only the definitions.
+
+For every concept, prepare these five things:
+
+1. What is it?
+2. Why do we use it?
+3. How does it work?
+4. How do we implement it in Python?
+5. Where have we used it in a real-world project?
+
+Focus on explaining complete workflows rather than isolated tools.
+
+**Core preparation stack:**
+
+Python + REST API + FastAPI + SQL + MongoDB + Pandas + ML + Gemini/OpenAI/EURI + Embeddings + RAG + Vector DB + LangGraph + MCP + Docker + Cloud.
+
+**Target Profiles:**
+- Data Scientist
+- Machine Learning Engineer
+- AI Engineer
+- GenAI Engineer
+- AI Consultant
+- Forward Deployed Engineer (FDE)
+
+**Preparation Motto: Consistency beats talent.**
