@@ -1,0 +1,1985 @@
+# 50 Real Interview Problems – Supabase SQL + Python
+## Basic to Intermediate | Coding Questions with Solutions | Hinglish
+
+**Target Roles:** Data Analyst, Data Scientist, AI Engineer, GenAI Engineer, Python Developer, Backend Developer, FDE.
+
+**Tech Stack:**
+- Python 3
+- PostgreSQL / Supabase
+- Supabase Python SDK
+- Pandas
+- SQL Joins, Aggregations, Subqueries, CTEs
+- CRUD Operations
+- API Integration
+
+---
+
+# PART 1: DATABASE SETUP – SUPABASE
+
+Supabase Dashboard → SQL Editor mein ye queries execute karo.
+
+## 1. Create Customers Table
+
+```sql
+CREATE TABLE customers (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    city TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+## 2. Create Transactions Table
+
+```sql
+CREATE TABLE transactions (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id BIGINT REFERENCES customers(id),
+    amount NUMERIC(12,2) NOT NULL,
+    status TEXT NOT NULL,
+    transaction_date TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+## 3. Create Products Table
+
+```sql
+CREATE TABLE products (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    product_name TEXT NOT NULL,
+    category TEXT,
+    price NUMERIC(12,2)
+);
+```
+
+## 4. Create Orders Table
+
+```sql
+CREATE TABLE orders (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id BIGINT REFERENCES customers(id),
+    product_id BIGINT REFERENCES products(id),
+    quantity INTEGER NOT NULL,
+    order_date TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+## 5. Insert Sample Customers
+
+```sql
+INSERT INTO customers (name, email, city)
+VALUES
+('Amit', 'amit@gmail.com', 'Delhi'),
+('Rahul', 'rahul@gmail.com', 'Mumbai'),
+('Neha', 'neha@gmail.com', 'Delhi'),
+('Priya', 'priya@gmail.com', 'Pune'),
+('Arjun', 'arjun@gmail.com', 'Mumbai');
+```
+
+## 6. Insert Sample Transactions
+
+```sql
+INSERT INTO transactions
+(customer_id, amount, status)
+VALUES
+(1, 1000, 'success'),
+(1, 2000, 'success'),
+(2, 1500, 'failed'),
+(2, 3000, 'success'),
+(3, 500, 'success'),
+(3, 2500, 'failed'),
+(4, 4000, 'success'),
+(5, 1000, 'success');
+```
+
+## 7. Insert Sample Products
+
+```sql
+INSERT INTO products (product_name, category, price)
+VALUES
+('Laptop', 'Electronics', 60000),
+('Mobile', 'Electronics', 25000),
+('Keyboard', 'Accessories', 1500),
+('Mouse', 'Accessories', 800),
+('Monitor', 'Electronics', 12000);
+```
+
+## 8. Insert Sample Orders
+
+```sql
+INSERT INTO orders
+(customer_id, product_id, quantity)
+VALUES
+(1, 1, 1),
+(1, 3, 2),
+(2, 2, 1),
+(3, 4, 3),
+(4, 5, 1),
+(5, 3, 2);
+```
+
+---
+
+# PART 2: BASIC SQL + SUPABASE (1–15)
+
+## Q1. Fetch All Customers
+
+**Interview Question:** Database se saare customers fetch karo.
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM customers;
+```
+
+**Python + Supabase Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("*")
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** SELECT query and data retrieval.
+
+## Q2. Fetch Customers from Delhi
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM customers
+WHERE city = 'Delhi';
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("*")
+    .eq("city", "Delhi")
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** WHERE and `.eq()` filtering.
+
+## Q3. Find Customers from Multiple Cities
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM customers
+WHERE city IN ('Delhi', 'Mumbai');
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("*")
+    .in_("city", ["Delhi", "Mumbai"])
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** IN operator and multiple-value filtering.
+
+## Q4. Find Transactions Greater Than 1000
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM transactions
+WHERE amount > 1000;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("*")
+    .gt("amount", 1000)
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** Comparison operators.
+
+## Q5. Sort Transactions by Amount
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM transactions
+ORDER BY amount DESC;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("*")
+    .order("amount", desc=True)
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** ORDER BY and descending sorting.
+
+## Q6. Fetch Only Customer Names and Emails
+
+**SQL Solution:**
+
+```sql
+SELECT name, email
+FROM customers;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("name,email")
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** Column selection and optimized data retrieval.
+
+## Q7. Count Total Customers
+
+**SQL Solution:**
+
+```sql
+SELECT COUNT(*) AS total_customers
+FROM customers;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("id", count="exact")
+    .execute()
+)
+
+print(response.count)
+```
+
+**Concept:** COUNT and exact count retrieval.
+
+## Q8. Find Average Transaction Amount
+
+**SQL Solution:**
+
+```sql
+SELECT AVG(amount) AS average_amount
+FROM transactions;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("amount")
+    .execute()
+)
+
+amounts = [
+    float(row["amount"])
+    for row in response.data
+]
+
+average = sum(amounts) / len(amounts) if amounts else 0
+
+print(average)
+```
+
+**Concept:** SQL aggregation and Python calculations.
+
+## Q9. Find Minimum and Maximum Transaction
+
+**SQL Solution:**
+
+```sql
+SELECT
+    MIN(amount) AS minimum_amount,
+    MAX(amount) AS maximum_amount
+FROM transactions;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("amount")
+    .execute()
+)
+
+amounts = [float(row["amount"]) for row in response.data]
+
+if amounts:
+    print("Minimum:", min(amounts))
+    print("Maximum:", max(amounts))
+```
+
+**Concept:** MIN, MAX and Python aggregation.
+
+## Q10. Find Successful Transactions
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM transactions
+WHERE status = 'success';
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("*")
+    .eq("status", "success")
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** Status-based filtering.
+
+## Q11. Find Transactions Between 1000 and 3000
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM transactions
+WHERE amount BETWEEN 1000 AND 3000;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("*")
+    .gte("amount", 1000)
+    .lte("amount", 3000)
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** BETWEEN and range filtering.
+
+## Q12. Find Customers Whose Name Starts with A
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM customers
+WHERE name ILIKE 'A%';
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("*")
+    .ilike("name", "A%")
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** Pattern matching and case-insensitive search.
+
+## Q13. Find Customers with Missing City
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM customers
+WHERE city IS NULL;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("*")
+    .is_("city", "null")
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** NULL handling.
+
+## Q14. Fetch Latest 3 Transactions
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM transactions
+ORDER BY transaction_date DESC
+LIMIT 3;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("*")
+    .order("transaction_date", desc=True)
+    .limit(3)
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** LIMIT and sorting.
+
+## Q15. Find Unique Customer Cities
+
+**SQL Solution:**
+
+```sql
+SELECT DISTINCT city
+FROM customers;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("city")
+    .execute()
+)
+
+cities = {
+    row["city"]
+    for row in response.data
+    if row["city"] is not None
+}
+
+print(cities)
+```
+
+**Concept:** DISTINCT and Python sets.
+
+---
+
+# PART 3: INTERMEDIATE SQL – JOINS AND AGGREGATIONS (16–30)
+
+## Q16. Join Customers and Transactions
+
+**Question:** Customer name ke saath transaction amount display karo.
+
+**SQL Solution:**
+
+```sql
+SELECT
+    c.name,
+    t.amount,
+    t.status
+FROM customers c
+INNER JOIN transactions t
+ON c.id = t.customer_id;
+```
+
+**Python + Supabase Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("amount,status,customers(name,email)")
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** INNER JOIN and Supabase relationship selection.
+
+## Q17. Find Customers Without Transactions
+
+**SQL Solution:**
+
+```sql
+SELECT c.*
+FROM customers c
+LEFT JOIN transactions t
+ON c.id = t.customer_id
+WHERE t.id IS NULL;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("id,name,transactions(id)")
+    .execute()
+)
+
+customers_without_transactions = [
+    row for row in response.data
+    if not row.get("transactions")
+]
+
+print(customers_without_transactions)
+```
+
+**Concept:** LEFT JOIN and unmatched records.
+
+## Q18. Calculate Total Spending Per Customer
+
+**SQL Solution:**
+
+```sql
+SELECT
+    c.id,
+    c.name,
+    SUM(t.amount) AS total_spending
+FROM customers c
+JOIN transactions t
+ON c.id = t.customer_id
+GROUP BY c.id, c.name
+ORDER BY total_spending DESC;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("customer_id,amount")
+    .execute()
+)
+
+summary = {}
+
+for row in response.data:
+    customer_id = row["customer_id"]
+
+    summary[customer_id] = (
+        summary.get(customer_id, 0)
+        + float(row["amount"])
+    )
+
+print(summary)
+```
+
+**Concept:** GROUP BY, SUM and dictionary aggregation.
+
+## Q19. Count Transactions by Status
+
+**SQL Solution:**
+
+```sql
+SELECT
+    status,
+    COUNT(*) AS total
+FROM transactions
+GROUP BY status;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("status")
+    .execute()
+)
+
+summary = {}
+
+for row in response.data:
+    status = row["status"]
+    summary[status] = summary.get(status, 0) + 1
+
+print(summary)
+```
+
+**Concept:** GROUP BY and frequency counting.
+
+## Q20. Find Customers Having More Than One Transaction
+
+**SQL Solution:**
+
+```sql
+SELECT
+    customer_id,
+    COUNT(*) AS total_transactions
+FROM transactions
+GROUP BY customer_id
+HAVING COUNT(*) > 1;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("customer_id")
+    .execute()
+)
+
+counts = {}
+
+for row in response.data:
+    customer_id = row["customer_id"]
+    counts[customer_id] = counts.get(customer_id, 0) + 1
+
+result = {
+    customer_id: count
+    for customer_id, count in counts.items()
+    if count > 1
+}
+
+print(result)
+```
+
+**Concept:** HAVING and grouped filtering.
+
+## Q21. Find Second Highest Transaction Amount
+
+**SQL Solution:**
+
+```sql
+SELECT DISTINCT amount
+FROM transactions
+ORDER BY amount DESC
+OFFSET 1
+LIMIT 1;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("amount")
+    .execute()
+)
+
+amounts = sorted(
+    {float(row["amount"]) for row in response.data},
+    reverse=True
+)
+
+second_highest = amounts[1] if len(amounts) >= 2 else None
+
+print(second_highest)
+```
+
+**Concept:** DISTINCT, OFFSET and sorting.
+
+## Q22. Find Duplicate Customer Emails
+
+**SQL Solution:**
+
+```sql
+SELECT
+    email,
+    COUNT(*) AS total
+FROM customers
+GROUP BY email
+HAVING COUNT(*) > 1;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("email")
+    .execute()
+)
+
+emails = [row["email"] for row in response.data]
+
+duplicates = {
+    email for email in emails
+    if emails.count(email) > 1
+}
+
+print(duplicates)
+```
+
+**Concept:** Duplicate detection. Note: Unique constraints normally prevent duplicate emails in this schema.
+
+## Q23. Calculate Revenue by City
+
+**SQL Solution:**
+
+```sql
+SELECT
+    c.city,
+    SUM(t.amount) AS total_revenue
+FROM customers c
+JOIN transactions t
+ON c.id = t.customer_id
+WHERE t.status = 'success'
+GROUP BY c.city
+ORDER BY total_revenue DESC;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("amount,customers(city)")
+    .eq("status", "success")
+    .execute()
+)
+
+revenue = {}
+
+for row in response.data:
+    city = row["customers"]["city"]
+    amount = float(row["amount"])
+
+    revenue[city] = revenue.get(city, 0) + amount
+
+print(revenue)
+```
+
+**Concept:** JOIN, GROUP BY and business analytics.
+
+## Q24. Find Top 3 Customers by Transaction Amount
+
+**SQL Solution:**
+
+```sql
+SELECT
+    c.name,
+    SUM(t.amount) AS total_amount
+FROM customers c
+JOIN transactions t
+ON c.id = t.customer_id
+GROUP BY c.id, c.name
+ORDER BY total_amount DESC
+LIMIT 3;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("customer_id,amount")
+    .execute()
+)
+
+totals = {}
+
+for row in response.data:
+    customer_id = row["customer_id"]
+    totals[customer_id] = (
+        totals.get(customer_id, 0)
+        + float(row["amount"])
+    )
+
+top_3 = sorted(
+    totals.items(),
+    key=lambda item: item[1],
+    reverse=True
+)[:3]
+
+print(top_3)
+```
+
+**Concept:** Ranking and aggregation.
+
+## Q25. Categorize Transactions Using CASE WHEN
+
+**SQL Solution:**
+
+```sql
+SELECT
+    id,
+    amount,
+    CASE
+        WHEN amount >= 3000 THEN 'High'
+        WHEN amount >= 1000 THEN 'Medium'
+        ELSE 'Low'
+    END AS category
+FROM transactions;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("id,amount")
+    .execute()
+)
+
+for row in response.data:
+    amount = float(row["amount"])
+
+    if amount >= 3000:
+        category = "High"
+    elif amount >= 1000:
+        category = "Medium"
+    else:
+        category = "Low"
+
+    print(row["id"], category)
+```
+
+**Concept:** CASE WHEN and conditional business logic.
+
+## Q26. Find Monthly Revenue
+
+**SQL Solution:**
+
+```sql
+SELECT
+    DATE_TRUNC('month', transaction_date) AS month,
+    SUM(amount) AS revenue
+FROM transactions
+WHERE status = 'success'
+GROUP BY DATE_TRUNC('month', transaction_date)
+ORDER BY month;
+```
+
+**Python Solution:**
+
+```python
+from collections import defaultdict
+from datetime import datetime
+
+response = (
+    supabase
+    .table("transactions")
+    .select("amount,transaction_date")
+    .eq("status", "success")
+    .execute()
+)
+
+monthly_revenue = defaultdict(float)
+
+for row in response.data:
+    date = datetime.fromisoformat(
+        row["transaction_date"].replace("Z", "+00:00")
+    )
+
+    month = date.strftime("%Y-%m")
+    monthly_revenue[month] += float(row["amount"])
+
+print(dict(monthly_revenue))
+```
+
+**Concept:** Date grouping and monthly analytics.
+
+## Q27. Find Customers with Successful and Failed Transactions
+
+**SQL Solution:**
+
+```sql
+SELECT
+    customer_id,
+    COUNT(*) FILTER (WHERE status = 'success') AS success_count,
+    COUNT(*) FILTER (WHERE status = 'failed') AS failed_count
+FROM transactions
+GROUP BY customer_id;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("customer_id,status")
+    .execute()
+)
+
+summary = {}
+
+for row in response.data:
+    customer_id = row["customer_id"]
+
+    if customer_id not in summary:
+        summary[customer_id] = {
+            "success": 0,
+            "failed": 0
+        }
+
+    if row["status"] in summary[customer_id]:
+        summary[customer_id][row["status"]] += 1
+
+print(summary)
+```
+
+**Concept:** Conditional aggregation.
+
+## Q28. Find Products with Their Total Order Quantity
+
+**SQL Solution:**
+
+```sql
+SELECT
+    p.product_name,
+    SUM(o.quantity) AS total_quantity
+FROM products p
+JOIN orders o
+ON p.id = o.product_id
+GROUP BY p.id, p.product_name;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("orders")
+    .select("product_id,quantity,products(product_name)")
+    .execute()
+)
+
+product_summary = {}
+
+for row in response.data:
+    product = row["products"]["product_name"]
+
+    product_summary[product] = (
+        product_summary.get(product, 0)
+        + row["quantity"]
+    )
+
+print(product_summary)
+```
+
+**Concept:** Multiple table relationships and aggregation.
+
+## Q29. Calculate Total Order Value
+
+**SQL Solution:**
+
+```sql
+SELECT
+    p.product_name,
+    SUM(o.quantity * p.price) AS total_value
+FROM orders o
+JOIN products p
+ON o.product_id = p.id
+GROUP BY p.id, p.product_name;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("orders")
+    .select("quantity,products(product_name,price)")
+    .execute()
+)
+
+total_value = {}
+
+for row in response.data:
+    product = row["products"]["product_name"]
+
+    value = (
+        row["quantity"]
+        * float(row["products"]["price"])
+    )
+
+    total_value[product] = (
+        total_value.get(product, 0) + value
+    )
+
+print(total_value)
+```
+
+**Concept:** Calculated columns and aggregation.
+
+## Q30. Find Customers Who Have Ordered Electronics
+
+**SQL Solution:**
+
+```sql
+SELECT DISTINCT c.id, c.name
+FROM customers c
+JOIN orders o
+ON c.id = o.customer_id
+JOIN products p
+ON o.product_id = p.id
+WHERE p.category = 'Electronics';
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("orders")
+    .select("customer_id,customers(name),products(category)")
+    .execute()
+)
+
+customers = {}
+
+for row in response.data:
+    if row["products"]["category"] == "Electronics":
+        customer_id = row["customer_id"]
+        customers[customer_id] = row["customers"]["name"]
+
+print(customers)
+```
+
+**Concept:** Multi-table JOIN and DISTINCT.
+
+---
+
+# PART 4: ADVANCED BASIC-TO-INTERMEDIATE SQL + PYTHON (31–40)
+
+## Q31. Find Highest Transaction Per Customer
+
+**SQL Solution:**
+
+```sql
+SELECT DISTINCT ON (customer_id)
+    customer_id,
+    amount
+FROM transactions
+ORDER BY customer_id, amount DESC;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("customer_id,amount")
+    .execute()
+)
+
+highest = {}
+
+for row in response.data:
+    customer_id = row["customer_id"]
+    amount = float(row["amount"])
+
+    highest[customer_id] = max(
+        highest.get(customer_id, amount),
+        amount
+    )
+
+print(highest)
+```
+
+**Concept:** DISTINCT ON and dictionary maximum.
+
+## Q32. Rank Transactions by Amount
+
+**SQL Solution:**
+
+```sql
+SELECT
+    id,
+    amount,
+    RANK() OVER (ORDER BY amount DESC) AS transaction_rank
+FROM transactions;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("id,amount")
+    .order("amount", desc=True)
+    .execute()
+)
+
+for rank, row in enumerate(response.data, start=1):
+    print(rank, row["id"], row["amount"])
+```
+
+**Concept:** Window functions and ranking.
+
+Note: Python enumeration here produces row numbers, not SQL RANK() tie behaviour.
+
+## Q33. Find Transactions Above Average Amount
+
+**SQL Solution:**
+
+```sql
+SELECT *
+FROM transactions
+WHERE amount > (
+    SELECT AVG(amount)
+    FROM transactions
+);
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("id,amount")
+    .execute()
+)
+
+amounts = [float(row["amount"]) for row in response.data]
+
+if amounts:
+    average = sum(amounts) / len(amounts)
+
+    result = [
+        row for row in response.data
+        if float(row["amount"]) > average
+    ]
+
+    print(result)
+```
+
+**Concept:** Subquery and average calculation.
+
+## Q34. Find the First Transaction of Each Customer
+
+**SQL Solution:**
+
+```sql
+SELECT DISTINCT ON (customer_id)
+    customer_id,
+    id,
+    amount,
+    transaction_date
+FROM transactions
+ORDER BY customer_id, transaction_date ASC;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("id,customer_id,amount,transaction_date")
+    .order("transaction_date")
+    .execute()
+)
+
+first_transactions = {}
+
+for row in response.data:
+    customer_id = row["customer_id"]
+
+    if customer_id not in first_transactions:
+        first_transactions[customer_id] = row
+
+print(first_transactions)
+```
+
+**Concept:** First record per group.
+
+## Q35. Find Customers with Total Spending Above 3000
+
+**SQL Solution:**
+
+```sql
+SELECT
+    customer_id,
+    SUM(amount) AS total_spending
+FROM transactions
+GROUP BY customer_id
+HAVING SUM(amount) > 3000;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("customer_id,amount")
+    .execute()
+)
+
+spending = {}
+
+for row in response.data:
+    customer_id = row["customer_id"]
+
+    spending[customer_id] = (
+        spending.get(customer_id, 0)
+        + float(row["amount"])
+    )
+
+result = {
+    customer_id: total
+    for customer_id, total in spending.items()
+    if total > 3000
+}
+
+print(result)
+```
+
+**Concept:** HAVING and business threshold filtering.
+
+## Q36. Find Percentage of Successful Transactions
+
+**SQL Solution:**
+
+```sql
+SELECT
+    COUNT(*) FILTER (WHERE status = 'success') * 100.0
+    / NULLIF(COUNT(*), 0) AS success_percentage
+FROM transactions;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("status")
+    .execute()
+)
+
+total = len(response.data)
+
+successful = sum(
+    row["status"] == "success"
+    for row in response.data
+)
+
+percentage = (
+    successful * 100 / total
+    if total else 0
+)
+
+print("Success Rate:", percentage)
+```
+
+**Concept:** Conditional aggregation and percentage calculation.
+
+## Q37. Find Customers with No Orders
+
+**SQL Solution:**
+
+```sql
+SELECT c.*
+FROM customers c
+LEFT JOIN orders o
+ON c.id = o.customer_id
+WHERE o.id IS NULL;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("customers")
+    .select("id,name,orders(id)")
+    .execute()
+)
+
+result = [
+    row for row in response.data
+    if not row.get("orders")
+]
+
+print(result)
+```
+
+**Concept:** LEFT JOIN and missing relationships.
+
+## Q38. Find the Most Expensive Product in Each Category
+
+**SQL Solution:**
+
+```sql
+SELECT DISTINCT ON (category)
+    category,
+    product_name,
+    price
+FROM products
+ORDER BY category, price DESC;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("products")
+    .select("category,product_name,price")
+    .execute()
+)
+
+result = {}
+
+for row in response.data:
+    category = row["category"]
+    price = float(row["price"])
+
+    if (
+        category not in result
+        or price > float(result[category]["price"])
+    ):
+        result[category] = row
+
+print(result)
+```
+
+**Concept:** Group-wise maximum.
+
+## Q39. Find Running Total of Transactions
+
+**SQL Solution:**
+
+```sql
+SELECT
+    id,
+    transaction_date,
+    amount,
+    SUM(amount) OVER (
+        ORDER BY transaction_date, id
+    ) AS running_total
+FROM transactions;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("id,amount,transaction_date")
+    .order("transaction_date")
+    .order("id")
+    .execute()
+)
+
+running_total = 0
+
+for row in response.data:
+    running_total += float(row["amount"])
+
+    print(
+        row["id"],
+        row["amount"],
+        running_total
+    )
+```
+
+**Concept:** Window functions and cumulative sums.
+
+## Q40. Find Customers with More Than 2 Failed Transactions
+
+**SQL Solution:**
+
+```sql
+SELECT
+    customer_id,
+    COUNT(*) AS failed_count
+FROM transactions
+WHERE status = 'failed'
+GROUP BY customer_id
+HAVING COUNT(*) > 2;
+```
+
+**Python Solution:**
+
+```python
+response = (
+    supabase
+    .table("transactions")
+    .select("customer_id")
+    .eq("status", "failed")
+    .execute()
+)
+
+counts = {}
+
+for row in response.data:
+    customer_id = row["customer_id"]
+
+    counts[customer_id] = (
+        counts.get(customer_id, 0) + 1
+    )
+
+result = {
+    customer_id: count
+    for customer_id, count in counts.items()
+    if count > 2
+}
+
+print(result)
+```
+
+**Concept:** Fraud analytics and conditional grouping.
+
+---
+
+# PART 5: SUPABASE PYTHON API + CRUD + REAL-WORLD PROBLEMS (41–50)
+
+## Setup: Install Required Libraries
+
+```bash
+pip install supabase python-dotenv pandas
+```
+
+## Create .env File
+
+```env
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_KEY=your_backend_appropriate_supabase_key
+```
+
+## Create supabase_client.py
+
+```python
+import os
+
+from dotenv import load_dotenv
+from supabase import create_client
+
+load_dotenv()
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise ValueError("Missing Supabase credentials")
+
+supabase = create_client(
+    SUPABASE_URL,
+    SUPABASE_KEY
+)
+```
+
+Use a publishable/anon key only with correctly configured RLS for the relevant user access. Keep secret/service-role keys strictly on the backend. Never expose them in frontend code or GitHub.
+
+## Q41. Insert a New Customer
+
+**Question:** Python se customer database mein insert karo.
+
+```python
+from supabase_client import supabase
+
+customer = {
+    "name": "Ashfaque",
+    "email": "ashfaque@gmail.com",
+    "city": "Delhi"
+}
+
+response = (
+    supabase
+    .table("customers")
+    .insert(customer)
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** INSERT and CRUD.
+
+## Q42. Update Customer Information
+
+```python
+from supabase_client import supabase
+
+response = (
+    supabase
+    .table("customers")
+    .update({
+        "city": "Bangalore"
+    })
+    .eq("id", 1)
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** UPDATE and WHERE condition.
+
+## Q43. Delete a Customer
+
+```python
+from supabase_client import supabase
+
+response = (
+    supabase
+    .table("customers")
+    .delete()
+    .eq("id", 5)
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** DELETE operation.
+
+Important: Real production application mein related records aur foreign-key constraints check karo before deleting.
+
+## Q44. Check Whether a Customer Exists
+
+```python
+from supabase_client import supabase
+
+email = "amit@gmail.com"
+
+response = (
+    supabase
+    .table("customers")
+    .select("id,name,email")
+    .eq("email", email)
+    .limit(1)
+    .execute()
+)
+
+if response.data:
+    print("Customer exists")
+else:
+    print("Customer not found")
+```
+
+**Concept:** Existence checking.
+
+## Q45. Implement Pagination
+
+**Question:** Database se 10-10 records fetch karo.
+
+```python
+from supabase_client import supabase
+
+page_size = 10
+page_number = 1
+
+start = (page_number - 1) * page_size
+end = start + page_size - 1
+
+response = (
+    supabase
+    .table("transactions")
+    .select("*")
+    .order("id")
+    .range(start, end)
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** Pagination and large dataset retrieval.
+
+## Q46. Insert Multiple Transactions
+
+```python
+from supabase_client import supabase
+
+transactions = [
+    {
+        "customer_id": 1,
+        "amount": 1500,
+        "status": "success"
+    },
+    {
+        "customer_id": 2,
+        "amount": 2500,
+        "status": "failed"
+    },
+    {
+        "customer_id": 3,
+        "amount": 3500,
+        "status": "success"
+    }
+]
+
+response = (
+    supabase
+    .table("transactions")
+    .insert(transactions)
+    .execute()
+)
+
+print(response.data)
+```
+
+**Concept:** Bulk insert and API integration.
+
+## Q47. Fetch Data and Convert into Pandas DataFrame
+
+```python
+import pandas as pd
+
+from supabase_client import supabase
+
+response = (
+    supabase
+    .table("transactions")
+    .select("*")
+    .execute()
+)
+
+df = pd.DataFrame(response.data)
+
+print(df.head())
+print(df.describe())
+```
+
+**Concept:** Supabase + Pandas + Data Analysis.
+
+## Q48. Find Duplicate Transactions Using Python
+
+**Question:** Same customer, same amount aur same status wali duplicate transaction records identify karo.
+
+```python
+from supabase_client import supabase
+from collections import Counter
+
+response = (
+    supabase
+    .table("transactions")
+    .select("customer_id,amount,status")
+    .execute()
+)
+
+keys = [
+    (
+        row["customer_id"],
+        float(row["amount"]),
+        row["status"]
+    )
+    for row in response.data
+]
+
+counts = Counter(keys)
+
+duplicates = {
+    key: count
+    for key, count in counts.items()
+    if count > 1
+}
+
+print(duplicates)
+```
+
+**Concept:** Duplicate detection and data quality.
+
+Note: Ye business-defined duplicate criteria hain. Same amount aur status hona automatically actual duplicate transaction prove nahi karta.
+
+## Q49. Build a Transaction Summary Function
+
+```python
+from supabase_client import supabase
+
+def get_transaction_summary():
+
+    response = (
+        supabase
+        .table("transactions")
+        .select("amount,status")
+        .execute()
+    )
+
+    data = response.data
+
+    total = len(data)
+
+    successful = [
+        row for row in data
+        if row["status"] == "success"
+    ]
+
+    failed = [
+        row for row in data
+        if row["status"] == "failed"
+    ]
+
+    total_revenue = sum(
+        float(row["amount"])
+        for row in successful
+    )
+
+    return {
+        "total_transactions": total,
+        "successful_transactions": len(successful),
+        "failed_transactions": len(failed),
+        "successful_amount": total_revenue
+    }
+
+print(get_transaction_summary())
+```
+
+**Concept:** Business logic and reusable functions.
+
+## Q50. Build a Customer Analytics Report
+
+**Question:** Customer-wise transaction count, successful amount aur failed count calculate karo.
+
+**SQL Solution:**
+
+```sql
+SELECT
+    c.id,
+    c.name,
+
+    COUNT(t.id) AS total_transactions,
+
+    COUNT(t.id) FILTER (
+        WHERE t.status = 'success'
+    ) AS successful_transactions,
+
+    COUNT(t.id) FILTER (
+        WHERE t.status = 'failed'
+    ) AS failed_transactions,
+
+    COALESCE(
+        SUM(t.amount) FILTER (
+            WHERE t.status = 'success'
+        ),
+        0
+    ) AS successful_amount
+
+FROM customers c
+
+LEFT JOIN transactions t
+ON c.id = t.customer_id
+
+GROUP BY c.id, c.name
+
+ORDER BY successful_amount DESC;
+```
+
+**Python + Supabase Solution:**
+
+```python
+from supabase_client import supabase
+
+response = (
+    supabase
+    .table("transactions")
+    .select("customer_id,amount,status,customers(name)")
+    .execute()
+)
+
+report = {}
+
+for row in response.data:
+
+    customer_id = row["customer_id"]
+    customer_name = row["customers"]["name"]
+
+    if customer_id not in report:
+        report[customer_id] = {
+            "name": customer_name,
+            "total_transactions": 0,
+            "successful_transactions": 0,
+            "failed_transactions": 0,
+            "successful_amount": 0
+        }
+
+    report[customer_id]["total_transactions"] += 1
+
+    if row["status"] == "success":
+
+        report[customer_id]["successful_transactions"] += 1
+
+        report[customer_id]["successful_amount"] += float(
+            row["amount"]
+        )
+
+    elif row["status"] == "failed":
+
+        report[customer_id]["failed_transactions"] += 1
+
+print(report)
+```
+
+**Concept:** SQL JOIN, conditional aggregation, Python dictionaries and analytics reporting.
+
+Note: SQL query includes customers with zero transactions. Python example above starts from transactions, so customers without transactions will not appear.
+
+---
+
+# PART 6: IMPORTANT SUPABASE INTERVIEW CONCEPTS
+
+## 1. What is Supabase?
+
+Supabase PostgreSQL-based backend platform hai jo database, APIs, authentication, storage aur realtime features provide karta hai.
+
+## 2. What is PostgreSQL?
+
+PostgreSQL ek open-source relational database management system hai jo SQL, transactions, indexing, JSONB aur advanced queries support karta hai.
+
+## 3. What is RLS?
+
+RLS ka full form Row Level Security hai. Ye control karta hai ki user kaunse rows read, insert, update ya delete kar sakta hai.
+
+## 4. What is a Foreign Key?
+
+Foreign Key ek table ko doosri table ke primary key se connect karti hai.
+
+## 5. What is an Index?
+
+Index database query performance improve karta hai, lekin extra storage aur write overhead bhi create karta hai.
+
+## 6. What is a View?
+
+View ek saved SQL query hai jo virtual table ki tarah behave karti hai.
+
+## 7. What is a Stored Function?
+
+Stored Function database ke andar reusable logic execute karne ke liye use hoti hai.
+
+## 8. What is RPC in Supabase?
+
+RPC ka full form Remote Procedure Call hai. Supabase mein database functions ko API ke through execute karne ke liye use hota hai.
+
+## 9. What is JSONB?
+
+JSONB PostgreSQL ka binary JSON data type hai jo JSON data ko efficiently store aur query karne mein help karta hai.
+
+## 10. What is Database Transaction?
+
+Database Transaction multiple operations ko ek logical unit mein execute karti hai, jisme ACID properties important hoti hain.
+
+---
+
+# PART 7: 10 SQL CONCEPTS YOU MUST PRACTICE
+
+1. SELECT, WHERE, ORDER BY, LIMIT
+2. COUNT, SUM, AVG, MIN, MAX
+3. GROUP BY and HAVING
+4. INNER JOIN and LEFT JOIN
+5. Subqueries
+6. CTE using WITH
+7. Window Functions: ROW_NUMBER, RANK, DENSE_RANK
+8. CASE WHEN
+9. Date and Time Functions
+10. Indexes, Views, Functions and RLS
+
+---
+
+# PART 8: 15-DAY INTERVIEW PRACTICE PLAN
+
+| Day | Practice |
+|---|---|
+| 1 | Supabase setup and table creation |
+| 2 | INSERT, SELECT, UPDATE, DELETE |
+| 3 | WHERE, ORDER BY, LIMIT |
+| 4 | COUNT, SUM, AVG, GROUP BY |
+| 5 | INNER JOIN and LEFT JOIN |
+| 6 | HAVING and subqueries |
+| 7 | CTE and window functions |
+| 8 | Python CRUD with Supabase |
+| 9 | Filtering and pagination |
+| 10 | Python data processing |
+| 11 | Pandas + Supabase |
+| 12 | Transaction analytics |
+| 13 | RLS, indexes and database functions |
+| 14 | End-to-end mini project |
+| 15 | Mock interview and revision |
+
+---
+
+# FINAL INTERVIEW TIPS
+
+Har problem ko 5 steps mein prepare karo:
+
+1. Problem statement ko clearly understand karo.
+2. Pehle SQL query independently likho.
+3. Python SDK se same task implement karo.
+4. Output verify karo using Supabase SQL Editor.
+5. Complexity, edge cases aur production considerations explain karo.
+
+**Important Production Knowledge:**
+
+- Large datasets ke liye pagination implement karo.
+- Aggregation ko possible ho toh database mein execute karo.
+- API keys ko environment variables ya secret manager mein rakho.
+- RLS policies configure karo.
+- Duplicate data prevent karne ke liye unique constraints use karo.
+- SQL injection se bachne ke liye parameterized queries use karo.
+- Multi-step database changes ke liye transactions use karo.
+
+**Your final goal:** Python + PostgreSQL + Supabase par confidently CRUD, JOIN, aggregation, analytics, API integration aur database security demonstrate kar paana.
