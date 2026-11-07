@@ -1,0 +1,424 @@
+# 100 LLM API Integration Concepts for AI Engineer, GenAI Engineer & Data Scientist
+## Interview Questions & Answers – Hinglish (One-Line Format)
+
+### Section 1: LLM API Fundamentals (1–15)
+
+**1. What is an LLM API?**  
+LLM API ek interface hai jo application ko Large Language Model ke saath communicate karne deta hai.
+
+**2. What is an LLM Provider?**  
+LLM Provider woh company ya platform hai jo LLM models aur APIs provide karta hai, jaise OpenAI, Google Gemini, Anthropic aur Azure OpenAI.
+
+**3. What is Model Selection?**  
+Model Selection ka matlab task, accuracy, latency aur cost ke according suitable LLM choose karna hai.
+
+**4. What is an API Endpoint?**  
+API Endpoint ek specific URL hota hai jahan application request send karti hai, jaise `/chat/completions`.
+
+**5. What is an API Key?**  
+API Key ek secret credential hai jo application ko API access aur authentication provide karta hai.
+
+**6. What is a System Message?**  
+System Message model ko uska role, behaviour aur response instructions define karta hai.
+
+**7. What is a User Message?**  
+User Message woh input ya question hai jo user LLM ko provide karta hai.
+
+**8. What is an Assistant Message?**  
+Assistant Message LLM ka generated response hota hai.
+
+**9. What is Chat Completion?**  
+Chat Completion API conversation messages ko process karke LLM-generated response return karti hai.
+
+**10. What is a Messages Array?**  
+Messages Array conversation ke system, user aur assistant messages ko structured format mein store karta hai.
+
+**11. What are LLM Parameters?**  
+LLM Parameters model ke response behaviour ko control karte hain, jaise temperature, top-p aur max tokens.
+
+**12. What is Temperature?**  
+Temperature response ki randomness control karta hai; low temperature generally focused output deta hai aur high temperature diverse output.
+
+**13. What is Top-P?**  
+Top-P nucleus sampling technique hai jo cumulative probability ke basis par possible next tokens select karti hai.
+
+**14. What is Max Output Tokens?**  
+Max Output Tokens model ke response ki maximum token limit define karta hai.
+
+**15. What are Stop Sequences?**  
+Stop Sequences specific text patterns hain jinhe generate karne ke baad model response generation stop kar sakta hai.
+
+### Section 2: LLM API Request and Response Handling (16–30)
+
+**16. What is Tokenization?**  
+Tokenization text ko smaller units, yani tokens, mein convert karne ki process hai.
+
+**17. What is a Context Window?**  
+Context Window maximum tokens define karta hai jo model ek request mein input aur output ke liye handle kar sakta hai.
+
+**18. What are Input Tokens?**  
+Input Tokens woh tokens hain jo prompt, instructions aur conversation ke through model ko send kiye jaate hain.
+
+**19. What are Output Tokens?**  
+Output Tokens woh tokens hain jo LLM response generate karte waqt produce karta hai.
+
+**20. What is Token Usage?**  
+Token Usage API request mein consumed input aur output tokens ka record hota hai.
+
+**21. What is Streaming Response?**  
+Streaming mein LLM response complete hone ka wait kiye bina chunks mein output send karta hai.
+
+**22. What is Non-Streaming Response?**  
+Non-Streaming mein application ko complete response generate hone ke baad result milta hai.
+
+**23. What is Response Parsing?**  
+Response Parsing API ke returned JSON data se required content, usage aur metadata extract karne ki process hai.
+
+**24. What is Finish Reason?**  
+Finish Reason batata hai ki model ne response kyun stop kiya, jaise stop sequence, token limit ya tool call.
+
+**25. What is API Timeout?**  
+API Timeout maximum waiting duration hai jiske baad application request ko unsuccessful ya timed out consider karti hai.
+
+**26. What is Retry Mechanism?**  
+Retry Mechanism temporary API failures par request ko controlled manner mein dobara execute karta hai.
+
+**27. What is Rate Limiting?**  
+Rate Limiting API requests ya tokens ki maximum allowed frequency control karta hai.
+
+**28. What is Idempotency?**  
+Idempotency ensure karti hai ki same request multiple times process hone par unintended duplicate operations na hon.
+
+**29. What is Async API Calling?**  
+Async API Calling application ko multiple API operations efficiently execute karne deti hai without blocking the main execution flow.
+
+**30. What is Batch API?**  
+Batch API multiple requests ko ek group mein process karne ke liye use hoti hai, especially large-scale workloads mein.
+
+### Section 3: Prompt Engineering and Structured Outputs (31–45)
+
+**31. What is Prompt Engineering?**  
+Prompt Engineering effective instructions design karne ki technique hai jisse LLM se relevant aur accurate output mil sake.
+
+**32. What is Zero-Shot Prompting?**  
+Zero-Shot Prompting mein model ko examples diye bina direct task instructions provide ki jaati hain.
+
+**33. What is One-Shot Prompting?**  
+One-Shot Prompting mein model ko task samjhane ke liye ek example diya jaata hai.
+
+**34. What is Few-Shot Prompting?**  
+Few-Shot Prompting mein model ko multiple examples provide karke expected response pattern samjhaya jaata hai.
+
+**35. What is Chain-of-Thought Prompting?**  
+Chain-of-Thought Prompting model ko complex problems ko intermediate reasoning steps ke through solve karne ke liye guide karti hai.
+
+**36. What is Role Prompting?**  
+Role Prompting mein model ko specific role diya jaata hai, jaise Data Scientist, AI Consultant ya Customer Support Agent.
+
+**37. What is a Prompt Template?**  
+Prompt Template reusable structure hota hai jisme dynamic variables insert karke different requests generate ki jaati hain.
+
+**38. What are Prompt Variables?**  
+Prompt Variables dynamic values hain jo runtime par template ke placeholders ko replace karte hain.
+
+**39. What is Structured Output?**  
+Structured Output model response ko predefined format mein return karta hai, jaise JSON ya schema-based data.
+
+**40. What is JSON Mode?**  
+JSON Mode model ko valid JSON format mein response generate karne ke liye guide karta hai, subject to provider support.
+
+**41. What is Function Calling?**  
+Function Calling model ko application ke predefined functions ke liye structured arguments generate karne deta hai.
+
+**42. What is Tool Calling?**  
+Tool Calling LLM ko external tools, APIs ya functions use karne ka mechanism provide karta hai.
+
+**43. What is Schema Validation?**  
+Schema Validation check karta hai ki generated output required fields, data types aur structure follow karta hai ya nahi.
+
+**44. What are Output Guardrails?**  
+Output Guardrails generated responses ko predefined business rules, safety aur quality requirements ke against validate karte hain.
+
+**45. What is Prompt Injection?**  
+Prompt Injection ek attack technique hai jisme malicious instructions model ke intended behaviour ko manipulate karne ki koshish karti hain.
+
+### Section 4: Embedding APIs and Vector Databases (46–60)
+
+**46. What is an Embedding API?**  
+Embedding API text, image ya other supported data ko numerical vector representation mein convert karti hai.
+
+**47. What is a Text Embedding?**  
+Text Embedding sentence ya document ke semantic meaning ko numerical vector mein represent karta hai.
+
+**48. What is an Image Embedding?**  
+Image Embedding image ke visual features ko numerical vector mein convert karta hai for similarity search.
+
+**49. What is a Multimodal Embedding?**  
+Multimodal Embedding text, image aur other supported modalities ko common vector space mein represent kar sakta hai.
+
+**50. What is Embedding Dimension?**  
+Embedding Dimension vector mein available numerical values ki total count hoti hai.
+
+**51. What is Cosine Similarity?**  
+Cosine Similarity do vectors ke beech directional similarity measure karti hai.
+
+**52. What is Euclidean Distance?**  
+Euclidean Distance do vectors ke beech straight-line distance calculate karti hai.
+
+**53. What is a Vector Database?**  
+Vector Database embeddings ko store, index aur similarity-based search karne ke liye use hota hai.
+
+**54. What is Pinecone?**  
+Pinecone ek managed vector database hai jo scalable vector search aur retrieval support karta hai.
+
+**55. What is FAISS?**  
+FAISS Meta ka similarity search library hai jo high-dimensional vectors par efficient search support karta hai.
+
+**56. What is ChromaDB?**  
+ChromaDB ek vector database hai jo embeddings store aur retrieve karne ke liye commonly RAG applications mein use hota hai.
+
+**57. What is Qdrant?**  
+Qdrant ek vector database hai jo similarity search, filtering aur vector retrieval provide karta hai.
+
+**58. What is Metadata Filtering?**  
+Metadata Filtering vector search ke results ko additional conditions jaise date, category ya customer ID se restrict karta hai.
+
+**59. What is Vector Upsert?**  
+Upsert operation vector database mein new vectors insert karta hai ya existing vectors update karta hai.
+
+**60. What is Vector Search?**  
+Vector Search query embedding aur stored embeddings ke similarity score ke basis par relevant records retrieve karta hai.
+
+### Section 5: Retrieval-Augmented Generation (61–75)
+
+**61. What is RAG?**  
+RAG ka full form Retrieval-Augmented Generation hai, jisme relevant external data retrieve karke LLM ko context provide kiya jaata hai.
+
+**62. What is a Document Loader?**  
+Document Loader PDF, CSV, DOCX, TXT aur other supported sources se data extract karta hai.
+
+**63. What is Chunking?**  
+Chunking large documents ko smaller text segments mein divide karne ki process hai.
+
+**64. What is Chunk Overlap?**  
+Chunk Overlap consecutive chunks ke beech common text maintain karta hai taaki context loss reduce ho.
+
+**65. What is Semantic Chunking?**  
+Semantic Chunking document ko meaning aur topic boundaries ke basis par divide karta hai.
+
+**66. What is a Retriever?**  
+Retriever user query ke according knowledge base se relevant documents ya chunks fetch karta hai.
+
+**67. What is Top-K Retrieval?**  
+Top-K Retrieval query ke liye highest-ranked K relevant results return karta hai.
+
+**68. What is Reranking?**  
+Reranking initial retrieval results ko more accurate relevance model ke through dobara rank karta hai.
+
+**69. What is Hybrid Search?**  
+Hybrid Search keyword-based search aur vector similarity search ko combine karta hai.
+
+**70. What is Context Injection?**  
+Context Injection retrieved information ko LLM prompt mein add karta hai taaki response relevant data par based ho.
+
+**71. What is a RAG Prompt?**  
+RAG Prompt model ko user question ke saath retrieved context use karke answer generate karne ki instructions deta hai.
+
+**72. What is Grounded Generation?**  
+Grounded Generation model ko supplied trusted context ke basis par response generate karne ke liye guide karta hai.
+
+**73. What is Citation Generation?**  
+Citation Generation answer ke supporting documents ya source references provide karne mein help karti hai.
+
+**74. What is Conversation Memory?**  
+Conversation Memory previous interactions ka relevant context maintain karti hai for multi-turn conversations.
+
+**75. What is Query Rewriting?**  
+Query Rewriting user query ko clearer search query mein transform karta hai to improve retrieval quality.
+
+### Section 6: AI Agents and LLM Integrations (76–85)
+
+**76. What is an AI Agent?**  
+AI Agent LLM ke saath tools, instructions aur decision-making logic use karke tasks execute karta hai.
+
+**77. What is a Multi-Agent System?**  
+Multi-Agent System multiple specialized agents ko coordinate karke complex tasks solve karta hai.
+
+**78. What is LangChain?**  
+LangChain ek framework hai jo LLM APIs, prompts, tools, retrievers aur application workflows ko integrate karta hai.
+
+**79. What is LangGraph?**  
+LangGraph stateful, multi-step aur cyclic agent workflows build karne ke liye orchestration framework hai.
+
+**80. What is MCP?**  
+MCP ka full form Model Context Protocol hai, jo AI applications ko external tools aur data sources ke saath standardised way mein connect karta hai.
+
+**81. What is an MCP Server?**  
+MCP Server tools, resources aur prompts expose karta hai jise compatible MCP clients access kar sakte hain.
+
+**82. What is an MCP Client?**  
+MCP Client AI application ka component hai jo MCP server se connect karke available capabilities access karta hai.
+
+**83. What is Tool Execution?**  
+Tool Execution mein application model ke requested function ya external API ko execute karke result wapas model ko provide karti hai.
+
+**84. What is Human-in-the-Loop?**  
+Human-in-the-Loop workflow mein sensitive ya important actions se pehle human approval ya intervention liya jaata hai.
+
+**85. What is Agent State?**  
+Agent State workflow execution ke dauraan conversation, variables, tool results aur progress maintain karta hai.
+
+### Section 7: LLM Evaluation and Monitoring (86–100)
+
+**86. What is LLM Evaluation?**  
+LLM Evaluation model ke output ki accuracy, relevance, reliability, safety aur quality measure karne ki process hai.
+
+**87. What is BLEU Score?**  
+BLEU Score generated text ko reference text ke saath n-gram precision ke basis par compare karta hai.
+
+**88. What is ROUGE Score?**  
+ROUGE Score generated text aur reference text ke overlap ko measure karta hai, commonly summarization evaluation mein.
+
+**89. What is Semantic Similarity?**  
+Semantic Similarity do text responses ke meaning-based closeness ko measure karti hai.
+
+**90. What is Hallucination Detection?**  
+Hallucination Detection identify karne ki process hai ki model unsupported ya fabricated information generate kar raha hai ya nahi.
+
+**91. What is RAGAS?**  
+RAGAS RAG applications ko evaluate karne ke liye metrics provide karta hai, jaise faithfulness, answer relevancy aur context precision.
+
+**92. What is LLM Observability?**  
+LLM Observability prompts, responses, latency, token usage, errors aur execution traces monitor karne mein help karti hai.
+
+**93. What is Prompt Versioning?**  
+Prompt Versioning different prompt changes ko track karta hai taaki testing, comparison aur rollback possible ho.
+
+**94. What is LLM Caching?**  
+LLM Caching repeated requests ke responses store karta hai taaki latency aur API cost reduce ho sake.
+
+**95. What is Semantic Caching?**  
+Semantic Caching similar meaning wali queries ke liye previously generated responses reuse karta hai.
+
+**96. What is Model Fallback?**  
+Model Fallback primary LLM fail hone par alternative model use karke service availability maintain karta hai.
+
+**97. What is Model Routing?**  
+Model Routing task complexity, latency, cost ya capability ke basis par request ko suitable LLM ke paas bhejta hai.
+
+**98. What is LLM Cost Optimization?**  
+LLM Cost Optimization token reduction, caching, model selection aur efficient prompting se API expenses reduce karta hai.
+
+**99. What is LLM Deployment?**  
+LLM Deployment trained ya integrated model/application ko production environment mein users ke liye available karna hai.
+
+**100. What are LLM Security Guardrails?**  
+LLM Security Guardrails prompt injection, sensitive data leakage, unsafe outputs aur unauthorized tool execution ko prevent karne mein help karte hain.
+
+---
+
+## 10 Important Real-World Interview Questions
+
+**1. How do you integrate an LLM API using Python?**  
+Python SDK ya HTTP client use karke API key configure karte hain, request payload send karte hain, response parse karte hain aur errors handle karte hain.
+
+**2. How do you handle LLM API failures?**  
+Timeout, retry with exponential backoff, rate-limit handling, logging aur fallback model implement karte hain.
+
+**3. How do you reduce LLM API cost?**  
+Smaller models, prompt optimization, token limits, caching, batch processing aur efficient model routing use karte hain.
+
+**4. How do you build a RAG application?**  
+Documents load karte hain, chunks banate hain, embeddings generate karte hain, vector database mein store karte hain aur relevant context LLM ko pass karte hain.
+
+**5. How do you prevent hallucinations in RAG?**  
+Relevant retrieval, reranking, grounded prompts, source citations aur faithfulness evaluation use karte hain.
+
+**6. How do you handle large documents?**  
+Chunking, overlap, metadata filtering, semantic search aur hierarchical retrieval use karte hain.
+
+**7. How do you implement streaming?**  
+Streaming-enabled API request send karke incoming chunks ko frontend ya client tak incrementally forward karte hain.
+
+**8. How do you secure LLM API integration?**  
+API keys ko environment variables ya secret manager mein store karte hain, access control, input validation aur rate limiting implement karte hain.
+
+**9. How do you evaluate an LLM application?**  
+Accuracy, relevance, hallucination, latency, token cost aur user feedback ke metrics track karte hain.
+
+**10. How do you integrate external APIs with AI Agents?**  
+Function calling ya tool calling ke through API schemas define karte hain, arguments validate karte hain, tools execute karte hain aur results LLM ko return karte hain.
+
+---
+
+## 3 Practical Projects for Interview Preparation
+
+**Project 1: Transaction Intelligence System**
+- Transaction data ko API se fetch karna.
+- Python aur FastAPI se backend banana.
+- LLM API se transaction summaries generate karna.
+- Fraud-related patterns identify karna.
+- RAG se transaction policy questions answer karna.
+- Dashboard par results display karna.
+
+**Project 2: Multimodal RAG Application**
+- PDF, text aur images ingest karna.
+- Gemini Embedding 2 ya suitable multimodal embedding model use karna.
+- Embeddings vector database mein store karna.
+- Text aur image similarity search implement karna.
+- LLM API se context-based answers generate karna.
+
+**Project 3: Multi-Agent Business Automation**
+- Multiple specialized AI agents create karna.
+- MCP ya function calling se external APIs connect karna.
+- LangGraph se workflow orchestrate karna.
+- Human approval implement karna.
+- Logs, evaluation aur error handling add karna.
+
+---
+
+## 10-Day Interview Preparation Roadmap
+
+**Day 1:** API fundamentals, HTTP methods, REST API, authentication.
+
+**Day 2:** LLM APIs, model selection, parameters, tokenization.
+
+**Day 3:** Prompt engineering, structured output, function calling.
+
+**Day 4:** Embeddings, vector databases, similarity search.
+
+**Day 5:** RAG, chunking, retrieval, reranking, hybrid search.
+
+**Day 6:** LangChain, LangGraph, MCP aur AI Agents.
+
+**Day 7:** Async API, streaming, FastAPI, error handling.
+
+**Day 8:** LLM evaluation, RAGAS, observability, monitoring.
+
+**Day 9:** Security, cost optimization, caching, deployment.
+
+**Day 10:** Practical project demonstration aur mock interview.
+
+---
+
+## Interview Preparation Checklist
+
+- [ ] REST API and HTTP methods
+- [ ] Python API integration
+- [ ] Authentication and API security
+- [ ] LLM API request and response handling
+- [ ] Tokenization and context window
+- [ ] Prompt Engineering
+- [ ] Function Calling and Tool Calling
+- [ ] Embedding APIs
+- [ ] Vector Databases
+- [ ] RAG Architecture
+- [ ] LangChain and LangGraph
+- [ ] MCP Integration
+- [ ] AI Agent Development
+- [ ] LLM Evaluation
+- [ ] API Monitoring and Logging
+- [ ] Cost Optimization
+- [ ] Production Deployment
+
+**Interview Tip:** Sirf definitions yaad mat karo. Har concept ke liye ek Python code example, ek real-world use case aur ek practical challenge prepare karo. Interview mein practical explanation zyada effective hoti hai.
