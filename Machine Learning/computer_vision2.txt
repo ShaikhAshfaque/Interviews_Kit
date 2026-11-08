@@ -1,0 +1,117 @@
+COMPUTER VISION KE 100 CONCEPTS (HINGLISH, ONE-LINERS)
+
+BASICS (1-10)
+1. Computer Vision: Machine ko images aur videos "dekhna" aur samajhna sikhana.
+2. Pixel: Image ka sabse chhota unit, ek chhota sa rangeen dot.
+3. Resolution: Image me kitne pixels hain (width x height).
+4. Grayscale Image: Sirf brightness wali image, ek channel, values 0 se 255.
+5. RGB Image: Red, Green, Blue ke 3 channels se bani color image.
+6. Channel: Image ki ek color layer.
+7. Image as Array: Computer image ko numbers ke matrix ki tarah dekhta hai.
+8. Bit Depth: Ek pixel ko store karne ke liye kitne bits use hote hain.
+9. Aspect Ratio: Image ki width aur height ka ratio.
+10. Color Space: Colors ko represent karne ka tarika (RGB, HSV, LAB).
+
+PREPROCESSING (11-30)
+11. HSV: Color ko Hue, Saturation, Value me todta hai, color-based detection ke liye best.
+12. Resizing: Image ka size model ki zaroorat ke hisaab se badalna.
+13. Cropping: Image ka sirf kaam ka hissa kaat lena.
+14. Normalization: Pixel values ko 0-1 range me laana taaki training stable rahe.
+15. Histogram: Graph jo batata hai kis brightness ke kitne pixels hain.
+16. Histogram Equalization: Contrast badhane ke liye brightness ko evenly failana.
+17. Thresholding: Pixel ko cut-off value se black ya white banana.
+18. Adaptive Thresholding: Har chhote region ke liye alag threshold nikalna.
+19. Otsu's Method: Automatic best threshold dhoondhne ka tarika.
+20. Noise: Image me aaye unwanted random dots ya disturbance.
+21. Gaussian Blur: Image ko smooth karke noise kam karna.
+22. Median Filter: Salt-and-pepper noise hatane ka best filter.
+23. Bilateral Filter: Edges ko bachakar image smooth karta hai.
+24. Sharpening: Edges aur details ko zyada clear banana.
+25. Convolution: Chhote filter ko image par slide karke features nikalna.
+26. Kernel (Filter): Chhota matrix jo convolution me use hota hai.
+27. Padding: Image ke charo taraf extra pixels jodna taaki size na ghate.
+28. Stride: Filter ek baar me kitne pixels aage badhega.
+29. Erosion: White object ko chhota karna aur chhote noise hatana.
+30. Dilation: White object ko bada karna aur gaps bharna.
+
+CLASSICAL FEATURES AUR EDGES (31-45)
+31. Opening: Erosion ke baad dilation, chhota noise hatata hai.
+32. Closing: Dilation ke baad erosion, chhote holes bharta hai.
+33. Edge Detection: Object ki boundaries dhoondhna.
+34. Sobel Filter: Horizontal aur vertical edges nikalne wala filter.
+35. Canny Edge Detector: Sabse popular, clean aur thin edges deta hai.
+36. Laplacian: Second derivative se edges detect karta hai.
+37. Gradient: Pixel intensity kitni tezi se badal rahi hai, uski direction aur strength.
+38. Contours: Same intensity wale object ki boundary ki curve.
+39. Harris Corner Detection: Image ke corners dhoondhta hai.
+40. Feature: Image ka koi unique, pehchaanne layak hissa.
+41. SIFT: Scale aur rotation badalne par bhi same features pakadta hai.
+42. SURF: SIFT ka faster version.
+43. ORB: Fast aur free alternative to SIFT/SURF, real-time ke liye.
+44. HOG: Gradient directions ka histogram, pehle pedestrian detection me use hota tha.
+45. Feature Matching: Do images ke same features ko jodna.
+
+GEOMETRY AUR TRANSFORMATIONS (46-55)
+46. Keypoint: Image ka important point jaise corner ya blob.
+47. Descriptor: Keypoint ke aas-paas ki info ko numbers me likhna.
+48. Homography: Ek plane ko dusre plane me map karne wala transformation.
+49. Image Stitching: Kai images jodkar panorama banana.
+50. Affine Transform: Rotate, scale, shift aur shear, lines parallel rehti hain.
+51. Flip / Rotate: Image ko ulta ya ghumana, augmentation me kaam aata hai.
+52. Perspective Transform: Image ka angle badalna, jaise tilted document ko seedha karna.
+53. Camera Calibration: Camera ke internal parameters aur distortion nikalna.
+54. Stereo Vision: Do cameras se depth (doori) nikalna.
+55. Optical Flow: Do frames ke beech pixels ki movement track karna.
+
+DEEP LEARNING BASICS (56-70)
+56. Neural Network: Neurons ka network jo data se patterns seekhta hai.
+57. CNN: Images ke liye bana neural network jo convolution use karta hai.
+58. Convolution Layer: Filters se image ke features (edges, shapes) nikalti hai.
+59. Feature Map: Convolution ke baad bana output.
+60. Pooling: Feature map ka size chhota karna, important info rakhte hue.
+61. Max Pooling: Har region ki sabse badi value rakhna.
+62. ReLU: Activation jo negative values ko 0 kar deta hai.
+63. Fully Connected Layer: Features ko jodkar final decision leti hai.
+64. Softmax: Output ko probabilities me badalta hai (total = 1).
+65. Loss Function: Model ki galti naapta hai (jaise Cross-Entropy).
+66. Backpropagation: Galti ke hisaab se weights ko sudharna.
+67. Optimizer: Weights update karne wala algorithm (SGD, Adam).
+68. Overfitting: Model training data ratta maar le, naye data par fail ho.
+69. Data Augmentation: Images ko flip, rotate, zoom karke data badhana.
+70. Dropout: Training me kuch neurons randomly band karna taaki overfitting kam ho.
+
+FAMOUS ARCHITECTURES (71-80)
+71. Batch Normalization: Layer ke inputs ko normalize karke training fast aur stable banata hai.
+72. Transfer Learning: Pehle se trained model ko apne kaam me lagana.
+73. Fine-Tuning: Pretrained model ke kuch layers ko apne data par dobara train karna.
+74. ImageNet: 1 million+ images ka bada dataset, pretrained models isi par bante hain.
+75. LeNet: Pehla famous CNN, digits pehchaanne ke liye.
+76. AlexNet: 2012 me deep learning ka boom laane wala CNN.
+77. VGG: Simple aur deep CNN, sirf 3x3 filters.
+78. ResNet: Skip connections wala model, bahut deep network train kar sakta hai.
+79. EfficientNet: Depth, width aur resolution ko balance karke kam compute me achhi accuracy.
+80. Vision Transformer (ViT): Image ko patches me todkar transformer se samajhta hai.
+
+MAIN TASKS (81-92)
+81. Image Classification: Poori image ko ek label dena (cat ya dog).
+82. Object Detection: Object kya hai aur kahan hai, dono batana.
+83. Bounding Box: Object ke charo taraf ka rectangle.
+84. IoU: Predicted aur actual box ka overlap kitna hai.
+85. NMS: Ek hi object ke duplicate boxes hatakar best rakhna.
+86. Anchor Boxes: Pehle se fixed size ke boxes jinse detector guess karta hai.
+87. YOLO: Ek hi baar me poori image dekhkar fast real-time detection.
+88. Faster R-CNN: Two-stage detector, accurate lekin YOLO se slow.
+89. SSD: Single-shot detector, speed aur accuracy ka balance.
+90. Semantic Segmentation: Har pixel ko class dena (road, sky, car).
+91. Instance Segmentation: Har alag object ko alag pixel mask dena (Mask R-CNN).
+92. U-Net: Medical images ki segmentation ke liye popular architecture.
+
+ADVANCED AUR APPLICATIONS (93-100)
+93. Panoptic Segmentation: Semantic aur instance segmentation dono ek saath.
+94. OCR: Image ke text ko computer text me badalna.
+95. Face Recognition: Face se insaan ko pehchaanna (detection sirf face dhoondhta hai).
+96. Pose Estimation: Insaan ke joints (haath, pair, sar) ki position nikalna.
+97. Object Tracking: Video me ek object ko frame-by-frame follow karna.
+98. GAN: Do networks (generator aur discriminator) ki ladai se nayi fake images banana.
+99. CLIP: Image aur text ko ek saath samajhne wala multimodal model.
+100. Evaluation Metrics: Precision, Recall, F1 aur mAP se model ki performance naapna.
