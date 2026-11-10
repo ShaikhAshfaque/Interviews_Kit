@@ -1,0 +1,766 @@
+# GPU SYSTEM DESIGN – 100 TECHNICAL TERMS
+## AI Engineer | GenAI Engineer | Forward Deployed Engineer (FDE)
+### Basic to Advanced | Hinglish Interview Q&A
+
+---
+
+# MODULE 1: GPU FUNDAMENTALS (1–10)
+
+### 1. What is GPU?
+**Q: GPU kya hota hai?**
+
+**Ans:** GPU ka full form Graphics Processing Unit hai. Ye ek specialized processor hai jo parallel computing ke liye design kiya gaya hai. AI/ML mein GPU large-scale mathematical operations, matrix multiplication aur neural network training ko fast karta hai.
+
+**Example:** CPU sequential/general-purpose tasks handle karta hai, jabki GPU thousands of operations parallel execute kar sakta hai.
+
+### 2. CPU vs GPU
+**Q: CPU aur GPU mein kya difference hai?**
+
+**Ans:**
+- CPU: Few powerful cores, low-latency general-purpose processing.
+- GPU: Many processing cores, high-throughput parallel processing.
+- CPU operating systems, APIs aur business logic ke liye useful hai.
+- GPU model training, tensor operations aur inference ke liye useful hai.
+
+### 3. Parallel Computing
+**Q: Parallel computing kya hai?**
+
+**Ans:** Ek large task ko multiple smaller tasks mein divide karke simultaneously execute karna parallel computing hai.
+
+**Example:** 1 million matrix calculations ko multiple GPU cores par distribute karna.
+
+### 4. GPU Core
+**Q: GPU core kya hota hai?**
+
+**Ans:** GPU core ek processing unit hai jo mathematical instructions execute karta hai. Modern GPUs mein bahut saare cores hote hain jo parallel workloads execute karte hain.
+
+### 5. CUDA
+**Q: CUDA kya hai?**
+
+**Ans:** CUDA NVIDIA ka parallel computing platform aur programming model hai. Developers CUDA use karke GPU par custom computations execute kar sakte hain.
+
+**Example:** PyTorch CUDA backend NVIDIA GPU par tensor operations run karne mein help karta hai.
+
+### 6. CUDA Core
+**Q: CUDA core kya hota hai?**
+
+**Ans:** NVIDIA GPU architecture mein CUDA cores general-purpose arithmetic operations execute karte hain. Ye parallel processing mein contribute karte hain.
+
+### 7. Tensor Core
+**Q: Tensor Core kya hota hai?**
+
+**Ans:** Tensor Cores specialized hardware units hain jo matrix multiplication aur AI-related operations ko accelerate karte hain.
+
+**Example:** FP16, BF16 aur supported precision formats mein deep learning workloads accelerate karna.
+
+### 8. GPU Architecture
+**Q: GPU architecture kya hoti hai?**
+
+**Ans:** GPU architecture uska internal design hai, jisme processing cores, memory, cache, execution units aur interconnects shamil hote hain.
+
+**Example:** NVIDIA Ampere, Hopper aur Blackwell architectures.
+
+### 9. GPU Throughput
+**Q: GPU throughput kya hota hai?**
+
+**Ans:** GPU ek unit of time mein kitna computation execute kar sakta hai, use throughput kehte hain.
+
+**Example:** TFLOPS, tokens per second aur samples per second.
+
+### 10. GPU Utilization
+**Q: GPU utilization kya hai?**
+
+**Ans:** GPU utilization batata hai ki GPU processing units kitne actively busy hain.
+
+**Example:** NVIDIA GPU monitoring mein 90% utilization ka matlab hai GPU processing activity high hai. Lekin high utilization automatically optimal performance prove nahi karta.
+
+---
+
+# MODULE 2: GPU MEMORY CONCEPTS (11–20)
+
+### 11. VRAM
+**Q: VRAM kya hai?**
+
+**Ans:** VRAM GPU ki dedicated memory hoti hai. Isme model weights, activations, tensors aur inference-related data store hota hai.
+
+**Example:** 24 GB VRAM GPU.
+
+### 12. HBM
+**Q: HBM kya hai?**
+
+**Ans:** High Bandwidth Memory ek high-speed memory technology hai jo GPUs aur accelerators mein use hoti hai.
+
+**Example:** Data-intensive AI workloads mein high memory bandwidth provide karna.
+
+### 13. Memory Bandwidth
+**Q: Memory bandwidth kya hoti hai?**
+
+**Ans:** GPU memory se data kitni speed se read/write ho sakta hai, use memory bandwidth kehte hain.
+
+**Example:** GB/s ya TB/s mein measure hoti hai.
+
+### 14. GPU Memory Hierarchy
+**Q: GPU memory hierarchy kya hai?**
+
+**Ans:** GPU memory ke different levels ka arrangement hai:
+- Registers
+- Shared memory
+- L1 cache
+- L2 cache
+- Global memory / VRAM
+
+Fast memory generally limited hoti hai, jabki global memory comparatively larger hoti hai.
+
+### 15. Registers
+**Q: GPU registers kya hote hain?**
+
+**Ans:** Registers extremely fast, small storage locations hain jo GPU threads ke temporary values store karte hain.
+
+### 16. Shared Memory
+**Q: Shared memory kya hai?**
+
+**Ans:** Shared memory GPU ki fast on-chip memory hoti hai jo same thread block ke threads share kar sakte hain.
+
+**Example:** Matrix multiplication mein data reuse improve karna.
+
+### 17. Global Memory
+**Q: Global memory kya hoti hai?**
+
+**Ans:** Global memory GPU ki main device memory hoti hai, jise GPU kernels access kar sakte hain. Ye registers aur shared memory se slower hoti hai.
+
+### 18. L1 and L2 Cache
+**Q: GPU cache kya hota hai?**
+
+**Ans:** Cache frequently accessed data ko temporarily store karta hai, taaki repeated global memory access reduce ho.
+
+- L1: Generally closer to processing units.
+- L2: Larger cache shared across more GPU resources.
+
+### 19. Memory Allocation
+**Q: GPU memory allocation kya hai?**
+
+**Ans:** GPU par tensors, model weights aur intermediate data ke liye memory reserve karna allocation hai.
+
+**Example:** PyTorch mein tensor ko CUDA device par create karna.
+
+### 20. Out of Memory (OOM)
+**Q: CUDA Out of Memory error kyun aata hai?**
+
+**Ans:** Jab GPU ko required memory available nahi hoti, tab OOM error aata hai.
+
+**Solutions:**
+- Batch size reduce karo.
+- Mixed precision use karo.
+- Gradient accumulation use karo.
+- Model quantization karo.
+- Unnecessary tensors release karo.
+- Gradient checkpointing use karo.
+
+---
+
+# MODULE 3: GPU PERFORMANCE & COMPUTATION (21–30)
+
+### 21. FLOPS
+**Q: FLOPS kya hota hai?**
+
+**Ans:** Floating Point Operations Per Second. Ye GPU ki floating-point computational performance measure karta hai.
+
+### 22. TFLOPS
+**Q: TFLOPS kya hota hai?**
+
+**Ans:** One trillion floating-point operations per second. GPU specifications mein theoretical compute performance show karne ke liye use hota hai.
+
+### 23. FP32
+**Q: FP32 kya hai?**
+
+**Ans:** 32-bit floating-point precision format hai. Isme numerical precision relatively high hoti hai, lekin memory consumption bhi higher hota hai.
+
+### 24. FP16
+**Q: FP16 kya hai?**
+
+**Ans:** 16-bit floating-point format hai. Ye FP32 ke comparison mein memory usage reduce kar sakta hai aur supported hardware par computation accelerate kar sakta hai.
+
+### 25. BF16
+**Q: BF16 kya hai?**
+
+**Ans:** Brain Floating Point 16-bit format hai. Isme FP32 jaisa exponent range hota hai, lekin mantissa precision lower hoti hai. Deep learning training mein useful hai.
+
+### 26. INT8
+**Q: INT8 kya hai?**
+
+**Ans:** 8-bit integer precision format hai. Quantization ke through model size aur memory bandwidth requirements reduce karne mein help karta hai.
+
+### 27. Mixed Precision
+**Q: Mixed precision training kya hai?**
+
+**Ans:** Training ke dauran different numerical precision formats combine karna mixed precision hai.
+
+**Example:** Supported operations FP16/BF16 mein aur sensitive operations higher precision mein execute karna.
+
+### 28. Matrix Multiplication
+**Q: Matrix multiplication AI mein important kyun hai?**
+
+**Ans:** Neural networks aur Transformers mein large-scale matrix multiplications hoti hain. GPU in operations ko parallel execute karke training aur inference accelerate karta hai.
+
+### 29. Kernel
+**Q: GPU kernel kya hota hai?**
+
+**Ans:** GPU kernel ek function hota hai jo GPU device par execute hota hai.
+
+**Example:** Matrix multiplication kernel, vector addition kernel.
+
+### 30. Kernel Launch Overhead
+**Q: Kernel launch overhead kya hai?**
+
+**Ans:** CPU se GPU kernel launch karne mein jo overhead lagta hai, use kernel launch overhead kehte hain. Bahut chhote operations mein ye performance bottleneck ban sakta hai.
+
+---
+
+# MODULE 4: GPU EXECUTION MODEL (31–40)
+
+### 31. Thread
+**Q: GPU thread kya hota hai?**
+
+**Ans:** Thread GPU execution ki smallest logical unit hai jo kernel instructions execute karta hai.
+
+### 32. Thread Block
+**Q: Thread block kya hota hai?**
+
+**Ans:** Multiple threads ka group jo GPU par ek block ke form mein execute hota hai. Threads shared memory use kar sakte hain aur synchronize kar sakte hain.
+
+### 33. Grid
+**Q: CUDA grid kya hoti hai?**
+
+**Ans:** Grid ek ya multiple thread blocks ka collection hoti hai jo GPU kernel execution ke liye launch ki jaati hai.
+
+### 34. Warp
+**Q: Warp kya hota hai?**
+
+**Ans:** NVIDIA GPU mein warp generally 32 threads ka execution group hota hai. Threads same instruction stream execute karte hain, subject to execution masks and architecture details.
+
+### 35. SIMT
+**Q: SIMT kya hai?**
+
+**Ans:** Single Instruction, Multiple Threads. GPU execution model jahan multiple threads same instruction execute karte hain, potentially different data par.
+
+### 36. SIMD
+**Q: SIMD kya hota hai?**
+
+**Ans:** Single Instruction, Multiple Data. Ek instruction multiple data elements par operate karti hai. Ye vector processing ka common concept hai.
+
+### 37. Occupancy
+**Q: GPU occupancy kya hoti hai?**
+
+**Ans:** GPU par active warps ka ratio, hardware ki maximum supported active warps ke comparison mein occupancy kehlata hai.
+
+**Important:** High occupancy hamesha high performance guarantee nahi karti.
+
+### 38. Warp Divergence
+**Q: Warp divergence kya hai?**
+
+**Ans:** Jab same warp ke threads conditional branches ke different paths follow karte hain, execution serialize ho sakta hai. Isse performance reduce ho sakti hai.
+
+### 39. Synchronization
+**Q: GPU synchronization kya hai?**
+
+**Ans:** Multiple threads ya operations ko coordinate karna synchronization hai, taaki required execution order maintain rahe.
+
+### 40. Asynchronous Execution
+**Q: GPU asynchronous execution kya hai?**
+
+**Ans:** CPU GPU operations submit karke har operation complete hone ka wait kiye bina next work continue kar sakta hai. Synchronization required hone par completion wait ki jaati hai.
+
+---
+
+# MODULE 5: DEEP LEARNING ON GPU (41–50)
+
+### 41. Tensor
+**Q: Tensor kya hota hai?**
+
+**Ans:** Tensor multidimensional numerical data structure hai. Deep learning mein inputs, weights, activations aur gradients tensors ke form mein represent hote hain.
+
+### 42. Tensor Shape
+**Q: Tensor shape kya hoti hai?**
+
+**Ans:** Tensor ke dimensions ko shape kehte hain.
+
+**Example:** (32, 3, 224, 224) ka matlab batch size 32, 3 channels, height 224 aur width 224.
+
+### 43. Batch Size
+**Q: Batch size kya hota hai?**
+
+**Ans:** Ek training iteration mein process kiye jaane wale samples ki quantity batch size hai.
+
+**Example:** Batch size 32 ka matlab ek step mein 32 samples process karna.
+
+### 44. Forward Propagation
+**Q: Forward propagation kya hai?**
+
+**Ans:** Input data ko neural network layers se pass karke prediction generate karna forward propagation hai.
+
+### 45. Backpropagation
+**Q: Backpropagation kya hai?**
+
+**Ans:** Loss function ke gradients calculate karke network weights ke respect mein error contribution determine karna backpropagation hai.
+
+### 46. Gradient
+**Q: Gradient kya hota hai?**
+
+**Ans:** Gradient batata hai ki loss function model parameters ke change hone par kis direction aur rate se change hota hai.
+
+### 47. Optimizer
+**Q: Optimizer kya hota hai?**
+
+**Ans:** Optimizer gradients use karke model parameters update karta hai.
+
+**Examples:** SGD, Adam, AdamW.
+
+### 48. Gradient Accumulation
+**Q: Gradient accumulation kya hai?**
+
+**Ans:** Multiple smaller batches ke gradients accumulate karke ek optimizer update perform karna gradient accumulation hai.
+
+**Example:** Limited VRAM mein effective batch size increase karna.
+
+### 49. Gradient Checkpointing
+**Q: Gradient checkpointing kya hai?**
+
+**Ans:** Training ke dauran selected intermediate activations store karna aur baaki activations backward pass mein recompute karna. Isse memory save hoti hai, lekin computation increase hota hai.
+
+### 50. Data Parallelism
+**Q: Data parallelism kya hai?**
+
+**Ans:** Same model ki copies multiple GPUs par run hoti hain. Har GPU different data batch process karta hai aur gradients synchronize kiye jaate hain.
+
+---
+
+# MODULE 6: LLM & GENERATIVE AI GPU CONCEPTS (51–60)
+
+### 51. Model Parameters
+**Q: Model parameters kya hote hain?**
+
+**Ans:** Neural network ke learnable weights aur biases ko parameters kehte hain.
+
+**Example:** 7B model mein approximately 7 billion parameters hote hain.
+
+### 52. Model Weights
+**Q: Model weights GPU memory mein kyun load hote hain?**
+
+**Ans:** Model weights inference aur training computations mein use hote hain. GPU memory mein weights load karne se GPU un par operations efficiently perform kar sakta hai.
+
+### 53. Token
+**Q: Token kya hota hai?**
+
+**Ans:** Token text ka ek unit hota hai jise tokenizer model input mein convert karta hai. Token word, subword ya character ka portion ho sakta hai.
+
+### 54. Token Embedding
+**Q: Token embedding kya hoti hai?**
+
+**Ans:** Token IDs ko dense numerical vectors mein convert karna embedding kehlata hai. Ye vectors GPU par further model computations ke liye use hote hain.
+
+### 55. Transformer
+**Q: Transformer architecture kya hai?**
+
+**Ans:** Transformer neural network architecture hai jo self-attention aur feed-forward layers use karti hai. Modern LLMs isi architecture par based hain.
+
+### 56. Attention Mechanism
+**Q: Attention mechanism kya karta hai?**
+
+**Ans:** Attention input sequence ke different tokens ke beech relationships calculate karta hai aur relevant information par focus karta hai.
+
+### 57. Self-Attention
+**Q: Self-attention kya hai?**
+
+**Ans:** Sequence ka har token same sequence ke other tokens ke saath relationship calculate karta hai.
+
+### 58. KV Cache
+**Q: KV cache kya hota hai?**
+
+**Ans:** Autoregressive LLM inference mein previous tokens ke Key aur Value tensors cache kiye jaate hain. Isse har new token ke liye previous attention projections dobara calculate nahi karne padte.
+
+**Trade-off:** Generation speed improve hoti hai, lekin GPU memory consumption increase hota hai.
+
+### 59. Context Window
+**Q: Context window kya hoti hai?**
+
+**Ans:** Model ek request mein maximum kitne tokens process kar sakta hai, use context window kehte hain.
+
+**Example:** 32K context window approximately 32,000 tokens support karti hai, subject to model configuration.
+
+### 60. Prefill and Decode
+**Q: LLM inference mein prefill aur decode kya hain?**
+
+**Ans:**
+- Prefill: Input prompt ke tokens process karna.
+- Decode: Output tokens autoregressively generate karna.
+
+Prefill generally compute-intensive hota hai, jabki decode often memory-bandwidth aur sequential-generation constrained hota hai.
+
+---
+
+# MODULE 7: LLM INFERENCE & OPTIMIZATION (61–70)
+
+### 61. Quantization
+**Q: Quantization kya hai?**
+
+**Ans:** Model weights ya activations ko lower precision representation mein convert karna quantization hai.
+
+**Example:** FP16 se INT8 ya 4-bit representation.
+
+### 62. GPTQ
+**Q: GPTQ kya hai?**
+
+**Ans:** GPTQ ek post-training weight quantization method hai jo large language models ko low-bit precision mein compress karne ke liye use hota hai.
+
+### 63. AWQ
+**Q: AWQ kya hai?**
+
+**Ans:** Activation-aware Weight Quantization ek quantization technique hai jo important weights ko activation information ke basis par protect karne ka approach use karti hai.
+
+### 64. GGUF
+**Q: GGUF kya hai?**
+
+**Ans:** GGUF ek model file format hai jo llama.cpp ecosystem mein model weights, metadata aur quantized model representations store karne ke liye use hota hai.
+
+### 65. vLLM
+**Q: vLLM kya hai?**
+
+**Ans:** vLLM LLM inference aur serving engine hai. Ye PagedAttention aur continuous batching jaise techniques se serving efficiency improve karta hai.
+
+### 66. PagedAttention
+**Q: PagedAttention kya hai?**
+
+**Ans:** KV cache ko fixed-size blocks/pages mein manage karne ka approach hai. Isse memory allocation efficient hoti hai aur fragmentation reduce ho sakti hai.
+
+### 67. Continuous Batching
+**Q: Continuous batching kya hai?**
+
+**Ans:** Requests ko fixed batch boundary ka wait karaye bina dynamically add/remove karna continuous batching hai.
+
+**Benefit:** LLM serving throughput improve hota hai.
+
+### 68. FlashAttention
+**Q: FlashAttention kya hai?**
+
+**Ans:** FlashAttention memory-efficient exact attention algorithm hai jo GPU memory hierarchy ka better use karta hai aur unnecessary memory traffic reduce karta hai.
+
+### 69. Speculative Decoding
+**Q: Speculative decoding kya hai?**
+
+**Ans:** Ek smaller draft model candidate tokens generate karta hai aur larger target model unhe verify karta hai. Compatible conditions mein generation latency reduce ho sakti hai.
+
+### 70. Tokens Per Second
+**Q: Tokens per second kya measure karta hai?**
+
+**Ans:** LLM kitni speed se output tokens generate karta hai, use tokens per second kehte hain.
+
+**Important metrics:** Time to First Token (TTFT), inter-token latency aur overall throughput.
+
+---
+
+# MODULE 8: MULTI-GPU & DISTRIBUTED COMPUTING (71–80)
+
+### 71. Multi-GPU
+**Q: Multi-GPU computing kya hai?**
+
+**Ans:** Ek workload ko multiple GPUs par execute karna multi-GPU computing hai. Iska use large model training aur high-throughput inference mein hota hai.
+
+### 72. Model Parallelism
+**Q: Model parallelism kya hai?**
+
+**Ans:** Ek model ko multiple GPUs mein divide karna model parallelism hai, jab model ek GPU ki memory mein fit nahi hota ya computation distribute karna hota hai.
+
+### 73. Tensor Parallelism
+**Q: Tensor parallelism kya hai?**
+
+**Ans:** Individual model layers ke tensor operations ko multiple GPUs mein divide karna tensor parallelism hai.
+
+### 74. Pipeline Parallelism
+**Q: Pipeline parallelism kya hai?**
+
+**Ans:** Model ki different layers ko different GPUs par place karke micro-batches pipeline ke through process karna pipeline parallelism hai.
+
+### 75. FSDP
+**Q: Fully Sharded Data Parallel (FSDP) kya hai?**
+
+**Ans:** FSDP model parameters, gradients aur optimizer states ko multiple GPUs ke across shard karta hai, taaki per-GPU memory requirement reduce ho.
+
+### 76. DeepSpeed
+**Q: DeepSpeed kya hai?**
+
+**Ans:** DeepSpeed Microsoft ka deep learning optimization library hai. Ye large-scale training ke liye ZeRO, parallelism aur memory optimization techniques provide karta hai.
+
+### 77. NCCL
+**Q: NCCL kya hai?**
+
+**Ans:** NVIDIA Collective Communications Library multi-GPU aur multi-node communication operations provide karti hai.
+
+**Examples:** AllReduce, AllGather, ReduceScatter.
+
+### 78. AllReduce
+**Q: AllReduce kya hota hai?**
+
+**Ans:** Multiple GPUs ke data ko reduce karke result sabhi participating GPUs tak distribute karna AllReduce hai.
+
+**Example:** Distributed training mein gradients synchronize karna.
+
+### 79. NVLink
+**Q: NVLink kya hai?**
+
+**Ans:** NVLink NVIDIA ka high-speed GPU interconnect technology hai jo supported systems mein GPUs ke beech fast communication provide karta hai.
+
+### 80. PCIe
+**Q: PCIe kya hai?**
+
+**Ans:** Peripheral Component Interconnect Express ek high-speed interface hai jo CPU, GPU aur other hardware components ko connect karta hai.
+
+---
+
+# MODULE 9: ADVANCED GPU ARCHITECTURE & OPTIMIZATION (81–90)
+
+### 81. GPU Memory Fragmentation
+**Q: Memory fragmentation kya hai?**
+
+**Ans:** Available GPU memory chhote separated blocks mein divided ho sakti hai, jiski wajah se large contiguous allocation difficult ho sakta hai.
+
+### 82. Memory Coalescing
+**Q: Memory coalescing kya hai?**
+
+**Ans:** Jab GPU warp ke threads nearby memory addresses access karte hain, hardware memory transactions ko combine kar sakta hai. Isse memory access efficiency improve hoti hai.
+
+### 83. Bank Conflict
+**Q: Shared memory bank conflict kya hai?**
+
+**Ans:** Jab multiple threads same shared-memory bank ke conflicting addresses access karte hain, accesses serialize ho sakte hain aur performance reduce ho sakti hai.
+
+### 84. Roofline Model
+**Q: Roofline model kya hai?**
+
+**Ans:** Roofline model compute performance aur memory bandwidth ke basis par workload ki performance limits analyze karta hai.
+
+**Two bottlenecks:**
+- Compute-bound
+- Memory-bound
+
+### 85. Compute-Bound
+**Q: Compute-bound workload kya hai?**
+
+**Ans:** Jab workload ki performance mainly GPU computational capacity se limited hoti hai, use compute-bound kehte hain.
+
+### 86. Memory-Bound
+**Q: Memory-bound workload kya hai?**
+
+**Ans:** Jab workload ki performance mainly data transfer ya memory bandwidth se limited hoti hai, use memory-bound kehte hain.
+
+### 87. CUDA Graphs
+**Q: CUDA Graphs kya hain?**
+
+**Ans:** CUDA Graphs multiple GPU operations ko capture karke reusable execution graph mein organize karte hain. Repeated workloads mein CPU launch overhead reduce ho sakta hai.
+
+### 88. Operator Fusion
+**Q: Operator fusion kya hai?**
+
+**Ans:** Multiple operations ko combine karke ek optimized kernel mein execute karna operator fusion hai.
+
+**Example:** Bias addition aur activation ko combine karna.
+
+### 89. Triton
+**Q: Triton kya hai?**
+
+**Ans:** Triton ek programming language aur compiler ecosystem hai jisse developers GPU kernels write kar sakte hain, especially AI workloads ke liye.
+
+### 90. Nsight
+**Q: NVIDIA Nsight kya hai?**
+
+**Ans:** NVIDIA Nsight GPU development aur profiling tools ka suite hai.
+
+**Use cases:**
+- GPU performance profiling.
+- Kernel analysis.
+- Memory bottleneck identification.
+- CPU-GPU execution analysis.
+
+---
+
+# MODULE 10: PRODUCTION GPU, CLOUD & FDE SYSTEM DESIGN (91–100)
+
+### 91. GPU Selection
+**Q: AI project ke liye GPU kaise select karoge?**
+
+**Ans:** GPU select karte waqt consider karunga:
+- Model parameter count.
+- Precision format.
+- Model weights memory.
+- KV cache memory.
+- Activation memory.
+- Batch size.
+- Context length.
+- Memory bandwidth.
+- Compute capability.
+- Budget and deployment requirements.
+
+### 92. GPU VRAM Estimation
+**Q: LLM ke liye GPU memory kaise estimate karoge?**
+
+**Ans:** Basic weight memory estimate:
+
+Model parameters × bytes per parameter.
+
+**Example:** 7B parameters × 2 bytes (FP16) ≈ 14 GB weight memory.
+
+Lekin actual deployment mein KV cache, activations, CUDA workspace aur framework overhead ke liye additional memory chahiye.
+
+### 93. GPU Benchmarking
+**Q: GPU benchmarking kya hai?**
+
+**Ans:** GPU performance ko standardized workload aur metrics ke through measure karna benchmarking hai.
+
+**Metrics:**
+- Training time.
+- Inference latency.
+- Tokens per second.
+- Throughput.
+- GPU utilization.
+- Memory usage.
+- Cost per request.
+
+### 94. GPU Monitoring
+**Q: Production mein GPU monitoring kaise karoge?**
+
+**Ans:** GPU health aur performance monitor karne ke liye:
+- GPU utilization.
+- VRAM usage.
+- Temperature.
+- Power consumption.
+- Memory bandwidth.
+- Error events.
+- Request latency.
+- Tokens per second.
+
+**Tools:** NVIDIA-SMI, DCGM, Prometheus aur Grafana.
+
+### 95. GPU Scheduling
+**Q: GPU scheduling kya hai?**
+
+**Ans:** Multiple workloads ko available GPUs par allocate aur schedule karna GPU scheduling hai.
+
+**Example:** Kubernetes GPU device plugins aur workload scheduling.
+
+### 96. MIG
+**Q: MIG kya hota hai?**
+
+**Ans:** Multi-Instance GPU NVIDIA ki supported GPU architectures par ek physical GPU ko isolated GPU instances mein partition karne ki technology hai.
+
+**Use case:** Multiple workloads ko separate GPU resources provide karna.
+
+### 97. GPU Cloud Instance
+**Q: GPU cloud instance kya hota hai?**
+
+**Ans:** Cloud provider ka virtual machine ya compute instance jisme GPU accelerator attached hota hai.
+
+**Examples:** AWS GPU instances, Azure GPU VMs aur Google Cloud GPU instances.
+
+### 98. GPU Containerization
+**Q: Docker container mein GPU kaise use karte hain?**
+
+**Ans:** NVIDIA Container Toolkit ke through container ko GPU access provide kiya ja sakta hai.
+
+**Example command:**
+
+`docker run --gpus all nvidia/cuda:12.4.1-base-ubuntu22.04 nvidia-smi`
+
+Host drivers aur container CUDA compatibility important hai.
+
+### 99. GPU Cost Optimization
+**Q: Production GenAI application mein GPU cost kaise reduce karoge?**
+
+**Ans:**
+- Right-sized GPU select karunga.
+- Quantization use karunga.
+- Continuous batching implement karunga.
+- KV cache optimize karunga.
+- Autoscaling implement karunga.
+- Idle GPU instances release karunga.
+- Request routing optimize karunga.
+- Smaller model use karunga where quality permits.
+- Tokens per dollar monitor karunga.
+
+### 100. End-to-End GPU Architecture
+**Q: FDE ke role mein client ke liye GPU-based GenAI solution kaise design karoge?**
+
+**Ans:**
+
+Step-by-step architecture:
+
+1. Business requirements collect karunga.
+2. Dataset aur model requirements analyze karunga.
+3. Model size aur precision select karunga.
+4. GPU VRAM requirements calculate karunga.
+5. Suitable GPU infrastructure select karunga.
+6. Model ko GPU par deploy karunga.
+7. vLLM ya suitable inference engine configure karunga.
+8. FastAPI ke through inference API expose karunga.
+9. Docker aur Kubernetes se deployment manage karunga.
+10. Prometheus/Grafana se monitoring implement karunga.
+11. Latency, throughput aur GPU cost optimize karunga.
+12. Production security, reliability aur scalability validate karunga.
+
+**Example Architecture:**
+
+Client Application → API Gateway → FastAPI → Authentication → vLLM → GPU Cluster → LLM → Response
+
+Monitoring: Prometheus + Grafana
+
+Infrastructure: Docker + Kubernetes + Cloud GPU
+
+---
+
+# FINAL REVISION FLOW
+
+1. GPU Fundamentals → Concepts 1–10
+2. GPU Memory → Concepts 11–20
+3. GPU Performance → Concepts 21–30
+4. GPU Execution Model → Concepts 31–40
+5. Deep Learning → Concepts 41–50
+6. LLM GPU Concepts → Concepts 51–60
+7. LLM Inference → Concepts 61–70
+8. Distributed GPU → Concepts 71–80
+9. Advanced Optimization → Concepts 81–90
+10. Production & FDE → Concepts 91–100
+
+# PRACTICAL TOOLS TO LEARN
+
+- NVIDIA-SMI – GPU monitoring
+- CUDA – GPU programming platform
+- PyTorch – Deep learning
+- TensorRT – Inference optimization
+- vLLM – LLM serving
+- Hugging Face – Model ecosystem
+- Triton – GPU kernel development
+- NVIDIA Nsight – Profiling
+- DeepSpeed – Distributed training
+- FSDP – Model sharding
+- Docker – Containerization
+- Kubernetes – GPU orchestration
+- Prometheus + Grafana – Monitoring
+
+# INTERVIEW PREPARATION CHECKLIST
+
+[ ] Explain CPU vs GPU.
+[ ] Explain GPU memory hierarchy.
+[ ] Calculate FP16 model memory.
+[ ] Explain CUDA cores vs Tensor Cores.
+[ ] Explain FP16 vs BF16 vs INT8.
+[ ] Troubleshoot CUDA OOM.
+[ ] Explain batch size and gradient accumulation.
+[ ] Explain data, tensor and pipeline parallelism.
+[ ] Explain KV cache.
+[ ] Explain PagedAttention.
+[ ] Explain FlashAttention.
+[ ] Explain quantization.
+[ ] Explain vLLM architecture.
+[ ] Calculate GPU requirements for a 7B/13B/70B model.
+[ ] Explain GPU monitoring and profiling.
+[ ] Design an end-to-end production GPU inference system.
+
+**Interview Tip:** Senior AI/GenAI Engineer aur FDE interviews mein sirf definitions nahi, balki memory estimation, bottleneck identification, architecture decisions, performance trade-offs aur production troubleshooting explain karna bhi important hai.
