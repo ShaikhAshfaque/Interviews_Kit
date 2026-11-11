@@ -1,0 +1,2445 @@
+# 200 REAL SOC ANALYST INTERVIEW QUESTIONS AND ANSWERS
+## SOC L1 & L2 | Beginner to Advanced | Scenario-Based
+
+**Technologies Covered:**
+- Microsoft Sentinel (SIEM/SOAR)
+- Microsoft Defender XDR
+- Microsoft Defender for Endpoint (EDR)
+- CrowdStrike Falcon
+- Splunk SIEM
+- IBM QRadar
+- Microsoft Entra ID
+- Active Directory
+- Windows Event Logs
+- KQL (Kusto Query Language)
+- MITRE ATT&CK Framework
+- Firewall, IDS, IPS, VPN, DNS
+- Threat Intelligence
+- Incident Response
+- Malware and Ransomware Investigation
+- Cloud Security Monitoring
+
+**LEVEL DISTRIBUTION**
+
+- Questions 1–40: SOC Fundamentals and Networking
+- Questions 41–65: Microsoft Sentinel and SIEM
+- Questions 66–90: EDR and XDR
+- Questions 91–110: Windows Security and Active Directory
+- Questions 111–140: SOC L1 Real-World Scenarios
+- Questions 141–170: SOC L2 Advanced Scenarios
+- Questions 171–190: KQL and Practical Sentinel
+- Questions 191–200: Advanced Cybersecurity and Incident Response
+
+==================================================
+SECTION 1: SOC FUNDAMENTALS (1–20)
+==================================================
+
+Q1. What is SOC (Security Operations Center)?
+
+Answer:
+SOC is a centralized security team responsible for continuously monitoring, detecting, investigating and responding to cybersecurity threats.
+
+Main responsibilities:
+1. Monitor security alerts.
+2. Detect suspicious activities.
+3. Investigate security incidents.
+4. Respond to cyberattacks.
+5. Escalate critical incidents.
+6. Maintain security visibility.
+
+Real Scenario:
+If an employee's account logs in from an unusual country, the SOC team investigates whether the activity is legitimate or malicious.
+
+Q2. What is a SOC Analyst?
+
+Answer:
+A SOC Analyst monitors security alerts, investigates suspicious activities and responds to cybersecurity incidents.
+
+L1 Responsibilities:
+- Alert monitoring.
+- Initial investigation.
+- Alert validation.
+- False-positive identification.
+- Incident escalation.
+
+L2 Responsibilities:
+- Deep investigation.
+- Threat hunting.
+- Root cause analysis.
+- Incident containment.
+- Detection engineering.
+
+Q3. What is the difference between SOC L1 and SOC L2?
+
+Answer:
+
+SOC L1:
+- Monitor security alerts.
+- Perform initial triage.
+- Analyze basic logs.
+- Identify false positives.
+- Follow investigation playbooks.
+- Escalate suspicious incidents.
+
+SOC L2:
+- Perform deep investigations.
+- Analyze process trees.
+- Correlate multiple log sources.
+- Perform threat hunting.
+- Investigate lateral movement.
+- Identify root causes.
+- Recommend containment and remediation.
+
+Example:
+L1 detects suspicious PowerShell execution.
+L2 investigates the process tree, parent process, command line, network connections and possible persistence.
+
+Q4. What is a Security Incident?
+
+Answer:
+A security incident is an event that compromises or threatens the confidentiality, integrity or availability of an organization's systems or information.
+
+Examples:
+- Unauthorized login.
+- Ransomware infection.
+- Data exfiltration.
+- Privilege escalation.
+
+Q5. What is a Security Event?
+
+Answer:
+A security event is a recorded activity occurring within a system, application or network.
+
+Examples:
+- User login.
+- Password change.
+- File access.
+- Firewall connection.
+
+Important:
+Every security incident contains relevant events, but not every security event is an incident.
+
+Q6. What is Alert Triage?
+
+Answer:
+Alert triage means analyzing an incoming security alert to determine whether it is legitimate, suspicious, a false positive or requires escalation.
+
+Steps:
+1. Check alert severity.
+2. Identify affected user and device.
+3. Review timestamps.
+4. Analyze source and destination IP.
+5. Check related events.
+6. Decide whether to close, investigate or escalate.
+
+Q7. What is a False Positive?
+
+Answer:
+A false positive occurs when a security tool identifies legitimate activity as malicious.
+
+Example:
+An employee logs in using an approved corporate VPN, but Sentinel generates an unusual-location alert.
+
+Q8. What is a False Negative?
+
+Answer:
+A false negative occurs when malicious activity happens but the security monitoring system fails to detect it.
+
+Example:
+Malware executes on an endpoint, but the EDR does not generate an alert.
+
+Q9. What is True Positive?
+
+Answer:
+A true positive occurs when a security tool correctly identifies genuine malicious activity.
+
+Example:
+Microsoft Defender detects and confirms ransomware encryption behavior.
+
+Q10. What is True Negative?
+
+Answer:
+A true negative occurs when normal activity is correctly identified as normal activity.
+
+Q11. What is Incident Severity?
+
+Answer:
+Incident severity represents the technical impact and seriousness of a security incident.
+
+Typical levels:
+- Critical: Active ransomware or major data breach.
+- High: Confirmed compromise of a privileged account.
+- Medium: Suspicious activity requiring investigation.
+- Low: Minor security policy violation.
+
+Q12. What is Incident Priority?
+
+Answer:
+Incident priority determines how urgently an incident should be investigated and resolved.
+
+It depends on:
+- Business impact.
+- Urgency.
+- Asset criticality.
+- Potential damage.
+- Organizational SLA.
+
+Q13. Difference between Severity and Priority?
+
+Answer:
+Severity measures the seriousness of the incident.
+Priority determines how quickly the incident needs attention.
+
+Example:
+Active ransomware on a production server means high severity and high priority.
+
+Q14. What is an IOC?
+
+Answer:
+IOC stands for Indicator of Compromise.
+
+It is evidence that may indicate a system has been compromised.
+
+Examples:
+- Malicious IP address.
+- Suspicious domain.
+- Malware hash.
+- Malicious file path.
+- Suspicious email address.
+
+Q15. What is an IOA?
+
+Answer:
+IOA stands for Indicator of Attack.
+
+It identifies suspicious attacker behavior or activities.
+
+Example:
+PowerShell executing an encoded command unexpectedly.
+
+IOC = Evidence associated with compromise.
+IOA = Suspicious or malicious behavior.
+
+Q16. What is Threat Intelligence?
+
+Answer:
+Threat Intelligence is information about cyber threats that is collected, processed and analyzed to help organizations detect and prevent attacks.
+
+Tools:
+- VirusTotal.
+- AbuseIPDB.
+- AlienVault OTX.
+- Microsoft Threat Intelligence.
+- MISP.
+
+Q17. What is Threat Hunting?
+
+Answer:
+Threat hunting is a proactive security process in which analysts search logs and endpoint activities to identify hidden threats before or without receiving an alert.
+
+Example:
+Searching Sentinel for suspicious PowerShell execution even when no detection alert exists.
+
+Q18. What is the MITRE ATT&CK Framework?
+
+Answer:
+MITRE ATT&CK is a knowledge base documenting real-world attacker tactics, techniques and procedures.
+
+Important tactics:
+- Initial Access.
+- Execution.
+- Persistence.
+- Privilege Escalation.
+- Defense Evasion.
+- Credential Access.
+- Discovery.
+- Lateral Movement.
+- Exfiltration.
+- Impact.
+
+Q19. What is TTP?
+
+Answer:
+TTP stands for Tactics, Techniques and Procedures.
+
+Tactic: What the attacker wants to achieve.
+Technique: How the attacker achieves the objective.
+Procedure: The specific implementation used by the attacker.
+
+Q20. What is Escalation in SOC?
+
+Answer:
+Escalation means transferring an incident to a higher-level analyst or specialized security team when advanced investigation, additional authority or remediation is required.
+
+Example:
+L1 detects confirmed malware execution with lateral movement indicators and escalates the incident to L2.
+
+==================================================
+SECTION 2: NETWORKING AND SECURITY FUNDAMENTALS (21–40)
+==================================================
+
+Q21. What is an IP Address?
+
+Answer:
+An IP address is a logical network address used to identify devices and enable communication.
+
+Types:
+- IPv4: 192.168.1.10
+- IPv6: 2001:db8::1
+
+Q22. What is the difference between Public IP and Private IP?
+
+Answer:
+Public IP:
+An IP address routable over the public internet.
+
+Private IP:
+An IP address used within internal networks.
+
+Private IP ranges:
+- 10.0.0.0/8
+- 172.16.0.0/12
+- 192.168.0.0/16
+
+Q23. What is a Port Number?
+
+Answer:
+A port number identifies the service or application associated with network communication.
+
+Important ports:
+
+FTP: 20/21
+SSH: 22
+Telnet: 23
+SMTP: 25
+DNS: 53
+HTTP: 80
+Kerberos: 88
+POP3: 110
+NTP: 123
+RPC: 135
+NetBIOS: 139
+IMAP: 143
+LDAP: 389
+HTTPS: 443
+SMB: 445
+LDAPS: 636
+RDP: 3389
+SMTP Submission: 587
+
+Q24. What is DNS?
+
+Answer:
+DNS stands for Domain Name System.
+
+It translates domain names into IP addresses.
+
+Example:
+example.com is resolved to its corresponding IP address.
+
+SOC relevance:
+Attackers may use suspicious domains for phishing and command-and-control communication.
+
+Q25. What is DHCP?
+
+Answer:
+DHCP stands for Dynamic Host Configuration Protocol.
+
+It automatically assigns:
+- IP address.
+- Subnet mask.
+- Default gateway.
+- DNS server.
+
+Q26. What is TCP?
+
+Answer:
+TCP stands for Transmission Control Protocol.
+
+It is connection-oriented and provides reliable data delivery.
+
+Examples:
+HTTPS, SSH and FTP commonly use TCP.
+
+Q27. What is UDP?
+
+Answer:
+UDP stands for User Datagram Protocol.
+
+It is connectionless and does not provide TCP-style delivery guarantees.
+
+Example:
+DNS commonly uses UDP port 53.
+
+Q28. What is the TCP Three-Way Handshake?
+
+Answer:
+
+Step 1: SYN
+Client sends a connection request.
+
+Step 2: SYN-ACK
+Server acknowledges the request.
+
+Step 3: ACK
+Client acknowledges the server.
+
+The TCP connection is established.
+
+Q29. What is a Firewall?
+
+Answer:
+A firewall monitors and controls network traffic based on predefined security rules.
+
+Types:
+- Network firewall.
+- Host-based firewall.
+- Next-Generation Firewall.
+- Cloud firewall.
+
+Q30. What is IDS?
+
+Answer:
+IDS stands for Intrusion Detection System.
+
+It detects suspicious network or system activities and generates alerts.
+
+Q31. What is IPS?
+
+Answer:
+IPS stands for Intrusion Prevention System.
+
+It detects malicious traffic and can automatically block or prevent it.
+
+Q32. Difference between IDS and IPS?
+
+Answer:
+IDS primarily detects and alerts.
+IPS detects and can actively prevent or block malicious traffic.
+
+Q33. What is VPN?
+
+Answer:
+VPN stands for Virtual Private Network.
+
+It creates an encrypted communication tunnel between systems or networks.
+
+Example:
+An employee securely connects to the company network remotely.
+
+Q34. What is NAT?
+
+Answer:
+NAT stands for Network Address Translation.
+
+It translates IP addresses, commonly allowing private network devices to communicate through public IP addresses.
+
+Q35. What is a Subnet Mask?
+
+Answer:
+A subnet mask identifies the network and host portions of an IP address.
+
+Example:
+255.255.255.0 = /24.
+
+Q36. What is a MAC Address?
+
+Answer:
+A MAC address is a Layer 2 hardware address associated with a network interface.
+
+Example:
+00:1A:2B:3C:4D:5E.
+
+Q37. What is ARP?
+
+Answer:
+ARP stands for Address Resolution Protocol.
+
+It discovers the MAC address associated with an IPv4 address on a local network.
+
+Q38. What is a Proxy Server?
+
+Answer:
+A proxy server acts as an intermediary between a client and a destination server.
+
+Security uses:
+- Web filtering.
+- Access control.
+- Traffic inspection.
+- Logging.
+
+Q39. What is a DDoS Attack?
+
+Answer:
+DDoS stands for Distributed Denial of Service.
+
+Multiple compromised systems generate excessive traffic against a target, potentially making the service unavailable.
+
+Q40. What is Network Segmentation?
+
+Answer:
+Network segmentation divides a network into smaller isolated sections.
+
+Benefits:
+- Reduces attack surface.
+- Limits lateral movement.
+- Protects critical systems.
+- Improves access control.
+
+==================================================
+SECTION 3: SIEM AND MICROSOFT SENTINEL (41–65)
+==================================================
+
+Q41. What is SIEM?
+
+Answer:
+SIEM stands for Security Information and Event Management.
+
+It collects logs from different sources, correlates events, analyzes suspicious activities and generates security alerts.
+
+Examples:
+- Microsoft Sentinel.
+- Splunk.
+- IBM QRadar.
+- Google Security Operations.
+
+Q42. What is Microsoft Sentinel?
+
+Answer:
+Microsoft Sentinel is Microsoft's cloud-native SIEM and SOAR platform.
+
+Main capabilities:
+1. Data collection.
+2. Log analytics.
+3. Threat detection.
+4. Incident management.
+5. Threat hunting.
+6. Automation.
+7. Security investigation.
+
+Q43. Difference between SIEM and SOAR?
+
+Answer:
+
+SIEM:
+- Collects logs.
+- Detects threats.
+- Correlates events.
+- Generates alerts.
+
+SOAR:
+- Automates investigations.
+- Executes playbooks.
+- Enriches incidents.
+- Performs approved response actions.
+
+Q44. What is a Log Source?
+
+Answer:
+A log source is a system or device that generates security-related logs.
+
+Examples:
+- Windows servers.
+- Firewalls.
+- EDR platforms.
+- Active Directory.
+- VPN.
+- Cloud applications.
+
+Q45. What is Log Ingestion?
+
+Answer:
+Log ingestion means collecting and importing logs from different sources into a SIEM platform.
+
+Q46. What is a Data Connector in Microsoft Sentinel?
+
+Answer:
+A data connector integrates Microsoft Sentinel with external data sources.
+
+Examples:
+- Microsoft Defender XDR.
+- Windows Security Events.
+- Azure Activity.
+- Microsoft Entra ID.
+
+Q47. What is a Log Analytics Workspace?
+
+Answer:
+Log Analytics Workspace is an Azure Monitor environment where logs and telemetry data are stored and queried.
+
+Microsoft Sentinel operates using a Log Analytics workspace.
+
+Q48. What is KQL?
+
+Answer:
+KQL stands for Kusto Query Language.
+
+It is used to search, filter, analyze and correlate data in Microsoft Sentinel and Azure Data Explorer.
+
+Example:
+
+SecurityEvent
+| where EventID == 4625
+| project TimeGenerated, Computer, Account, IpAddress
+| sort by TimeGenerated desc
+
+Q49. What is an Analytics Rule in Sentinel?
+
+Answer:
+An analytics rule contains detection logic that analyzes incoming logs and identifies suspicious activities.
+
+Common types:
+- Scheduled rules.
+- Near-real-time rules.
+- Microsoft security product-based detections.
+
+Q50. What is an Incident in Microsoft Sentinel?
+
+Answer:
+An incident is a security investigation case containing related alerts, entities and evidence.
+
+Q51. What is an Alert in Sentinel?
+
+Answer:
+An alert is a security notification generated when a detection identifies suspicious activity.
+
+Multiple related alerts may be grouped into one incident.
+
+Q52. Difference between Alert and Incident?
+
+Answer:
+Alert = Individual detection.
+
+Incident = Investigation case containing one or more related alerts, entities and evidence.
+
+Q53. What are Workbooks in Microsoft Sentinel?
+
+Answer:
+Workbooks are interactive dashboards that visualize security data using:
+- Charts.
+- Graphs.
+- Tables.
+- Reports.
+
+Q54. What are Hunting Queries?
+
+Answer:
+Hunting queries help SOC analysts proactively search for suspicious activities.
+
+Example:
+
+DeviceProcessEvents
+| where ProcessCommandLine contains "EncodedCommand"
+| project Timestamp, DeviceName, AccountName, ProcessCommandLine
+
+Q55. What is an Automation Rule?
+
+Answer:
+Automation rules automatically perform predefined actions on Sentinel incidents.
+
+Examples:
+- Assign incidents.
+- Change incident status.
+- Add tags.
+- Trigger playbooks.
+
+Q56. What is a Playbook in Sentinel?
+
+Answer:
+A playbook is an automated workflow commonly implemented using Azure Logic Apps.
+
+Example:
+1. Phishing alert received.
+2. Extract sender and URL.
+3. Enrich URL with threat intelligence.
+4. Notify SOC team.
+5. Perform approved blocking action.
+
+Q57. What is Entity Mapping?
+
+Answer:
+Entity mapping identifies and maps entities such as users, IP addresses, hostnames and accounts within security alerts.
+
+Q58. What is UEBA?
+
+Answer:
+UEBA stands for User and Entity Behavior Analytics.
+
+It analyzes normal user and device behavior to identify unusual activities.
+
+Example:
+An employee usually logs in from India but suddenly accesses the account from an unusual country.
+
+Q59. What is Data Normalization?
+
+Answer:
+Data normalization converts different log formats into a common structure for easier investigation and correlation.
+
+Q60. What is ASIM in Microsoft Sentinel?
+
+Answer:
+ASIM stands for Advanced Security Information Model.
+
+It provides normalized schemas to help analysts query different log sources using consistent structures.
+
+Q61. What is a Watchlist in Sentinel?
+
+Answer:
+A watchlist stores reference data that can be used in queries and detection rules.
+
+Examples:
+- Approved IP addresses.
+- VIP users.
+- Critical servers.
+- Service accounts.
+
+Q62. What is Threat Intelligence in Sentinel?
+
+Answer:
+Sentinel can use threat intelligence indicators to correlate logs with suspicious IP addresses, domains and file hashes.
+
+Q63. What is Fusion Detection?
+
+Answer:
+Fusion correlates multiple security signals to help identify sophisticated multi-stage attacks.
+
+Q64. What is a Scheduled Analytics Rule?
+
+Answer:
+A scheduled analytics rule executes a query at configured intervals and generates alerts when detection conditions match.
+
+Q65. What will you investigate first when a Sentinel incident appears?
+
+Answer:
+1. Check incident severity and status.
+2. Review alert description.
+3. Identify affected user and device.
+4. Check IP addresses and timestamps.
+5. Review related alerts and entities.
+6. Run relevant KQL queries.
+7. Check Defender endpoint evidence.
+8. Document findings.
+9. Close as false positive or escalate according to evidence.
+
+==================================================
+SECTION 4: EDR, XDR AND MICROSOFT DEFENDER (66–90)
+==================================================
+
+Q66. What is EDR?
+
+Answer:
+EDR stands for Endpoint Detection and Response.
+
+It continuously monitors endpoint devices to detect, investigate and respond to suspicious activities.
+
+Examples:
+- Microsoft Defender for Endpoint.
+- CrowdStrike Falcon.
+- SentinelOne.
+- Sophos.
+
+Q67. What is XDR?
+
+Answer:
+XDR stands for Extended Detection and Response.
+
+It integrates security signals from endpoints, identities, email, cloud and network environments to detect threats.
+
+Q68. Difference between EDR and Antivirus?
+
+Answer:
+Antivirus primarily focuses on malware prevention and detection.
+
+EDR provides continuous monitoring, behavioral detection, investigation and response capabilities.
+
+Q69. What is Microsoft Defender for Endpoint?
+
+Answer:
+Microsoft Defender for Endpoint is an enterprise endpoint security platform that helps protect, detect, investigate and respond to endpoint threats.
+
+Q70. What is Microsoft Defender XDR?
+
+Answer:
+Microsoft Defender XDR correlates alerts and security signals from multiple Microsoft security products to provide unified incident investigation.
+
+Q71. What is Device Isolation?
+
+Answer:
+Device isolation restricts network communication from a compromised endpoint while preserving supported security management connectivity.
+
+Scenario:
+A ransomware-infected laptop needs immediate containment.
+
+Q72. What is Quarantine?
+
+Answer:
+Quarantine isolates a suspicious or malicious file to prevent further execution or harm.
+
+Q73. What is Endpoint Telemetry?
+
+Answer:
+Endpoint telemetry is activity data collected from endpoint devices.
+
+Examples:
+- Process creation.
+- File modification.
+- Registry changes.
+- Network connections.
+- User activity.
+
+Q74. What is a Process Tree?
+
+Answer:
+A process tree shows parent-child process relationships.
+
+Example:
+
+WINWORD.EXE
+    |
+    |--- powershell.exe
+              |
+              |--- cmd.exe
+                       |
+                       |--- suspicious.exe
+
+Q75. Why is PowerShell important in SOC investigation?
+
+Answer:
+PowerShell is a legitimate Windows administration tool, but attackers can misuse it to execute malicious commands.
+
+Suspicious indicators:
+- Encoded commands.
+- Download and execute patterns.
+- Hidden window execution.
+- Unusual parent-child relationships.
+
+Q76. What is a File Hash?
+
+Answer:
+A file hash is a digital fingerprint of a file.
+
+Common algorithms:
+- MD5.
+- SHA-1.
+- SHA-256.
+
+SOC analysts use hashes to check file reputation through threat intelligence platforms.
+
+Q77. What is Fileless Malware?
+
+Answer:
+Fileless malware can execute malicious activities through memory, scripting tools or legitimate system utilities without relying on traditional executable files.
+
+Q78. What is Behavioral Detection?
+
+Answer:
+Behavioral detection identifies suspicious activities based on behavior and patterns rather than relying only on known malware signatures.
+
+Example:
+A process suddenly starts encrypting hundreds of files.
+
+Q79. Difference between Endpoint Isolation and Network Isolation?
+
+Answer:
+Endpoint isolation restricts network communication from a specific endpoint.
+
+Network isolation separates network segments and restricts communication between them.
+
+Q80. What is Live Response in Defender?
+
+Answer:
+Live Response allows authorized analysts to perform supported remote investigation commands and collect evidence from endpoints.
+
+Q81. What is Attack Surface Reduction?
+
+Answer:
+Attack Surface Reduction rules help prevent common attacker techniques on Windows endpoints.
+
+Q82. What is EDR Alert Severity?
+
+Answer:
+EDR alert severity indicates the potential seriousness of detected activity.
+
+Common levels:
+- Informational.
+- Low.
+- Medium.
+- High.
+
+Exact severity depends on the security vendor and detection logic.
+
+Q83. What is Device Timeline?
+
+Answer:
+Device Timeline provides historical endpoint activity.
+
+Analysts investigate processes, files, connections and other activities.
+
+Q84. What is an EDR Sensor or Agent?
+
+Answer:
+An EDR agent is software installed on an endpoint to collect security telemetry and communicate with the EDR platform.
+
+Q85. What is Tamper Protection?
+
+Answer:
+Tamper Protection protects security settings and protection components against unauthorized modifications.
+
+Q86. What is IOC Matching in EDR?
+
+Answer:
+IOC matching compares endpoint indicators with known malicious indicators.
+
+Example:
+A known malware SHA-256 hash matches an endpoint file.
+
+Q87. What is a Suspicious Parent-Child Process?
+
+Answer:
+It occurs when a process launches an unexpected child process with suspicious behavior.
+
+Example:
+Outlook.exe unexpectedly launching PowerShell.
+
+Q88. What is Credential Dumping?
+
+Answer:
+Credential dumping is an attacker technique used to steal passwords, password hashes or authentication material.
+
+Example:
+Suspicious access to LSASS memory.
+
+Q89. What is Lateral Movement Detection?
+
+Answer:
+Lateral movement detection identifies attacker activities involving movement from one compromised machine to another.
+
+Examples:
+- RDP.
+- SMB.
+- Remote services.
+- PsExec.
+
+Q90. What will you do if EDR detects malware on an employee laptop?
+
+Answer:
+1. Review detection details.
+2. Identify the affected endpoint.
+3. Check malware name and hash.
+4. Review file location.
+5. Investigate process tree.
+6. Review network connections.
+7. Determine whether malware executed.
+8. Isolate the device if required.
+9. Collect evidence.
+10. Escalate or coordinate remediation.
+11. Verify endpoint health before closure.
+
+==================================================
+SECTION 5: WINDOWS SECURITY AND ACTIVE DIRECTORY (91–110)
+==================================================
+
+Q91. What is Active Directory?
+
+Answer:
+Active Directory is Microsoft's directory service used to manage users, computers, groups and permissions within an organization.
+
+Q92. What is a Domain Controller?
+
+Answer:
+A Domain Controller provides Active Directory authentication and authorization services.
+
+Example:
+An employee logs into a company laptop using domain credentials.
+
+Q93. What is Windows Event ID 4624?
+
+Answer:
+Event ID 4624 indicates a successful logon.
+
+SOC investigation:
+- Check username.
+- Check source IP.
+- Check logon type.
+- Check timestamp.
+- Verify whether the login is authorized.
+
+Q94. What is Windows Event ID 4625?
+
+Answer:
+Event ID 4625 indicates a failed logon attempt.
+
+Scenario:
+An IP generates 100 failed login attempts. Investigate possible brute-force activity.
+
+Q95. What is Windows Event ID 4672?
+
+Answer:
+Event ID 4672 indicates special privileges assigned to a new logon session.
+
+SOC analysts verify whether privileged access is authorized.
+
+Q96. What is Windows Event ID 4688?
+
+Answer:
+Event ID 4688 indicates process creation.
+
+Investigation details:
+- Process name.
+- Creator process.
+- User.
+- Command line, if configured and available.
+
+Q97. What is Windows Event ID 4720?
+
+Answer:
+Event ID 4720 indicates a user account was created.
+
+Scenario:
+An unknown administrator creates a new account after business hours.
+
+Q98. What is Windows Event ID 4728?
+
+Answer:
+Event ID 4728 indicates a member was added to a security-enabled global group.
+
+Example:
+A user is added to the Domain Admins group.
+
+Q99. What is Windows Event ID 4740?
+
+Answer:
+Event ID 4740 indicates an account lockout.
+
+Possible reasons:
+- Incorrect passwords.
+- Brute-force activity.
+- Old saved credentials.
+- Misconfigured services.
+
+Q100. What is Windows Event ID 1102?
+
+Answer:
+Event ID 1102 indicates that the Windows Security audit log was cleared.
+
+Scenario:
+An administrator account clears Security logs. This may indicate defense evasion.
+
+Q101. What is Kerberos?
+
+Answer:
+Kerberos is a network authentication protocol that uses tickets to provide secure authentication.
+
+Q102. What is NTLM?
+
+Answer:
+NTLM is a legacy Microsoft challenge-response authentication protocol.
+
+Modern environments generally prefer Kerberos where supported.
+
+Q103. What is Kerberoasting?
+
+Answer:
+Kerberoasting is an attack in which an attacker requests Kerberos service tickets and attempts offline password cracking against service account credentials.
+
+Q104. What is Pass-the-Hash?
+
+Answer:
+Pass-the-Hash is an attack in which a stolen password hash is used to authenticate without knowing the plaintext password.
+
+Q105. What is Password Spraying?
+
+Answer:
+Password spraying is an attack where an attacker tries one or a few common passwords against multiple accounts.
+
+Example:
+Trying one common password against 500 user accounts.
+
+Q106. What is a Brute Force Attack?
+
+Answer:
+A brute-force attack repeatedly tries different password combinations to gain unauthorized access.
+
+Q107. What is MFA?
+
+Answer:
+MFA stands for Multi-Factor Authentication.
+
+It requires multiple authentication factors.
+
+Examples:
+- Something you know: Password.
+- Something you have: Authenticator app.
+- Something you are: Biometrics.
+
+Q108. What is Conditional Access in Microsoft Entra ID?
+
+Answer:
+Conditional Access uses identity-based policies to control access based on conditions such as:
+- User.
+- Device.
+- Location.
+- Risk.
+- Application.
+
+Q109. What is Impossible Travel Detection?
+
+Answer:
+Impossible travel detection identifies suspicious logins from geographically distant locations within a time interval that appears physically impossible.
+
+Important:
+VPN, proxies and inaccurate geolocation can generate false alerts.
+
+Q110. What is Privilege Escalation?
+
+Answer:
+Privilege escalation occurs when an attacker attempts to gain higher permissions than initially available.
+
+Types:
+- Vertical privilege escalation.
+- Horizontal privilege escalation.
+
+==================================================
+SECTION 6: SOC L1 REAL-WORLD SCENARIO QUESTIONS (111–140)
+==================================================
+
+Q111. You receive a high-severity brute-force alert in Microsoft Sentinel. What will you do?
+
+Answer:
+1. Open the incident.
+2. Identify the targeted account.
+3. Check source IP.
+4. Review failed login attempts.
+5. Check successful logins after failures.
+6. Review Entra ID sign-in logs.
+7. Check whether MFA was triggered.
+8. Identify whether the IP is malicious.
+9. Escalate if compromise is suspected.
+
+Q112. An employee reports receiving a suspicious email. How will you investigate?
+
+Answer:
+1. Collect the original email.
+2. Check sender address.
+3. Review email headers.
+4. Inspect URLs and attachments.
+5. Check SPF, DKIM and DMARC results.
+6. Analyze URLs using approved threat intelligence tools.
+7. Search for other recipients.
+8. Check Defender for Office 365 alerts.
+9. Quarantine or remove the email if confirmed malicious and authorized.
+10. Escalate if credentials or systems are compromised.
+
+Q113. Microsoft Defender detects ransomware on an endpoint. What will you do?
+
+Answer:
+1. Validate the alert.
+2. Identify affected endpoint.
+3. Check encryption behavior.
+4. Isolate the device if required.
+5. Identify suspicious processes.
+6. Check file hashes.
+7. Search for lateral movement.
+8. Escalate immediately to incident response.
+9. Preserve evidence.
+10. Support recovery according to IR procedures.
+
+Q114. A user logs in from two different countries within 10 minutes. What will you investigate?
+
+Answer:
+1. Check sign-in timestamps.
+2. Verify source IP addresses.
+3. Check geolocation.
+4. Review VPN and proxy usage.
+5. Check MFA results.
+6. Review device information.
+7. Identify successful and failed logins.
+8. Contact the user through an approved channel.
+9. Escalate if unauthorized access is suspected.
+
+Q115. EDR detects PowerShell with an encoded command. What will you do?
+
+Answer:
+1. Collect the command line.
+2. Identify parent process.
+3. Check executing user.
+4. Decode the command safely in an isolated analysis environment.
+5. Review process tree.
+6. Check downloaded files.
+7. Inspect network connections.
+8. Search related events in Sentinel.
+9. Escalate if malicious behavior is confirmed.
+
+Q116. An employee's account is locked repeatedly. How will you investigate?
+
+Answer:
+1. Identify the affected account.
+2. Check Event ID 4740.
+3. Find the originating computer.
+4. Review authentication failures.
+5. Check old saved credentials.
+6. Check service accounts and scheduled tasks.
+7. Identify suspicious source IPs.
+8. Determine whether this is misconfiguration or an attack.
+
+Q117. You receive an alert for suspicious outbound traffic. What will you do?
+
+Answer:
+1. Identify source device.
+2. Identify destination IP and port.
+3. Check destination reputation.
+4. Review firewall logs.
+5. Check DNS queries.
+6. Investigate the process responsible.
+7. Check data transfer volume.
+8. Correlate with EDR alerts.
+9. Escalate potential command-and-control or data exfiltration.
+
+Q118. An employee clicks a phishing link. What are your next steps?
+
+Answer:
+1. Identify the email and URL.
+2. Check whether the URL was accessed.
+3. Review browser and proxy logs.
+4. Check credential submission indicators.
+5. Review Entra ID sign-in activity.
+6. Check endpoint telemetry.
+7. Determine whether malware was downloaded.
+8. Reset credentials and revoke sessions if compromise is suspected, following approval.
+9. Block malicious indicators through approved controls.
+10. Document the incident.
+
+Q119. You find a USB device connected to a critical server. What will you do?
+
+Answer:
+1. Identify the device and connected user.
+2. Review endpoint logs.
+3. Check USB device identifiers.
+4. Investigate file transfers.
+5. Check whether files were executed.
+6. Verify business authorization.
+7. Escalate unauthorized activity.
+
+Q120. A user downloads a suspicious executable. How will you investigate?
+
+Answer:
+1. Identify filename and file path.
+2. Calculate SHA-256 hash.
+3. Check file reputation.
+4. Review download source.
+5. Check execution status.
+6. Analyze process tree.
+7. Review network activity.
+8. Quarantine or isolate according to policy.
+9. Escalate if malicious.
+
+Q121. You receive a suspicious RDP login alert. What will you investigate?
+
+Answer:
+1. Identify source and destination IP.
+2. Check user account.
+3. Review Event ID 4624.
+4. Check Logon Type 10.
+5. Review failed login attempts.
+6. Check MFA or VPN context where applicable.
+7. Verify whether remote access was authorized.
+8. Search for lateral movement.
+
+Q122. An unknown IP is accessing multiple internal servers. What will you do?
+
+Answer:
+1. Identify the source IP.
+2. Review firewall logs.
+3. Identify destination servers.
+4. Check ports and protocols.
+5. Look for scanning behavior.
+6. Review authentication events.
+7. Check whether the source is an approved scanner.
+8. Escalate unauthorized access attempts.
+
+Q123. Sentinel generates an alert for multiple failed logins followed by a successful login. What does this indicate?
+
+Answer:
+It may indicate a brute-force or password-guessing attack.
+
+Investigation:
+1. Identify the account.
+2. Analyze source IP.
+3. Check failure frequency.
+4. Review successful login details.
+5. Check MFA results.
+6. Investigate post-login activity.
+7. Escalate suspected account compromise.
+
+Q124. A user receives an MFA fatigue attack. What will you do?
+
+Answer:
+MFA fatigue occurs when attackers repeatedly send authentication requests hoping the user will approve one.
+
+Steps:
+1. Review authentication logs.
+2. Identify repeated MFA requests.
+3. Check successful authentication.
+4. Contact the user.
+5. Block or restrict suspicious sign-ins as authorized.
+6. Revoke sessions if compromise is confirmed.
+7. Escalate.
+
+Q125. A critical server suddenly communicates with an unknown external domain. How will you investigate?
+
+Answer:
+1. Identify domain and IP.
+2. Check DNS logs.
+3. Review firewall logs.
+4. Identify initiating process.
+5. Check domain reputation.
+6. Investigate outbound traffic patterns.
+7. Search for malware or C2 indicators.
+8. Escalate if suspicious.
+
+Q126. You detect multiple failed VPN login attempts from one IP. What will you do?
+
+Answer:
+1. Check VPN authentication logs.
+2. Identify targeted accounts.
+3. Review attempt frequency.
+4. Check IP reputation.
+5. Check whether any login succeeded.
+6. Identify geographic location.
+7. Apply approved blocking controls if required.
+8. Escalate if attack is confirmed.
+
+Q127. A user reports that files have strange extensions and cannot be opened. What will you do?
+
+Answer:
+This may indicate ransomware.
+
+1. Treat as high priority.
+2. Identify affected device.
+3. Isolate endpoint if appropriate.
+4. Check file modification patterns.
+5. Review EDR alerts.
+6. Check ransom notes.
+7. Search for other affected endpoints.
+8. Escalate to incident response.
+9. Preserve evidence.
+
+Q128. You receive an alert for an unsigned application running on a workstation. What will you do?
+
+Answer:
+1. Identify application name.
+2. Check file hash.
+3. Review publisher and signature status.
+4. Check download location.
+5. Analyze parent process.
+6. Verify business approval.
+7. Check threat intelligence.
+8. Escalate suspicious execution.
+
+Q129. A user accesses sensitive files outside business hours. Is this an incident?
+
+Answer:
+Not necessarily.
+
+Investigation:
+1. Identify the user.
+2. Check job role.
+3. Review file sensitivity.
+4. Check access history.
+5. Verify business requirement.
+6. Check unusual downloads or transfers.
+7. Investigate potential insider threat.
+
+Q130. An administrator account creates a new user at midnight. What will you do?
+
+Answer:
+1. Review Event ID 4720.
+2. Identify the administrator.
+3. Check source device.
+4. Review authentication logs.
+5. Check account permissions.
+6. Verify change approval.
+7. Check whether the new account received privileged access.
+8. Escalate unauthorized activity.
+
+Q131. Defender detects suspicious LSASS access. What does it mean?
+
+Answer:
+LSASS stores authentication-related information.
+
+Suspicious access can indicate credential dumping.
+
+Investigation:
+1. Identify process accessing LSASS.
+2. Check process hash.
+3. Review command line.
+4. Identify user privileges.
+5. Review related endpoint alerts.
+6. Check credential access techniques.
+7. Escalate immediately if malicious.
+
+Q132. An employee sends a large amount of data to an external cloud storage service. How will you investigate?
+
+Answer:
+1. Identify employee and endpoint.
+2. Check destination domain.
+3. Review network traffic.
+4. Check file types and volume.
+5. Review DLP alerts.
+6. Verify business authorization.
+7. Identify potential data exfiltration.
+8. Escalate.
+
+Q133. You receive an impossible travel login alert, but the employee confirms VPN usage. What will you do?
+
+Answer:
+1. Verify corporate VPN IP.
+2. Review authentication logs.
+3. Check device ID.
+4. Check MFA result.
+5. Confirm approved VPN usage.
+6. Correlate with previous logins.
+7. Document findings.
+8. Close as false positive only when sufficient evidence supports it.
+
+Q134. Your SIEM receives a sudden increase in security alerts. What will you do?
+
+Answer:
+1. Identify alert categories.
+2. Check whether one source generates excessive alerts.
+3. Check data ingestion health.
+4. Identify possible attack patterns.
+5. Check duplicate alerts.
+6. Prioritize critical incidents.
+7. Escalate widespread or coordinated attacks.
+
+Q135. A user executes a file named invoice.pdf.exe. What is suspicious?
+
+Answer:
+Double extensions can disguise executable files as documents.
+
+Investigation:
+- Check actual file type.
+- Check file hash.
+- Identify download source.
+- Check execution status.
+- Review parent process.
+- Investigate network connections.
+
+Q136. You receive an alert for suspicious DNS queries. What will you investigate?
+
+Answer:
+1. Identify querying device.
+2. Review queried domains.
+3. Check domain reputation.
+4. Look for DGA-like domains.
+5. Check query frequency.
+6. Review DNS responses.
+7. Identify related processes.
+8. Investigate possible C2 communication.
+
+Q137. An employee reports that their laptop is unusually slow and antivirus is disabled. What will you do?
+
+Answer:
+1. Check EDR device health.
+2. Review recent security alerts.
+3. Check running processes.
+4. Check security service status.
+5. Review suspicious persistence.
+6. Investigate possible malware.
+7. Isolate if compromise is suspected.
+8. Escalate.
+
+Q138. You discover a suspicious scheduled task on a Windows server. How will you investigate?
+
+Answer:
+1. Identify task name.
+2. Check creation time.
+3. Identify creator account.
+4. Review executable or script path.
+5. Check command line.
+6. Investigate task execution history.
+7. Check persistence.
+8. Escalate if unauthorized.
+
+Q139. A firewall reports a connection to a known malicious IP. What will you do?
+
+Answer:
+1. Identify source endpoint.
+2. Identify destination IP.
+3. Check connection time.
+4. Review allowed or blocked status.
+5. Search threat intelligence.
+6. Identify associated process.
+7. Search related alerts.
+8. Escalate if communication succeeded.
+
+Q140. How do you close a SOC incident?
+
+Answer:
+1. Confirm investigation is complete.
+2. Identify root cause or available findings.
+3. Record affected assets.
+4. Document evidence.
+5. Record actions taken.
+6. Classify as true positive, false positive or benign positive as appropriate.
+7. Add closure comments.
+8. Close according to organizational SOP.
+
+==================================================
+SECTION 7: SOC L2 ADVANCED SCENARIO QUESTIONS (141–170)
+==================================================
+
+Q141. An attacker compromises one workstation and starts accessing multiple servers. How will you investigate lateral movement?
+
+Answer:
+1. Identify initial compromised endpoint.
+2. Build a process timeline.
+3. Check authentication events.
+4. Investigate RDP, SMB and remote service activity.
+5. Review Event IDs 4624, 4648 and 4688.
+6. Check privileged accounts.
+7. Correlate multiple endpoints in Sentinel.
+8. Identify affected systems.
+9. Coordinate containment.
+
+Q142. How will you investigate a suspected Golden Ticket attack?
+
+Answer:
+Golden Ticket attacks involve forged Kerberos Ticket Granting Tickets.
+
+Investigation:
+1. Review unusual Kerberos authentication.
+2. Examine Event IDs 4768 and 4769.
+3. Investigate abnormal ticket lifetimes.
+4. Check suspicious account privileges.
+5. Investigate Domain Controller activity.
+6. Look for indicators of KRBTGT compromise.
+7. Escalate to AD and incident response specialists.
+
+Q143. How will you investigate a Pass-the-Hash attack?
+
+Answer:
+1. Review unusual NTLM authentication.
+2. Identify source and destination machines.
+3. Check Event ID 4624 and logon type.
+4. Review suspicious privileged logons.
+5. Check process execution.
+6. Investigate lateral movement.
+7. Identify compromised credentials.
+8. Coordinate credential rotation and containment.
+
+Q144. You detect possible data exfiltration. How will you confirm it?
+
+Answer:
+1. Identify source system.
+2. Review outbound traffic.
+3. Analyze data volume.
+4. Identify destination.
+5. Review proxy and firewall logs.
+6. Check DLP alerts.
+7. Identify files accessed or transferred.
+8. Correlate endpoint activities.
+9. Establish whether data actually left the organization.
+10. Escalate confirmed or suspected exfiltration.
+
+Q145. How do you perform root cause analysis of a malware infection?
+
+Answer:
+1. Identify initial detection.
+2. Determine initial execution time.
+3. Identify entry vector.
+4. Analyze parent-child process relationships.
+5. Review file and registry changes.
+6. Check persistence mechanisms.
+7. Investigate network communication.
+8. Identify affected users and endpoints.
+9. Determine attack scope.
+10. Recommend remediation.
+
+Q146. What is Persistence in Cybersecurity?
+
+Answer:
+Persistence means an attacker maintains access to a compromised system even after reboot or logout.
+
+Common techniques:
+- Registry Run Keys.
+- Scheduled Tasks.
+- Services.
+- Startup folders.
+- WMI event subscriptions.
+
+Q147. What is Defense Evasion?
+
+Answer:
+Defense evasion refers to attacker techniques used to avoid security tools and detection mechanisms.
+
+Examples:
+- Disabling security tools.
+- Clearing event logs.
+- Obfuscating PowerShell.
+- Process injection.
+
+Q148. What is Command and Control (C2)?
+
+Answer:
+C2 is the communication channel between an attacker and compromised systems.
+
+Example:
+Malware periodically communicates with an attacker-controlled server.
+
+Q149. How will you detect C2 communication using Sentinel?
+
+Answer:
+1. Identify suspicious outbound connections.
+2. Analyze DNS requests.
+3. Check beaconing intervals.
+4. Review destination IP/domain reputation.
+5. Correlate with endpoint processes.
+6. Identify multiple affected devices.
+7. Investigate possible MITRE ATT&CK techniques.
+
+Q150. What is Beaconing Activity?
+
+Answer:
+Beaconing occurs when a compromised endpoint communicates with an external server at regular intervals.
+
+Example:
+An endpoint sends requests to a suspicious external IP every 60 seconds.
+
+Q151. What is Living off the Land (LOLBins)?
+
+Answer:
+Attackers misuse legitimate operating system tools to execute malicious activities.
+
+Examples:
+- PowerShell.
+- Certutil.
+- Mshta.
+- Rundll32.
+- Regsvr32.
+- WMI.
+
+Q152. How will you investigate a compromised administrator account?
+
+Answer:
+1. Identify account and privileges.
+2. Review sign-in logs.
+3. Check MFA activity.
+4. Review privileged actions.
+5. Identify newly created accounts.
+6. Check group membership changes.
+7. Review endpoint activity.
+8. Identify affected systems.
+9. Revoke sessions and disable or restrict the account as authorized.
+10. Coordinate credential reset and recovery.
+
+Q153. Difference between Containment, Eradication and Recovery?
+
+Answer:
+
+Containment:
+Stop the attack from spreading.
+
+Eradication:
+Remove malware, persistence and attacker access.
+
+Recovery:
+Restore systems safely to normal operation.
+
+Q154. How do you perform Threat Hunting for suspicious PowerShell activity?
+
+Answer:
+1. Search unusual PowerShell executions.
+2. Identify encoded commands.
+3. Review parent process.
+4. Check executing user.
+5. Investigate network connections.
+6. Search for suspicious downloads.
+7. Correlate with MITRE techniques.
+8. Identify affected endpoints.
+
+Q155. What is a Correlation Rule?
+
+Answer:
+A correlation rule combines multiple security events to identify meaningful suspicious activities.
+
+Example:
+- Multiple failed logins.
+- Successful login.
+- Privileged group change.
+- Sensitive file access.
+
+Combined behavior may indicate account compromise.
+
+Q156. How do you investigate a newly created scheduled task and outbound network traffic?
+
+Answer:
+1. Identify task creator.
+2. Review task configuration.
+3. Check executable path.
+4. Analyze process tree.
+5. Identify destination IP/domain.
+6. Review file hash.
+7. Check persistence and C2 indicators.
+8. Determine whether the task is legitimate.
+9. Contain and escalate if malicious.
+
+Q157. What is a SIEM Detection Engineering Process?
+
+Answer:
+1. Understand threat behavior.
+2. Identify required telemetry.
+3. Map to MITRE ATT&CK.
+4. Write detection query.
+5. Test against historical data.
+6. Validate true and false positives.
+7. Configure alert logic.
+8. Deploy detection.
+9. Monitor performance.
+10. Tune periodically.
+
+Q158. How do you reduce false positives in Microsoft Sentinel?
+
+Answer:
+1. Understand detection logic.
+2. Identify legitimate activity patterns.
+3. Review historical data.
+4. Use approved watchlists.
+5. Add appropriate filters.
+6. Use entity context.
+7. Apply reasonable thresholds.
+8. Test updated detection logic.
+9. Monitor for missed threats.
+
+Important:
+Never suppress alerts blindly just to reduce alert volume.
+
+Q159. What is Alert Fatigue?
+
+Answer:
+Alert fatigue occurs when SOC analysts receive excessive low-value or repetitive alerts, increasing the risk of missing important threats.
+
+Q160. What is MITRE ATT&CK Mapping?
+
+Answer:
+It means mapping detection or incident behavior to MITRE ATT&CK tactics and techniques.
+
+Example:
+Tactic: Credential Access.
+Technique: OS Credential Dumping.
+Technique ID: T1003.
+
+Q161. Difference between Vulnerability and Exploit?
+
+Answer:
+Vulnerability:
+A security weakness in a system.
+
+Exploit:
+A method or code that takes advantage of a vulnerability.
+
+Q162. What is CVE?
+
+Answer:
+CVE stands for Common Vulnerabilities and Exposures.
+
+It provides standardized identifiers for publicly disclosed cybersecurity vulnerabilities.
+
+Example:
+CVE-2021-44228.
+
+Q163. What is CVSS?
+
+Answer:
+CVSS stands for Common Vulnerability Scoring System.
+
+It measures vulnerability severity.
+
+Typical scores:
+- 0.0: None.
+- 0.1–3.9: Low.
+- 4.0–6.9: Medium.
+- 7.0–8.9: High.
+- 9.0–10.0: Critical.
+
+Q164. What is a Zero-Day Vulnerability?
+
+Answer:
+A zero-day vulnerability is a software weakness for which an effective patch is not available when exploitation occurs or becomes known.
+
+Q165. What is an Insider Threat?
+
+Answer:
+An insider threat occurs when an authorized employee, contractor or other insider creates a security risk intentionally or unintentionally.
+
+Q166. How will you investigate possible insider data theft?
+
+Answer:
+1. Identify user.
+2. Review file access logs.
+3. Check USB activity.
+4. Analyze cloud uploads.
+5. Review email attachments.
+6. Check unusual login times.
+7. Review DLP alerts.
+8. Verify business justification.
+9. Preserve evidence.
+10. Escalate to appropriate security and HR/legal teams.
+
+Q167. What is DLP?
+
+Answer:
+DLP stands for Data Loss Prevention.
+
+It protects sensitive data against unauthorized access, sharing or transfer.
+
+Examples:
+- Blocking sensitive email attachments.
+- Preventing unauthorized USB copying.
+- Monitoring sensitive cloud uploads.
+
+Q168. What is an Incident Response Playbook?
+
+Answer:
+An incident response playbook is a documented procedure that guides analysts through specific security incidents.
+
+Examples:
+- Phishing response.
+- Ransomware response.
+- Malware response.
+- Account compromise response.
+
+Q169. How will you investigate a suspected Active Directory compromise?
+
+Answer:
+1. Identify affected Domain Controllers.
+2. Review privileged account activity.
+3. Investigate unusual Kerberos and NTLM authentication.
+4. Check suspicious group membership changes.
+5. Review new accounts and services.
+6. Investigate directory changes.
+7. Check potential credential dumping.
+8. Determine compromise scope.
+9. Coordinate with AD specialists.
+10. Follow enterprise AD recovery procedures.
+
+Q170. What is Blast Radius in Incident Response?
+
+Answer:
+Blast radius represents the total scope of users, devices, servers, applications and data affected by a security incident.
+
+Example:
+A compromised administrator account accesses 20 servers. Those systems form part of the incident's blast radius.
+
+==================================================
+SECTION 8: KQL AND PRACTICAL MICROSOFT SENTINEL (171–190)
+==================================================
+
+Q171. Write a KQL query to find failed Windows login attempts.
+
+Answer:
+
+SecurityEvent
+| where EventID == 4625
+| summarize FailedAttempts = count()
+    by Account, IpAddress, bin(TimeGenerated, 5m)
+| where FailedAttempts > 5
+| sort by FailedAttempts desc
+
+Explanation:
+- EventID 4625 = Failed login.
+- summarize = Group events.
+- count() = Count attempts.
+- bin() = Five-minute time window.
+- where = Filter suspicious activity.
+
+Q172. Write a KQL query to identify successful Windows logins.
+
+Answer:
+
+SecurityEvent
+| where EventID == 4624
+| project TimeGenerated,
+          Account,
+          Computer,
+          IpAddress,
+          LogonType
+| sort by TimeGenerated desc
+
+Q173. Write a KQL query to find suspicious PowerShell execution.
+
+Answer:
+
+DeviceProcessEvents
+| where FileName =~ "powershell.exe"
+| where ProcessCommandLine has_any
+    ("EncodedCommand", "-enc", "DownloadString")
+| project Timestamp,
+          DeviceName,
+          AccountName,
+          ProcessCommandLine,
+          InitiatingProcessFileName
+| sort by Timestamp desc
+
+Q174. Write a KQL query to find suspicious outbound connections.
+
+Answer:
+
+DeviceNetworkEvents
+| where ActionType == "ConnectionSuccess"
+| where RemoteIPType == "Public"
+| project Timestamp,
+          DeviceName,
+          InitiatingProcessAccountName,
+          RemoteIP,
+          RemotePort,
+          RemoteUrl
+| sort by Timestamp desc
+
+Q175. Write a KQL query to investigate a particular IP address.
+
+Answer:
+
+let SuspiciousIP = "8.8.8.8";
+DeviceNetworkEvents
+| where RemoteIP == SuspiciousIP
+    or LocalIP == SuspiciousIP
+| project Timestamp,
+          DeviceName,
+          LocalIP,
+          RemoteIP,
+          RemotePort,
+          InitiatingProcessFileName
+| sort by Timestamp desc
+
+Note:
+8.8.8.8 is an illustrative public DNS IP, not a malicious indicator.
+
+Q176. Write a KQL query to identify multiple failed login attempts.
+
+Answer:
+
+SigninLogs
+| where ResultType != "0"
+| summarize FailedCount = count()
+    by UserPrincipalName,
+       IPAddress,
+       bin(TimeGenerated, 10m)
+| where FailedCount >= 10
+| sort by FailedCount desc
+
+Q177. Write a KQL query to identify suspicious file creation.
+
+Answer:
+
+DeviceFileEvents
+| where ActionType == "FileCreated"
+| where FileName endswith ".exe"
+    or FileName endswith ".dll"
+| project Timestamp,
+          DeviceName,
+          InitiatingProcessAccountName,
+          FileName,
+          FolderPath,
+          SHA256
+| sort by Timestamp desc
+
+Q178. Write a KQL query to investigate a device process timeline.
+
+Answer:
+
+DeviceProcessEvents
+| where DeviceName == "DESKTOP-01"
+| project Timestamp,
+          AccountName,
+          FileName,
+          ProcessCommandLine,
+          InitiatingProcessFileName,
+          ProcessId,
+          InitiatingProcessId
+| sort by Timestamp asc
+
+Q179. Write a KQL query to find devices with suspicious process execution.
+
+Answer:
+
+DeviceProcessEvents
+| where ProcessCommandLine has_any
+    ("mimikatz", "procdump", "rundll32")
+| summarize Events = count()
+    by DeviceName, FileName
+| sort by Events desc
+
+Note:
+These strings are investigation leads, not proof of malicious behavior.
+
+Q180. Difference between where, summarize, project and extend in KQL?
+
+Answer:
+where = Filter records.
+summarize = Aggregate records.
+project = Select columns.
+extend = Create calculated columns.
+
+Example:
+
+SecurityEvent
+| where EventID == 4625
+| extend AlertType = "Failed Login"
+| summarize Total = count() by Account
+| project Account, Total
+
+Q181. Difference between join and union in KQL?
+
+Answer:
+join:
+Combines two tables using a common key.
+
+union:
+Combines records from multiple tables.
+
+Example:
+
+SecurityEvent
+| where EventID == 4625
+| join kind=inner (
+    SecurityEvent
+    | where EventID == 4624
+) on Account
+
+For real investigations, also correlate timestamps, source IP and device to avoid misleading matches.
+
+Q182. What is TimeGenerated in Sentinel?
+
+Answer:
+TimeGenerated represents the event timestamp recorded in a table.
+
+It is useful for incident timelines and event correlation.
+
+Q183. What is bin() in KQL?
+
+Answer:
+bin() groups timestamps or numerical values into fixed intervals.
+
+Example:
+
+SigninLogs
+| summarize Total = count()
+    by bin(TimeGenerated, 5m)
+
+Q184. How do you correlate user login activity with endpoint activity?
+
+Answer:
+1. Identify user account.
+2. Search SigninLogs.
+3. Identify device and timestamp.
+4. Search DeviceLogonEvents.
+5. Search DeviceProcessEvents.
+6. Correlate user, device and time.
+7. Investigate unusual activities.
+
+Q185. What is a KQL let statement?
+
+Answer:
+The let statement defines reusable variables or named expressions.
+
+Example:
+
+let TargetUser = "admin@company.com";
+SigninLogs
+| where UserPrincipalName == TargetUser
+
+Q186. How do you investigate an IP address across multiple Sentinel tables?
+
+Answer:
+
+let TargetIP = "10.0.0.10";
+union isfuzzy=true
+    SigninLogs,
+    SecurityEvent,
+    DeviceNetworkEvents
+| where tostring(pack_all())
+    contains TargetIP
+| take 100
+
+Explanation:
+- union combines available tables.
+- isfuzzy allows some unresolved table references.
+- pack_all converts row fields into a dynamic object.
+- This is a broad exploratory query. Targeted column-specific queries are preferable for production investigations.
+
+Q187. What is a Sentinel Hunting Bookmark?
+
+Answer:
+A bookmark saves important query results or observations so analysts can revisit and correlate evidence during an investigation.
+
+Q188. What is a Sentinel Analytics Rule Threshold?
+
+Answer:
+A threshold is a numerical limit used in detection conditions.
+
+Example:
+Generate an alert when 20 failed login attempts occur within 10 minutes.
+
+Q189. What is Scheduled Query Frequency?
+
+Answer:
+Scheduled query frequency determines how often an analytics rule executes.
+
+Example:
+Every 5 minutes.
+
+Q190. How do you create a custom detection rule in Microsoft Sentinel?
+
+Answer:
+1. Identify attack scenario.
+2. Identify required log source.
+3. Write KQL detection query.
+4. Test historical data.
+5. Set query frequency and lookback period.
+6. Configure alert threshold.
+7. Configure entity mapping.
+8. Map MITRE ATT&CK techniques.
+9. Test alert generation.
+10. Deploy and monitor.
+
+==================================================
+SECTION 9: ADVANCED CYBERSECURITY AND INCIDENT RESPONSE (191–200)
+==================================================
+
+Q191. What is the complete Incident Response Lifecycle?
+
+Answer:
+The NIST incident response lifecycle can be organized into four broad phases:
+
+1. Preparation:
+Prepare security tools, policies and playbooks.
+
+2. Detection and Analysis:
+Identify and investigate security incidents.
+
+3. Containment, Eradication and Recovery:
+Control the threat, remove malicious activity and restore systems.
+
+4. Post-Incident Activity:
+Perform lessons learned, reporting and detection improvements.
+
+Example:
+Ransomware detection → Endpoint isolation → Malware removal → System recovery → Root cause analysis.
+
+Q192. What will you do if Microsoft Sentinel stops receiving security logs?
+
+Answer:
+1. Check data connector status.
+2. Check Log Analytics Workspace.
+3. Review ingestion errors.
+4. Verify source connectivity.
+5. Check agent or diagnostic settings.
+6. Review permissions and configuration.
+7. Check ingestion delay.
+8. Identify affected log tables.
+9. Escalate infrastructure or platform issues.
+10. Verify log ingestion has resumed.
+
+Q193. How do you investigate a compromised Microsoft 365 account?
+
+Answer:
+1. Open Microsoft Defender XDR.
+2. Review Entra ID sign-in logs.
+3. Check suspicious IP addresses.
+4. Investigate MFA activity.
+5. Check mailbox forwarding rules.
+6. Review inbox rules.
+7. Check unusual email sending activity.
+8. Review OAuth application consent.
+9. Revoke sessions and reset credentials as authorized.
+10. Check for data exfiltration and additional compromised accounts.
+
+Q194. What is OAuth Abuse?
+
+Answer:
+OAuth abuse occurs when attackers misuse OAuth applications, tokens or permissions to gain unauthorized access to organizational resources.
+
+Example:
+A user unknowingly grants a malicious application permission to read emails.
+
+Investigation:
+- Review application permissions.
+- Check consent activity.
+- Identify application publisher.
+- Review sign-in activity.
+- Investigate token usage.
+- Revoke malicious application permissions through approved procedures.
+
+Q195. What is Cloud Security Monitoring?
+
+Answer:
+Cloud security monitoring means continuously monitoring cloud infrastructure, identities, workloads, applications and network activities to detect threats.
+
+Azure examples:
+- Microsoft Sentinel.
+- Microsoft Defender for Cloud.
+- Microsoft Defender XDR.
+- Microsoft Entra ID.
+- Azure Activity Logs.
+- NSG Flow Logs, where configured.
+
+Q196. What is Microsoft Defender for Cloud?
+
+Answer:
+Microsoft Defender for Cloud is a cloud security platform that provides security posture management and workload protection capabilities.
+
+Main capabilities:
+- Cloud security recommendations.
+- Vulnerability assessment integrations.
+- Threat detection.
+- Security posture management.
+- Regulatory compliance visibility.
+
+Q197. How will you investigate a suspicious Azure resource creation alert?
+
+Answer:
+1. Open Azure Activity Log.
+2. Identify the resource created.
+3. Check operation name.
+4. Identify initiating user or service principal.
+5. Review source IP and timestamp where available.
+6. Verify change approval.
+7. Check resource permissions.
+8. Investigate network exposure.
+9. Review related Defender for Cloud alerts.
+10. Escalate unauthorized resource creation.
+
+Q198. What is Zero Trust Security?
+
+Answer:
+Zero Trust is a security model that does not automatically trust any user or device, whether inside or outside the network.
+
+Core principles:
+1. Verify explicitly.
+2. Use least-privilege access.
+3. Assume breach.
+
+Example:
+An employee connected to the company network must still complete MFA and device compliance checks before accessing a sensitive application.
+
+Q199. How would you handle a critical security incident during your night shift?
+
+Answer:
+1. Validate the critical alert.
+2. Identify affected users and systems.
+3. Determine business impact.
+4. Collect initial evidence.
+5. Initiate authorized containment.
+6. Inform the shift lead and incident response team.
+7. Escalate immediately according to SLA.
+8. Maintain incident timeline.
+9. Document every action.
+10. Provide a detailed handover to the next shift.
+
+Important:
+Never delay critical escalation just because the incident occurred during a night shift.
+
+Q200. Explain one complete real-world cyberattack investigation from detection to closure.
+
+Answer:
+
+Scenario:
+Phishing attack leading to account compromise and ransomware execution.
+
+Step 1: Initial Detection
+Microsoft Defender for Office 365 detects a suspicious phishing email.
+
+Step 2: Email Investigation
+SOC L1 checks sender, email headers, malicious URL and attachments.
+
+Step 3: User Investigation
+Identify the employee who clicked the URL and check whether credentials were submitted.
+
+Step 4: Identity Investigation
+Review Microsoft Entra ID sign-in logs, MFA activity, IP addresses and suspicious authentication.
+
+Step 5: Endpoint Investigation
+Microsoft Defender for Endpoint detects suspicious PowerShell execution.
+
+Step 6: Process Investigation
+Analyze parent-child process relationships, downloaded files, file hashes and network connections.
+
+Step 7: SIEM Correlation
+Microsoft Sentinel correlates phishing, suspicious sign-in and endpoint alerts.
+
+Step 8: Containment
+Isolate affected endpoint, revoke compromised sessions and restrict compromised accounts as authorized.
+
+Step 9: Eradication
+Remove malicious files, persistence mechanisms and unauthorized access.
+
+Step 10: Recovery
+Restore affected systems using approved recovery procedures and verify endpoint security.
+
+Step 11: Reporting
+Document:
+- Initial entry point.
+- Affected accounts.
+- Affected endpoints.
+- Attack timeline.
+- MITRE ATT&CK techniques.
+- IOCs.
+- Containment and remediation actions.
+- Lessons learned.
+
+Interview Conclusion:
+
+"My approach is to investigate an incident using SIEM, EDR, identity and network telemetry. I correlate evidence, determine the scope and impact, perform authorized containment and escalate according to the incident response procedure."
+
+==================================================
+SECTION 10: IMPORTANT SOC TOOLS AND PLATFORMS
+==================================================
+
+1. SIEM PLATFORMS
+
+Microsoft Sentinel:
+Cloud-native SIEM and SOAR.
+Website: https://learn.microsoft.com/en-us/azure/sentinel/
+
+Splunk:
+SIEM, log analysis and SPL.
+Website: https://www.splunk.com/
+
+IBM QRadar:
+Enterprise SIEM.
+Website: https://www.ibm.com/products/qradar-siem
+
+2. EDR / XDR PLATFORMS
+
+Microsoft Defender for Endpoint:
+Endpoint investigation and response.
+
+CrowdStrike Falcon:
+EDR and XDR.
+
+SentinelOne:
+Endpoint detection and response.
+
+Sophos:
+Endpoint security.
+
+3. THREAT INTELLIGENCE TOOLS
+
+VirusTotal:
+https://www.virustotal.com/
+
+AbuseIPDB:
+https://www.abuseipdb.com/
+
+MITRE ATT&CK:
+https://attack.mitre.org/
+
+Shodan:
+https://www.shodan.io/
+
+==================================================
+SECTION 11: SOC L1 AND L2 PRACTICAL PREPARATION CHECKLIST
+==================================================
+
+SOC L1 CHECKLIST
+
+[ ] SOC fundamentals and incident lifecycle.
+[ ] TCP/IP, DNS, DHCP and common ports.
+[ ] Windows Event IDs 4624, 4625, 4688, 4720 and 4740.
+[ ] Phishing email investigation.
+[ ] Microsoft Sentinel incident investigation.
+[ ] KQL basics and log analysis.
+[ ] EDR alerts and device timeline.
+[ ] Brute-force investigation.
+[ ] Password spraying investigation.
+
+SOC L2 CHECKLIST
+
+[ ] Process tree and PowerShell investigation.
+[ ] Active Directory attack investigation.
+[ ] Threat hunting using KQL.
+[ ] MITRE ATT&CK mapping.
+[ ] Lateral movement investigation.
+[ ] Persistence investigation.
+[ ] Root cause analysis.
+[ ] Incident containment and recovery.
+[ ] Sentinel analytics rule creation.
+[ ] Sentinel playbook creation.
+[ ] Cloud and Entra ID investigation.
+[ ] Detection engineering.
+[ ] False-positive tuning.
+
+==================================================
+SECTION 12: HOW TO ANSWER SCENARIO QUESTIONS IN AN INTERVIEW
+==================================================
+
+Follow this 7-step investigation framework:
+
+1. DETECTION
+What alert was generated?
+
+2. VALIDATION
+Is it a true positive or false positive?
+
+3. INVESTIGATION
+Which user, IP, device, process and logs are involved?
+
+4. CORRELATION
+What other related events occurred?
+
+5. CONTAINMENT
+What authorized action can reduce the risk?
+
+6. ESCALATION
+Does it require L2, incident response or infrastructure teams?
+
+7. DOCUMENTATION
+What evidence, findings and actions will you record?
+
+FINAL INTERVIEW PREPARATION STRATEGY
+
+For SOC L1:
+Master Questions 1–140.
+
+Focus on:
+- SOC fundamentals.
+- Networking.
+- Windows Event IDs.
+- Microsoft Sentinel.
+- EDR.
+- Phishing investigation.
+- Brute-force investigation.
+- Incident triage.
+- Escalation.
+
+For SOC L2:
+Master Questions 141–200.
+
+Focus on:
+- Advanced KQL.
+- Active Directory attacks.
+- Threat hunting.
+- MITRE ATT&CK.
+- Lateral movement.
+- Persistence.
+- Root cause analysis.
+- Incident response.
+- Detection engineering.
+- Cloud security.
+
+IMPORTANT INTERVIEW TIP:
+
+Do not memorize only definitions.
+
+For every question, prepare these four points:
+
+1. What is it?
+2. Why is it used?
+3. How does it work?
+4. What will you do as a SOC Analyst in a real-world scenario?
+
+Your objective should be to demonstrate practical investigation skills, not just theoretical knowledge.
+
+**CONSISTENCY BEATS TALENT.**
