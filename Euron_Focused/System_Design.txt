@@ -1,0 +1,794 @@
+# 100 Most Asked System Design Interview Questions & Answers (Hinglish)
+
+## 23. System Design Fundamentals (15 Questions)
+
+**Q1. System Design kya hai?**
+
+System Design ek process hai jisme hum software application ke components, architecture, database, APIs, infrastructure aur communication patterns plan karte hain, taaki application scalable, reliable aur maintainable ho.
+
+**Q2. System Design interview mein kya evaluate kiya jaata hai?**
+
+Interviewer generally check karta hai:
+- Requirement gathering
+- Scalability
+- Database selection
+- API design
+- Architecture decisions
+- Reliability and availability
+- Trade-offs
+- Communication skills
+
+**Q3. Functional aur Non-functional Requirements kya hain?**
+
+Functional Requirements define karti hain ki system kya karega.
+
+Example: User login, payment, search.
+
+Non-functional Requirements define karti hain ki system kitna efficiently kaam karega.
+
+Example: Performance, scalability, availability, security.
+
+**Q4. Scalability kya hai?**
+
+Scalability system ki ability hai ki increasing users, traffic aur workload ko handle kar sake without significant performance degradation.
+
+**Q5. Vertical Scaling aur Horizontal Scaling mein kya difference hai?**
+
+- Vertical Scaling: Existing server ki CPU, RAM ya storage increase karna.
+- Horizontal Scaling: Multiple servers add karke workload distribute karna.
+
+**Q6. Load Balancer kya hota hai?**
+
+Load Balancer incoming requests ko multiple servers ke beech distribute karta hai, jisse performance aur availability improve hoti hai.
+
+Common algorithms:
+- Round Robin
+- Least Connections
+- Weighted Round Robin
+- IP Hash
+
+**Q7. Caching kya hai?**
+
+Caching frequently accessed data ko faster storage layer mein temporarily store karna hai, taaki repeated database queries reduce ho sakein.
+
+Examples: Redis, Memcached, CDN cache.
+
+**Q8. CDN kya hota hai?**
+
+CDN (Content Delivery Network) geographically distributed servers ka network hai jo static content users ko nearest location se deliver karta hai.
+
+**Q9. Database Replication kya hai?**
+
+Replication database data ki copies multiple servers par maintain karti hai. Isse read scalability aur availability improve ho sakti hai.
+
+**Q10. Database Sharding kya hai?**
+
+Sharding database ko multiple independent partitions mein divide karke different servers par distribute karne ki technique hai.
+
+**Q11. SQL aur NoSQL database kab choose karna chahiye?**
+
+SQL choose karo jab relational data, complex joins aur strong transactional consistency important ho.
+
+NoSQL choose karo jab flexible schema, specific access patterns aur horizontal distribution important ho.
+
+**Q12. CAP Theorem kya hai?**
+
+CAP Theorem distributed systems mein Consistency, Availability aur Partition Tolerance ke trade-offs explain karta hai.
+
+Network partition ke time system ko Consistency aur Availability ke beech trade-off karna padta hai.
+
+**Q13. High Availability kya hai?**
+
+High Availability ka matlab system ko maximum possible time operational rakhna hai, even when some components fail.
+
+**Q14. Fault Tolerance kya hai?**
+
+Fault Tolerance system ki ability hai ki component failure hone ke baad bhi service continue kar sake.
+
+**Q15. Latency aur Throughput mein kya difference hai?**
+
+- Latency: Ek request complete hone mein lagne wala time.
+- Throughput: Ek second ya unit time mein process hone wali requests ki quantity.
+
+---
+
+## 24. System Design Skeleton (10 Questions)
+
+**Q16. System Design Skeleton kya hota hai?**
+
+System Design Skeleton ek reusable framework hai jise use karke hum kisi bhi system ka high-level design systematically prepare kar sakte hain.
+
+**Q17. System Design start kaise karna chahiye?**
+
+Sabse pehle requirements clarify karo:
+- Users kaun hain?
+- Main features kya hain?
+- Expected traffic kitna hai?
+- Data volume kitna hoga?
+- Performance requirements kya hain?
+
+**Q18. Functional Requirements kaise identify karte hain?**
+
+Application ke main user journeys aur business operations identify karke.
+
+Example: URL Shortener:
+- Short URL generate karna.
+- Original URL redirect karna.
+- Analytics track karna.
+
+**Q19. Non-functional Requirements kaise define karte hain?**
+
+System ke quality targets define karke:
+- Availability
+- Latency
+- Scalability
+- Durability
+- Security
+- Consistency
+
+**Q20. Capacity Estimation kya hai?**
+
+Capacity Estimation expected users, requests, storage aur bandwidth calculate karne ki process hai.
+
+Example:
+
+Agar 1 million users daily 10 requests karte hain:
+
+Daily Requests = 1,000,000 × 10 = 10 million.
+
+Average RPS = 10,000,000 / 86,400 ≈ 116.
+
+**Q21. High-Level Design (HLD) kya hai?**
+
+HLD system ke major components aur unke interactions show karta hai.
+
+Example:
+
+Client → Load Balancer → API Server → Database → Cache.
+
+**Q22. Low-Level Design (LLD) kya hai?**
+
+LLD individual components ki internal implementation detail define karta hai, jaise classes, methods, schemas aur algorithms.
+
+**Q23. API Design system design mein important kyun hai?**
+
+APIs services ke beech communication contract define karti hain. Good API design maintainability, consistency aur integration improve karta hai.
+
+**Q24. Bottleneck identification kaise karte hain?**
+
+Monitoring aur profiling se identify karte hain ki performance issue CPU, memory, network, database, cache ya external service mein hai.
+
+**Q25. System Design interview ka recommended flow kya hai?**
+
+1. Requirements clarify karo.
+2. Functional aur non-functional requirements define karo.
+3. Capacity estimate karo.
+4. APIs design karo.
+5. Database schema define karo.
+6. High-level architecture draw karo.
+7. Bottlenecks identify karo.
+8. Scaling strategies explain karo.
+9. Failure handling aur security discuss karo.
+10. Trade-offs explain karo.
+
+---
+
+## 25. Software Architecture (10 Questions)
+
+**Q26. Software Architecture kya hai?**
+
+Software Architecture application ke components, services, communication, dependencies aur deployment structure ka overall blueprint hai.
+
+**Q27. Monolithic Architecture kya hai?**
+
+Monolithic architecture mein application ke multiple modules ek single deployable unit ke andar hote hain.
+
+Advantages:
+- Simple development
+- Easy initial deployment
+- Straightforward debugging
+
+Disadvantages:
+- Scaling limitations
+- Tight coupling risk
+- Large deployments
+
+**Q28. Microservices Architecture kya hai?**
+
+Microservices architecture application ko small, independently deployable services mein divide karti hai. Har service ek specific business capability handle karti hai.
+
+**Q29. Monolith aur Microservices mein kya difference hai?**
+
+Monolith ek single deployable application hoti hai. Microservices multiple independently deployable services hoti hain.
+
+Microservices scaling flexibility provide karti hain, lekin distributed system complexity increase karti hain.
+
+**Q30. Event-Driven Architecture kya hai?**
+
+Event-Driven Architecture mein services events publish aur consume karke communicate karti hain.
+
+Example: OrderPlaced event publish hota hai aur Inventory, Payment aur Notification services usse process karti hain.
+
+**Q31. Message Queue kya hoti hai?**
+
+Message Queue asynchronous communication enable karti hai. Producer messages publish karta hai aur consumer unhe process karta hai.
+
+Examples: RabbitMQ, Apache Kafka, AWS SQS.
+
+**Q32. API Gateway kya hai?**
+
+API Gateway clients aur backend services ke beech entry point hota hai. Ye routing, authentication, rate limiting aur request transformation handle kar sakta hai.
+
+**Q33. Service Discovery kya hai?**
+
+Service Discovery distributed environment mein services ke network addresses locate karne ka mechanism hai.
+
+**Q34. Circuit Breaker Pattern kya hai?**
+
+Circuit Breaker failing service ko repeatedly call karne se temporarily stop karta hai.
+
+States:
+- Closed
+- Open
+- Half-Open
+
+Isse cascading failures reduce karne mein help milti hai.
+
+**Q35. Saga Pattern kya hai?**
+
+Saga Pattern distributed transaction ko multiple local transactions mein divide karta hai. Failure hone par compensating transactions execute ki ja sakti hain.
+
+---
+
+## 26. AI System Design (12 Questions)
+
+**Q36. AI System Design kya hai?**
+
+AI System Design mein AI/ML models, data pipelines, inference infrastructure, storage, APIs aur monitoring ko combine karke production-ready AI application design ki jaati hai.
+
+**Q37. Traditional Software System aur AI System mein kya difference hai?**
+
+Traditional software mostly predefined logic aur rules follow karta hai.
+
+AI systems learned model behavior aur input data ke basis par predictions ya generated outputs produce karte hain.
+
+**Q38. AI System ke major components kya hain?**
+
+- Data ingestion
+- Data preprocessing
+- Model training
+- Model registry
+- Model serving
+- Inference API
+- Monitoring
+- Feedback pipeline
+
+**Q39. Training aur Inference mein kya difference hai?**
+
+Training mein model historical data se patterns learn karta hai.
+
+Inference mein trained model new input ke liye prediction ya output generate karta hai.
+
+**Q40. Model Serving kya hai?**
+
+Model Serving trained model ko API ya service ke through expose karna hai, taaki applications predictions request kar sakein.
+
+**Q41. Batch Inference aur Real-time Inference mein kya difference hai?**
+
+Batch Inference mein large data batches process hote hain, usually scheduled manner mein.
+
+Real-time Inference mein incoming request par immediately prediction generate hota hai.
+
+**Q42. AI System mein GPU kyun use hota hai?**
+
+GPU parallel computations ke liye optimized hota hai. Deep learning training aur large-scale inference mein ye CPU se significantly faster ho sakta hai.
+
+**Q43. Model Latency kya hai?**
+
+Model Latency input receive karne se output generate hone tak ka time hai.
+
+Isme preprocessing, model computation, network aur postprocessing time include ho sakta hai.
+
+**Q44. Model Throughput kya hai?**
+
+Model Throughput ek unit of time mein model kitne requests ya samples process kar sakta hai, ye measure karta hai.
+
+**Q45. Model Quantization kya hai?**
+
+Quantization model weights aur activations ki numerical precision reduce karti hai, jaise FP32 se INT8.
+
+Isse memory aur inference cost reduce ho sakti hai, lekin accuracy impact ho sakti hai.
+
+**Q46. Model Monitoring kyun important hai?**
+
+Production model ke performance, latency, errors, prediction quality aur data drift ko track karne ke liye monitoring important hai.
+
+**Q47. Data Drift aur Model Drift mein kya difference hai?**
+
+Data Drift mein incoming input data ka distribution change hota hai.
+
+Model Drift mein model ki predictive performance time ke saath degrade hoti hai, often changing data patterns ya relationships ke karan.
+
+---
+
+## 27. AI Application Architecture (10 Questions)
+
+**Q48. AI Application Architecture kya hai?**
+
+AI Application Architecture frontend, backend, AI model, data storage, retrieval systems aur external services ko combine karke complete AI application banati hai.
+
+**Q49. Typical LLM Application Architecture kya hoti hai?**
+
+Example:
+
+User → Frontend → Backend API → Prompt Builder → LLM API → Response Processor → User.
+
+Additional components:
+- Cache
+- Database
+- Vector Database
+- Logging
+- Guardrails
+
+**Q50. LLM Gateway kya hota hai?**
+
+LLM Gateway ek centralized layer hai jo multiple LLM providers aur models ke requests manage karti hai.
+
+Ye routing, authentication, rate limits, logging aur fallback handle kar sakti hai.
+
+**Q51. Prompt Management kya hai?**
+
+Prompt Management prompts ko version, test aur maintain karne ki process hai.
+
+Isse prompt changes track karna aur output quality improve karna easy hota hai.
+
+**Q52. LLM Response Streaming kya hai?**
+
+Streaming mein model ka output chunks ya tokens ke form mein progressively client ko send hota hai, instead of waiting for the complete response.
+
+**Q53. LLM Application mein Caching kaise use hoti hai?**
+
+Repeated requests ya similar queries ke responses cache kiye ja sakte hain.
+
+Semantic caching mein embeddings ke through semantically similar queries identify ki ja sakti hain.
+
+**Q54. AI Application mein Rate Limiting kyun important hai?**
+
+Rate Limiting users ya applications ki request frequency control karti hai. Isse cost, resource consumption aur abuse manage hota hai.
+
+**Q55. AI Application mein Guardrails kya hain?**
+
+Guardrails input aur output ko validate aur control karne ke mechanisms hain.
+
+Examples:
+- Input validation
+- PII detection
+- Prompt injection checks
+- Output moderation
+- Tool permission checks
+
+**Q56. LLM Fallback Strategy kya hai?**
+
+Agar primary model unavailable ho ya timeout ho, toh request ko alternate model ya provider par route karna fallback strategy hai.
+
+**Q57. AI Application ki cost kaise optimize karte hain?**
+
+- Smaller models use karo where suitable.
+- Prompt length reduce karo.
+- Cache repeated results.
+- Batch requests where possible.
+- Token usage monitor karo.
+- Unnecessary context avoid karo.
+- Model routing use karo.
+
+---
+
+## 28. RAG Architecture (12 Questions)
+
+**Q58. RAG kya hai?**
+
+RAG ka full form Retrieval-Augmented Generation hai.
+
+Isme relevant external documents retrieve karke LLM ko context provide kiya jaata hai, jisse model domain-specific aur grounded answers generate kar sake.
+
+**Q59. RAG Architecture ke main components kya hain?**
+
+- Document Loader
+- Text Extractor
+- Chunking
+- Embedding Model
+- Vector Database
+- Retriever
+- Prompt Builder
+- LLM
+- Response Generator
+
+**Q60. RAG ka complete workflow explain karo.**
+
+Ingestion Pipeline:
+
+Documents → Extraction → Cleaning → Chunking → Embeddings → Vector Database.
+
+Query Pipeline:
+
+User Query → Query Embedding → Retrieval → Context Building → LLM → Final Answer.
+
+**Q61. Document Chunking kya hai?**
+
+Chunking large documents ko smaller text segments mein divide karne ki process hai, taaki retrieval relevant information ko efficiently find kar sake.
+
+**Q62. Chunk Size kya hota hai?**
+
+Chunk Size ek chunk mein text ya tokens ki quantity define karta hai.
+
+Small chunks precise retrieval provide kar sakte hain, jabki large chunks more context preserve karte hain.
+
+**Q63. Chunk Overlap kya hai?**
+
+Chunk Overlap adjacent chunks ke beech repeated text hota hai. Isse chunk boundaries par context loss reduce ho sakta hai.
+
+**Q64. Embedding Model ka role kya hai?**
+
+Embedding Model text ko numerical vectors mein convert karta hai, jisse semantic similarity search possible hoti hai.
+
+**Q65. Retriever kya karta hai?**
+
+Retriever user query ke basis par knowledge base se relevant chunks retrieve karta hai.
+
+**Q66. Top-K Retrieval kya hai?**
+
+Top-K Retrieval query ke liye K most relevant documents ya chunks return karta hai.
+
+**Q67. RAG mein Re-ranking kya hai?**
+
+Re-ranking retrieved chunks ko more accurate relevance model se score karke reorder karti hai.
+
+**Q68. Hybrid Search kya hai?**
+
+Hybrid Search vector similarity aur keyword search combine karti hai.
+
+Vector search semantic similarity find karti hai, jabki keyword search exact terms match karne mein useful hoti hai.
+
+**Q69. RAG mein Hallucination kaise reduce karte hain?**
+
+- Relevant context retrieve karo.
+- Context quality improve karo.
+- Source-based answers require karo.
+- Unsupported claims avoid karne ke instructions do.
+- Retrieval evaluation karo.
+- Low-confidence cases mein clarification ya abstention allow karo.
+
+---
+
+## 29. Vector Search Architecture (10 Questions)
+
+**Q70. Vector Search Architecture kya hai?**
+
+Vector Search Architecture embeddings generate, store, index aur retrieve karne ke components ka design hai.
+
+**Q71. Vector Search Pipeline explain karo.**
+
+Indexing Pipeline:
+
+Documents → Embedding Model → Vector Database → Index.
+
+Query Pipeline:
+
+User Query → Query Embedding → Similarity Search → Top-K Results.
+
+**Q72. ANN Search kya hai?**
+
+ANN ka full form Approximate Nearest Neighbor hai. Ye high-dimensional vectors mein nearest neighbors efficiently retrieve karta hai, with a possible accuracy trade-off.
+
+**Q73. HNSW Index kya hai?**
+
+HNSW graph-based ANN index hai jo hierarchical graph layers ke through efficient nearest-neighbor search perform karta hai.
+
+**Q74. IVF Index kya hai?**
+
+IVF vectors ko clusters mein organize karta hai aur search ke time selected clusters examine karta hai.
+
+**Q75. Cosine Similarity aur Euclidean Distance mein kya difference hai?**
+
+Cosine Similarity vectors ke beech angle-based similarity measure karti hai.
+
+Euclidean Distance vectors ke beech straight-line distance calculate karti hai.
+
+Correct metric embedding model aur use case par depend karta hai.
+
+**Q76. Metadata Filtering kya hai?**
+
+Metadata Filtering vector search ke saath additional conditions apply karti hai.
+
+Example: Sirf particular user, category ya date ke documents search karna.
+
+**Q77. Vector Search mein Recall aur Precision kya hain?**
+
+Recall relevant results mein se retrieve kiye gaye relevant results ka proportion hai.
+
+Precision retrieved results mein se relevant results ka proportion hai.
+
+**Q78. Vector Search performance kaise improve karte hain?**
+
+- Appropriate ANN index select karo.
+- Embedding dimensions evaluate karo.
+- Query filters optimize karo.
+- Index parameters tune karo.
+- Metadata indexes use karo.
+- Retrieval latency monitor karo.
+
+**Q79. Vector Database Scaling kaise karte hain?**
+
+Workload ke according sharding, replication, partitioning, distributed indexing aur resource scaling use kar sakte hain.
+
+---
+
+## 30. Image Data Processing for RAG (6 Questions)
+
+**Q80. Image RAG kya hai?**
+
+Image RAG aisa retrieval-augmented system hai jo images se visual information extract karke usse searchable knowledge base mein store karta hai.
+
+User image-related questions pooch sakta hai aur system relevant images ya extracted information retrieve kar sakta hai.
+
+**Q81. Image RAG Pipeline explain karo.**
+
+Typical Pipeline:
+
+Image Upload → Validation → Preprocessing → OCR / Vision Model → Captioning → Embeddings → Vector Database.
+
+Query ke time:
+
+User Query → Embedding → Image/Text Retrieval → Context → LLM → Answer.
+
+**Q82. OCR kya hai?**
+
+OCR ka full form Optical Character Recognition hai.
+
+Ye images ya scanned documents se machine-readable text extract karta hai.
+
+Examples: Invoice scanning, receipt processing aur scanned document search.
+
+**Q83. Image Embeddings kya hain?**
+
+Image Embeddings numerical vectors hote hain jo image ke visual features aur semantic information represent karte hain.
+
+Inka use image similarity search aur multimodal retrieval mein hota hai.
+
+**Q84. CLIP kya hai?**
+
+CLIP ek model architecture hai jo images aur text ko shared embedding space mein represent kar sakta hai.
+
+Isse text-to-image aur image-to-image semantic retrieval possible hoti hai.
+
+**Q85. Image RAG mein challenges kya hain?**
+
+- Large image storage
+- Image quality variation
+- OCR errors
+- Complex visual understanding
+- Image-text alignment
+- Duplicate images
+- High embedding cost
+- Metadata management
+
+---
+
+## 31. PDF Data Processing (5 Questions)
+
+**Q86. PDF Data Processing kya hai?**
+
+PDF Data Processing PDF files se text, tables, images aur metadata extract karke structured, searchable information mein convert karne ki process hai.
+
+**Q87. PDF Processing Pipeline explain karo.**
+
+PDF Upload → Validation → Text Extraction → OCR if needed → Cleaning → Chunking → Embedding → Vector Database.
+
+**Q88. PDF se text extract kaise karte hain?**
+
+Python mein PyMuPDF, pdfplumber aur pypdf jaise libraries use kar sakte hain.
+
+Example using PyMuPDF:
+
+```python
+import fitz
+
+doc = fitz.open("document.pdf")
+
+for page in doc:
+    text = page.get_text()
+    print(text)
+```
+
+**Q89. Scanned PDF aur Text-based PDF mein kya difference hai?**
+
+Text-based PDF mein selectable machine-readable text hota hai.
+
+Scanned PDF mein pages mostly images hote hain. Text extract karne ke liye OCR required ho sakta hai.
+
+**Q90. PDF Tables ko correctly extract kaise karte hain?**
+
+pdfplumber, Camelot ya Tabula jaise tools use kar sakte hain.
+
+Complex tables ke liye layout detection aur manual validation ki zarurat ho sakti hai.
+
+---
+
+## Advanced System Design Scenarios (10 Questions)
+
+**Q91. ChatGPT jaisa AI Chat System kaise design karoge?**
+
+High-level architecture:
+
+Frontend → API Gateway → Chat Service → LLM Gateway → Model Provider.
+
+Additional components:
+- Redis for caching and session state.
+- PostgreSQL for users and conversations.
+- Streaming API for token delivery.
+- Rate Limiter for usage control.
+- Observability for logs and metrics.
+
+**Q92. Large-scale RAG System kaise design karoge?**
+
+Architecture:
+
+Document Ingestion → Processing Queue → Extraction Workers → Chunking → Embedding Workers → Vector Database.
+
+Query Flow:
+
+API Gateway → Query Embedding → Hybrid Retrieval → Re-ranking → Context Builder → LLM → Streaming Response.
+
+Scaling:
+- Async ingestion.
+- Batch embeddings.
+- Distributed vector search.
+- Cache frequent queries.
+- Monitor retrieval quality and latency.
+
+**Q93. PDF Chat Application kaise design karoge?**
+
+1. User PDF upload karega.
+2. File object storage mein save hogi.
+3. Background worker PDF process karega.
+4. Text aur tables extract honge.
+5. Text chunks generate honge.
+6. Embeddings vector database mein store honge.
+7. User query par relevant chunks retrieve honge.
+8. LLM context ke basis par answer generate karega.
+
+**Q94. Image Search Engine kaise design karoge?**
+
+Architecture:
+
+Image Upload → Object Storage → Image Preprocessing → Vision Embeddings → Vector Database.
+
+Search:
+
+Text/Image Query → Query Embedding → Similarity Search → Metadata Filtering → Results.
+
+**Q95. YouTube jaisa Video Platform kaise design karoge?**
+
+Major components:
+- User Service
+- Video Upload Service
+- Object Storage
+- Transcoding Workers
+- CDN
+- Metadata Database
+- Recommendation Service
+- Search Service
+
+Video upload ke baad asynchronous transcoding aur CDN distribution use karenge.
+
+**Q96. URL Shortener kaise design karoge?**
+
+Components:
+- URL Creation API
+- Unique ID Generator
+- Database
+- Redis Cache
+- Redirect Service
+- Analytics Service
+
+Short code ko original URL ke saath map karenge. Redirect requests cache se serve karenge where possible.
+
+**Q97. Real-time Chat Application kaise design karoge?**
+
+Components:
+- WebSocket Gateway
+- Chat Service
+- Message Queue
+- Message Database
+- Redis for presence
+- Push Notification Service
+
+Messages persist karenge aur delivery acknowledgements, retries aur ordering strategy define karenge.
+
+**Q98. E-commerce System kaise design karoge?**
+
+Major services:
+- User Service
+- Product Catalog
+- Search Service
+- Cart Service
+- Order Service
+- Payment Service
+- Inventory Service
+- Notification Service
+
+Order workflow mein event-driven architecture aur Saga Pattern use kar sakte hain.
+
+**Q99. AI Application mein Observability kaise implement karoge?**
+
+Track karne wale metrics:
+- Request latency
+- Token usage
+- Model errors
+- Retrieval latency
+- Retrieval relevance
+- Cost per request
+- Cache hit rate
+- User feedback
+- Hallucination and safety evaluation
+
+**Q100. Production AI System design karte waqt sabse important considerations kya hain?**
+
+- Reliability
+- Scalability
+- Security
+- Data privacy
+- Model quality
+- Retrieval accuracy
+- Latency
+- Cost optimization
+- Monitoring
+- Versioning
+- Evaluation
+- Failure recovery
+
+---
+
+# Quick Revision Cheat Sheet
+
+| Topic | Important Concepts |
+|---|---|
+| System Design Fundamentals | Scalability, CAP, Caching, Load Balancing |
+| System Design Skeleton | Requirements, Estimation, HLD, LLD |
+| Software Architecture | Monolith, Microservices, Event-Driven |
+| AI System Design | Training, Inference, Model Serving |
+| AI Application Architecture | LLM Gateway, Streaming, Guardrails |
+| RAG Architecture | Chunking, Embeddings, Retrieval, Re-ranking |
+| Vector Search Architecture | ANN, HNSW, IVF, Similarity |
+| Image RAG | OCR, CLIP, Image Embeddings |
+| PDF Processing | Extraction, OCR, Tables, Chunking |
+
+# Practical Projects for Interview Preparation
+
+1. Design a URL Shortener.
+2. Design a WhatsApp-like Chat System.
+3. Design a YouTube-like Video Platform.
+4. Build a PDF Chat Application using RAG.
+5. Build an Image Search Engine using CLIP.
+6. Build a Hybrid Search Engine.
+7. Design a Scalable AI Chatbot.
+8. Build a Multi-tenant Knowledge Base.
+9. Design a Distributed Document Ingestion Pipeline.
+10. Build a Production-ready RAG System with Monitoring.
+
+# System Design Interview Answer Framework
+
+Har system design question ko answer karte waqt ye sequence follow karo:
+
+1. **Understand Requirements:** System kya solve karega?
+2. **Define Scale:** Users, requests per second aur data volume estimate karo.
+3. **Define APIs:** Main endpoints aur request/response structure.
+4. **Design Database:** Tables, collections, indexes aur relationships.
+5. **Draw Architecture:** Services aur communication flow.
+6. **Discuss Scaling:** Caching, load balancing, replication, sharding.
+7. **Handle Failures:** Retries, timeouts, circuit breakers, fallbacks.
+8. **Discuss Security:** Authentication, authorization, encryption.
+9. **Identify Bottlenecks:** Database, network, CPU, model inference.
+10. **Explain Trade-offs:** Har design decision ka reason aur limitation.
+
+**Interview Tip:** System Design mein sirf architecture diagram banana enough nahi hai. Har component kyun choose kiya, bottleneck kahan aa sakta hai, failure kaise handle hoga aur cost kaise optimize hogi — ye explain karna sabse important hai.

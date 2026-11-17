@@ -1,0 +1,793 @@
+# 100 Backend Engineering Interview Questions & Answers (Hinglish)
+
+**Topics:** Python Basics, Functions, Loops, FastAPI, REST API, Database, Supabase, Authentication, Authorization, JWT, MongoDB, PyMongo, CRUD Operations.
+
+**Difficulty:** Beginner to Intermediate
+
+---
+
+# SECTION 1: PYTHON BASICS (Q1–Q10)
+
+### Q1. Python kya hai?
+**Answer:** Python ek high-level, interpreted aur general-purpose programming language hai. Iska syntax simple aur readable hota hai. Backend development mein iska use APIs, database connectivity aur server-side logic ke liye hota hai.
+
+### Q2. Python interpreted language kyun kehlati hai?
+**Answer:** Python code ko Python runtime execute karta hai. CPython mein source code pehle bytecode mein compile hota hai, phir Python Virtual Machine usse execute karti hai.
+
+### Q3. Python mein List aur Tuple mein kya difference hai?
+**Answer:**
+- List mutable hoti hai, yani modify kar sakte hain.
+- Tuple immutable hoti hai, yani creation ke baad modify nahi kar sakte.
+- List ke liye [] aur Tuple ke liye () use hota hai.
+
+### Q4. Mutable aur Immutable kya hote hain?
+**Answer:**
+- Mutable: Jiska data creation ke baad modify kar sakte hain. Example: List, Dictionary, Set.
+- Immutable: Jiska existing object modify nahi kar sakte. Example: String, Tuple, Integer, Float.
+
+### Q5. Python Dictionary kya hai?
+**Answer:** Dictionary ek key-value pair data structure hai. Isme har key unique hoti hai.
+
+Example:
+```python
+user = {
+    "name": "Rahul",
+    "age": 25
+}
+print(user["name"])
+```
+
+### Q6. Python mein == aur is mein kya difference hai?
+**Answer:**
+- == values compare karta hai.
+- is check karta hai ki dono references same object ko point kar rahe hain ya nahi.
+
+### Q7. Python mein None kya hota hai?
+**Answer:** None Python ka special value hai jo absence of value represent karta hai.
+
+### Q8. Python mein Exception Handling kya hai?
+**Answer:** Exception handling runtime errors ko handle karne ke liye use hoti hai. Iske liye try, except, else aur finally use karte hain.
+
+### Q9. Python mein break, continue aur pass kya hain?
+**Answer:**
+- break: Loop terminate karta hai.
+- continue: Current iteration skip karta hai.
+- pass: Empty placeholder statement hai.
+
+### Q10. Python mein PEP 8 kya hai?
+**Answer:** PEP 8 Python ka official style guide hai. Ye coding standards define karta hai jisse code readable aur maintainable banta hai.
+
+---
+
+# SECTION 2: PYTHON FUNCTIONS (Q11–Q17)
+
+### Q11. Python Function kya hota hai?
+**Answer:** Function reusable code block hota hai jo specific task perform karta hai. Ise def keyword se define karte hain.
+
+```python
+def greet(name):
+    return f"Hello {name}"
+```
+
+### Q12. Arguments aur Parameters mein kya difference hai?
+**Answer:**
+- Parameter: Function definition mein variable.
+- Argument: Function call karte waqt pass ki gayi actual value.
+
+### Q13. Python mein *args kya hai?
+**Answer:** *args function mein multiple positional arguments accept karta hai. Values tuple ke form mein receive hoti hain.
+
+### Q14. Python mein **kwargs kya hai?
+**Answer:** **kwargs multiple keyword arguments accept karta hai aur unhe dictionary ke form mein store karta hai.
+
+### Q15. Lambda Function kya hai?
+**Answer:** Lambda ek small anonymous function hota hai jo single expression contain karta hai.
+
+```python
+square = lambda x: x * x
+```
+
+### Q16. Recursion kya hai?
+**Answer:** Jab koi function khud ko call karta hai, use recursion kehte hain. Example: Factorial calculation.
+
+### Q17. Decorator kya hota hai?
+**Answer:** Decorator ek function hota hai jo doosre function ke behavior ko modify ya extend karta hai bina original code ko directly change kiye. Logging aur authentication mein useful hai.
+
+---
+
+# SECTION 3: PYTHON LOOPS (Q18–Q22)
+
+### Q18. Python mein Loops kya hote hain?
+**Answer:** Loops kisi code ko repeatedly execute karne ke liye use hote hain. Python mein for aur while loops hote hain.
+
+### Q19. For Loop aur While Loop mein difference kya hai?
+**Answer:**
+- For loop: Iterable ya sequence ke elements par iterate karta hai.
+- While loop: Jab tak condition true hoti hai tab tak execute hota hai.
+
+### Q20. range() Function kya karta hai?
+**Answer:** range() numbers ka sequence generate karta hai. Generally loops mein use hota hai.
+
+### Q21. Nested Loop kya hota hai?
+**Answer:** Jab ek loop ke andar doosra loop hota hai, use nested loop kehte hain.
+
+### Q22. List Comprehension kya hai?
+**Answer:** List comprehension ek concise way hai list create karne ka.
+
+```python
+squares = [x*x for x in range(1, 6)]
+```
+
+---
+
+# SECTION 4: FASTAPI (Q23–Q34)
+
+### Q23. FastAPI kya hai?
+**Answer:** FastAPI Python ka modern web framework hai jiska use high-performance REST APIs develop karne ke liye hota hai.
+
+Features:
+- High performance.
+- Automatic API documentation.
+- Pydantic validation.
+- Async/await support.
+- Dependency Injection.
+
+### Q24. FastAPI aur Flask mein kya difference hai?
+**Answer:**
+- FastAPI modern aur type-hint based framework hai.
+- Flask lightweight microframework hai.
+- FastAPI mein automatic Swagger documentation milti hai.
+- FastAPI mein Pydantic-based validation built-in integration ke saath available hai.
+
+### Q25. FastAPI mein Endpoint kya hota hai?
+**Answer:** Endpoint ek specific URL hota hai jahan client HTTP request send karta hai aur server response return karta hai.
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/hello")
+def hello():
+    return {"message": "Hello World"}
+```
+
+### Q26. FastAPI mein GET aur POST kya hain?
+**Answer:**
+- GET: Data retrieve karne ke liye.
+- POST: New data create ya submit karne ke liye.
+
+### Q27. FastAPI mein Pydantic kya hai?
+**Answer:** Pydantic Python library hai jo data validation aur serialization ke liye use hoti hai.
+
+```python
+from pydantic import BaseModel
+
+class User(BaseModel):
+    name: str
+    age: int
+```
+
+### Q28. FastAPI mein Path Parameter kya hai?
+**Answer:** Path parameter URL ka part hota hai jisse specific resource identify karte hain.
+
+Example: /users/10
+
+### Q29. Query Parameter kya hota hai?
+**Answer:** Query parameters URL mein ? ke baad pass hote hain. Filtering, searching aur pagination ke liye use hote hain.
+
+Example: /users?age=25
+
+### Q30. FastAPI mein HTTPException kya hai?
+**Answer:** HTTPException custom HTTP errors return karne ke liye use hota hai.
+
+```python
+from fastapi import HTTPException
+
+raise HTTPException(
+    status_code=404,
+    detail="User not found"
+)
+```
+
+### Q31. FastAPI mein Middleware kya hota hai?
+**Answer:** Middleware request aur response ke beech execute hota hai. Logging, CORS, timing aur security headers ke liye useful hai.
+
+### Q32. FastAPI mein Async aur Await kya hain?
+**Answer:**
+- async: Coroutine function define karta hai.
+- await: Asynchronous operation ka wait karta hai bina event loop ko block kiye.
+
+### Q33. FastAPI mein Dependency Injection kya hai?
+**Answer:** Dependency Injection ka matlab hai kisi function ko required dependency externally provide karna. FastAPI mein Depends() use hota hai.
+
+### Q34. FastAPI mein Swagger UI kya hai?
+**Answer:** Swagger UI automatic interactive API documentation provide karta hai.
+- /docs: Swagger UI.
+- /redoc: ReDoc.
+- /openapi.json: OpenAPI schema.
+
+---
+
+# SECTION 5: REST API DEVELOPMENT (Q35–Q44)
+
+### Q35. REST API kya hoti hai?
+**Answer:** REST ka full form Representational State Transfer hai. REST API ek architectural style hai jisme client aur server HTTP methods ke through communicate karte hain.
+
+### Q36. HTTP Methods kaun-kaun se hain?
+**Answer:**
+- GET: Retrieve.
+- POST: Create.
+- PUT: Complete update.
+- PATCH: Partial update.
+- DELETE: Delete.
+
+### Q37. HTTP Status Codes kya hote hain?
+**Answer:**
+- 200: OK.
+- 201: Created.
+- 204: No Content.
+- 400: Bad Request.
+- 401: Unauthorized.
+- 403: Forbidden.
+- 404: Not Found.
+- 422: Validation Error.
+- 500: Internal Server Error.
+
+### Q38. PUT aur PATCH mein kya difference hai?
+**Answer:**
+- PUT: Resource ko completely replace/update karne ke liye.
+- PATCH: Resource ke specific fields update karne ke liye.
+
+### Q39. REST API Stateless kyun hoti hai?
+**Answer:** Har request independently process hoti hai. Server previous request ki session state par depend nahi karta. Client har request ke saath required information send karta hai.
+
+### Q40. API mein JSON kya hai?
+**Answer:** JSON ka full form JavaScript Object Notation hai. Ye lightweight data exchange format hai jo client aur server ke beech data transfer ke liye use hota hai.
+
+### Q41. API Pagination kya hai?
+**Answer:** Large datasets ko small chunks mein return karne ki technique pagination kehlati hai.
+
+Example: /users?page=1&limit=10
+
+### Q42. API Rate Limiting kya hai?
+**Answer:** Rate limiting user ya client ke requests ki maximum frequency control karti hai. Isse server abuse aur excessive traffic se protect karne mein help milti hai.
+
+### Q43. CORS kya hai?
+**Answer:** CORS ka full form Cross-Origin Resource Sharing hai. Ye browser security mechanism hai jo control karta hai ki ek origin doosre origin ke API ko access kar sakta hai ya nahi.
+
+### Q44. API Idempotency kya hai?
+**Answer:** Same request ko multiple times execute karne par final server state same rehna idempotency kehlata hai. GET, PUT aur DELETE generally idempotent hote hain.
+
+---
+
+# SECTION 6: FASTAPI WITH DATABASE (Q45–Q52)
+
+### Q45. Database kya hota hai?
+**Answer:** Database organized collection of data hota hai jahan data store, retrieve, update aur delete kar sakte hain.
+
+### Q46. SQL aur NoSQL mein kya difference hai?
+**Answer:**
+- SQL relational database hota hai.
+- NoSQL non-relational database hota hai.
+- SQL mein tables aur rows hoti hain.
+- NoSQL mein documents, key-value etc. hote hain.
+- Examples: PostgreSQL, MySQL, MongoDB.
+
+### Q47. FastAPI ko Database se kaise connect karte hain?
+**Answer:** Database driver ya ORM use karke FastAPI ko database se connect kar sakte hain. Example: SQLAlchemy with PostgreSQL.
+
+### Q48. ORM kya hota hai?
+**Answer:** ORM ka full form Object Relational Mapping hai. Iske through Python classes aur objects ki help se relational database interact kar sakte hain.
+
+Examples: SQLAlchemy, Django ORM.
+
+### Q49. Database Session kya hota hai?
+**Answer:** Database session database ke saath interaction manage karta hai. Iske through query, insert, update, commit aur rollback operations perform karte hain.
+
+### Q50. Commit aur Rollback mein kya difference hai?
+**Answer:**
+- Commit: Database changes save karta hai.
+- Rollback: Uncommitted changes cancel karta hai.
+
+### Q51. Database Connection Pooling kya hai?
+**Answer:** Connection pooling reusable database connections ka pool maintain karta hai. Isse connection overhead reduce hota hai aur performance improve hoti hai.
+
+### Q52. FastAPI mein Database Dependency kaise create karte hain?
+**Answer:** Database dependency har request ke liye database session provide karti hai. Iske liye Depends() aur yield use kar sakte hain.
+
+---
+
+# SECTION 7: SUPABASE INTEGRATION (Q53–Q58)
+
+### Q53. Supabase kya hai?
+**Answer:** Supabase ek Backend-as-a-Service platform hai jo PostgreSQL database, Authentication, Storage, Realtime aur APIs provide karta hai.
+
+### Q54. Supabase ka use kyun karte hain?
+**Answer:** Supabase backend development ko fast banata hai. Isme PostgreSQL, authentication, storage, realtime subscriptions aur auto-generated APIs available hain.
+
+### Q55. Python mein Supabase kaise connect karte hain?
+**Answer:** Supabase Python SDK install karke connect karte hain.
+
+```bash
+pip install supabase
+```
+
+```python
+from supabase import create_client
+
+url = "YOUR_SUPABASE_URL"
+key = "YOUR_SUPABASE_KEY"
+
+supabase = create_client(url, key)
+```
+
+### Q56. Supabase mein CRUD Operations kaise perform karte hain?
+**Answer:**
+
+```python
+# Insert
+supabase.table("users").insert({
+    "name": "Rahul"
+}).execute()
+
+# Read
+supabase.table("users").select("*").execute()
+
+# Update
+supabase.table("users").update({
+    "name": "Aman"
+}).eq("id", 1).execute()
+
+# Delete
+supabase.table("users").delete().eq(
+    "id", 1
+).execute()
+```
+
+### Q57. Supabase Row Level Security (RLS) kya hai?
+**Answer:** RLS PostgreSQL ka security feature hai jo control karta hai ki kaunsa user kis row ko read, insert, update ya delete kar sakta hai.
+
+### Q58. Supabase Auth kya hai?
+**Answer:** Supabase Auth user authentication system provide karta hai. Isme email/password, OTP, magic link, OAuth aur JWT-based tokens available hain.
+
+---
+
+# SECTION 8: AUTHENTICATION & AUTHORIZATION (Q59–Q67)
+
+### Q59. Authentication kya hota hai?
+**Answer:** Authentication verify karta hai ki user kaun hai. Example: Login ke waqt email aur password verify karna.
+
+### Q60. Authorization kya hota hai?
+**Answer:** Authorization decide karta hai ki authenticated user kya kar sakta hai aur kaunse resources access kar sakta hai.
+
+### Q61. Authentication aur Authorization mein difference kya hai?
+**Answer:**
+- Authentication: Who are you?
+- Authorization: What can you do?
+- Authentication identity verify karta hai.
+- Authorization permissions check karta hai.
+
+### Q62. Password ko Database mein kaise store karna chahiye?
+**Answer:** Password ko kabhi plain text mein store nahi karna chahiye. Argon2id ya bcrypt jaise password hashing algorithms use karne chahiye.
+
+### Q63. Hashing aur Encryption mein kya difference hai?
+**Answer:**
+- Hashing one-way process hai.
+- Encryption reversible process hai.
+- Password storage ke liye hashing use hoti hai.
+- Sensitive data ko protect karne ke liye encryption use hoti hai.
+
+### Q64. Role-Based Access Control (RBAC) kya hai?
+**Answer:** RBAC mein users ko roles assign kiye jaate hain aur roles ke according permissions milti hain.
+
+Example:
+- Admin: Create, Read, Update, Delete.
+- Editor: Create, Read, Update.
+- User: Read.
+
+### Q65. Session-Based Authentication kya hai?
+**Answer:** Successful login ke baad server session create karta hai aur session ID client ko cookie ke through deta hai. Server session ID ke basis par user identify karta hai.
+
+### Q66. OAuth kya hai?
+**Answer:** OAuth 2.0 ek authorization framework hai jo third-party applications ko limited access provide karne deta hai without sharing the user's password.
+
+### Q67. API Security ke liye kaunse practices follow karni chahiye?
+**Answer:**
+1. HTTPS use karna.
+2. Password hashing.
+3. JWT ya secure session authentication.
+4. Input validation.
+5. Rate limiting.
+6. CORS configuration.
+7. SQL injection prevention.
+8. Secrets environment variables mein store karna.
+9. Authorization checks.
+10. Proper error handling.
+
+---
+
+# SECTION 9: JWT TOKEN (Q68–Q75)
+
+### Q68. JWT kya hai?
+**Answer:** JWT ka full form JSON Web Token hai. Ye client aur server ke beech claims transmit karne ke liye compact token format hai.
+
+### Q69. JWT ke kitne parts hote hain?
+**Answer:** JWT ke three parts hote hain:
+1. Header.
+2. Payload.
+3. Signature.
+
+Format: Header.Payload.Signature
+
+### Q70. JWT Header kya contain karta hai?
+**Answer:** Header mein token ka type aur signing algorithm hota hai.
+
+Example:
+```json
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+```
+
+### Q71. JWT Payload kya hota hai?
+**Answer:** Payload mein claims hote hain, jaise user ID, role aur expiry time.
+
+Example:
+```json
+{
+  "sub": "123",
+  "role": "admin",
+  "exp": 1900000000
+}
+```
+
+JWT payload generally encoded hota hai, encrypted nahi. Isliye sensitive information store nahi karni chahiye.
+
+### Q72. JWT Signature kya hoti hai?
+**Answer:** Signature token ki integrity verify karti hai. Server secret key ya private key se signature create karta hai aur token verify karte waqt validate karta hai.
+
+### Q73. Access Token aur Refresh Token mein difference kya hai?
+**Answer:**
+- Access Token: API access ke liye use hota hai aur short-lived hota hai.
+- Refresh Token: Naya access token generate karne ke liye use hota hai aur longer-lived hota hai.
+
+### Q74. JWT Token FastAPI mein kaise generate karte hain?
+**Answer:** python-jose library se JWT generate kar sakte hain.
+
+```bash
+pip install python-jose[cryptography]
+```
+
+```python
+from jose import jwt
+from datetime import datetime, timedelta, timezone
+
+SECRET_KEY = "your-secret-key"
+ALGORITHM = "HS256"
+
+def create_token(user_id: str):
+    payload = {
+        "sub": user_id,
+        "exp": datetime.now(timezone.utc)
+               + timedelta(minutes=30)
+    }
+
+    return jwt.encode(
+        payload,
+        SECRET_KEY,
+        algorithm=ALGORITHM
+    )
+```
+
+### Q75. JWT Token ko verify kaise karte hain?
+**Answer:** JWT ko decode karke signature aur expiry validate karte hain.
+
+```python
+from jose import jwt, JWTError
+
+def verify_token(token: str):
+    try:
+        payload = jwt.decode(
+            token,
+            SECRET_KEY,
+            algorithms=["HS256"]
+        )
+        return payload
+
+    except JWTError:
+        return None
+```
+
+---
+
+# SECTION 10: MONGODB (Q76–Q84)
+
+### Q76. MongoDB kya hai?
+**Answer:** MongoDB ek NoSQL document-oriented database hai jo data ko JSON-like BSON documents mein store karta hai.
+
+### Q77. MongoDB aur MySQL mein kya difference hai?
+**Answer:**
+- MongoDB NoSQL database hai.
+- MySQL relational SQL database hai.
+- MongoDB documents store karta hai.
+- MySQL tables aur rows store karta hai.
+- MongoDB flexible schema support karta hai.
+
+### Q78. Collection aur Document kya hote hain?
+**Answer:**
+- Collection: Documents ka group.
+- Document: Individual record.
+
+### Q79. MongoDB mein _id kya hota hai?
+**Answer:** _id har MongoDB document ka unique identifier hota hai. Agar specify nahi karte toh MongoDB automatically ObjectId generate karta hai.
+
+### Q80. MongoDB mein Schema kya hota hai?
+**Answer:** Schema data ka structure define karta hai. MongoDB flexible schema support karta hai, lekin production applications mein consistent schema maintain karna recommended hai.
+
+### Q81. MongoDB mein Indexing kya hoti hai?
+**Answer:** Indexing queries ko fast banane ke liye use hoti hai.
+
+```javascript
+db.users.createIndex({ email: 1 })
+```
+
+Indexes extra storage lete hain aur write operations ka overhead increase kar sakte hain.
+
+### Q82. MongoDB mein Aggregation kya hai?
+**Answer:** Aggregation complex data processing aur analysis ke liye use hoti hai. Isme $match, $group, $sort aur $project jaise stages use hote hain.
+
+### Q83. MongoDB mein Replication kya hai?
+**Answer:** Replication mein same data ki multiple copies different MongoDB servers par maintain hoti hain. Isse high availability aur failover support milta hai.
+
+### Q84. MongoDB mein Sharding kya hai?
+**Answer:** Sharding large database ko multiple servers mein distribute karne ki technique hai. Isse horizontal scaling possible hoti hai.
+
+---
+
+# SECTION 11: PYMONGO (Q85–Q91)
+
+### Q85. PyMongo kya hai?
+**Answer:** PyMongo Python ka MongoDB driver hai. Iska use Python applications ko MongoDB se connect karne ke liye hota hai.
+
+### Q86. PyMongo install kaise karte hain?
+**Answer:**
+```bash
+pip install pymongo
+```
+
+### Q87. Python mein MongoDB Connection kaise establish karte hain?
+**Answer:**
+```python
+from pymongo import MongoClient
+
+client = MongoClient(
+    "mongodb://localhost:27017/"
+)
+
+db = client["company"]
+collection = db["users"]
+```
+
+### Q88. PyMongo mein Insert Operation kaise karte hain?
+**Answer:**
+
+```python
+user = {
+    "name": "Rahul",
+    "age": 25
+}
+
+result = collection.insert_one(user)
+
+print(result.inserted_id)
+```
+
+Multiple documents ke liye insert_many() use karte hain.
+
+### Q89. PyMongo mein Find Operation kaise karte hain?
+**Answer:**
+
+```python
+# Single document
+user = collection.find_one({
+    "name": "Rahul"
+})
+
+# Multiple documents
+users = collection.find()
+
+for user in users:
+    print(user)
+```
+
+### Q90. PyMongo mein Update Operation kaise karte hain?
+**Answer:**
+
+```python
+collection.update_one(
+    {"name": "Rahul"},
+    {"$set": {"age": 26}}
+)
+```
+
+update_many() multiple documents update karta hai.
+
+### Q91. PyMongo mein Delete Operation kaise karte hain?
+**Answer:**
+
+```python
+collection.delete_one({
+    "name": "Rahul"
+})
+```
+
+Multiple records ke liye delete_many() use karte hain.
+
+---
+
+# SECTION 12: CRUD OPERATIONS (Q92–Q100)
+
+### Q92. CRUD kya hai?
+**Answer:** CRUD ka full form hai:
+- C: Create.
+- R: Read.
+- U: Update.
+- D: Delete.
+
+Ye database ke four basic operations hain.
+
+### Q93. Create Operation kya hai?
+**Answer:** Create operation ka use database mein new records insert karne ke liye hota hai.
+
+```python
+collection.insert_one({
+    "name": "Rahul",
+    "email": "rahul@gmail.com"
+})
+```
+
+### Q94. Read Operation kya hai?
+**Answer:** Read operation database se existing records retrieve karne ke liye use hota hai.
+
+```python
+users = collection.find({
+    "age": 25
+})
+```
+
+### Q95. Update Operation kya hai?
+**Answer:** Update operation existing records ki information modify karne ke liye use hota hai.
+
+```python
+collection.update_one(
+    {"name": "Rahul"},
+    {"$set": {"age": 27}}
+)
+```
+
+### Q96. Delete Operation kya hai?
+**Answer:** Delete operation database se existing records remove karne ke liye use hota hai.
+
+```python
+collection.delete_one({
+    "name": "Rahul"
+})
+```
+
+### Q97. CRUD API FastAPI mein kaise implement karte hain?
+**Answer:** FastAPI mein HTTP methods aur database functions ka use karke CRUD APIs implement karte hain.
+
+```python
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI()
+
+users = {}
+
+class User(BaseModel):
+    name: str
+    age: int
+
+# Create
+@app.post("/users/{user_id}")
+def create_user(user_id: int, user: User):
+    if user_id in users:
+        raise HTTPException(409, "User exists")
+
+    users[user_id] = user.model_dump()
+    return users[user_id]
+
+# Read
+@app.get("/users/{user_id}")
+def get_user(user_id: int):
+    if user_id not in users:
+        raise HTTPException(404, "User not found")
+
+    return users[user_id]
+
+# Update
+@app.put("/users/{user_id}")
+def update_user(user_id: int, user: User):
+    if user_id not in users:
+        raise HTTPException(404, "User not found")
+
+    users[user_id] = user.model_dump()
+    return users[user_id]
+
+# Delete
+@app.delete("/users/{user_id}")
+def delete_user(user_id: int):
+    if user_id not in users:
+        raise HTTPException(404, "User not found")
+
+    del users[user_id]
+    return {"message": "User deleted"}
+```
+
+Note: Ye in-memory demonstration hai. Real project mein persistent database use karna chahiye.
+
+### Q98. CRUD Operations mein Validation kyun important hai?
+**Answer:** Validation ensure karti hai ki database mein correct aur expected format ka data hi insert ya update ho. FastAPI mein Pydantic validation automatically perform karta hai.
+
+### Q99. Database mein Duplicate Records kaise prevent karte hain?
+**Answer:** Duplicate records prevent karne ke liye unique constraints ya unique indexes use karte hain.
+
+```python
+collection.create_index(
+    "email",
+    unique=True
+)
+```
+
+### Q100. Ek Secure Backend API develop karne ke liye kya steps follow karoge?
+**Answer:**
+1. Python aur FastAPI se project setup karunga.
+2. Proper folder structure maintain karunga.
+3. Database configure karunga.
+4. Pydantic se input validation karunga.
+5. CRUD endpoints develop karunga.
+6. Password hashing implement karunga.
+7. JWT authentication implement karunga.
+8. Role-based authorization implement karunga.
+9. Error handling aur logging add karunga.
+10. CORS, HTTPS aur rate limiting configure karunga.
+11. Database indexing aur connection management optimize karunga.
+12. APIs ko Swagger aur automated tests se test karunga.
+13. Environment variables mein secrets store karunga.
+14. Application ko production server par deploy karunga.
+
+**Interview Conclusion:**
+
+"Main backend development mein clean code architecture, secure authentication, proper database management, input validation aur scalable API design ko priority deta hoon."
+
+---
+
+# QUICK REVISION: IMPORTANT DIFFERENCES
+
+1. List vs Tuple: Mutable vs Immutable.
+2. == vs is: Value vs Object Identity.
+3. *args vs **kwargs: Positional vs Keyword Arguments.
+4. GET vs POST: Retrieve vs Create.
+5. PUT vs PATCH: Complete vs Partial Update.
+6. Authentication vs Authorization: Identity vs Permission.
+7. Hashing vs Encryption: One-way vs Reversible.
+8. SQL vs NoSQL: Relational vs Document-based.
+9. Access Token vs Refresh Token: API Access vs Token Renewal.
+10. Commit vs Rollback: Save vs Undo.
+11. Collection vs Document: Group vs Individual Record.
+12. Indexing vs Aggregation: Query Performance vs Data Processing.
+13. Async vs Sync: Asynchronous vs Synchronous Execution.
+14. ORM vs Driver: Object Mapping vs Direct Database Interaction.
+
+# PRACTICAL PROJECTS FOR INTERVIEW PREPARATION
+
+1. User Management API: Python + FastAPI + MongoDB.
+2. Authentication System: FastAPI + JWT + Password Hashing.
+3. Supabase Backend: FastAPI + Supabase + PostgreSQL.
+4. MongoDB CRUD Project: Python + PyMongo.
+5. Complete Backend Project: FastAPI + JWT + MongoDB + CRUD + Authorization.
+
+**Preparation Tip:** Sirf definitions yaad mat karo. Har topic ka practical implementation bhi practice karo. Interview mein conceptual questions ke saath coding questions bhi pooche ja sakte hain.

@@ -1,0 +1,586 @@
+# 100 Most Asked Database Engineering Interview Questions & Answers (Hinglish)
+
+## 14. PostgreSQL (15 Questions)
+
+**Q1. PostgreSQL kya hai?**
+
+PostgreSQL ek powerful, open-source relational database management system (RDBMS) hai. Ye SQL support karta hai aur advanced features jaise JSONB, indexing, transactions, stored procedures aur replication provide karta hai.
+
+**Q2. PostgreSQL aur MySQL mein kya difference hai?**
+
+PostgreSQL advanced SQL features, complex queries, JSONB aur extensibility ke liye popular hai. MySQL simplicity, read-heavy workloads aur common web applications ke liye widely used hai.
+
+**Q3. Primary Key kya hoti hai?**
+
+Primary Key ek column ya columns ka combination hota hai jo table ke har record ko uniquely identify karta hai. Isme duplicate aur NULL values allowed nahi hoti.
+
+**Q4. Foreign Key kya hoti hai?**
+
+Foreign Key ek table ka column hota hai jo doosre table ki Primary Key ko reference karta hai. Ye tables ke beech referential integrity maintain karta hai.
+
+**Q5. Index kya hota hai?**
+
+Index ek data structure hai jo database ko records quickly search karne mein help karta hai. Isse SELECT queries fast hoti hain, lekin INSERT, UPDATE aur DELETE operations par overhead aa sakta hai.
+
+**Q6. PostgreSQL mein different indexes kaun se hain?**
+
+Common index types:
+- B-tree: Equality aur range queries.
+- Hash: Equality comparisons.
+- GIN: JSONB aur array searches.
+- GiST: Geometric aur range-based data.
+- BRIN: Large, naturally ordered tables.
+
+**Q7. ACID properties kya hain?**
+
+ACID ka matlab hai:
+- Atomicity: Transaction complete hoga ya rollback.
+- Consistency: Data valid state mein rahega.
+- Isolation: Concurrent transactions ek doosre ko incorrectly affect nahi karenge.
+- Durability: Commit ke baad changes persist rahenge.
+
+**Q8. JOIN kya hota hai?**
+
+JOIN multiple tables ka related data combine karta hai.
+
+Types:
+- INNER JOIN
+- LEFT JOIN
+- RIGHT JOIN
+- FULL OUTER JOIN
+- CROSS JOIN
+
+**Q9. Normalization kya hai?**
+
+Normalization database ko efficiently organize karne ki process hai. Iska purpose data duplication aur update anomalies reduce karna hai.
+
+**Q10. 1NF, 2NF aur 3NF kya hain?**
+
+- 1NF: Har column mein atomic values honi chahiye.
+- 2NF: 1NF ke saath non-key attributes complete candidate key par depend karein.
+- 3NF: 2NF ke saath non-key attributes mein transitive dependency nahi honi chahiye.
+
+**Q11. PostgreSQL mein JSONB kya hai?**
+
+JSONB JSON data ko binary format mein store karta hai. Ye indexing aur querying support karta hai, isliye semi-structured data ke liye useful hai.
+
+**Q12. VACUUM kya karta hai?**
+
+VACUUM dead tuples ki space ko reusable banata hai aur table maintenance mein help karta hai. VACUUM ANALYZE statistics bhi update karta hai.
+
+**Q13. EXPLAIN ANALYZE kya hai?**
+
+EXPLAIN query execution plan show karta hai. EXPLAIN ANALYZE query actually execute karke real execution time aur row statistics provide karta hai.
+
+**Q14. PostgreSQL mein transactions kaise work karti hain?**
+
+Transaction multiple SQL operations ko ek logical unit mein execute karti hai. COMMIT changes save karta hai aur ROLLBACK changes undo karta hai.
+
+**Q15. PostgreSQL replication kya hai?**
+
+Replication primary database ke data ko standby ya replica servers par copy karti hai. Isse high availability, disaster recovery aur read scaling mein help milti hai.
+
+---
+
+## 15. Supabase Database (10 Questions)
+
+**Q16. Supabase kya hai?**
+
+Supabase ek open-source backend platform hai jo PostgreSQL database, authentication, storage, realtime features aur APIs provide karta hai.
+
+**Q17. Supabase aur Firebase mein kya difference hai?**
+
+Supabase PostgreSQL-based relational database use karta hai aur SQL support karta hai. Firebase primarily NoSQL Firestore database provide karta hai. Dono authentication aur realtime capabilities bhi offer karte hain.
+
+**Q18. Supabase mein Row Level Security (RLS) kya hai?**
+
+RLS PostgreSQL ka security feature hai jo define karta hai ki kaun user kis row ko access ya modify kar sakta hai.
+
+**Q19. Supabase mein RLS enable kaise karte hain?**
+
+```sql
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+```
+
+Iske baad required SELECT, INSERT, UPDATE aur DELETE policies define karni hoti hain.
+
+**Q20. Supabase Auth kya hai?**
+
+Supabase Auth user authentication aur authorization manage karta hai. Ye email/password, magic links, OTP aur supported social login providers offer karta hai.
+
+**Q21. Supabase Edge Functions kya hain?**
+
+Edge Functions server-side TypeScript functions hain jo edge infrastructure par execute hoti hain. Inka use custom APIs, webhooks aur backend logic ke liye hota hai.
+
+**Q22. Supabase Realtime kya hai?**
+
+Supabase Realtime database changes ko clients tak live stream kar sakta hai. Iska use chat applications, dashboards aur live notifications mein hota hai.
+
+**Q23. Supabase Storage kya hai?**
+
+Supabase Storage files jaise images, videos aur documents store aur serve karne ke liye use hota hai. Access policies se file permissions control ki ja sakti hain.
+
+**Q24. Supabase mein database migrations kya hoti hain?**
+
+Migrations version-controlled SQL changes hoti hain jo database schema ko consistently create ya update karti hain.
+
+**Q25. Supabase mein service role key kya hai?**
+
+Service role key privileged backend access provide karti hai aur RLS restrictions bypass kar sakti hai. Isse kabhi bhi frontend ya public repository mein expose nahi karna chahiye.
+
+---
+
+## 16. NoSQL Database (10 Questions)
+
+**Q26. NoSQL database kya hai?**
+
+NoSQL databases non-relational data models use karte hain. Ye flexible schemas aur distributed workloads ke liye useful hote hain.
+
+**Q27. NoSQL databases ke types kya hain?**
+
+Four major types:
+- Document databases
+- Key-value databases
+- Wide-column databases
+- Graph databases
+
+**Q28. SQL aur NoSQL mein kya difference hai?**
+
+SQL databases generally relational tables aur structured schemas use karte hain. NoSQL databases document, key-value, graph ya wide-column models use karte hain.
+
+**Q29. NoSQL kab use karna chahiye?**
+
+Jab application ko flexible schema, horizontal scaling, high-volume data ya specific non-relational data model ki zarurat ho.
+
+**Q30. Eventual Consistency kya hai?**
+
+Eventual consistency mein replicas immediately synchronized nahi hote, lekin updates propagate hone ke baad eventually same data state par aa jaate hain.
+
+**Q31. CAP Theorem kya hai?**
+
+CAP theorem ke according distributed system network partition ke time Consistency aur Availability ke beech trade-off face karta hai.
+
+**Q32. Sharding kya hai?**
+
+Sharding database data ko multiple servers ya partitions mein divide karne ki technique hai. Isse horizontal scaling possible hoti hai.
+
+**Q33. Replication kya hai?**
+
+Replication same data ki copies multiple database nodes par maintain karti hai. Ye availability aur read scalability improve kar sakti hai.
+
+**Q34. Partitioning aur Sharding mein kya difference hai?**
+
+Partitioning data ko logical parts mein divide karti hai, kabhi same database server ke andar. Sharding usually partitions ko multiple database servers par distribute karti hai.
+
+**Q35. NoSQL database ke challenges kya hain?**
+
+Common challenges:
+- Data consistency
+- Complex joins ki limitations
+- Data duplication
+- Schema governance
+- Distributed transactions
+- Query design complexity
+
+---
+
+## 17. MongoDB Document Modelling (12 Questions)
+
+**Q36. MongoDB kya hai?**
+
+MongoDB ek NoSQL document database hai jo data ko BSON documents ke form mein store karta hai.
+
+**Q37. MongoDB mein Collection kya hai?**
+
+Collection documents ka group hota hai. Ye relational database ke table ke similar concept hai.
+
+**Q38. MongoDB mein Document kya hai?**
+
+Document ek record hota hai jo key-value pairs ke form mein data store karta hai.
+
+Example:
+
+```json
+{
+  "name": "Rahul",
+  "age": 25,
+  "skills": ["Node.js", "MongoDB"]
+}
+```
+
+**Q39. Embedding aur Referencing kya hain?**
+
+Embedding mein related data same document ke andar store hota hai. Referencing mein related documents ke IDs store kiye jaate hain.
+
+**Q40. Embedding kab use karna chahiye?**
+
+Jab related data frequently saath read hota ho, relationship one-to-few ho aur document size limits ke andar rahe.
+
+**Q41. Referencing kab use karna chahiye?**
+
+Jab relationship many-to-many ho, related data independently update hota ho ya embedded document unnecessarily large ho sakta ho.
+
+**Q42. MongoDB mein Schema Design important kyun hai?**
+
+Schema design query performance, storage efficiency aur application scalability ko directly impact karta hai.
+
+**Q43. MongoDB mein Aggregation Pipeline kya hai?**
+
+Aggregation Pipeline multiple stages ke through data process aur transform karti hai.
+
+Example:
+
+```javascript
+db.orders.aggregate([
+  { $match: { status: "completed" } },
+  {
+    $group: {
+      _id: "$customerId",
+      total: { $sum: "$amount" }
+    }
+  }
+]);
+```
+
+**Q44. MongoDB mein Compound Index kya hai?**
+
+Compound Index multiple fields par create hota hai. Ye queries ko optimize karta hai jo un fields ko suitable order mein filter ya sort karti hain.
+
+**Q45. MongoDB mein TTL Index kya hai?**
+
+TTL Index documents ko specified time ke baad automatically expire karne mein help karta hai. Sessions aur temporary records ke liye useful hai.
+
+**Q46. MongoDB mein $lookup kya hai?**
+
+$lookup aggregation stage hai jo doosri collection se matching documents retrieve karke join-like operation perform karti hai.
+
+**Q47. MongoDB mein Schema Validation kya hai?**
+
+Schema Validation documents ke structure aur field types ko enforce karti hai. Isse invalid data insert hone se roka ja sakta hai.
+
+---
+
+## 18. Graph Database (8 Questions)
+
+**Q48. Graph Database kya hai?**
+
+Graph Database data ko nodes aur relationships ke form mein represent karta hai. Ye highly connected data ke liye useful hai.
+
+**Q49. Graph Database ke main components kya hain?**
+
+- Nodes: Entities.
+- Relationships/Edges: Entities ke connections.
+- Properties: Nodes aur relationships ka additional data.
+- Labels: Node categories.
+
+**Q50. Graph Database kab use karna chahiye?**
+
+Social networks, recommendation engines, fraud detection, network analysis aur knowledge graphs mein.
+
+**Q51. Graph Database aur Relational Database mein kya difference hai?**
+
+Relational databases tables aur joins use karte hain. Graph databases relationships ko directly represent karte hain, jisse multi-hop relationship traversal natural ho jaata hai.
+
+**Q52. Graph Traversal kya hai?**
+
+Graph Traversal nodes aur relationships ke through connected data explore karne ki process hai.
+
+**Q53. Directed aur Undirected Graph kya hain?**
+
+Directed graph mein edges ki direction hoti hai. Undirected graph mein relationships bidirectional hoti hain.
+
+**Q54. Weighted Graph kya hai?**
+
+Weighted Graph mein relationships ke saath numerical values hoti hain, jaise distance, cost ya score.
+
+**Q55. Graph Database ke use cases kya hain?**
+
+- Fraud detection
+- Social networking
+- Recommendation systems
+- Identity resolution
+- Knowledge graphs
+- Dependency analysis
+
+---
+
+## 19. Neo4j (12 Questions)
+
+**Q56. Neo4j kya hai?**
+
+Neo4j ek native graph database hai jo nodes, relationships aur properties ke form mein data store karta hai.
+
+**Q57. Cypher Query Language kya hai?**
+
+Cypher Neo4j ki declarative query language hai. Ye graph data ko readable pattern-matching syntax se query karne deti hai.
+
+**Q58. Neo4j mein Node kya hota hai?**
+
+Node ek entity represent karta hai, jaise Person, Product ya Company.
+
+**Q59. Neo4j mein Relationship kya hota hai?**
+
+Relationship do nodes ke beech connection represent karta hai. Iska type aur direction hota hai.
+
+**Q60. Neo4j mein CREATE query kaise likhte hain?**
+
+```cypher
+CREATE (:Person {
+  name: "Rahul",
+  age: 25
+});
+```
+
+**Q61. Neo4j mein MATCH kya karta hai?**
+
+MATCH graph mein specified pattern search karta hai.
+
+```cypher
+MATCH (p:Person)
+RETURN p;
+```
+
+**Q62. Neo4j mein MERGE kya hai?**
+
+MERGE specified pattern ko match karta hai. Agar pattern nahi milta, toh create karta hai.
+
+```cypher
+MERGE (p:Person {email: "rahul@example.com"});
+```
+
+**Q63. Neo4j mein OPTIONAL MATCH kya hai?**
+
+OPTIONAL MATCH SQL ke LEFT JOIN jaisa behavior provide karta hai. Matching pattern nahi milne par null values return ho sakti hain.
+
+**Q64. Neo4j mein Indexes kyun use hote hain?**
+
+Indexes node aur relationship properties ko efficiently search karne mein help karte hain.
+
+**Q65. Neo4j mein Constraints kya hain?**
+
+Constraints graph data par rules enforce karte hain, jaise uniqueness aur property existence.
+
+**Q66. Neo4j mein Shortest Path kaise find karte hain?**
+
+Cypher mein shortestPath() function use kar sakte hain.
+
+```cypher
+MATCH (a:Person {name: "A"}),
+      (b:Person {name: "B"}),
+      p = shortestPath((a)-[*]-(b))
+RETURN p;
+```
+
+**Q67. Neo4j mein APOC kya hai?**
+
+APOC Neo4j ka popular library/plugin hai jo additional procedures aur functions provide karta hai, jaise data import/export aur graph processing.
+
+---
+
+## 20. Graph Data Modelling (10 Questions)
+
+**Q68. Graph Data Modelling kya hai?**
+
+Graph Data Modelling entities, relationships aur properties ko graph structure mein design karne ki process hai.
+
+**Q69. Graph Model design karte waqt kya consider karna chahiye?**
+
+- Main entities
+- Relationship types
+- Relationship direction
+- Node properties
+- Query patterns
+- Expected graph growth
+
+**Q70. Node aur Relationship kab create karna chahiye?**
+
+Jab koi entity independently identify ya query hoti ho, use node bana sakte hain. Jab do entities ke beech connection ho, use relationship represent kar sakte hain.
+
+**Q71. Many-to-Many relationship graph mein kaise model hoti hai?**
+
+Direct relationships se naturally model hoti hai.
+
+Example:
+
+```cypher
+(:Student)-[:ENROLLED_IN]->(:Course)
+```
+
+**Q72. Graph Modelling mein Supernodes kya hain?**
+
+Supernode aisa node hai jiske bahut zyada relationships hote hain. Ye traversal performance ko impact kar sakta hai.
+
+**Q73. Graph Traversal Performance kaise improve karte hain?**
+
+- Selective starting nodes choose karo.
+- Relevant indexes create karo.
+- Unnecessary traversal depth avoid karo.
+- Query patterns optimize karo.
+- Supernodes ko carefully handle karo.
+
+**Q74. Graph Modelling mein Direction important kyun hai?**
+
+Direction relationship ka meaning clear karti hai aur query patterns ko more precise banati hai.
+
+**Q75. Knowledge Graph kya hai?**
+
+Knowledge Graph entities aur unke semantic relationships ko represent karta hai. Ye search, AI aur recommendation systems mein useful hai.
+
+**Q76. Graph Modelling mein Denormalization kya hai?**
+
+Denormalization mein performance ya simpler traversal ke liye additional properties ya relationships store kiye ja sakte hain.
+
+**Q77. Graph Database mein Data Integrity kaise maintain karte hain?**
+
+Constraints, validation, controlled writes aur application-level business rules se data integrity maintain ki ja sakti hai.
+
+---
+
+## 21. Vector Database (12 Questions)
+
+**Q78. Vector Database kya hai?**
+
+Vector Database high-dimensional numerical vectors store, index aur search karta hai. Ye semantic search aur AI applications mein commonly use hota hai.
+
+**Q79. Vector kya hota hai?**
+
+Vector numerical values ki ordered list hoti hai jo kisi object ya text ka mathematical representation ho sakti hai.
+
+Example:
+
+```python
+vector = [0.12, 0.45, 0.78, 0.23]
+```
+
+**Q80. Embedding kya hai?**
+
+Embedding ML model se generated numerical representation hoti hai jo text, images ya other data ka semantic meaning capture karne ki koshish karti hai.
+
+**Q81. Vector Search kya hai?**
+
+Vector Search query vector ke closest vectors retrieve karta hai using similarity ya distance metrics.
+
+**Q82. Cosine Similarity kya hai?**
+
+Cosine Similarity do vectors ke beech angle-based similarity measure karti hai. Normalized embeddings ke semantic comparison mein commonly use hoti hai.
+
+**Q83. Euclidean Distance kya hai?**
+
+Euclidean Distance do vectors ke beech straight-line distance calculate karti hai.
+
+**Q84. Dot Product kya hai?**
+
+Dot Product corresponding vector elements multiply karke unka sum calculate karta hai. Embedding similarity ke liye use ho sakta hai.
+
+**Q85. Vector Database ke popular examples kya hain?**
+
+- Pinecone
+- Weaviate
+- Milvus
+- Qdrant
+- Chroma
+- PostgreSQL with pgvector
+
+**Q86. Semantic Search kya hai?**
+
+Semantic Search keywords ke exact match ke bajaye query ke meaning aur context ke basis par relevant results retrieve karti hai.
+
+**Q87. Vector Database mein Metadata Filtering kya hai?**
+
+Metadata Filtering vector similarity search ke saath additional conditions apply karti hai, jaise category, date ya user ID.
+
+**Q88. RAG kya hai?**
+
+RAG ka full form Retrieval-Augmented Generation hai. Isme relevant documents retrieve karke LLM ko context diya jaata hai, taaki response more grounded ho.
+
+**Q89. Vector Database aur Traditional Database mein kya difference hai?**
+
+Traditional databases structured data aur exact queries ke liye optimized hote hain. Vector databases embedding storage aur similarity search ke liye optimized hote hain.
+
+---
+
+## 22. Vector Database Internals (11 Questions)
+
+**Q90. ANN Search kya hai?**
+
+ANN ka full form Approximate Nearest Neighbor hai. Ye exact nearest-neighbor search ke comparison mein faster search provide karta hai, usually small accuracy trade-off ke saath.
+
+**Q91. HNSW kya hai?**
+
+HNSW ka full form Hierarchical Navigable Small World hai. Ye graph-based ANN indexing algorithm hai jo multi-layer graph ke through nearest neighbors efficiently search karta hai.
+
+**Q92. IVF Index kya hai?**
+
+IVF ka full form Inverted File Index hai. Ye vectors ko clusters mein divide karta hai aur search ke time selected clusters scan karta hai.
+
+**Q93. PQ kya hai?**
+
+PQ ka full form Product Quantization hai. Ye vectors ko compressed representation mein store karta hai, jisse memory usage reduce ho sakta hai.
+
+**Q94. Vector Quantization kya hai?**
+
+Vector Quantization vectors ko representative codebook entries se approximate karti hai. Isse storage aur search efficiency improve ho sakti hai.
+
+**Q95. Recall@K kya hai?**
+
+Recall@K measure karta hai ki top K search results mein expected relevant nearest neighbors ka kitna proportion retrieve hua.
+
+**Q96. Latency aur Throughput mein kya difference hai?**
+
+Latency ek request complete hone ka time hai. Throughput ek unit of time mein process hone wali requests ki quantity hai.
+
+**Q97. Vector Database mein Filtering Performance kaise improve karte hain?**
+
+- Metadata fields ko index karo.
+- Selective filters use karo.
+- Appropriate ANN index choose karo.
+- Filter aur vector search execution strategy optimize karo.
+
+**Q98. Vector Database mein Re-ranking kya hai?**
+
+Re-ranking initial retrieval ke results ko second-stage model ya scoring function se reorder karti hai, taaki most relevant results top par aayein.
+
+**Q99. Vector Database mein Hybrid Search kya hai?**
+
+Hybrid Search vector similarity search aur keyword-based search combine karti hai. Isse semantic aur exact keyword matching dono ka benefit mil sakta hai.
+
+**Q100. Production Vector Database design karte waqt kya consider karna chahiye?**
+
+- Embedding model aur dimensions
+- Distance metric
+- ANN index selection
+- Recall aur latency targets
+- Metadata filtering
+- Data freshness
+- Replication aur backups
+- Security aur access control
+- Monitoring aur cost
+
+---
+
+## Quick Revision
+
+| Topic | Key Concepts |
+|---|---|
+| PostgreSQL | ACID, JOIN, Indexes, JSONB, VACUUM |
+| Supabase | PostgreSQL, RLS, Auth, Realtime, Edge Functions |
+| NoSQL | CAP, Sharding, Replication, Consistency |
+| MongoDB | Documents, Embedding, Referencing, Aggregation |
+| Graph Database | Nodes, Edges, Traversal |
+| Neo4j | Cypher, MATCH, MERGE, APOC |
+| Graph Modelling | Relationships, Supernodes, Knowledge Graph |
+| Vector Database | Embeddings, Similarity, Semantic Search, RAG |
+| Vector Internals | HNSW, IVF, PQ, ANN, Recall@K |
+
+## Practical Projects for Interview Preparation
+
+1. PostgreSQL-based E-commerce Database
+2. Supabase Authentication and Role-Based Access System
+3. MongoDB Social Media Data Model
+4. Neo4j Social Network Recommendation Engine
+5. Knowledge Graph for Product Relationships
+6. Vector Search-based Document Retrieval System
+7. RAG Application using PostgreSQL + pgvector
+8. Hybrid Search Engine using Keyword and Vector Search
+
+**Interview Tip:** Sirf definitions yaad mat karo. Har topic ke saath ek practical example, ek query aur ek real-world use case explain karne ki practice karo.

@@ -1,0 +1,936 @@
+
+# ============================================================
+# PYTHON OOPS - 50 CONCEPTS (BASIC TO ADVANCED)
+# Hinglish Explanation + Practical Code
+# ============================================================
+
+
+# ============================================================
+# LEVEL 1: OOPS BASICS (1-10)
+# ============================================================
+
+
+# 1. CLASS
+# Class ek blueprint hoti hai jisse objects create hote hain.
+
+class Student:
+    name = "Rahul"
+    age = 21
+
+s1 = Student()
+print("1. Class:", s1.name, s1.age)
+
+
+# 2. OBJECT
+# Object class ka instance hota hai.
+
+class Student:
+    pass
+
+s1 = Student()
+s2 = Student()
+
+s1.name = "Rahul"
+s2.name = "Aman"
+
+print("2. Object:", s1.name, s2.name)
+
+
+# 3. CONSTRUCTOR (__init__)
+# Object create hote hi constructor automatically call hota hai.
+
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+s1 = Student("Rahul", 22)
+print("3. Constructor:", s1.name, s1.age)
+
+
+# 4. SELF KEYWORD
+# Self current object ko refer karta hai.
+
+class Student:
+    def __init__(self, name):
+        self.name = name
+
+    def show(self):
+        print("Name:", self.name)
+
+s1 = Student("Rahul")
+print("4. Self:")
+s1.show()
+
+
+# 5. INSTANCE VARIABLES
+# Har object ke instance variables alag hote hain.
+
+class Employee:
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+e1 = Employee("Rahul", 30000)
+e2 = Employee("Aman", 40000)
+
+print("5. Instance Variables:", e1.salary, e2.salary)
+
+
+# 6. CLASS VARIABLES
+# Class variables objects ke beech shared hote hain.
+
+class Employee:
+    company = "Google"
+
+    def __init__(self, name):
+        self.name = name
+
+e1 = Employee("Rahul")
+e2 = Employee("Aman")
+
+print("6. Class Variables:", e1.company, e2.company)
+
+
+# 7. INSTANCE METHODS
+# Instance method self ke through object data access karta hai.
+
+class Student:
+    def __init__(self, marks):
+        self.marks = marks
+
+    def show_marks(self):
+        print("Marks:", self.marks)
+
+s1 = Student(90)
+print("7. Instance Method:")
+s1.show_marks()
+
+
+# 8. CLASS METHODS
+# Class method cls ke through class variables modify karta hai.
+
+class Employee:
+    company = "Google"
+
+    @classmethod
+    def change_company(cls, name):
+        cls.company = name
+
+Employee.change_company("Microsoft")
+print("8. Class Method:", Employee.company)
+
+
+# 9. STATIC METHODS
+# Static method ko self aur cls ki requirement nahi hoti.
+
+class Calculator:
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+print("9. Static Method:", Calculator.add(10, 20))
+
+
+# 10. DESTRUCTOR
+# __del__ object cleanup ke time call ho sakta hai.
+# Iska exact execution time guaranteed nahi hai.
+
+class Student:
+    def __init__(self):
+        print("Object Created")
+
+    def __del__(self):
+        print("Object Destroyed")
+
+s1 = Student()
+del s1
+
+
+# ============================================================
+# LEVEL 2: FOUR PILLARS OF OOPS (11-20)
+# ============================================================
+
+
+# 11. ENCAPSULATION
+# Data aur methods ko ek class ke andar bind karna.
+
+class BankAccount:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def deposit(self, amount):
+        self.balance += amount
+
+    def show_balance(self):
+        print(self.balance)
+
+account = BankAccount(1000)
+account.deposit(500)
+
+print("11. Encapsulation:")
+account.show_balance()
+
+
+# 12. PUBLIC MEMBERS
+# Public members class ke bahar access ho sakte hain.
+
+class Student:
+    def __init__(self):
+        self.name = "Rahul"
+
+s1 = Student()
+print("12. Public:", s1.name)
+
+
+# 13. PROTECTED MEMBERS
+# Single underscore protected convention ko represent karta hai.
+
+class Student:
+    def __init__(self):
+        self._marks = 90
+
+s1 = Student()
+print("13. Protected:", s1._marks)
+
+
+# 14. PRIVATE MEMBERS
+# Double underscore name mangling apply karta hai.
+
+class Bank:
+    def __init__(self):
+        self.__balance = 5000
+
+    def show_balance(self):
+        print(self.__balance)
+
+b1 = Bank()
+print("14. Private:")
+b1.show_balance()
+
+
+# 15. GETTER AND SETTER
+# Getter value read karta hai aur setter value update karta hai.
+
+class Student:
+    def __init__(self):
+        self.__age = 18
+
+    def get_age(self):
+        return self.__age
+
+    def set_age(self, age):
+        if age >= 18:
+            self.__age = age
+        else:
+            print("Invalid Age")
+
+s1 = Student()
+s1.set_age(25)
+
+print("15. Getter Setter:", s1.get_age())
+
+
+# 16. INHERITANCE
+# Child class parent class ke methods inherit karti hai.
+
+class Animal:
+    def eat(self):
+        print("Animal is eating")
+
+class Dog(Animal):
+    pass
+
+d1 = Dog()
+print("16. Inheritance:")
+d1.eat()
+
+
+# 17. SINGLE INHERITANCE
+# Ek child class ek parent class se inherit karti hai.
+
+class Father:
+    def house(self):
+        print("Father owns a house")
+
+class Son(Father):
+    def car(self):
+        print("Son owns a car")
+
+s = Son()
+
+print("17. Single Inheritance:")
+s.house()
+s.car()
+
+
+# 18. MULTIPLE INHERITANCE
+# Ek child class multiple parent classes se inherit karti hai.
+
+class Father:
+    def skills(self):
+        print("Gardening")
+
+class Mother:
+    def talent(self):
+        print("Cooking")
+
+class Child(Father, Mother):
+    pass
+
+c = Child()
+
+print("18. Multiple Inheritance:")
+c.skills()
+c.talent()
+
+
+# 19. MULTILEVEL INHERITANCE
+# Grandparent -> Parent -> Child inheritance chain.
+
+class Grandfather:
+    def show1(self):
+        print("Grandfather")
+
+class Father(Grandfather):
+    def show2(self):
+        print("Father")
+
+class Son(Father):
+    def show3(self):
+        print("Son")
+
+s = Son()
+
+print("19. Multilevel Inheritance:")
+s.show1()
+s.show2()
+s.show3()
+
+
+# 20. HIERARCHICAL INHERITANCE
+# Multiple child classes ek parent se inherit karti hain.
+
+class Animal:
+    def eat(self):
+        print("Eating")
+
+class Dog(Animal):
+    pass
+
+class Cat(Animal):
+    pass
+
+d = Dog()
+c = Cat()
+
+print("20. Hierarchical Inheritance:")
+d.eat()
+c.eat()
+
+
+# ============================================================
+# LEVEL 3: INHERITANCE AND POLYMORPHISM (21-30)
+# ============================================================
+
+
+# 21. HYBRID INHERITANCE
+# Multiple inheritance types ka combination.
+
+class A:
+    def show_a(self):
+        print("Class A")
+
+class B(A):
+    def show_b(self):
+        print("Class B")
+
+class C(A):
+    def show_c(self):
+        print("Class C")
+
+class D(B, C):
+    def show_d(self):
+        print("Class D")
+
+obj = D()
+
+print("21. Hybrid Inheritance:")
+obj.show_a()
+obj.show_b()
+obj.show_c()
+obj.show_d()
+
+
+# 22. METHOD OVERRIDING
+# Child class parent ke method ko redefine karti hai.
+
+class Animal:
+    def sound(self):
+        print("Animal makes sound")
+
+class Dog(Animal):
+    def sound(self):
+        print("Dog barks")
+
+d = Dog()
+
+print("22. Method Overriding:")
+d.sound()
+
+
+# 23. METHOD OVERLOADING
+# Python traditional method overloading support nahi karta.
+# Default arguments se similar behaviour achieve kar sakte hain.
+
+class Calculator:
+    def add(self, a, b=0, c=0):
+        return a + b + c
+
+obj = Calculator()
+
+print("23. Method Overloading:")
+print(obj.add(10, 20))
+print(obj.add(10, 20, 30))
+
+
+# 24. POLYMORPHISM
+# Same method name, different class behaviour.
+
+class Dog:
+    def sound(self):
+        print("Bark")
+
+class Cat:
+    def sound(self):
+        print("Meow")
+
+class Cow:
+    def sound(self):
+        print("Moo")
+
+animals = [Dog(), Cat(), Cow()]
+
+print("24. Polymorphism:")
+
+for animal in animals:
+    animal.sound()
+
+
+# 25. DUCK TYPING
+# Object ke type se zyada uske behaviour ko importance milti hai.
+
+class Dog:
+    def speak(self):
+        print("Dog says Woof")
+
+class Person:
+    def speak(self):
+        print("Person says Hello")
+
+def make_sound(obj):
+    obj.speak()
+
+print("25. Duck Typing:")
+make_sound(Dog())
+make_sound(Person())
+
+
+# 26. SUPER KEYWORD
+# super() parent class ka method access karta hai.
+
+class Parent:
+    def show(self):
+        print("Parent Method")
+
+class Child(Parent):
+    def show(self):
+        super().show()
+        print("Child Method")
+
+obj = Child()
+
+print("26. Super Keyword:")
+obj.show()
+
+
+# 27. CONSTRUCTOR OVERRIDING
+# Child apna constructor define kar sakti hai.
+# super().__init__() parent constructor call karta hai.
+
+class Parent:
+    def __init__(self):
+        print("Parent Constructor")
+
+class Child(Parent):
+    def __init__(self):
+        super().__init__()
+        print("Child Constructor")
+
+print("27. Constructor Overriding:")
+obj = Child()
+
+
+# 28. MRO (METHOD RESOLUTION ORDER)
+# Python multiple inheritance mein method search order decide karta hai.
+
+class A:
+    pass
+
+class B(A):
+    pass
+
+class C(A):
+    pass
+
+class D(B, C):
+    pass
+
+print("28. MRO:")
+print(D.mro())
+
+
+# 29. OPERATOR OVERLOADING
+# Operators ka behaviour custom classes ke liye define karna.
+
+class Number:
+    def __init__(self, value):
+        self.value = value
+
+    def __add__(self, other):
+        return self.value + other.value
+
+n1 = Number(10)
+n2 = Number(20)
+
+print("29. Operator Overloading:", n1 + n2)
+
+
+# 30. ABSTRACTION
+# Implementation details hide karke essential functionality show karna.
+
+from abc import ABC, abstractmethod
+
+class Vehicle(ABC):
+
+    @abstractmethod
+    def start(self):
+        pass
+
+class Car(Vehicle):
+    def start(self):
+        print("Car Started")
+
+c = Car()
+
+print("30. Abstraction:")
+c.start()
+
+
+# ============================================================
+# LEVEL 4: INTERMEDIATE OOPS (31-40)
+# ============================================================
+
+
+# 31. ABSTRACT CLASS
+# Abstract class ka direct object nahi bana sakte.
+
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+
+    @abstractmethod
+    def area(self):
+        pass
+
+class Circle(Shape):
+    def area(self):
+        return 3.14 * 5 * 5
+
+c = Circle()
+
+print("31. Abstract Class:", c.area())
+
+
+# 32. PROPERTY DECORATOR
+# Method ko attribute ki tarah access karne deta hai.
+
+class Student:
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+s = Student("Rahul")
+
+print("32. Property:", s.name)
+
+s.name = "Aman"
+print(s.name)
+
+
+# 33. COMPOSITION
+# Ek class ke andar doosri class ka object use hota hai.
+# Example: Car HAS-A Engine.
+
+class Engine:
+    def start(self):
+        print("Engine Started")
+
+class Car:
+    def __init__(self):
+        self.engine = Engine()
+
+    def start_car(self):
+        self.engine.start()
+        print("Car Started")
+
+c = Car()
+
+print("33. Composition:")
+c.start_car()
+
+
+# 34. AGGREGATION
+# Ek object doosre independently existing object ko use karta hai.
+
+class Teacher:
+    def __init__(self, name):
+        self.name = name
+
+class Department:
+    def __init__(self, teacher):
+        self.teacher = teacher
+
+t1 = Teacher("Rahul")
+d1 = Department(t1)
+
+print("34. Aggregation:", d1.teacher.name)
+
+
+# 35. ASSOCIATION
+# Do independent classes ke objects ke beech relationship.
+
+class Teacher:
+    def teach(self):
+        print("Teacher is teaching")
+
+class Student:
+    def learn(self, teacher):
+        teacher.teach()
+        print("Student is learning")
+
+t = Teacher()
+s = Student()
+
+print("35. Association:")
+s.learn(t)
+
+
+# 36. __str__ METHOD
+# Object ko readable string representation deta hai.
+
+class Student:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return f"Student Name: {self.name}"
+
+s = Student("Rahul")
+
+print("36. __str__:", s)
+
+
+# 37. __repr__ METHOD
+# Developer-friendly object representation deta hai.
+
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __repr__(self):
+        return f"Student({self.name!r}, {self.age})"
+
+s = Student("Rahul", 22)
+
+print("37. __repr__:", repr(s))
+
+
+# 38. isinstance()
+# Check karta hai object kisi class ka instance hai ya nahi.
+
+class Animal:
+    pass
+
+class Dog(Animal):
+    pass
+
+d = Dog()
+
+print("38. isinstance:")
+print(isinstance(d, Dog))
+print(isinstance(d, Animal))
+print(isinstance(d, str))
+
+
+# 39. issubclass()
+# Check karta hai ek class doosri class ki subclass hai ya nahi.
+
+class Animal:
+    pass
+
+class Dog(Animal):
+    pass
+
+class Cat:
+    pass
+
+print("39. issubclass:")
+print(issubclass(Dog, Animal))
+print(issubclass(Cat, Animal))
+
+
+# 40. CLASS DECORATOR
+# Class decorator class ko modify ya enhance karta hai.
+
+def add_info(cls):
+    cls.category = "Programming"
+    return cls
+
+@add_info
+class Python:
+    pass
+
+obj = Python()
+
+print("40. Class Decorator:", obj.category)
+
+
+# ============================================================
+# LEVEL 5: ADVANCED OOPS (41-50)
+# ============================================================
+
+
+# 41. MAGIC METHODS
+# Special methods Python operations ka behaviour customize karte hain.
+
+class ShoppingCart:
+    def __init__(self, items):
+        self.items = items
+
+    def __len__(self):
+        return len(self.items)
+
+    def __contains__(self, item):
+        return item in self.items
+
+cart = ShoppingCart(["Laptop", "Mobile", "Mouse"])
+
+print("41. Magic Methods:")
+print(len(cart))
+print("Laptop" in cart)
+
+
+# 42. __call__ METHOD
+# Object ko function ki tarah call kar sakte hain.
+
+class Greeting:
+    def __call__(self, name):
+        print("Hello", name)
+
+g = Greeting()
+
+print("42. __call__:")
+g("Rahul")
+g("Aman")
+
+
+# 43. __len__ METHOD
+# Custom object ke liye len() behaviour define karta hai.
+
+class Team:
+    def __init__(self, members):
+        self.members = members
+
+    def __len__(self):
+        return len(self.members)
+
+team = Team(["Rahul", "Aman", "Ravi"])
+
+print("43. __len__:", len(team))
+
+
+# 44. __eq__ METHOD
+# == operator ka custom behaviour define karta hai.
+
+class Student:
+    def __init__(self, roll):
+        self.roll = roll
+
+    def __eq__(self, other):
+        if not isinstance(other, Student):
+            return NotImplemented
+
+        return self.roll == other.roll
+
+s1 = Student(101)
+s2 = Student(101)
+
+print("44. __eq__:", s1 == s2)
+
+
+# 45. CLASS INVARIANT
+# Object ki valid state maintain karne ke liye conditions lagana.
+
+class BankAccount:
+    def __init__(self, balance):
+        if balance < 0:
+            raise ValueError("Balance cannot be negative")
+
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise ValueError("Insufficient Balance")
+
+        self.balance -= amount
+
+account = BankAccount(5000)
+account.withdraw(1000)
+
+print("45. Class Invariant:", account.balance)
+
+
+# 46. MULTIPLE DISPATCH
+# singledispatchmethod first non-self argument ke type ke basis par
+# method implementation choose karta hai.
+
+from functools import singledispatchmethod
+
+class Printer:
+
+    @singledispatchmethod
+    def display(self, value):
+        print("Other:", value)
+
+    @display.register
+    def _(self, value: int):
+        print("Integer:", value)
+
+    @display.register
+    def _(self, value: str):
+        print("String:", value)
+
+p = Printer()
+
+print("46. Multiple Dispatch:")
+p.display(100)
+p.display("Python")
+p.display(3.14)
+
+
+# 47. METACLASS
+# Metaclass classes create karne wali class hoti hai.
+
+class MyMeta(type):
+    def __new__(mcs, name, bases, attrs):
+        attrs["category"] = "Python OOPS"
+
+        return super().__new__(
+            mcs, name, bases, attrs
+        )
+
+class Student(metaclass=MyMeta):
+    pass
+
+print("47. Metaclass:")
+print(Student.category)
+print(type(Student))
+
+
+# 48. DESCRIPTOR PROTOCOL
+# Descriptor attribute access aur assignment control karta hai.
+
+class PositiveNumber:
+
+    def __set_name__(self, owner, name):
+        self.name = name
+
+    def __get__(self, obj, owner):
+        if obj is None:
+            return self
+
+        return obj.__dict__[self.name]
+
+    def __set__(self, obj, value):
+        if value <= 0:
+            raise ValueError("Must be positive")
+
+        obj.__dict__[self.name] = value
+
+class Product:
+    price = PositiveNumber()
+
+    def __init__(self, price):
+        self.price = price
+
+p = Product(500)
+
+print("48. Descriptor:", p.price)
+
+
+# 49. __slots__
+# Allowed instance attributes define karta hai.
+# Instance __dict__ ko avoid kar sakta hai.
+
+class Student:
+    __slots__ = ("name", "age")
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+s = Student("Rahul", 22)
+
+print("49. Slots:")
+print(s.name)
+print(s.age)
+
+# s.city = "Delhi"  # AttributeError
+
+
+# 50. DEPENDENCY INJECTION
+# Dependency ko class ke andar create karne ke bajaye
+# externally provide kiya jata hai.
+
+class EmailService:
+    def send(self, message):
+        print("Email Sent:", message)
+
+class Notification:
+    def __init__(self, service):
+        self.service = service
+
+    def notify(self, message):
+        self.service.send(message)
+
+email = EmailService()
+notification = Notification(email)
+
+print("50. Dependency Injection:")
+notification.notify("Welcome to Python!")
+
+
+# ============================================================
+# END OF PYTHON OOPS - 50 CONCEPTS
+# ============================================================
+
+print("\nCongratulations! All 50 OOPS concepts completed.")
