@@ -1,0 +1,1019 @@
+
+###############################################################################
+# 1. DOCKER INSTALLATION AND BASIC INFORMATION
+###############################################################################
+
+# Check Docker version
+docker --version
+
+# Check Docker client and server versions
+docker version
+
+# Display Docker system information
+docker info
+
+# Display Docker help
+docker --help
+
+# Check Docker service status on Linux
+sudo systemctl status docker
+
+# Start Docker service
+sudo systemctl start docker
+
+# Stop Docker service
+sudo systemctl stop docker
+
+# Restart Docker service
+sudo systemctl restart docker
+
+# Enable Docker at system startup
+sudo systemctl enable docker
+
+
+###############################################################################
+# 2. DOCKER IMAGE COMMANDS
+###############################################################################
+
+# List all local Docker images
+docker images
+
+# List images using image command
+docker image ls
+
+# Download Ubuntu image
+docker pull ubuntu:24.04
+
+# Download Python image
+docker pull python:3.12-slim
+
+# Download Nginx image
+docker pull nginx
+
+# Download Redis image
+docker pull redis:7
+
+# Inspect image configuration
+docker image inspect ubuntu:24.04
+
+# Display image layers and build history
+docker image history ubuntu:24.04
+
+# Remove a Docker image
+docker rmi ubuntu:24.04
+
+# Forcefully remove an image
+docker rmi -f IMAGE_NAME
+
+# Remove unused images
+docker image prune
+
+# Remove all unused images
+docker image prune -a
+
+# Remove dangling images
+docker image prune -f
+
+
+###############################################################################
+# 3. DOCKER CONTAINER COMMANDS
+###############################################################################
+
+# List running containers
+docker ps
+
+# List all containers including stopped containers
+docker ps -a
+
+# List only container IDs
+docker ps -q
+
+# Create and run Ubuntu container
+docker run ubuntu:24.04
+
+# Run container with interactive terminal
+docker run -it ubuntu:24.04 bash
+
+# Run Nginx container in background
+docker run -d nginx
+
+# Run container with custom name
+docker run -d --name my-nginx nginx
+
+# Run container with port mapping
+docker run -d -p 8080:80 nginx
+
+# Automatically remove container after exit
+docker run --rm ubuntu:24.04
+
+# Start stopped container
+docker start CONTAINER_NAME
+
+# Stop running container gracefully
+docker stop CONTAINER_NAME
+
+# Restart container
+docker restart CONTAINER_NAME
+
+# Forcefully terminate container
+docker kill CONTAINER_NAME
+
+# Pause running container
+docker pause CONTAINER_NAME
+
+# Resume paused container
+docker unpause CONTAINER_NAME
+
+# Remove stopped container
+docker rm CONTAINER_NAME
+
+# Forcefully remove container
+docker rm -f CONTAINER_NAME
+
+# Remove all stopped containers
+docker container prune
+
+
+###############################################################################
+# 4. DOCKER RUN OPTIONS
+###############################################################################
+
+# Run container in background
+docker run -d nginx
+
+# Run container interactively
+docker run -it ubuntu:24.04 bash
+
+# Assign custom container name
+docker run --name genai-app nginx
+
+# Map host port 8000 to container port 8000
+docker run -p 8000:8000 my-app
+
+# Set environment variable
+docker run -e ENV=production my-app
+
+# Load environment variables from .env file
+docker run --env-file .env my-app
+
+# Mount named volume into container
+docker run -v model-data:/app/models my-app
+
+# Mount current directory into container
+docker run -v "$(pwd)":/app my-app
+
+# Attach container to a Docker network
+docker run --network ai-network my-app
+
+# Limit container memory to 4 GB
+docker run --memory=4g my-app
+
+# Limit container CPU to 2 CPUs
+docker run --cpus=2 my-app
+
+# Configure automatic restart
+docker run --restart unless-stopped nginx
+
+# Allocate 2 GB shared memory
+docker run --shm-size=2g my-ml-app
+
+# Enable NVIDIA GPU access
+docker run --gpus all my-ml-app
+
+# Override container entrypoint
+docker run --entrypoint bash my-app
+
+# Run with read-only filesystem
+docker run --read-only my-app
+
+# Run container using a specific user
+docker run --user 1000:1000 my-app
+
+
+###############################################################################
+# 5. DOCKER DEBUGGING AND TROUBLESHOOTING
+###############################################################################
+
+# Display container logs
+docker logs CONTAINER_NAME
+
+# Follow live container logs
+docker logs -f CONTAINER_NAME
+
+# Display last 100 log lines
+docker logs --tail 100 CONTAINER_NAME
+
+# Display logs with timestamps
+docker logs -t CONTAINER_NAME
+
+# Enter running container using Bash
+docker exec -it CONTAINER_NAME bash
+
+# Enter running container using SH
+docker exec -it CONTAINER_NAME sh
+
+# Execute command inside container
+docker exec CONTAINER_NAME ls
+
+# Check Python version inside container
+docker exec -it CONTAINER_NAME python --version
+
+# List Python packages inside container
+docker exec -it CONTAINER_NAME pip list
+
+# Inspect container configuration
+docker inspect CONTAINER_NAME
+
+# Monitor container CPU and memory usage
+docker stats
+
+# Monitor one container
+docker stats CONTAINER_NAME
+
+# Display running processes inside container
+docker top CONTAINER_NAME
+
+# Show container filesystem changes
+docker diff CONTAINER_NAME
+
+# Copy local file into container
+docker cp app.py CONTAINER_NAME:/app/
+
+# Copy container file to local machine
+docker cp CONTAINER_NAME:/app/output.txt .
+
+# Display container port mappings
+docker port CONTAINER_NAME
+
+# Display container processes
+docker container top CONTAINER_NAME
+
+
+###############################################################################
+# 6. DOCKERFILE INSTRUCTIONS
+###############################################################################
+
+# FROM specifies base image
+# FROM python:3.12-slim
+
+# WORKDIR sets working directory
+# WORKDIR /app
+
+# COPY copies local files into image
+# COPY . .
+
+# ADD copies files and can extract local archives
+# ADD archive.tar.gz /app/
+
+# RUN executes commands during image building
+# RUN pip install fastapi uvicorn
+
+# ENV sets environment variables
+# ENV APP_ENV=production
+
+# ARG defines build-time variables
+# ARG APP_VERSION=1.0
+
+# EXPOSE documents the application port
+# EXPOSE 8000
+
+# CMD defines the default startup command
+# CMD ["python", "main.py"]
+
+# ENTRYPOINT defines the main executable
+# ENTRYPOINT ["python"]
+
+# USER specifies the execution user
+# USER 1000
+
+# VOLUME declares a persistent data mount point
+# VOLUME ["/app/data"]
+
+# HEALTHCHECK checks application health
+# HEALTHCHECK CMD curl -f http://localhost:8000/health || exit 1
+
+# LABEL adds image metadata
+# LABEL maintainer="ai-engineering-team"
+
+# SHELL changes shell used by RUN instructions
+# SHELL ["/bin/bash", "-c"]
+
+
+###############################################################################
+# 7. DOCKERFILE EXAMPLE FOR GENAI FASTAPI APPLICATION
+###############################################################################
+
+# Use Python slim image as base image
+# FROM python:3.12-slim
+
+# Set application working directory
+# WORKDIR /app
+
+# Copy requirements file
+# COPY requirements.txt .
+
+# Install application dependencies
+# RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application source code
+# COPY . .
+
+# Disable Python bytecode generation
+# ENV PYTHONDONTWRITEBYTECODE=1
+
+# Enable real-time Python logs
+# ENV PYTHONUNBUFFERED=1
+
+# Expose FastAPI application port
+# EXPOSE 8000
+
+# Start FastAPI application
+# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+
+###############################################################################
+# 8. DOCKER BUILD COMMANDS
+###############################################################################
+
+# Build image using Dockerfile in current directory
+docker build -t genai-app .
+
+# Build image with version tag
+docker build -t genai-app:v1 .
+
+# Build image without cached layers
+docker build --no-cache -t genai-app .
+
+# Build using custom Dockerfile
+docker build -f Dockerfile.dev -t genai-app:dev .
+
+# Pass build-time argument
+docker build --build-arg APP_ENV=production -t genai-app .
+
+# Build using a specific target stage
+docker build --target runtime -t genai-runtime .
+
+# Display image build history
+docker image history genai-app
+
+# Inspect image metadata
+docker image inspect genai-app
+
+# Enable BuildKit during image build
+DOCKER_BUILDKIT=1 docker build -t genai-app .
+
+
+###############################################################################
+# 9. DOCKER VOLUMES AND STORAGE
+###############################################################################
+
+# List Docker volumes
+docker volume ls
+
+# Create named volume
+docker volume create model-data
+
+# Inspect volume details
+docker volume inspect model-data
+
+# Remove specific volume
+docker volume rm model-data
+
+# Remove unused volumes
+docker volume prune
+
+# Mount named volume into container
+docker run -v model-data:/app/data my-app
+
+# Mount local directory into container
+docker run -v "$(pwd)/data":/app/data my-app
+
+# Mount volume in read-only mode
+docker run -v model-data:/app/data:ro my-app
+
+# Create temporary filesystem mount
+docker run --tmpfs /app/temp my-app
+
+# List containers using a volume
+docker ps -a --filter volume=model-data
+
+
+###############################################################################
+# 10. DOCKER NETWORKING
+###############################################################################
+
+# List Docker networks
+docker network ls
+
+# Create bridge network
+docker network create ai-network
+
+# Inspect network configuration
+docker network inspect ai-network
+
+# Connect container to network
+docker network connect ai-network my-container
+
+# Disconnect container from network
+docker network disconnect ai-network my-container
+
+# Remove Docker network
+docker network rm ai-network
+
+# Remove unused networks
+docker network prune
+
+# Run container using specific network
+docker run -d --network ai-network --name redis redis:7
+
+# Run container using host networking
+docker run --network host nginx
+
+# Run container without network
+docker run --network none ubuntu:24.04
+
+
+###############################################################################
+# 11. DOCKER COMPOSE COMMANDS
+###############################################################################
+
+# Start all services defined in Compose file
+docker compose up
+
+# Start services in background
+docker compose up -d
+
+# Build images and start services
+docker compose up --build
+
+# Build without using cache
+docker compose build --no-cache
+
+# Stop and remove containers and networks
+docker compose down
+
+# Stop and remove containers, networks and volumes
+docker compose down -v
+
+# List Compose services
+docker compose ps
+
+# Display logs from all services
+docker compose logs
+
+# Follow live logs
+docker compose logs -f
+
+# Follow logs of a specific API service
+docker compose logs -f api
+
+# Restart all services
+docker compose restart
+
+# Restart specific service
+docker compose restart api
+
+# Stop specific service
+docker compose stop api
+
+# Start stopped service
+docker compose start api
+
+# Enter running API container
+docker compose exec api bash
+
+# Run a one-time command in a new API container
+docker compose run --rm api python --version
+
+# Validate Compose configuration
+docker compose config
+
+# Pull images defined in Compose file
+docker compose pull
+
+# Display service processes
+docker compose top
+
+# Remove stopped service containers
+docker compose rm
+
+
+###############################################################################
+# 12. DOCKER COMPOSE YAML EXAMPLE FOR GENAI
+###############################################################################
+
+# Save this section as compose.yaml
+# Run using: docker compose up --build -d
+
+# services:
+#
+#   # FastAPI backend service
+#   api:
+#     # Build image from current directory
+#     build: .
+#
+#     # Assign container name
+#     container_name: genai-api
+#
+#     # Map host and container ports
+#     ports:
+#       - "8000:8000"
+#
+#     # Set environment variables
+#     environment:
+#       REDIS_HOST: redis
+#       QDRANT_HOST: qdrant
+#
+#     # Start dependency services first
+#     depends_on:
+#       - redis
+#       - qdrant
+#
+#     # Restart unless manually stopped
+#     restart: unless-stopped
+#
+#   # Redis cache service
+#   redis:
+#     # Use Redis 7 image
+#     image: redis:7
+#
+#     # Persist Redis data
+#     volumes:
+#       - redis-data:/data
+#
+#   # Qdrant vector database service
+#   qdrant:
+#     # Use Qdrant image
+#     image: qdrant/qdrant:latest
+#
+#     # Expose HTTP and gRPC ports
+#     ports:
+#       - "6333:6333"
+#       - "6334:6334"
+#
+#     # Persist vector database storage
+#     volumes:
+#       - qdrant-data:/qdrant/storage
+#
+# # Declare persistent volumes
+# volumes:
+#   redis-data:
+#   qdrant-data:
+
+
+###############################################################################
+# 13. NVIDIA GPU AND CUDA DOCKER COMMANDS
+###############################################################################
+
+# Check NVIDIA GPU details on host
+nvidia-smi
+
+# Check GPU from CUDA container
+docker run --rm --gpus all nvidia/cuda:12.4.1-base-ubuntu22.04 nvidia-smi
+
+# Run interactive GPU-enabled container
+docker run -it --rm --gpus all pytorch/pytorch:latest bash
+
+# Run GPU-enabled container in background
+docker run -d --gpus all --name gpu-app my-ml-image
+
+# Allocate all available GPUs
+docker run --gpus all my-ml-image
+
+# Allocate GPU number zero
+docker run --gpus '"device=0"' my-ml-image
+
+# Allocate GPU numbers zero and one
+docker run --gpus '"device=0,1"' my-ml-image
+
+# Check GPU inside running container
+docker exec -it gpu-app nvidia-smi
+
+# Monitor GPU container resource usage
+docker stats gpu-app
+
+
+###############################################################################
+# 14. HUGGING FACE DOCKER COMMANDS
+###############################################################################
+
+# Create persistent Hugging Face cache volume
+docker volume create hf-cache
+
+# Run application with persistent model cache
+docker run -it --rm -v hf-cache:/root/.cache/huggingface my-hf-app
+
+# Set Hugging Face home directory
+docker run -e HF_HOME=/root/.cache/huggingface my-hf-app
+
+# Pass Hugging Face token from host environment
+docker run -e HF_TOKEN my-hf-app
+
+# Set Hugging Face Hub cache location
+docker run -e HF_HUB_CACHE=/models/cache my-hf-app
+
+# Inspect Hugging Face cache volume
+docker volume inspect hf-cache
+
+
+###############################################################################
+# 15. OLLAMA DOCKER COMMANDS
+###############################################################################
+
+# Create persistent Ollama model storage
+docker volume create ollama-data
+
+# Start Ollama server
+docker run -d --name ollama -p 11434:11434 -v ollama-data:/root/.ollama ollama/ollama
+
+# Download Llama 3.2 model
+docker exec -it ollama ollama pull llama3.2
+
+# List downloaded Ollama models
+docker exec -it ollama ollama list
+
+# Run Llama 3.2 interactively
+docker exec -it ollama ollama run llama3.2
+
+# View Ollama server logs
+docker logs -f ollama
+
+# Check Ollama model API
+curl http://localhost:11434/api/tags
+
+# Stop Ollama container
+docker stop ollama
+
+# Start Ollama container again
+docker start ollama
+
+
+###############################################################################
+# 16. vLLM DOCKER COMMANDS
+###############################################################################
+
+# Create persistent Hugging Face model cache
+docker volume create hf-cache
+
+# Run GPU-enabled vLLM OpenAI-compatible server
+docker run -d --name vllm-server --gpus all -p 8000:8000 -v hf-cache:/root/.cache/huggingface -e HF_TOKEN vllm/vllm-openai:latest --model Qwen/Qwen2.5-1.5B-Instruct --host 0.0.0.0 --port 8000
+
+# Follow vLLM inference server logs
+docker logs -f vllm-server
+
+# List available models through OpenAI-compatible API
+curl http://localhost:8000/v1/models
+
+# Inspect vLLM container
+docker inspect vllm-server
+
+# Monitor vLLM resource usage
+docker stats vllm-server
+
+# Stop vLLM server
+docker stop vllm-server
+
+# Remove vLLM container
+docker rm vllm-server
+
+
+###############################################################################
+# 17. VECTOR DATABASE DOCKER COMMANDS
+###############################################################################
+
+# Start ChromaDB with persistent storage
+docker run -d --name chromadb -p 8000:8000 -v chroma-data:/chroma/chroma chromadb/chroma
+
+# Follow ChromaDB logs
+docker logs -f chromadb
+
+# Start Qdrant with persistent storage
+docker run -d --name qdrant -p 6333:6333 -p 6334:6334 -v qdrant-data:/qdrant/storage qdrant/qdrant
+
+# Check Qdrant health
+curl http://localhost:6333/healthz
+
+# List Qdrant collections
+curl http://localhost:6333/collections
+
+# Follow Qdrant logs
+docker logs -f qdrant
+
+# Inspect Qdrant container
+docker inspect qdrant
+
+# Monitor Qdrant resources
+docker stats qdrant
+
+
+###############################################################################
+# 18. ADVANCED RESOURCE MANAGEMENT
+###############################################################################
+
+# Limit RAM to 4 GB
+docker run --memory=4g nginx
+
+# Limit CPU to 2 CPUs
+docker run --cpus=2 nginx
+
+# Reserve 2 GB memory
+docker run --memory-reservation=2g nginx
+
+# Allocate 2 GB shared memory
+docker run --shm-size=2g my-ml-app
+
+# Limit number of processes
+docker run --pids-limit=200 my-app
+
+# Automatically restart container
+docker run --restart=always nginx
+
+# Restart unless manually stopped
+docker run --restart=unless-stopped nginx
+
+# Monitor live container resource consumption
+docker stats
+
+# Check Docker disk usage
+docker system df
+
+# Display detailed disk usage
+docker system df -v
+
+
+###############################################################################
+# 19. DOCKER REGISTRY COMMANDS
+###############################################################################
+
+# Login to Docker Hub
+docker login
+
+# Login using Docker Hub username
+docker login -u USERNAME
+
+# Tag local image for Docker Hub
+docker tag genai-app username/genai-app:v1
+
+# Push image to Docker Hub
+docker push username/genai-app:v1
+
+# Pull image from Docker Hub
+docker pull username/genai-app:v1
+
+# List local images
+docker images
+
+# Logout from Docker Hub
+docker logout
+
+
+###############################################################################
+# 20. DOCKER SECURITY COMMANDS
+###############################################################################
+
+# Run as non-root user
+docker run --user 1000:1000 my-app
+
+# Use read-only filesystem
+docker run --read-only my-app
+
+# Drop all Linux capabilities
+docker run --cap-drop=ALL my-app
+
+# Prevent privilege escalation
+docker run --security-opt=no-new-privileges my-app
+
+# Limit container processes
+docker run --pids-limit=200 my-app
+
+# Scan image for vulnerabilities
+docker scout cves my-app
+
+# Display Docker Scout image overview
+docker scout quickview my-app
+
+# Inspect image security-related configuration
+docker image inspect my-app
+
+
+###############################################################################
+# 21. DOCKER CLEANUP COMMANDS
+###############################################################################
+
+# Remove stopped containers
+docker container prune
+
+# Remove unused images
+docker image prune
+
+# Remove all unused images
+docker image prune -a
+
+# Remove unused volumes
+docker volume prune
+
+# Remove unused networks
+docker network prune
+
+# Remove unused Docker resources
+docker system prune
+
+# Remove all unused images and resources
+docker system prune -a
+
+# Remove unused resources and volumes (destructive)
+docker system prune -a --volumes
+
+# Check Docker disk usage after cleanup
+docker system df
+
+
+###############################################################################
+# 22. ADVANCED BUILD AND DEPLOYMENT COMMANDS
+###############################################################################
+
+# Build production image using custom Dockerfile
+docker build -f Dockerfile.prod -t genai-app:prod .
+
+# Build image without cache
+docker build --no-cache -t genai-app .
+
+# Pass build argument
+docker build --build-arg VERSION=1.0 -t genai-app .
+
+# Build specific multi-stage target
+docker build --target runtime -t genai-runtime .
+
+# Tag image for production
+docker tag genai-app:latest genai-app:prod
+
+# Save Docker image as TAR archive
+docker save -o genai-app.tar genai-app:latest
+
+# Load Docker image from TAR archive
+docker load -i genai-app.tar
+
+# Export container filesystem as TAR
+docker export CONTAINER_NAME -o container.tar
+
+# Import TAR filesystem as a Docker image
+docker import container.tar imported-image:latest
+
+# Display image layers
+docker image history genai-app
+
+# Inspect image architecture and metadata
+docker image inspect genai-app
+
+
+###############################################################################
+# 23. GENAI APPLICATION DEBUGGING COMMANDS
+###############################################################################
+
+# Check whether GenAI API container is running
+docker ps --filter name=genai-api
+
+# Follow last 200 API log lines
+docker logs --tail 200 -f genai-api
+
+# Enter GenAI API container
+docker exec -it genai-api bash
+
+# Check Python version
+docker exec genai-api python --version
+
+# Check installed AI and ML libraries
+docker exec genai-api pip list
+
+# Check PyTorch version
+docker exec genai-api python -c "import torch; print(torch.__version__)"
+
+# Check CUDA availability through PyTorch
+docker exec genai-api python -c "import torch; print(torch.cuda.is_available())"
+
+# Check GPU from API container
+docker exec genai-api nvidia-smi
+
+# Check API health endpoint
+curl http://localhost:8000/health
+
+# Check container resource usage
+docker stats genai-api
+
+# Check API port mapping
+docker port genai-api
+
+# Inspect API container configuration
+docker inspect genai-api
+
+# Restart API container
+docker restart genai-api
+
+
+###############################################################################
+# 24. DOCKER MULTI-STAGE BUILD EXAMPLE
+###############################################################################
+
+# Save this as Dockerfile
+#
+# Stage 1: Build Python dependencies
+# FROM python:3.12-slim AS builder
+#
+# WORKDIR /app
+#
+# COPY requirements.txt .
+#
+# Install dependencies into a separate directory
+# RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+#
+# Stage 2: Create runtime image
+# FROM python:3.12-slim AS runtime
+#
+# Set application directory
+# WORKDIR /app
+#
+# Copy dependencies from builder stage
+# COPY --from=builder /install /usr/local
+#
+# Copy application source code
+# COPY . .
+#
+# Run application
+# CMD ["python", "main.py"]
+
+
+###############################################################################
+# 25. MOST IMPORTANT COMMANDS FOR DAILY REVISION
+###############################################################################
+
+# List running containers
+docker ps
+
+# List all containers
+docker ps -a
+
+# List images
+docker images
+
+# Pull image
+docker pull IMAGE
+
+# Build image
+docker build -t app .
+
+# Run container
+docker run -d --name app -p 8000:8000 IMAGE
+
+# Stop container
+docker stop app
+
+# Remove container
+docker rm app
+
+# Remove image
+docker rmi IMAGE
+
+# Enter container
+docker exec -it app bash
+
+# Follow container logs
+docker logs -f app
+
+# Inspect container
+docker inspect app
+
+# Monitor resources
+docker stats
+
+# Create persistent volume
+docker volume create data
+
+# Create network
+docker network create ai-network
+
+# Start Docker Compose
+docker compose up -d
+
+# Stop Docker Compose
+docker compose down
+
+# Rebuild and start Compose services
+docker compose up --build -d
+
+# Check NVIDIA GPU
+nvidia-smi
+
+# Run GPU-enabled container
+docker run --rm --gpus all IMAGE nvidia-smi
+
+# Check Docker disk usage
+docker system df
+
+# Clean unused Docker resources
+docker system prune
+
+
+###############################################################################
+# END OF DOCKER MASTER CHEAT SHEET
+# FOCUS: AI ENGINEERING / MACHINE LEARNING / GENERATIVE AI / LLMOPS
+###############################################################################
