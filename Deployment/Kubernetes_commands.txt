@@ -1,0 +1,1327 @@
+
+###############################################################################
+# 1. KUBERNETES AND KUBECTL BASIC COMMANDS
+###############################################################################
+
+# Check kubectl version
+kubectl version --client
+
+# Display client and server version
+kubectl version
+
+# Display kubectl help
+kubectl --help
+
+# Display Kubernetes cluster information
+kubectl cluster-info
+
+# Display cluster nodes
+kubectl get nodes
+
+# Display detailed node information
+kubectl describe nodes
+
+# Display Kubernetes API resources
+kubectl api-resources
+
+# Display supported API versions
+kubectl api-versions
+
+# Display available kubectl commands
+kubectl help
+
+# Display current Kubernetes context
+kubectl config current-context
+
+# Display all Kubernetes contexts
+kubectl config get-contexts
+
+# Display complete Kubernetes configuration
+kubectl config view
+
+# Display current cluster configuration
+kubectl config view --minify
+
+
+###############################################################################
+# 2. KUBERNETES CLUSTER MANAGEMENT
+###############################################################################
+
+# Display cluster information
+kubectl cluster-info
+
+# List all cluster nodes
+kubectl get nodes
+
+# List nodes with additional details
+kubectl get nodes -o wide
+
+# Describe a specific node
+kubectl describe node NODE_NAME
+
+# Check node labels
+kubectl get nodes --show-labels
+
+# Add a label to a node
+kubectl label nodes NODE_NAME environment=production
+
+# Remove a node label
+kubectl label nodes NODE_NAME environment-
+
+# Mark node as unschedulable
+kubectl cordon NODE_NAME
+
+# Mark node as schedulable again
+kubectl uncordon NODE_NAME
+
+# Drain workloads from a node before maintenance
+kubectl drain NODE_NAME --ignore-daemonsets
+
+# Display cluster component information
+kubectl get componentstatuses
+
+# Display all cluster resources
+kubectl get all -A
+
+
+###############################################################################
+# 3. KUBERNETES CONTEXT COMMANDS
+###############################################################################
+
+# Display current context
+kubectl config current-context
+
+# List available contexts
+kubectl config get-contexts
+
+# Switch to a different context
+kubectl config use-context CONTEXT_NAME
+
+# Rename current context
+kubectl config rename-context OLD_NAME NEW_NAME
+
+# Display current context configuration
+kubectl config view --minify
+
+# Set default namespace for current context
+kubectl config set-context --current --namespace=default
+
+# Set namespace for a specific context
+kubectl config set-context CONTEXT_NAME --namespace=production
+
+# Delete a context
+kubectl config delete-context CONTEXT_NAME
+
+
+###############################################################################
+# 4. POD COMMANDS
+###############################################################################
+
+# List pods in current namespace
+kubectl get pods
+
+# List pods in all namespaces
+kubectl get pods -A
+
+# List pods with node and IP information
+kubectl get pods -o wide
+
+# Watch pod status continuously
+kubectl get pods -w
+
+# Describe a specific pod
+kubectl describe pod POD_NAME
+
+# Create a simple Nginx pod
+kubectl run nginx --image=nginx
+
+# Create pod with custom name and image
+kubectl run my-pod --image=python:3.12-slim
+
+# Create interactive Ubuntu pod
+kubectl run ubuntu --image=ubuntu:24.04 -it -- bash
+
+# Create pod with environment variable
+kubectl run my-pod --image=nginx --env="APP_ENV=production"
+
+# Create pod with exposed container port metadata
+kubectl run my-pod --image=nginx --port=80
+
+# Delete a pod
+kubectl delete pod POD_NAME
+
+# Delete pod forcefully
+kubectl delete pod POD_NAME --grace-period=0 --force
+
+# Delete all pods in current namespace
+kubectl delete pods --all
+
+# Display pod labels
+kubectl get pods --show-labels
+
+# Display pod YAML configuration
+kubectl get pod POD_NAME -o yaml
+
+# Display pod JSON configuration
+kubectl get pod POD_NAME -o json
+
+
+###############################################################################
+# 5. POD EXECUTION AND DEBUGGING
+###############################################################################
+
+# Open shell inside a running pod
+kubectl exec -it POD_NAME -- /bin/sh
+
+# Open Bash inside a running pod
+kubectl exec -it POD_NAME -- /bin/bash
+
+# Execute Python command inside pod
+kubectl exec POD_NAME -- python --version
+
+# List installed Python packages
+kubectl exec POD_NAME -- pip list
+
+# Execute command inside a specific container
+kubectl exec -it POD_NAME -c CONTAINER_NAME -- /bin/sh
+
+# Display pod logs
+kubectl logs POD_NAME
+
+# Follow live pod logs
+kubectl logs -f POD_NAME
+
+# Display last 100 log lines
+kubectl logs POD_NAME --tail=100
+
+# Display logs with timestamps
+kubectl logs POD_NAME --timestamps=true
+
+# Display logs from previous crashed container
+kubectl logs POD_NAME --previous
+
+# Display logs from a specific container
+kubectl logs POD_NAME -c CONTAINER_NAME
+
+# Display logs from all pods matching a label
+kubectl logs -l app=genai-api --all-containers=true
+
+# Display pod events and troubleshooting details
+kubectl describe pod POD_NAME
+
+# Display recent cluster events
+kubectl get events --sort-by=.metadata.creationTimestamp
+
+
+###############################################################################
+# 6. DEPLOYMENT COMMANDS
+###############################################################################
+
+# List deployments
+kubectl get deployments
+
+# List deployments across namespaces
+kubectl get deployments -A
+
+# Create deployment using Nginx image
+kubectl create deployment nginx --image=nginx
+
+# Create deployment using Python image
+kubectl create deployment python-app --image=python:3.12-slim
+
+# Create deployment with 3 replicas
+kubectl create deployment my-app --image=nginx --replicas=3
+
+# Describe deployment
+kubectl describe deployment DEPLOYMENT_NAME
+
+# Display deployment YAML
+kubectl get deployment DEPLOYMENT_NAME -o yaml
+
+# Display deployment status
+kubectl rollout status deployment/DEPLOYMENT_NAME
+
+# Delete deployment
+kubectl delete deployment DEPLOYMENT_NAME
+
+# Delete all deployments in current namespace
+kubectl delete deployments --all
+
+
+###############################################################################
+# 7. REPLICASET COMMANDS
+###############################################################################
+
+# List ReplicaSets
+kubectl get replicasets
+
+# List ReplicaSets across namespaces
+kubectl get rs -A
+
+# Describe ReplicaSet
+kubectl describe rs REPLICASET_NAME
+
+# Display ReplicaSet YAML
+kubectl get rs REPLICASET_NAME -o yaml
+
+# Delete ReplicaSet
+kubectl delete rs REPLICASET_NAME
+
+# Display ReplicaSet labels
+kubectl get rs --show-labels
+
+
+###############################################################################
+# 8. SCALING COMMANDS
+###############################################################################
+
+# Scale deployment to 3 replicas
+kubectl scale deployment nginx --replicas=3
+
+# Scale deployment to 5 replicas
+kubectl scale deployment nginx --replicas=5
+
+# Scale deployment to 1 replica
+kubectl scale deployment nginx --replicas=1
+
+# Check deployment replica status
+kubectl get deployments
+
+# Automatically scale deployment based on CPU
+kubectl autoscale deployment nginx --cpu-percent=70 --min=2 --max=10
+
+# Display Horizontal Pod Autoscalers
+kubectl get hpa
+
+# Describe autoscaler
+kubectl describe hpa HPA_NAME
+
+# Delete autoscaler
+kubectl delete hpa HPA_NAME
+
+# Check metrics API availability
+kubectl top nodes
+
+# Check pod CPU and memory usage
+kubectl top pods
+
+# Check resource usage across namespaces
+kubectl top pods -A
+
+
+###############################################################################
+# 9. ROLLING UPDATE AND ROLLBACK COMMANDS
+###############################################################################
+
+# Update deployment image
+kubectl set image deployment/nginx nginx=nginx:latest
+
+# Update application container image
+kubectl set image deployment/genai-api api=my-genai-app:v2
+
+# Check rollout status
+kubectl rollout status deployment/nginx
+
+# Display deployment rollout history
+kubectl rollout history deployment/nginx
+
+# Display a specific rollout revision
+kubectl rollout history deployment/nginx --revision=2
+
+# Undo the latest deployment update
+kubectl rollout undo deployment/nginx
+
+# Roll back to a specific revision
+kubectl rollout undo deployment/nginx --to-revision=2
+
+# Pause deployment rollout
+kubectl rollout pause deployment/nginx
+
+# Resume deployment rollout
+kubectl rollout resume deployment/nginx
+
+# Restart deployment pods
+kubectl rollout restart deployment/nginx
+
+
+###############################################################################
+# 10. KUBERNETES SERVICES AND NETWORKING
+###############################################################################
+
+# List services
+kubectl get services
+
+# List services across namespaces
+kubectl get services -A
+
+# Create ClusterIP service for deployment
+kubectl expose deployment nginx --port=80 --target-port=80
+
+# Create NodePort service
+kubectl expose deployment nginx --type=NodePort --port=80
+
+# Create LoadBalancer service
+kubectl expose deployment nginx --type=LoadBalancer --port=80
+
+# Describe service
+kubectl describe service SERVICE_NAME
+
+# Display service endpoints
+kubectl get endpoints
+
+# Display EndpointSlices
+kubectl get endpointslices
+
+# Delete service
+kubectl delete service SERVICE_NAME
+
+# Display service YAML
+kubectl get service SERVICE_NAME -o yaml
+
+# Forward local port 8080 to pod port 80
+kubectl port-forward pod/POD_NAME 8080:80
+
+# Forward local port 8000 to service port 8000
+kubectl port-forward service/genai-api 8000:8000
+
+# Test application from inside a temporary curl pod
+kubectl run curl-test --image=curlimages/curl:latest --rm -it --restart=Never -- curl http://SERVICE_NAME:PORT
+
+# Display network-related pods
+kubectl get pods -o wide
+
+# Display service labels
+kubectl get services --show-labels
+
+
+###############################################################################
+# 11. NAMESPACE COMMANDS
+###############################################################################
+
+# List all namespaces
+kubectl get namespaces
+
+# Create development namespace
+kubectl create namespace development
+
+# Create production namespace
+kubectl create namespace production
+
+# Describe namespace
+kubectl describe namespace development
+
+# Set default namespace for current context
+kubectl config set-context --current --namespace=development
+
+# List pods in development namespace
+kubectl get pods -n development
+
+# List deployments in production namespace
+kubectl get deployments -n production
+
+# Create deployment in development namespace
+kubectl create deployment nginx --image=nginx -n development
+
+# Display all pods across namespaces
+kubectl get pods -A
+
+# Delete namespace and its namespaced resources
+kubectl delete namespace development
+
+
+###############################################################################
+# 12. CONFIGMAP COMMANDS
+###############################################################################
+
+# Create ConfigMap from literal key-value pair
+kubectl create configmap app-config --from-literal=APP_ENV=production
+
+# Create ConfigMap from file
+kubectl create configmap app-config --from-file=config.properties
+
+# Create ConfigMap from directory
+kubectl create configmap app-config --from-file=./config/
+
+# List ConfigMaps
+kubectl get configmaps
+
+# Describe ConfigMap
+kubectl describe configmap app-config
+
+# Display ConfigMap YAML
+kubectl get configmap app-config -o yaml
+
+# Edit ConfigMap
+kubectl edit configmap app-config
+
+# Delete ConfigMap
+kubectl delete configmap app-config
+
+
+###############################################################################
+# 13. SECRET COMMANDS
+###############################################################################
+
+# Create Secret from literal values
+kubectl create secret generic app-secret --from-literal=API_KEY=YOUR_API_KEY
+
+# Create Secret from environment file
+kubectl create secret generic app-secret --from-env-file=.env
+
+# Create Docker registry authentication Secret
+kubectl create secret docker-registry docker-secret --docker-server=https://index.docker.io/v1/ --docker-username=USERNAME --docker-password=PASSWORD --docker-email=EMAIL
+
+# List Secrets
+kubectl get secrets
+
+# Describe Secret
+kubectl describe secret app-secret
+
+# Display Secret YAML (values are base64 encoded, not encrypted)
+kubectl get secret app-secret -o yaml
+
+# Delete Secret
+kubectl delete secret app-secret
+
+# Edit Secret
+kubectl edit secret app-secret
+
+
+###############################################################################
+# 14. PERSISTENT VOLUMES AND STORAGE
+###############################################################################
+
+# List Persistent Volumes
+kubectl get pv
+
+# List Persistent Volume Claims
+kubectl get pvc
+
+# Describe Persistent Volume
+kubectl describe pv PV_NAME
+
+# Describe Persistent Volume Claim
+kubectl describe pvc PVC_NAME
+
+# List Storage Classes
+kubectl get storageclass
+
+# Display StorageClass details
+kubectl describe storageclass STORAGE_CLASS_NAME
+
+# Delete Persistent Volume Claim
+kubectl delete pvc PVC_NAME
+
+# Delete Persistent Volume
+kubectl delete pv PV_NAME
+
+# Display PVC YAML
+kubectl get pvc PVC_NAME -o yaml
+
+
+###############################################################################
+# 15. JOBS AND CRONJOBS
+###############################################################################
+
+# Create a one-time Ubuntu job
+kubectl create job test-job --image=ubuntu:24.04 -- echo "Hello Kubernetes"
+
+# List jobs
+kubectl get jobs
+
+# Describe job
+kubectl describe job JOB_NAME
+
+# Display job logs
+kubectl logs job/JOB_NAME
+
+# Delete job
+kubectl delete job JOB_NAME
+
+# Create CronJob running every minute
+kubectl create cronjob test-cron --image=busybox:1.36 --schedule="*/1 * * * *" -- /bin/sh -c "date; echo Hello"
+
+# List CronJobs
+kubectl get cronjobs
+
+# Describe CronJob
+kubectl describe cronjob CRONJOB_NAME
+
+# Suspend CronJob
+kubectl patch cronjob CRONJOB_NAME -p '{"spec":{"suspend":true}}'
+
+# Resume CronJob
+kubectl patch cronjob CRONJOB_NAME -p '{"spec":{"suspend":false}}'
+
+# Manually trigger a CronJob
+kubectl create job manual-job --from=cronjob/CRONJOB_NAME
+
+# Delete CronJob
+kubectl delete cronjob CRONJOB_NAME
+
+
+###############################################################################
+# 16. RESOURCE REQUESTS AND LIMITS
+###############################################################################
+
+# Display node resource usage
+kubectl top nodes
+
+# Display pod resource usage
+kubectl top pods
+
+# Display resource usage in all namespaces
+kubectl top pods -A
+
+# Describe pod resource allocation
+kubectl describe pod POD_NAME
+
+# Display node capacity and allocatable resources
+kubectl describe node NODE_NAME
+
+# Edit deployment resource requests and limits
+kubectl edit deployment DEPLOYMENT_NAME
+
+# Apply CPU and memory limits through YAML
+# kubectl apply -f deployment.yaml
+
+# Display resource quotas
+kubectl get resourcequota
+
+# Describe resource quota
+kubectl describe resourcequota QUOTA_NAME
+
+# Display limit ranges
+kubectl get limitrange
+
+
+###############################################################################
+# 17. GPU AND NVIDIA KUBERNETES COMMANDS
+###############################################################################
+
+# List cluster nodes
+kubectl get nodes
+
+# Check GPU capacity advertised by nodes
+kubectl get nodes -o json | grep -A 5 nvidia.com/gpu
+
+# Display node GPU labels and resources
+kubectl describe node NODE_NAME
+
+# List NVIDIA device plugin pods
+kubectl get pods -A | grep -i nvidia
+
+# Display GPU allocation information
+kubectl describe node NODE_NAME | grep -A 10 Allocated
+
+# Check NVIDIA GPU information from inside a GPU pod
+kubectl exec -it GPU_POD_NAME -- nvidia-smi
+
+# Display GPU pod logs
+kubectl logs GPU_POD_NAME
+
+# Display GPU pod resource usage
+kubectl top pod GPU_POD_NAME
+
+# List GPU-related cluster resources
+kubectl get nodes -o yaml | grep -i nvidia.com/gpu
+
+
+###############################################################################
+# 18. AI / ML / GENAI DEPLOYMENT COMMANDS
+###############################################################################
+
+# Deploy FastAPI GenAI application
+kubectl create deployment genai-api --image=my-genai-app:v1
+
+# Expose GenAI API on port 8000
+kubectl expose deployment genai-api --port=8000 --target-port=8000
+
+# Check GenAI API deployment
+kubectl get deployment genai-api
+
+# Check GenAI API pods
+kubectl get pods -l app=genai-api
+
+# Follow GenAI API logs
+kubectl logs -f deployment/genai-api
+
+# Scale GenAI API to 3 replicas
+kubectl scale deployment genai-api --replicas=3
+
+# Update GenAI API to a new version
+kubectl set image deployment/genai-api genai-api=my-genai-app:v2
+
+# Check GenAI API rollout
+kubectl rollout status deployment/genai-api
+
+# Restart GenAI API deployment
+kubectl rollout restart deployment/genai-api
+
+# Roll back GenAI API deployment
+kubectl rollout undo deployment/genai-api
+
+# Forward local port to GenAI API
+kubectl port-forward service/genai-api 8000:8000
+
+# Check GenAI API service
+kubectl get service genai-api
+
+# Inspect GenAI API pod
+kubectl describe pods -l app=genai-api
+
+# Check Python version inside GenAI pod
+kubectl exec -it POD_NAME -- python --version
+
+# Check PyTorch version inside GenAI pod
+kubectl exec POD_NAME -- python -c "import torch; print(torch.__version__)"
+
+# Check CUDA availability inside GenAI pod
+kubectl exec POD_NAME -- python -c "import torch; print(torch.cuda.is_available())"
+
+# Check installed LangChain packages
+kubectl exec POD_NAME -- pip list | grep -i langchain
+
+# Check GPU from GenAI inference pod
+kubectl exec -it POD_NAME -- nvidia-smi
+
+
+###############################################################################
+# 19. INGRESS COMMANDS
+###############################################################################
+
+# List Ingress resources
+kubectl get ingress
+
+# List Ingress across namespaces
+kubectl get ingress -A
+
+# Describe Ingress
+kubectl describe ingress INGRESS_NAME
+
+# Display Ingress YAML
+kubectl get ingress INGRESS_NAME -o yaml
+
+# Create an Ingress resource from YAML
+kubectl apply -f ingress.yaml
+
+# Delete Ingress
+kubectl delete ingress INGRESS_NAME
+
+# Check installed Ingress controller pods
+kubectl get pods -A | grep -i ingress
+
+# Check Ingress controller services
+kubectl get services -A | grep -i ingress
+
+
+###############################################################################
+# 20. HELM COMMANDS
+###############################################################################
+
+# Check Helm version
+helm version
+
+# Display Helm help
+helm help
+
+# List configured Helm repositories
+helm repo list
+
+# Add Bitnami Helm repository
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+# Add Prometheus community repository
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+# Add Grafana Helm repository
+helm repo add grafana https://grafana.github.io/helm-charts
+
+# Update Helm repositories
+helm repo update
+
+# Search for a chart
+helm search repo nginx
+
+# Search for a chart on Artifact Hub
+helm search hub nginx
+
+# Install Helm chart
+helm install my-release bitnami/nginx
+
+# List Helm releases
+helm list
+
+# List releases across namespaces
+helm list -A
+
+# Inspect Helm release
+helm status my-release
+
+# Display Helm release history
+helm history my-release
+
+# Upgrade Helm release
+helm upgrade my-release bitnami/nginx
+
+# Install or upgrade a release
+helm upgrade --install my-release bitnami/nginx
+
+# Roll back Helm release
+helm rollback my-release 1
+
+# Uninstall Helm release
+helm uninstall my-release
+
+# Display chart configuration values
+helm show values bitnami/nginx
+
+# Render Kubernetes YAML without installing
+helm template my-release bitnami/nginx
+
+# Validate Helm chart locally
+helm lint ./my-chart
+
+# Package Helm chart
+helm package ./my-chart
+
+
+###############################################################################
+# 21. RBAC AND KUBERNETES SECURITY
+###############################################################################
+
+# List service accounts
+kubectl get serviceaccounts
+
+# Create service account
+kubectl create serviceaccount genai-sa
+
+# Describe service account
+kubectl describe serviceaccount genai-sa
+
+# List roles
+kubectl get roles
+
+# List cluster roles
+kubectl get clusterroles
+
+# List role bindings
+kubectl get rolebindings
+
+# List cluster role bindings
+kubectl get clusterrolebindings
+
+# Describe cluster role
+kubectl describe clusterrole CLUSTER_ROLE_NAME
+
+# Check whether current user can list pods
+kubectl auth can-i list pods
+
+# Check whether current user can create deployments
+kubectl auth can-i create deployments
+
+# Check permission in a namespace
+kubectl auth can-i create pods -n production
+
+# Check all permissions for current identity
+kubectl auth can-i --list
+
+# Create role binding for service account
+kubectl create rolebinding genai-binding --clusterrole=view --serviceaccount=default:genai-sa
+
+# Delete role binding
+kubectl delete rolebinding genai-binding
+
+# Display security contexts of a pod
+kubectl get pod POD_NAME -o yaml
+
+# List Network Policies
+kubectl get networkpolicies
+
+# Describe Network Policy
+kubectl describe networkpolicy POLICY_NAME
+
+
+###############################################################################
+# 22. LABELS AND SELECTORS
+###############################################################################
+
+# List pods with labels
+kubectl get pods --show-labels
+
+# Add label to pod
+kubectl label pod POD_NAME environment=production
+
+# Update an existing pod label
+kubectl label pod POD_NAME environment=staging --overwrite
+
+# Remove pod label
+kubectl label pod POD_NAME environment-
+
+# Filter pods by label
+kubectl get pods -l environment=production
+
+# Filter deployments by label
+kubectl get deployments -l app=genai-api
+
+# Display resources with matching label
+kubectl get all -l app=genai-api
+
+# List nodes with labels
+kubectl get nodes --show-labels
+
+
+###############################################################################
+# 23. ADVANCED TROUBLESHOOTING
+###############################################################################
+
+# Display recent Kubernetes events
+kubectl get events --sort-by=.metadata.creationTimestamp
+
+# Display events in all namespaces
+kubectl get events -A
+
+# Describe problematic pod
+kubectl describe pod POD_NAME
+
+# Display current pod status
+kubectl get pods -o wide
+
+# Display pods in Pending state
+kubectl get pods --field-selector=status.phase=Pending
+
+# Display failed pods
+kubectl get pods --field-selector=status.phase=Failed
+
+# Display pods with detailed status
+kubectl get pods -o wide
+
+# Check container restart counts
+kubectl get pods
+
+# Display logs from crashed container
+kubectl logs POD_NAME --previous
+
+# Display deployment events
+kubectl describe deployment DEPLOYMENT_NAME
+
+# Check node conditions
+kubectl describe node NODE_NAME
+
+# Display all resources in namespace
+kubectl get all -n default
+
+# Display API server health endpoints
+kubectl get --raw='/readyz'
+
+# Check API server liveness
+kubectl get --raw='/livez'
+
+# Run temporary debugging pod
+kubectl run debug --image=busybox:1.36 -it --rm --restart=Never -- sh
+
+# Run temporary curl debugging pod
+kubectl run curl-debug --image=curlimages/curl:latest -it --rm --restart=Never -- sh
+
+# Check DNS resolution inside a pod
+kubectl exec -it POD_NAME -- nslookup kubernetes.default
+
+# Test service connectivity inside a pod
+kubectl exec -it POD_NAME -- curl http://SERVICE_NAME:PORT
+
+
+###############################################################################
+# 24. APPLY, EDIT, PATCH AND DELETE RESOURCES
+###############################################################################
+
+# Apply YAML configuration
+kubectl apply -f deployment.yaml
+
+# Apply all YAML files in a directory
+kubectl apply -f ./k8s/
+
+# Apply resources using recursive directory traversal
+kubectl apply -R -f ./k8s/
+
+# Preview changes without applying
+kubectl diff -f deployment.yaml
+
+# Edit deployment interactively
+kubectl edit deployment DEPLOYMENT_NAME
+
+# Patch deployment replica count
+kubectl patch deployment DEPLOYMENT_NAME -p '{"spec":{"replicas":3}}'
+
+# Delete resources using YAML file
+kubectl delete -f deployment.yaml
+
+# Delete all resources in a namespace
+kubectl delete all --all -n development
+
+# Display resource YAML
+kubectl get deployment DEPLOYMENT_NAME -o yaml
+
+# Display resource JSON
+kubectl get deployment DEPLOYMENT_NAME -o json
+
+# Explain Kubernetes resource fields
+kubectl explain pod
+
+# Explain deployment specification
+kubectl explain deployment.spec
+
+# Explain container configuration
+kubectl explain pod.spec.containers
+
+
+###############################################################################
+# 25. ADVANCED KUBERNETES SCHEDULING
+###############################################################################
+
+# Display node labels
+kubectl get nodes --show-labels
+
+# Add GPU node label
+kubectl label nodes NODE_NAME accelerator=nvidia-gpu
+
+# Display node taints
+kubectl describe node NODE_NAME
+
+# Add node taint
+kubectl taint nodes NODE_NAME dedicated=ai:NoSchedule
+
+# Remove node taint
+kubectl taint nodes NODE_NAME dedicated=ai:NoSchedule-
+
+# Display pod scheduling details
+kubectl describe pod POD_NAME
+
+# Display pod node assignment
+kubectl get pods -o wide
+
+# Check node resource capacity
+kubectl describe node NODE_NAME
+
+
+###############################################################################
+# 26. KUBERNETES STORAGE AND APPLICATION CONFIGURATION
+###############################################################################
+
+# Create ConfigMap from environment file
+kubectl create configmap genai-config --from-env-file=.env
+
+# Create Secret from environment file
+kubectl create secret generic genai-secret --from-env-file=.env
+
+# Display ConfigMaps
+kubectl get configmaps
+
+# Display Secrets
+kubectl get secrets
+
+# Display PVCs
+kubectl get pvc
+
+# Display PVs
+kubectl get pv
+
+# Display StorageClasses
+kubectl get storageclass
+
+# Inspect ConfigMap
+kubectl describe configmap genai-config
+
+# Inspect PVC
+kubectl describe pvc PVC_NAME
+
+
+###############################################################################
+# 27. KUBERNETES PRODUCTION OPERATIONS
+###############################################################################
+
+# Check all nodes
+kubectl get nodes -o wide
+
+# Check all pods in all namespaces
+kubectl get pods -A
+
+# Check all deployments
+kubectl get deployments -A
+
+# Check all services
+kubectl get services -A
+
+# Check all namespaces
+kubectl get namespaces
+
+# Check all persistent volume claims
+kubectl get pvc -A
+
+# Check all ingress resources
+kubectl get ingress -A
+
+# Check all autoscalers
+kubectl get hpa -A
+
+# Check cluster events
+kubectl get events -A --sort-by=.metadata.creationTimestamp
+
+# Check node resource usage
+kubectl top nodes
+
+# Check pod resource usage
+kubectl top pods -A
+
+# Restart application deployment
+kubectl rollout restart deployment/DEPLOYMENT_NAME
+
+# Check rollout status
+kubectl rollout status deployment/DEPLOYMENT_NAME
+
+# Check rollout history
+kubectl rollout history deployment/DEPLOYMENT_NAME
+
+# Roll back application
+kubectl rollout undo deployment/DEPLOYMENT_NAME
+
+# Drain node before maintenance
+kubectl drain NODE_NAME --ignore-daemonsets
+
+# Make node schedulable again
+kubectl uncordon NODE_NAME
+
+
+###############################################################################
+# 28. IMPORTANT KUBERNETES YAML EXAMPLES
+###############################################################################
+
+# Save the following as deployment.yaml
+#
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: genai-api
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       app: genai-api
+#   template:
+#     metadata:
+#       labels:
+#         app: genai-api
+#     spec:
+#       containers:
+#         - name: genai-api
+#           image: my-genai-app:v1
+#           ports:
+#             - containerPort: 8000
+#           resources:
+#             requests:
+#               cpu: "250m"
+#               memory: "512Mi"
+#             limits:
+#               cpu: "1"
+#               memory: "2Gi"
+#           readinessProbe:
+#             httpGet:
+#               path: /health
+#               port: 8000
+#             initialDelaySeconds: 10
+#             periodSeconds: 10
+#           livenessProbe:
+#             httpGet:
+#               path: /health
+#               port: 8000
+#             initialDelaySeconds: 20
+#             periodSeconds: 20
+#
+# # Apply GenAI deployment
+# kubectl apply -f deployment.yaml
+#
+# # Check deployment
+# kubectl get deployment genai-api
+#
+# # Check pods
+# kubectl get pods -l app=genai-api
+
+
+###############################################################################
+# 29. GENAI SERVICE YAML EXAMPLE
+###############################################################################
+
+# Save the following as service.yaml
+#
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: genai-api
+# spec:
+#   type: ClusterIP
+#   selector:
+#     app: genai-api
+#   ports:
+#     - protocol: TCP
+#       port: 8000
+#       targetPort: 8000
+#
+# # Create Kubernetes service
+# kubectl apply -f service.yaml
+#
+# # Display service
+# kubectl get service genai-api
+#
+# # Forward local port to GenAI service
+# kubectl port-forward service/genai-api 8000:8000
+
+
+###############################################################################
+# 30. GPU-ENABLED LLM INFERENCE DEPLOYMENT YAML
+###############################################################################
+
+# Save the following as llm-gpu-deployment.yaml
+#
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: llm-server
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: llm-server
+#   template:
+#     metadata:
+#       labels:
+#         app: llm-server
+#     spec:
+#       containers:
+#         - name: vllm
+#           image: vllm/vllm-openai:latest
+#           args:
+#             - --model
+#             - Qwen/Qwen2.5-1.5B-Instruct
+#             - --host
+#             - "0.0.0.0"
+#             - --port
+#             - "8000"
+#           ports:
+#             - containerPort: 8000
+#           resources:
+#             limits:
+#               nvidia.com/gpu: 1
+#               memory: 16Gi
+#               cpu: "4"
+#             requests:
+#               memory: 8Gi
+#               cpu: "2"
+#
+# # Deploy GPU-enabled LLM server
+# kubectl apply -f llm-gpu-deployment.yaml
+#
+# # Check LLM server pod
+# kubectl get pods -l app=llm-server
+#
+# # Follow inference server logs
+# kubectl logs -f deployment/llm-server
+#
+# # Check GPU allocation
+# kubectl describe pod POD_NAME
+#
+# # Forward local port to inference API
+# kubectl port-forward deployment/llm-server 8000:8000
+#
+# # Test OpenAI-compatible model endpoint
+# curl http://localhost:8000/v1/models
+
+
+###############################################################################
+# 31. KUBERNETES QUICK DAILY REVISION
+###############################################################################
+
+# List nodes
+kubectl get nodes
+
+# List pods
+kubectl get pods
+
+# List pods in all namespaces
+kubectl get pods -A
+
+# List deployments
+kubectl get deployments
+
+# Create deployment
+kubectl create deployment app --image=nginx
+
+# Expose deployment
+kubectl expose deployment app --port=80 --target-port=80
+
+# Scale deployment
+kubectl scale deployment app --replicas=3
+
+# Update application image
+kubectl set image deployment/app nginx=nginx:latest
+
+# Check rollout
+kubectl rollout status deployment/app
+
+# Roll back deployment
+kubectl rollout undo deployment/app
+
+# Display pod logs
+kubectl logs -f POD_NAME
+
+# Enter pod
+kubectl exec -it POD_NAME -- /bin/sh
+
+# Describe pod
+kubectl describe pod POD_NAME
+
+# Display events
+kubectl get events
+
+# Create namespace
+kubectl create namespace development
+
+# Apply YAML file
+kubectl apply -f deployment.yaml
+
+# Delete YAML resources
+kubectl delete -f deployment.yaml
+
+# List services
+kubectl get svc
+
+# List ConfigMaps
+kubectl get configmaps
+
+# List Secrets
+kubectl get secrets
+
+# List PVCs
+kubectl get pvc
+
+# Display resource usage
+kubectl top nodes
+
+# Display pod resource usage
+kubectl top pods
+
+# Check GPU from pod
+kubectl exec -it POD_NAME -- nvidia-smi
+
+# Forward application port
+kubectl port-forward service/genai-api 8000:8000
+
+# Display Helm releases
+helm list -A
+
+# Check cluster health endpoint
+kubectl get --raw='/readyz'
+
+
+###############################################################################
+# END OF KUBERNETES MASTER CHEAT SHEET
+# FOCUS: AI ENGINEERING / MACHINE LEARNING / GENAI / LLMOPS / MLOPS
+###############################################################################
