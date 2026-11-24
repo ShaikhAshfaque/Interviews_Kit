@@ -1,0 +1,1058 @@
+# 50 FastAPI Programs – Beginner to Advanced
+
+## 1. Basic FastAPI Application
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "Hello FastAPI"}
+```
+
+**Explanation:** Basic FastAPI application create karta hai aur home route par JSON response deta hai.
+
+## 2. Simple GET API
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/hello")
+def hello():
+    return {"message": "Hello World"}
+```
+
+**Explanation:** GET request se data retrieve karte hain.
+
+## 3. Return User Information
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/user")
+def get_user():
+    return {
+        "name": "Ashfaque",
+        "role": "AI Engineer",
+        "experience": 7
+    }
+```
+
+**Explanation:** API multiple fields wala JSON response return karti hai.
+
+## 4. Path Parameter
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/user/{user_id}")
+def get_user(user_id: int):
+    return {"user_id": user_id}
+```
+
+**Explanation:** URL se dynamic user_id receive karte hain.
+
+## 5. Multiple Path Parameters
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/student/{student_id}/marks/{marks}")
+def get_student(student_id: int, marks: int):
+    return {
+        "student_id": student_id,
+        "marks": marks
+    }
+```
+
+**Explanation:** Ek endpoint mein multiple path parameters receive kar sakte hain.
+
+## 6. Query Parameter
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/search")
+def search(name: str):
+    return {"search_name": name}
+```
+
+**Explanation:** `/search?name=Ashfaque` se query parameter receive hota hai.
+
+## 7. Optional Query Parameter
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/products")
+def products(category: str = "all"):
+    return {"category": category}
+```
+
+**Explanation:** Parameter nahi dene par default value `all` use hogi.
+
+## 8. Multiple Query Parameters
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/filter")
+def filter_data(category: str, price: int):
+    return {
+        "category": category,
+        "price": price
+    }
+```
+
+**Explanation:** Ek URL se multiple query parameters receive karte hain.
+
+## 9. POST API
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.post("/create")
+def create_data():
+    return {"message": "Data created"}
+```
+
+**Explanation:** POST method generally new data create karne ke liye use hota hai.
+
+## 10. POST API with Pydantic
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class User(BaseModel):
+    name: str
+    age: int
+
+@app.post("/users")
+def create_user(user: User):
+    return user
+```
+
+**Explanation:** Pydantic model request body ke data ko validate karta hai.
+
+## 11. User Registration
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Register(BaseModel):
+    username: str
+    email: str
+    password: str
+
+@app.post("/register")
+def register(user: Register):
+    return {
+        "message": "Registration successful",
+        "username": user.username
+    }
+```
+
+**Explanation:** User registration ka basic API structure hai. Production mein password hash karna zaroori hai.
+
+## 12. Login API
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Login(BaseModel):
+    username: str
+    password: str
+
+@app.post("/login")
+def login(data: Login):
+    if data.username == "admin" and data.password == "1234":
+        return {"message": "Login successful"}
+
+    return {"message": "Invalid credentials"}
+```
+
+**Explanation:** Username aur password match karke response deta hai. Real projects mein password hashing aur proper authentication use karein.
+
+## 13. Add Two Numbers
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/add")
+def add(a: int, b: int):
+    return {"result": a + b}
+```
+
+**Explanation:** Do query parameters receive karke addition perform karta hai.
+
+## 14. Subtract Two Numbers
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/subtract")
+def subtract(a: int, b: int):
+    return {"result": a - b}
+```
+
+**Explanation:** Do numbers ka subtraction karta hai.
+
+## 15. Multiply Two Numbers
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/multiply")
+def multiply(a: int, b: int):
+    return {"result": a * b}
+```
+
+**Explanation:** Do numbers multiply karta hai.
+
+## 16. Division API
+
+```python
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI()
+
+@app.get("/divide")
+def divide(a: float, b: float):
+    if b == 0:
+        raise HTTPException(
+            status_code=400,
+            detail="Cannot divide by zero"
+        )
+
+    return {"result": a / b}
+```
+
+**Explanation:** Zero se division hone par HTTP error return karta hai.
+
+## 17. List of Students
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+students = ["Ali", "Ahmed", "Sara"]
+
+@app.get("/students")
+def get_students():
+    return {"students": students}
+```
+
+**Explanation:** Python list ko API response mein return karta hai.
+
+## 18. Add Student to List
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+students = []
+
+class Student(BaseModel):
+    name: str
+
+@app.post("/students")
+def add_student(student: Student):
+    students.append(student.name)
+    return {"students": students}
+```
+
+**Explanation:** POST request se student ka naam list mein add karta hai. Data memory mein temporarily store hota hai.
+
+## 19. Find Student
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+students = ["Ali", "Ahmed", "Sara"]
+
+@app.get("/students/{name}")
+def find_student(name: str):
+    if name in students:
+        return {"message": "Student found"}
+
+    return {"message": "Student not found"}
+```
+
+**Explanation:** List mein student ka naam search karta hai.
+
+## 20. Delete Student
+
+```python
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI()
+
+students = ["Ali", "Ahmed", "Sara"]
+
+@app.delete("/students/{name}")
+def delete_student(name: str):
+    if name not in students:
+        raise HTTPException(status_code=404, detail="Student not found")
+
+    students.remove(name)
+    return {"message": "Student deleted"}
+```
+
+**Explanation:** Student ka naam list se remove karta hai.
+
+## 21. Update Student
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+students = {"1": "Ali", "2": "Ahmed"}
+
+class Student(BaseModel):
+    name: str
+
+@app.put("/students/{student_id}")
+def update_student(student_id: str, student: Student):
+    if student_id not in students:
+        return {"message": "Student not found"}
+
+    students[student_id] = student.name
+    return {"updated_student": students[student_id]}
+```
+
+**Explanation:** PUT method existing student ka data update karta hai.
+
+## 22. Pydantic Field Validation
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel, Field
+
+app = FastAPI()
+
+class Product(BaseModel):
+    name: str = Field(min_length=3)
+    price: float = Field(gt=0)
+
+@app.post("/products")
+def create_product(product: Product):
+    return product
+```
+
+**Explanation:** Name minimum 3 characters aur price zero se greater hona chahiye.
+
+## 23. Email Validation
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel, EmailStr
+
+app = FastAPI()
+
+class User(BaseModel):
+    name: str
+    email: EmailStr
+
+@app.post("/users")
+def create_user(user: User):
+    return user
+```
+
+**Explanation:** Email format validate karta hai. Install `email-validator` using `pip install email-validator`.
+
+## 24. Response Model
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class UserResponse(BaseModel):
+    name: str
+    age: int
+
+@app.get("/user", response_model=UserResponse)
+def get_user():
+    return {
+        "name": "Ali",
+        "age": 25,
+        "password": "secret"
+    }
+```
+
+**Explanation:** Response model sirf declared fields return karta hai. Password response mein expose nahi hota.
+
+## 25. HTTP Status Code
+
+```python
+from fastapi import FastAPI, status
+
+app = FastAPI()
+
+@app.post("/create", status_code=status.HTTP_201_CREATED)
+def create():
+    return {"message": "Created successfully"}
+```
+
+**Explanation:** Successful creation par HTTP 201 status return hota hai.
+
+## 26. Custom HTTP Exception
+
+```python
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI()
+
+@app.get("/users/{user_id}")
+def get_user(user_id: int):
+    if user_id != 1:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    return {"user": "Ali"}
+```
+
+**Explanation:** Custom error message aur HTTP status code return karta hai.
+
+## 27. Header Parameter
+
+```python
+from fastapi import FastAPI, Header
+
+app = FastAPI()
+
+@app.get("/headers")
+def get_headers(user_agent: str | None = Header(default=None)):
+    return {"user_agent": user_agent}
+```
+
+**Explanation:** Request headers se user-agent information read karta hai.
+
+## 28. Cookie Parameter
+
+```python
+from fastapi import FastAPI, Cookie
+
+app = FastAPI()
+
+@app.get("/cookies")
+def get_cookie(session_id: str | None = Cookie(default=None)):
+    return {"session_id": session_id}
+```
+
+**Explanation:** Browser request se cookie value read karta hai.
+
+## 29. File Upload
+
+```python
+from fastapi import FastAPI, UploadFile, File
+
+app = FastAPI()
+
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    return {
+        "filename": file.filename,
+        "content_type": file.content_type
+    }
+```
+
+**Explanation:** File upload endpoint banata hai. Install `python-multipart` using `pip install python-multipart`.
+
+## 30. Read Uploaded File
+
+```python
+from fastapi import FastAPI, UploadFile, File
+
+app = FastAPI()
+
+@app.post("/read-file")
+async def read_file(file: UploadFile = File(...)):
+    content = await file.read()
+
+    return {
+        "filename": file.filename,
+        "size": len(content)
+    }
+```
+
+**Explanation:** Uploaded file read karke uska size return karta hai.
+
+## 31. Background Task
+
+```python
+from fastapi import FastAPI, BackgroundTasks
+
+app = FastAPI()
+
+def send_email(email: str):
+    print(f"Email sent to {email}")
+
+@app.post("/send-email")
+def send_email_api(
+    email: str,
+    background_tasks: BackgroundTasks
+):
+    background_tasks.add_task(send_email, email)
+
+    return {"message": "Email task scheduled"}
+```
+
+**Explanation:** Background task response ke baad execute hota hai. Actual email sending ke liye email service configure karni hogi.
+
+## 32. Dependency Injection
+
+```python
+from fastapi import FastAPI, Depends
+
+app = FastAPI()
+
+def get_database():
+    return "Database Connected"
+
+@app.get("/database")
+def database(db=Depends(get_database)):
+    return {"status": db}
+```
+
+**Explanation:** Depends reusable functions ya resources inject karne ke liye use hota hai.
+
+## 33. API Middleware
+
+```python
+from fastapi import FastAPI, Request
+import time
+
+app = FastAPI()
+
+@app.middleware("http")
+async def timing_middleware(request: Request, call_next):
+    start = time.time()
+
+    response = await call_next(request)
+
+    response.headers["X-Process-Time"] = str(time.time() - start)
+
+    return response
+
+@app.get("/")
+def home():
+    return {"message": "Hello"}
+```
+
+**Explanation:** Middleware request aur response ke beech execute hota hai. Yahan processing time header add kiya gaya hai.
+
+## 34. CORS Configuration
+
+```python
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+@app.get("/")
+def home():
+    return {"message": "CORS enabled"}
+```
+
+**Explanation:** Frontend aur backend ke beech cross-origin requests allow karta hai. Production mein trusted origins specify karein.
+
+## 35. Async API
+
+```python
+from fastapi import FastAPI
+import asyncio
+
+app = FastAPI()
+
+@app.get("/async")
+async def async_api():
+    await asyncio.sleep(2)
+    return {"message": "Async task completed"}
+```
+
+**Explanation:** Async endpoint mein `await` use karke non-blocking waiting perform karte hain.
+
+## 36. Multiple API Routes
+
+```python
+from fastapi import FastAPI, APIRouter
+
+app = FastAPI()
+
+router = APIRouter()
+
+@router.get("/users")
+def users():
+    return {"users": ["Ali", "Ahmed"]}
+
+@router.get("/products")
+def products():
+    return {"products": ["Laptop", "Mobile"]}
+
+app.include_router(router, prefix="/api")
+```
+
+**Explanation:** APIRouter se multiple endpoints organize kar sakte hain.
+
+## 37. Pagination
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+items = list(range(1, 101))
+
+@app.get("/items")
+def get_items(skip: int = 0, limit: int = 10):
+    return {
+        "items": items[skip:skip + limit],
+        "skip": skip,
+        "limit": limit
+    }
+```
+
+**Explanation:** Skip aur limit se large data ko small pages mein return karte hain.
+
+## 38. Search API
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+products = ["Laptop", "Mobile", "Tablet", "Keyboard"]
+
+@app.get("/search")
+def search_product(keyword: str):
+    result = [
+        product for product in products
+        if keyword.lower() in product.lower()
+    ]
+
+    return {"results": result}
+```
+
+**Explanation:** Keyword ke basis par products search karta hai.
+
+## 39. Sorting API
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+numbers = [50, 10, 40, 20, 30]
+
+@app.get("/sort")
+def sort_numbers(order: str = "asc"):
+    if order == "desc":
+        return {"result": sorted(numbers, reverse=True)}
+
+    return {"result": sorted(numbers)}
+```
+
+**Explanation:** Query parameter se ascending ya descending sorting hoti hai.
+
+## 40. Environment Variables
+
+```python
+from fastapi import FastAPI
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+app = FastAPI()
+
+@app.get("/config")
+def get_config():
+    return {
+        "environment": os.getenv("APP_ENV", "development")
+    }
+```
+
+**Explanation:** Environment variables se configuration read karte hain. Install `pip install python-dotenv`.
+
+## 41. Password Hashing
+
+```python
+from fastapi import FastAPI
+from passlib.context import CryptContext
+
+app = FastAPI()
+
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto"
+)
+
+@app.post("/hash-password")
+def hash_password(password: str):
+    hashed = pwd_context.hash(password)
+
+    return {"hashed_password": hashed}
+```
+
+**Explanation:** Plain password ko secure hash mein convert karta hai. Install `pip install "passlib[bcrypt]"`. Production mein password request body se receive karein aur HTTPS use karein.
+
+## 42. Verify Password
+
+```python
+from fastapi import FastAPI
+from passlib.context import CryptContext
+
+app = FastAPI()
+
+pwd_context = CryptContext(schemes=["bcrypt"])
+
+@app.post("/verify-password")
+def verify_password(password: str, hashed_password: str):
+    result = pwd_context.verify(password, hashed_password)
+
+    return {"password_valid": result}
+```
+
+**Explanation:** Entered password ko stored password hash ke against verify karta hai.
+
+## 43. JWT Token Creation
+
+```python
+from fastapi import FastAPI
+from jose import jwt
+from datetime import datetime, timedelta, timezone
+
+app = FastAPI()
+
+SECRET_KEY = "change-this-secret"
+ALGORITHM = "HS256"
+
+@app.post("/token")
+def create_token(username: str):
+    payload = {
+        "sub": username,
+        "exp": datetime.now(timezone.utc) + timedelta(minutes=30)
+    }
+
+    token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
+    return {"access_token": token}
+```
+
+**Explanation:** JWT token generate karta hai. Install `pip install "python-jose[cryptography]"`. Production mein secret environment variable mein rakhein.
+
+## 44. JWT Token Verification
+
+```python
+from fastapi import FastAPI, HTTPException
+from jose import jwt, JWTError
+
+app = FastAPI()
+
+SECRET_KEY = "change-this-secret"
+ALGORITHM = "HS256"
+
+@app.get("/verify-token")
+def verify_token(token: str):
+    try:
+        payload = jwt.decode(
+            token,
+            SECRET_KEY,
+            algorithms=[ALGORITHM]
+        )
+
+        return {"username": payload.get("sub")}
+
+    except JWTError:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid token"
+        )
+```
+
+**Explanation:** JWT decode karke token valid hai ya nahi check karta hai.
+
+## 45. SQLite Database Connection
+
+```python
+from fastapi import FastAPI
+import sqlite3
+
+app = FastAPI()
+
+@app.get("/database")
+def database():
+    connection = sqlite3.connect("test.db")
+
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY,
+            name TEXT
+        )
+    """)
+
+    connection.commit()
+    connection.close()
+
+    return {"message": "Database connected"}
+```
+
+**Explanation:** SQLite database aur users table create karta hai.
+
+## 46. Insert Data into SQLite
+
+```python
+from fastapi import FastAPI
+import sqlite3
+
+app = FastAPI()
+
+@app.post("/insert-user")
+def insert_user(name: str):
+    connection = sqlite3.connect("test.db")
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "INSERT INTO users (name) VALUES (?)",
+        (name,)
+    )
+
+    connection.commit()
+    connection.close()
+
+    return {"message": "User inserted"}
+```
+
+**Explanation:** SQLite table mein parameterized query se user insert karta hai.
+
+## 47. Fetch Data from SQLite
+
+```python
+from fastapi import FastAPI
+import sqlite3
+
+app = FastAPI()
+
+@app.get("/fetch-users")
+def fetch_users():
+    connection = sqlite3.connect("test.db")
+    connection.row_factory = sqlite3.Row
+
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM users")
+
+    users = [dict(row) for row in cursor.fetchall()]
+
+    connection.close()
+
+    return {"users": users}
+```
+
+**Explanation:** Database se all users fetch karke JSON response return karta hai.
+
+## 48. FastAPI Unit Testing
+
+```python
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "Hello"}
+
+client = TestClient(app)
+
+def test_home():
+    response = client.get("/")
+
+    assert response.status_code == 200
+    assert response.json() == {"message": "Hello"}
+```
+
+**Explanation:** TestClient API endpoint ko test karta hai. Install `pip install pytest httpx`; run `pytest`.
+
+## 49. Async HTTP Request
+
+```python
+from fastapi import FastAPI
+import httpx
+
+app = FastAPI()
+
+@app.get("/external-api")
+async def external_api():
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            "https://jsonplaceholder.typicode.com/posts/1"
+        )
+
+    response.raise_for_status()
+
+    return response.json()
+```
+
+**Explanation:** HTTPX ke through external API ko asynchronously call karta hai. Install `pip install httpx`.
+
+## 50. Complete CRUD API
+
+```python
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI()
+
+database = {}
+
+class Employee(BaseModel):
+    name: str
+    role: str
+    salary: float
+
+@app.post("/employees/{employee_id}")
+def create_employee(employee_id: int, employee: Employee):
+    if employee_id in database:
+        raise HTTPException(status_code=409, detail="Employee already exists")
+
+    database[employee_id] = employee.model_dump()
+
+    return {
+        "message": "Employee created",
+        "employee": database[employee_id]
+    }
+
+@app.get("/employees")
+def get_employees():
+    return {"employees": database}
+
+@app.get("/employees/{employee_id}")
+def get_employee(employee_id: int):
+    if employee_id not in database:
+        raise HTTPException(status_code=404, detail="Employee not found")
+
+    return database[employee_id]
+
+@app.put("/employees/{employee_id}")
+def update_employee(employee_id: int, employee: Employee):
+    if employee_id not in database:
+        raise HTTPException(status_code=404, detail="Employee not found")
+
+    database[employee_id] = employee.model_dump()
+
+    return {"message": "Employee updated"}
+
+@app.delete("/employees/{employee_id}")
+def delete_employee(employee_id: int):
+    if employee_id not in database:
+        raise HTTPException(status_code=404, detail="Employee not found")
+
+    del database[employee_id]
+
+    return {"message": "Employee deleted"}
+```
+
+**Explanation:** Is program mein Create, Read, Update aur Delete operations implement kiye gaye hain. Ye in-memory demo hai; production mein proper database use karein.
+
+---
+
+# Important FastAPI Commands
+
+```bash
+# Install FastAPI
+pip install fastapi
+
+# Install Uvicorn
+pip install uvicorn
+
+# Run application
+uvicorn main:app --reload
+
+# Run on custom port
+uvicorn main:app --reload --port 8001
+
+# Run on all network interfaces
+uvicorn main:app --host 0.0.0.0 --port 8000
+
+# Install testing dependencies
+pip install pytest httpx
+
+# Install file upload support
+pip install python-multipart
+```
+
+# Important HTTP Methods
+
+| Method | Purpose |
+|---|---|
+| GET | Data read karna |
+| POST | New data create karna |
+| PUT | Existing data update karna |
+| PATCH | Partial data update karna |
+| DELETE | Data delete karna |
+
+# Practice Order
+
+1. Programs 1–10: FastAPI basics
+2. Programs 11–20: Request handling and CRUD
+3. Programs 21–30: Validation and file handling
+4. Programs 31–40: Middleware, async and API architecture
+5. Programs 41–50: Security, database and testing
+
+**Note:** Ye examples learning ke liye hain. Production APIs mein database persistence, authentication, input validation, error handling, logging aur secrets management properly implement karein.
