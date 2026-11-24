@@ -1,0 +1,1945 @@
+# 50 Python + FastAPI Coding Examples
+## Beginner to Advanced | Complete Hinglish Explanation
+
+Har example mein concept, code, explanation aur real-world use diya gaya hai.
+
+---
+
+# PART 1: PYTHON BASICS (1–10)
+
+## 1. Variables and Data Types
+
+```python
+name = "Ashfaque"
+age = 28
+salary = 50000.50
+is_employed = True
+
+print(name)
+print(age)
+print(salary)
+print(is_employed)
+
+print(type(name))
+print(type(age))
+print(type(salary))
+print(type(is_employed))
+```
+
+**Explanation:**
+- `name` string variable hai.
+- `age` integer variable hai.
+- `salary` float variable hai.
+- `is_employed` Boolean variable hai.
+- `type()` data type batata hai.
+
+**Use:** Employee management, user profiles.
+
+## 2. Taking User Input
+
+```python
+name = input("Enter your name: ")
+age = int(input("Enter your age: "))
+
+print("Welcome", name)
+print("Your age is:", age)
+print("Next year age:", age + 1)
+```
+
+**Explanation:**
+- `input()` user se value leta hai.
+- `int()` string ko integer mein convert karta hai.
+- `age + 1` next year ki age calculate karta hai.
+
+**Use:** Registration forms, user input.
+
+## 3. If-Else Conditions
+
+```python
+marks = 75
+
+if marks >= 90:
+    print("Grade A")
+elif marks >= 75:
+    print("Grade B")
+elif marks >= 50:
+    print("Grade C")
+else:
+    print("Fail")
+```
+
+**Explanation:**
+- `if` first condition check karta hai.
+- `elif` additional conditions check karta hai.
+- `else` default condition execute karta hai.
+
+**Use:** Eligibility checks, fraud detection.
+
+## 4. For Loop
+
+```python
+for number in range(1, 6):
+    print(number)
+```
+
+**Explanation:**
+- `range(1, 6)` 1 se 5 tak numbers generate karta hai.
+- `for` loop har number par execute hota hai.
+
+**Use:** Multiple records process karna.
+
+## 5. While Loop
+
+```python
+count = 1
+
+while count <= 5:
+    print("Count:", count)
+    count += 1
+```
+
+**Explanation:**
+- `while` condition true hone tak execute hota hai.
+- `count += 1` counter increase karta hai.
+- Condition false hone par loop stop hota hai.
+
+**Use:** Repeated processing.
+
+## 6. Functions
+
+```python
+def calculate_sum(a, b):
+    result = a + b
+    return result
+
+answer = calculate_sum(10, 20)
+
+print("Sum:", answer)
+```
+
+**Explanation:**
+- `def` function create karta hai.
+- `a` aur `b` parameters hain.
+- `return` result return karta hai.
+
+**Use:** Reusable business logic.
+
+## 7. Lists
+
+```python
+employees = ["Rahul", "Amit", "Shaikh", "John"]
+
+print(employees[0])
+
+employees.append("David")
+employees.remove("Amit")
+
+for employee in employees:
+    print(employee)
+```
+
+**Explanation:**
+- List multiple values store karti hai.
+- `append()` element add karta hai.
+- `remove()` element delete karta hai.
+- Indexing zero se start hoti hai.
+
+**Use:** Customer records, employee lists.
+
+## 8. Dictionaries
+
+```python
+employee = {
+    "name": "Ashfaque",
+    "age": 28,
+    "role": "Data Scientist",
+    "salary": 60000
+}
+
+print(employee["name"])
+
+employee["city"] = "Delhi"
+employee["salary"] = 70000
+
+print(employee)
+```
+
+**Explanation:**
+- Dictionary key-value pairs store karti hai.
+- `employee["name"]` value access karta hai.
+- New key add aur existing value update kar sakte hain.
+
+**Use:** JSON, API payloads.
+
+## 9. Exception Handling
+
+```python
+try:
+    number1 = int(input("Enter first number: "))
+    number2 = int(input("Enter second number: "))
+
+    result = number1 / number2
+
+    print("Result:", result)
+
+except ValueError:
+    print("Please enter valid numbers.")
+
+except ZeroDivisionError:
+    print("Cannot divide by zero.")
+
+finally:
+    print("Program completed.")
+```
+
+**Explanation:**
+- `try` risky code execute karta hai.
+- `except` errors handle karta hai.
+- `finally` hamesha execute hota hai.
+
+**Use:** API errors, database errors.
+
+## 10. String Operations
+
+```python
+name = "  ashfaque shaikh  "
+
+print(name.upper())
+print(name.lower())
+print(name.title())
+print(name.strip())
+print(name.replace("ashfaque", "ahmed"))
+print(len(name))
+```
+
+**Explanation:**
+- `upper()` uppercase karta hai.
+- `lower()` lowercase karta hai.
+- `title()` title case karta hai.
+- `strip()` extra outer spaces remove karta hai.
+- `replace()` text replace karta hai.
+- `len()` length calculate karta hai.
+
+**Use:** Data cleaning, NLP preprocessing.
+
+---
+
+# PART 2: INTERMEDIATE PYTHON (11–20)
+
+## 11. List Comprehension
+
+```python
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+squares = [number ** 2 for number in numbers]
+
+print(squares)
+```
+
+**Explanation:**
+- List comprehension short syntax mein list create karta hai.
+- `number ** 2` square calculate karta hai.
+
+**Use:** Feature engineering, data transformation.
+
+## 12. Lambda Functions
+
+```python
+multiply = lambda a, b: a * b
+
+result = multiply(10, 5)
+
+print(result)
+```
+
+**Explanation:**
+- `lambda` anonymous function create karta hai.
+- `a, b` inputs hain.
+- `a * b` calculation hai.
+
+**Use:** Sorting, filtering.
+
+## 13. Map Function
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+def square(number):
+    return number ** 2
+
+result = list(map(square, numbers))
+
+print(result)
+```
+
+**Explanation:**
+- `map()` har element par function apply karta hai.
+- `list()` result ko list mein convert karta hai.
+
+**Use:** Bulk data transformation.
+
+## 14. Filter Function
+
+```python
+numbers = [10, 15, 20, 25, 30, 35, 40]
+
+def even_number(number):
+    return number % 2 == 0
+
+result = list(filter(even_number, numbers))
+
+print(result)
+```
+
+**Explanation:**
+- `%` remainder calculate karta hai.
+- Even numbers ka remainder zero hota hai.
+- `filter()` condition pass karne wale elements return karta hai.
+
+**Use:** Transaction filtering, customer filtering.
+
+## 15. Object-Oriented Programming
+
+```python
+class Employee:
+
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+    def display_details(self):
+        print("Name:", self.name)
+        print("Salary:", self.salary)
+
+
+employee1 = Employee("Ashfaque", 60000)
+
+employee1.display_details()
+```
+
+**Explanation:**
+- `class` blueprint hai.
+- `__init__()` constructor hai.
+- `self` current object ko refer karta hai.
+- `employee1` object hai.
+
+**Use:** Banking systems, AI applications.
+
+## 16. Inheritance
+
+```python
+class Animal:
+
+    def eat(self):
+        print("Animal is eating")
+
+
+class Dog(Animal):
+
+    def bark(self):
+        print("Dog is barking")
+
+
+dog = Dog()
+
+dog.eat()
+dog.bark()
+```
+
+**Explanation:**
+- `Animal` parent class hai.
+- `Dog` child class hai.
+- Dog parent ka method reuse karta hai.
+
+**Use:** Reusable application architecture.
+
+## 17. Encapsulation
+
+```python
+class BankAccount:
+
+    def __init__(self, balance):
+        self.__balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+
+    def get_balance(self):
+        return self.__balance
+
+
+account = BankAccount(10000)
+
+account.deposit(5000)
+
+print(account.get_balance())
+```
+
+**Explanation:**
+- `__balance` name-mangled attribute hai.
+- `deposit()` balance update karta hai.
+- `get_balance()` balance return karta hai.
+
+**Use:** Banking and financial applications.
+
+## 18. Decorators
+
+```python
+def my_decorator(func):
+
+    def wrapper():
+        print("Function started")
+
+        func()
+
+        print("Function completed")
+
+    return wrapper
+
+
+@my_decorator
+def welcome():
+    print("Welcome to Python")
+
+
+welcome()
+```
+
+**Explanation:**
+- Decorator existing function ka behaviour extend karta hai.
+- `wrapper()` additional logic execute karta hai.
+- `@my_decorator` decorator apply karta hai.
+
+**Use:** Logging, authentication, monitoring.
+
+## 19. Generators
+
+```python
+def generate_numbers():
+
+    for number in range(1, 6):
+        yield number
+
+
+result = generate_numbers()
+
+for value in result:
+    print(value)
+```
+
+**Explanation:**
+- `yield` values one-by-one generate karta hai.
+- Generator large data ke liye memory efficient ho sakta hai.
+
+**Use:** Large CSV processing, streaming.
+
+## 20. File Handling
+
+```python
+with open("employee.txt", "w") as file:
+    file.write("Ashfaque - Data Scientist")
+
+
+with open("employee.txt", "r") as file:
+    content = file.read()
+
+print(content)
+```
+
+**Explanation:**
+- `open()` file open karta hai.
+- `"w"` write mode hai.
+- `"r"` read mode hai.
+- `with` automatically file close karta hai.
+
+**Use:** Logs, reports, configuration.
+
+---
+
+# PART 3: ADVANCED PYTHON (21–25)
+
+## 21. Iterators
+
+```python
+numbers = [10, 20, 30, 40]
+
+iterator = iter(numbers)
+
+print(next(iterator))
+print(next(iterator))
+print(next(iterator))
+print(next(iterator))
+```
+
+**Explanation:**
+- `iter()` iterator create karta hai.
+- `next()` next element return karta hai.
+- Elements finish hone par `StopIteration` aata hai.
+
+**Use:** Data streaming.
+
+## 22. Context Managers
+
+```python
+class FileManager:
+
+    def __enter__(self):
+        print("File opened")
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("File closed")
+
+
+with FileManager() as manager:
+    print("Working with file")
+```
+
+**Explanation:**
+- `__enter__()` context start karta hai.
+- `__exit__()` context close karta hai.
+- `with` cleanup manage karta hai.
+
+**Use:** Database connections, file handling.
+
+## 23. Async and Await
+
+```python
+import asyncio
+
+
+async def fetch_data():
+    print("Fetching data...")
+
+    await asyncio.sleep(2)
+
+    print("Data received")
+
+    return {"name": "Ashfaque"}
+
+
+async def main():
+    result = await fetch_data()
+    print(result)
+
+
+asyncio.run(main())
+```
+
+**Explanation:**
+- `async def` coroutine create karta hai.
+- `await` asynchronous operation ka wait karta hai.
+- `asyncio.run()` coroutine execute karta hai.
+
+**Use:** FastAPI, external API calls.
+
+## 24. Multithreading
+
+```python
+import threading
+import time
+
+
+def download_file(name):
+    print(f"Downloading {name}")
+
+    time.sleep(2)
+
+    print(f"Completed {name}")
+
+
+thread1 = threading.Thread(
+    target=download_file,
+    args=("file1.pdf",)
+)
+
+thread2 = threading.Thread(
+    target=download_file,
+    args=("file2.pdf",)
+)
+
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+
+print("All downloads completed")
+```
+
+**Explanation:**
+- Thread multiple tasks manage karta hai.
+- `start()` thread start karta hai.
+- `join()` completion ka wait karta hai.
+
+**Use:** I/O-bound tasks, downloads.
+
+## 25. Multiprocessing
+
+```python
+from multiprocessing import Process
+
+
+def calculate_square(number):
+    result = number ** 2
+    print(f"Square of {number}: {result}")
+
+
+if __name__ == "__main__":
+
+    process1 = Process(
+        target=calculate_square,
+        args=(5,)
+    )
+
+    process2 = Process(
+        target=calculate_square,
+        args=(10,)
+    )
+
+    process1.start()
+    process2.start()
+
+    process1.join()
+    process2.join()
+
+    print("All processes completed")
+```
+
+**Explanation:**
+- `Process` separate process create karta hai.
+- `start()` process start karta hai.
+- `join()` process completion ka wait karta hai.
+- CPU-intensive tasks ke liye useful hai.
+
+**Use:** Image processing, parallel computation.
+
+---
+
+# PART 4: FASTAPI FUNDAMENTALS (26–35)
+
+## FastAPI Installation
+
+```bash
+pip install fastapi uvicorn
+```
+
+Project:
+
+```text
+fastapi_project/
+    main.py
+```
+
+Run:
+
+```bash
+uvicorn main:app --reload
+```
+
+Documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+## 26. First FastAPI Application
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/")
+def home():
+    return {
+        "message": "Welcome to FastAPI",
+        "status": "success"
+    }
+```
+
+**Explanation:**
+- `FastAPI()` application create karta hai.
+- `@app.get("/")` GET endpoint define karta hai.
+- `home()` request handle karta hai.
+- Dictionary JSON response ban jaati hai.
+
+**Use:** Backend entry point.
+
+## 27. GET API with Path Parameters
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/users/{user_id}")
+def get_user(user_id: int):
+
+    return {
+        "user_id": user_id,
+        "name": "Ashfaque"
+    }
+```
+
+Test:
+
+```text
+http://127.0.0.1:8000/users/101
+```
+
+**Explanation:**
+- `{user_id}` dynamic URL parameter hai.
+- `int` integer validation karta hai.
+
+**Use:** User profile, order details.
+
+## 28. GET API with Query Parameters
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/search")
+def search_users(name: str, age: int = 18):
+
+    return {
+        "name": name,
+        "age": age
+    }
+```
+
+Test:
+
+```text
+http://127.0.0.1:8000/search?name=Ashfaque&age=28
+```
+
+**Explanation:**
+- `name` required parameter hai.
+- `age` optional parameter hai.
+- `?` query string start karta hai.
+- `&` parameters separate karta hai.
+
+**Use:** Search and filtering.
+
+## 29. POST API with Pydantic
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class User(BaseModel):
+    name: str
+    age: int
+    email: str
+
+
+@app.post("/users")
+def create_user(user: User):
+
+    return {
+        "message": "User created successfully",
+        "user": user
+    }
+```
+
+Test JSON:
+
+```json
+{
+    "name": "Ashfaque",
+    "age": 28,
+    "email": "ashfaque@example.com"
+}
+```
+
+**Explanation:**
+- `BaseModel` data schema define karta hai.
+- `user: User` incoming JSON validate karta hai.
+- Invalid input par automatic validation error aata hai.
+
+**Use:** Registration, customer creation.
+
+## 30. Data Validation with Field
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel, Field
+
+app = FastAPI()
+
+
+class Employee(BaseModel):
+
+    name: str = Field(min_length=3, max_length=50)
+
+    age: int = Field(ge=18, le=60)
+
+    salary: float = Field(gt=0)
+
+
+@app.post("/employees")
+def create_employee(employee: Employee):
+
+    return {
+        "message": "Employee added",
+        "data": employee
+    }
+```
+
+**Explanation:**
+- `Field()` validation rules define karta hai.
+- `min_length` minimum characters.
+- `max_length` maximum characters.
+- `ge` greater than or equal.
+- `le` less than or equal.
+- `gt` greater than.
+
+**Use:** Input validation.
+
+## 31. Response Model
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class UserResponse(BaseModel):
+    name: str
+    email: str
+
+
+@app.get("/profile", response_model=UserResponse)
+def get_profile():
+
+    return {
+        "name": "Ashfaque",
+        "email": "ashfaque@example.com",
+        "password": "secret123"
+    }
+```
+
+**Explanation:**
+- `response_model` response structure define karta hai.
+- Extra password field response mein expose nahi hota.
+
+**Use:** Secure API responses.
+
+## 32. HTTP Status Codes
+
+```python
+from fastapi import FastAPI, status
+
+app = FastAPI()
+
+
+@app.post(
+    "/users",
+    status_code=status.HTTP_201_CREATED
+)
+def create_user():
+
+    return {
+        "message": "User created successfully"
+    }
+
+
+@app.get("/health")
+def health_check():
+
+    return {
+        "status": "healthy"
+    }
+```
+
+**Important HTTP Codes:**
+- 200: OK
+- 201: Created
+- 204: No Content
+- 400: Bad Request
+- 401: Unauthorized
+- 403: Forbidden
+- 404: Not Found
+- 422: Validation Error
+- 500: Internal Server Error
+
+**Use:** API communication.
+
+## 33. PUT API
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class User(BaseModel):
+    name: str
+    age: int
+
+
+users = {
+    1: {"name": "Rahul", "age": 25}
+}
+
+
+@app.put("/users/{user_id}")
+def update_user(user_id: int, user: User):
+
+    if user_id not in users:
+        return {"message": "User not found"}
+
+    users[user_id] = user.model_dump()
+
+    return {
+        "message": "User updated",
+        "data": users[user_id]
+    }
+```
+
+**Explanation:**
+- PUT update endpoint hai.
+- `model_dump()` Pydantic model ko dictionary banata hai.
+- Existing record update hota hai.
+
+**Use:** Profile updates.
+
+## 34. DELETE API
+
+```python
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI()
+
+
+users = {
+    1: "Rahul",
+    2: "Amit",
+    3: "Ashfaque"
+}
+
+
+@app.delete("/users/{user_id}")
+def delete_user(user_id: int):
+
+    if user_id not in users:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    deleted_user = users.pop(user_id)
+
+    return {
+        "message": "User deleted",
+        "deleted_user": deleted_user
+    }
+```
+
+**Explanation:**
+- DELETE record remove karta hai.
+- `HTTPException` error response generate karta hai.
+- `pop()` dictionary se record remove karta hai.
+
+**Use:** Customer and record management.
+
+## 35. Optional Parameters
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/products")
+def get_products(
+    category: str | None = None,
+    price: float | None = None
+):
+
+    return {
+        "category": category,
+        "price": price
+    }
+```
+
+**Explanation:**
+- `str | None` string ya None accept karta hai.
+- `= None` default value hai.
+- Dono parameters optional hain.
+
+**Use:** Product filtering.
+
+---
+
+# PART 5: ADVANCED FASTAPI (36–50)
+
+## 36. Complete CRUD API
+
+```python
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Product(BaseModel):
+    name: str
+    price: float
+
+
+products = {}
+
+
+@app.post("/products")
+def create_product(product_id: int, product: Product):
+
+    if product_id in products:
+        raise HTTPException(409, "Product already exists")
+
+    products[product_id] = product.model_dump()
+
+    return {"message": "Product created"}
+
+
+@app.get("/products")
+def get_products():
+    return products
+
+
+@app.get("/products/{product_id}")
+def get_product(product_id: int):
+
+    if product_id not in products:
+        raise HTTPException(404, "Product not found")
+
+    return products[product_id]
+
+
+@app.put("/products/{product_id}")
+def update_product(product_id: int, product: Product):
+
+    if product_id not in products:
+        raise HTTPException(404, "Product not found")
+
+    products[product_id] = product.model_dump()
+
+    return {"message": "Product updated"}
+
+
+@app.delete("/products/{product_id}")
+def delete_product(product_id: int):
+
+    if product_id not in products:
+        raise HTTPException(404, "Product not found")
+
+    products.pop(product_id)
+
+    return {"message": "Product deleted"}
+```
+
+**Explanation:**
+- POST creates.
+- GET reads.
+- PUT updates.
+- DELETE removes.
+- `HTTPException` handles missing records and duplicate IDs.
+
+**Use:** Complete backend CRUD application.
+
+Note: In-memory storage hai; server restart par data lose ho jayega.
+
+## 37. Dependency Injection
+
+```python
+from fastapi import FastAPI, Depends
+
+app = FastAPI()
+
+
+def get_current_user():
+
+    return {
+        "username": "Ashfaque",
+        "role": "admin"
+    }
+
+
+@app.get("/profile")
+def profile(user: dict = Depends(get_current_user)):
+
+    return {
+        "message": "User profile",
+        "user": user
+    }
+
+
+@app.get("/dashboard")
+def dashboard(user: dict = Depends(get_current_user)):
+
+    return {
+        "message": "Dashboard access granted",
+        "user": user
+    }
+```
+
+**Explanation:**
+- `Depends()` dependency injection provide karta hai.
+- Same function multiple endpoints mein reuse hota hai.
+
+**Use:** Authentication, database sessions.
+
+## 38. Header Parameters
+
+```python
+from fastapi import FastAPI, Header
+
+app = FastAPI()
+
+
+@app.get("/secure")
+def secure_api(
+    authorization: str | None = Header(default=None)
+):
+
+    if authorization is None:
+        return {"message": "Authorization header missing"}
+
+    return {
+        "message": "Header received",
+        "authorization": authorization
+    }
+```
+
+**Explanation:**
+- `Header()` HTTP headers read karta hai.
+- Authorization header commonly token carry karta hai.
+- Ye example header read karta hai, token verify nahi karta.
+
+**Use:** API authentication.
+
+## 39. Middleware
+
+```python
+from fastapi import FastAPI
+import time
+
+app = FastAPI()
+
+
+@app.middleware("http")
+async def log_requests(request, call_next):
+
+    start_time = time.time()
+
+    response = await call_next(request)
+
+    process_time = time.time() - start_time
+
+    response.headers["X-Process-Time"] = str(process_time)
+
+    print("Request:", request.url.path)
+
+    return response
+
+
+@app.get("/")
+async def home():
+
+    return {"message": "Welcome"}
+```
+
+**Explanation:**
+- Middleware request aur response ke beech execute hota hai.
+- `call_next()` next handler execute karta hai.
+- `process_time` execution duration calculate karta hai.
+
+**Use:** Logging, monitoring, security.
+
+## 40. JWT Authentication
+
+Install:
+
+```bash
+pip install "PyJWT[crypto]"
+```
+
+Set environment variable:
+
+```powershell
+$env:JWT_SECRET_KEY="your-long-random-secret"
+```
+
+Code:
+
+```python
+import os
+import jwt
+
+from datetime import datetime, timedelta, timezone
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI()
+
+SECRET_KEY = os.environ["JWT_SECRET_KEY"]
+
+ALGORITHM = "HS256"
+
+
+def create_access_token(username: str):
+
+    payload = {
+        "sub": username,
+        "exp": datetime.now(timezone.utc) + timedelta(minutes=30)
+    }
+
+    token = jwt.encode(
+        payload,
+        SECRET_KEY,
+        algorithm=ALGORITHM
+    )
+
+    return token
+
+
+def verify_token(token: str):
+
+    try:
+        payload = jwt.decode(
+            token,
+            SECRET_KEY,
+            algorithms=[ALGORITHM]
+        )
+
+        return payload["sub"]
+
+    except jwt.InvalidTokenError:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or expired token"
+        )
+
+
+@app.post("/login")
+def login(username: str):
+
+    token = create_access_token(username)
+
+    return {
+        "access_token": token,
+        "token_type": "bearer"
+    }
+
+
+@app.get("/protected")
+def protected_api(token: str):
+
+    username = verify_token(token)
+
+    return {
+        "message": "Access granted",
+        "username": username
+    }
+```
+
+**Explanation:**
+- JWT login token generate karta hai.
+- `sub` username represent karta hai.
+- `exp` expiry define karta hai.
+- `jwt.encode()` token generate karta hai.
+- `jwt.decode()` token validate karta hai.
+
+Note: Ye learning example hai. Production mein password verification, OAuth2 Bearer authentication aur secure token handling implement karo.
+
+## 41. Password Hashing
+
+Install:
+
+```bash
+pip install "pwdlib[argon2]"
+```
+
+Code:
+
+```python
+from pwdlib import PasswordHash
+
+password_hash = PasswordHash.recommended()
+
+
+def hash_password(password: str):
+
+    return password_hash.hash(password)
+
+
+def verify_password(plain_password, hashed_password):
+
+    return password_hash.verify(
+        plain_password,
+        hashed_password
+    )
+
+
+stored_password = hash_password("MySecurePassword123")
+
+print("Hashed password:", stored_password)
+
+result = verify_password(
+    "MySecurePassword123",
+    stored_password
+)
+
+print("Password correct:", result)
+```
+
+**Explanation:**
+- `hash()` password ka secure hash banata hai.
+- `verify()` entered password verify karta hai.
+- Original password store nahi karna chahiye.
+
+**Use:** User registration and login.
+
+## 42. SQL Database Integration
+
+Install:
+
+```bash
+pip install sqlalchemy
+```
+
+Code:
+
+```python
+from fastapi import FastAPI, Depends
+from sqlalchemy import create_engine, String
+from sqlalchemy.orm import (
+    DeclarativeBase,
+    sessionmaker,
+    Session,
+    Mapped,
+    mapped_column
+)
+
+app = FastAPI()
+
+DATABASE_URL = "sqlite:///./employees.db"
+
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={"check_same_thread": False}
+)
+
+SessionLocal = sessionmaker(
+    bind=engine,
+    autoflush=False,
+    autocommit=False
+)
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+class Employee(Base):
+
+    __tablename__ = "employees"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    name: Mapped[str] = mapped_column(String(100))
+
+
+Base.metadata.create_all(bind=engine)
+
+
+def get_db():
+
+    db = SessionLocal()
+
+    try:
+        yield db
+
+    finally:
+        db.close()
+
+
+@app.post("/employees")
+def create_employee(
+    name: str,
+    db: Session = Depends(get_db)
+):
+
+    employee = Employee(name=name)
+
+    db.add(employee)
+
+    db.commit()
+
+    db.refresh(employee)
+
+    return {
+        "id": employee.id,
+        "name": employee.name
+    }
+
+
+@app.get("/employees")
+def get_employees(db: Session = Depends(get_db)):
+
+    return db.query(Employee).all()
+```
+
+**Explanation:**
+- SQLAlchemy ORM database operations manage karta hai.
+- `create_engine()` database engine create karta hai.
+- `Employee` ORM model hai.
+- `get_db()` database session provide karta hai.
+- `db.add()` record add karta hai.
+- `db.commit()` changes save karta hai.
+- `db.refresh()` updated record fetch karta hai.
+
+**Use:** PostgreSQL, MySQL, SQLite integration.
+
+## 43. Async API Endpoint
+
+```python
+from fastapi import FastAPI
+import asyncio
+
+app = FastAPI()
+
+
+async def fetch_customer():
+
+    await asyncio.sleep(2)
+
+    return {
+        "customer": "Ashfaque",
+        "status": "active"
+    }
+
+
+@app.get("/customer")
+async def get_customer():
+
+    result = await fetch_customer()
+
+    return result
+```
+
+**Explanation:**
+- `async def` asynchronous function hai.
+- `await` coroutine completion ka wait karta hai.
+- `asyncio.sleep()` non-blocking delay hai.
+
+**Use:** External API calls, async databases.
+
+## 44. File Upload API
+
+Install:
+
+```bash
+pip install python-multipart
+```
+
+Code:
+
+```python
+from fastapi import FastAPI, UploadFile, File
+
+app = FastAPI()
+
+
+@app.post("/upload")
+async def upload_file(
+    file: UploadFile = File(...)
+):
+
+    content = await file.read()
+
+    return {
+        "filename": file.filename,
+        "content_type": file.content_type,
+        "file_size": len(content)
+    }
+```
+
+**Explanation:**
+- `UploadFile` uploaded file represent karta hai.
+- `File(...)` required file input hai.
+- `await file.read()` content read karta hai.
+- `len()` file size calculate karta hai.
+
+**Use:** Resume upload, document ingestion, RAG.
+
+## 45. Background Tasks
+
+```python
+from fastapi import FastAPI, BackgroundTasks
+
+app = FastAPI()
+
+
+def send_notification(email: str):
+
+    with open("notifications.txt", "a") as file:
+
+        file.write(
+            f"Notification sent to {email}\n"
+        )
+
+
+@app.post("/send-notification")
+def send_email(
+    email: str,
+    background_tasks: BackgroundTasks
+):
+
+    background_tasks.add_task(
+        send_notification,
+        email
+    )
+
+    return {
+        "message": "Notification scheduled"
+    }
+```
+
+**Explanation:**
+- `BackgroundTasks` background execution provide karta hai.
+- `add_task()` task register karta hai.
+- Response ke baad task execute hota hai.
+
+**Use:** Notifications, reports.
+
+## 46. Pagination
+
+```python
+from fastapi import FastAPI, Query
+
+app = FastAPI()
+
+users = [
+    {"id": i, "name": f"User {i}"}
+    for i in range(1, 101)
+]
+
+
+@app.get("/users")
+def get_users(
+    page: int = Query(1, ge=1),
+    limit: int = Query(10, ge=1, le=50)
+):
+
+    start = (page - 1) * limit
+
+    end = start + limit
+
+    result = users[start:end]
+
+    return {
+        "page": page,
+        "limit": limit,
+        "total": len(users),
+        "data": result
+    }
+```
+
+**Explanation:**
+- `page` current page number hai.
+- `limit` records per page hai.
+- `start` starting index calculate karta hai.
+- List slicing records return karti hai.
+
+**Use:** Large database APIs.
+
+## 47. CORS Middleware
+
+```python
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+
+    allow_origins=[
+        "http://localhost:3000"
+    ],
+
+    allow_credentials=True,
+
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+
+    allow_headers=["Authorization", "Content-Type"]
+)
+
+
+@app.get("/")
+def home():
+
+    return {
+        "message": "CORS configured"
+    }
+```
+
+**Explanation:**
+- CORS frontend aur backend communication control karta hai.
+- `allow_origins` trusted frontend domains define karta hai.
+- `allow_methods` HTTP methods specify karta hai.
+- `allow_headers` allowed headers define karta hai.
+
+**Use:** React/Next.js frontend with FastAPI.
+
+## 48. API Testing with TestClient
+
+Install:
+
+```bash
+pip install pytest httpx
+```
+
+File: `main.py`
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/health")
+def health():
+
+    return {
+        "status": "healthy"
+    }
+```
+
+File: `test_main.py`
+
+```python
+from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+
+def test_health():
+
+    response = client.get("/health")
+
+    assert response.status_code == 200
+
+    assert response.json() == {
+        "status": "healthy"
+    }
+```
+
+Run:
+
+```bash
+pytest -v
+```
+
+**Explanation:**
+- `TestClient` API testing karta hai.
+- `client.get()` endpoint call karta hai.
+- `assert` expected output verify karta hai.
+- `pytest` automated testing execute karta hai.
+
+**Use:** Unit testing, regression testing.
+
+## 49. Environment Variables
+
+Install:
+
+```bash
+pip install pydantic-settings
+```
+
+File: `.env`
+
+```text
+APP_NAME=JobMate AI
+DEBUG=True
+DATABASE_URL=sqlite:///./jobmate.db
+```
+
+File: `main.py`
+
+```python
+from fastapi import FastAPI
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+
+    app_name: str
+
+    debug: bool = False
+
+    database_url: str
+
+    model_config = SettingsConfigDict(
+        env_file=".env"
+    )
+
+
+settings = Settings()
+
+app = FastAPI(
+    title=settings.app_name,
+    debug=settings.debug
+)
+
+
+@app.get("/")
+def home():
+
+    return {
+        "application": settings.app_name,
+        "database": settings.database_url
+    }
+```
+
+**Explanation:**
+- `.env` configuration store karta hai.
+- `BaseSettings` configuration read karta hai.
+- `Settings()` environment values validate karta hai.
+- Application configuration ko environment se separate rakhta hai.
+
+**Use:** API keys, database configuration, deployment.
+
+Important: `.env` ko `.gitignore` mein add karo.
+
+## 50. Production-Style FastAPI Project Structure
+
+Project:
+
+```text
+jobmate_api/
+│
+├── app/
+│   ├── main.py
+│   │
+│   ├── routers/
+│   │   ├── __init__.py
+│   │   └── users.py
+│   │
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   └── user.py
+│   │
+│   └── services/
+│       ├── __init__.py
+│       └── user_service.py
+│
+└── requirements.txt
+```
+
+File 1: `app/schemas/user.py`
+
+```python
+from pydantic import BaseModel, Field
+
+
+class UserCreate(BaseModel):
+
+    name: str = Field(min_length=3)
+
+    email: str
+
+
+class UserResponse(BaseModel):
+
+    id: int
+
+    name: str
+
+    email: str
+```
+
+**Explanation:** Schema request aur response data validate karta hai.
+
+File 2: `app/services/user_service.py`
+
+```python
+users = []
+
+next_user_id = 1
+
+
+def create_user(user_data):
+
+    global next_user_id
+
+    user = {
+        "id": next_user_id,
+        "name": user_data.name,
+        "email": user_data.email
+    }
+
+    users.append(user)
+
+    next_user_id += 1
+
+    return user
+
+
+def get_all_users():
+
+    return users
+```
+
+**Explanation:** Service layer business logic manage karta hai.
+
+File 3: `app/routers/users.py`
+
+```python
+from fastapi import APIRouter
+
+from app.schemas.user import UserCreate, UserResponse
+
+from app.services.user_service import (
+    create_user,
+    get_all_users
+)
+
+
+router = APIRouter(
+    prefix="/users",
+    tags=["Users"]
+)
+
+
+@router.post("/", response_model=UserResponse)
+def add_user(user: UserCreate):
+
+    return create_user(user)
+
+
+@router.get("/")
+def list_users():
+
+    return get_all_users()
+```
+
+**Explanation:**
+- `APIRouter` routes organize karta hai.
+- `prefix` URL prefix define karta hai.
+- `tags` Swagger grouping karta hai.
+- Router service functions call karta hai.
+
+File 4: `app/main.py`
+
+```python
+from fastapi import FastAPI
+
+from app.routers.users import router as user_router
+
+
+app = FastAPI(
+    title="JobMate AI API",
+    version="1.0.0"
+)
+
+
+app.include_router(user_router)
+
+
+@app.get("/")
+def home():
+
+    return {
+        "message": "JobMate AI API is running"
+    }
+```
+
+**Explanation:**
+- Main application create hoti hai.
+- Router import hota hai.
+- `include_router()` users endpoints register karta hai.
+
+Run:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Open:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+**Real-world use:** Scalable backend architecture, AI applications, GenAI applications.
+
+---
+
+# 8-DAY CODING PRACTICE PLAN
+
+Day 1: Python Basics (1–10)
+
+Day 2: Intermediate Python (11–20)
+
+Day 3: Advanced Python (21–25)
+
+Day 4: FastAPI Fundamentals (26–30)
+
+Day 5: FastAPI CRUD and Validation (31–35)
+
+Day 6: Advanced FastAPI (36–40)
+
+Day 7: Security, Database and Integrations (41–45)
+
+Day 8: Production FastAPI (46–50)
+
+# IMPORTANT INTERVIEW REVISION
+
+Python:
+1. List vs Tuple
+2. Dictionary vs Set
+3. OOP concepts
+4. Decorators
+5. Generators
+6. Iterators
+7. Async vs Sync
+8. Threading vs Multiprocessing
+
+FastAPI:
+1. GET vs POST
+2. PUT vs PATCH
+3. Pydantic
+4. Dependency Injection
+5. Middleware
+6. JWT Authentication
+7. SQLAlchemy
+8. Async endpoints
+9. CORS
+10. Testing and Deployment
+
+**Practice Rule:**
+
+1. Read the code.
+2. Copy and execute.
+3. Understand every line.
+4. Change the input values.
+5. Write the same code without looking.
+6. Explain the code in your own words.
+
+**Goal: Become interview-ready in Python and FastAPI through practical coding.**
