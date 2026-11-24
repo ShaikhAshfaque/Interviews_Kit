@@ -1,0 +1,1020 @@
+# KUBERNETES – 50 PRACTICAL CODES FOR AI ENGINEERS
+## SIMPLE TO INTERMEDIATE | HINGLISH
+
+==================================================
+PART 1: KUBERNETES BASIC COMMANDS (1–10)
+==================================================
+
+1. CHECK KUBERNETES VERSION
+
+Command:
+
+kubectl version --client
+
+Explanation:
+kubectl client ka installed version check karta hai.
+
+2. CHECK CLUSTER INFORMATION
+
+Command:
+
+kubectl cluster-info
+
+Explanation:
+Kubernetes cluster ka control plane address aur cluster information show karta hai.
+
+3. CHECK NODES
+
+Command:
+
+kubectl get nodes
+
+Explanation:
+Cluster mein available worker nodes ki list show karta hai.
+
+4. GET PODS
+
+Command:
+
+kubectl get pods
+
+Explanation:
+Current namespace mein running aur pending Pods show karta hai.
+
+5. GET ALL PODS
+
+Command:
+
+kubectl get pods -A
+
+Explanation:
+All namespaces ke Pods show karta hai.
+
+6. GET SERVICES
+
+Command:
+
+kubectl get services
+
+Explanation:
+Cluster ke available Services show karta hai.
+
+7. GET DEPLOYMENTS
+
+Command:
+
+kubectl get deployments
+
+Explanation:
+Available Deployments ki list show karta hai.
+
+8. DESCRIBE A POD
+
+Command:
+
+kubectl describe pod pod-name
+
+Explanation:
+Pod ki detailed information, events aur configuration show karta hai.
+
+9. DELETE A POD
+
+Command:
+
+kubectl delete pod pod-name
+
+Explanation:
+Specified Pod delete karta hai.
+
+10. GET NAMESPACES
+
+Command:
+
+kubectl get namespaces
+
+Explanation:
+Cluster ke different namespaces show karta hai.
+
+
+==================================================
+PART 2: POD AND DEPLOYMENT YAML (11–20)
+==================================================
+
+11. CREATE YOUR FIRST POD
+
+File: pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: python-pod
+spec:
+  containers:
+    - name: python
+      image: python:3.12-slim
+      command: ["python", "-c", "import time; time.sleep(3600)"]
+
+Command:
+
+kubectl apply -f pod.yaml
+
+Explanation:
+Python Docker image se Kubernetes Pod create karta hai.
+
+12. CHECK POD STATUS
+
+Command:
+
+kubectl get pods -o wide
+
+Explanation:
+Pod ka status, IP address aur worker node show karta hai.
+
+13. CREATE FASTAPI DEPLOYMENT
+
+File: deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-ai
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fastapi-ai
+  template:
+    metadata:
+      labels:
+        app: fastapi-ai
+    spec:
+      containers:
+        - name: fastapi
+          image: fastapi-ai:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+
+Command:
+
+kubectl apply -f deployment.yaml
+
+Explanation:
+FastAPI application ke 2 replicas create karta hai.
+
+Note:
+fastapi-ai image ko cluster ke nodes par available hona chahiye.
+
+14. SCALE DEPLOYMENT
+
+Command:
+
+kubectl scale deployment fastapi-ai --replicas=4
+
+Explanation:
+FastAPI application ke replicas 2 se 4 kar deta hai.
+
+15. CHECK DEPLOYMENT STATUS
+
+Command:
+
+kubectl get deployments
+
+Explanation:
+Deployment ka desired aur available replicas status show karta hai.
+
+16. UPDATE CONTAINER IMAGE
+
+Command:
+
+kubectl set image deployment/fastapi-ai fastapi=fastapi-ai:v2
+
+Explanation:
+Running deployment ki container image update karta hai.
+
+17. CHECK ROLLOUT STATUS
+
+Command:
+
+kubectl rollout status deployment/fastapi-ai
+
+Explanation:
+Deployment update successful hua ya nahi check karta hai.
+
+18. ROLLBACK DEPLOYMENT
+
+Command:
+
+kubectl rollout undo deployment/fastapi-ai
+
+Explanation:
+Previous working deployment revision par rollback karta hai.
+
+19. DELETE DEPLOYMENT
+
+Command:
+
+kubectl delete deployment fastapi-ai
+
+Explanation:
+Specified Deployment delete karta hai.
+
+20. GET POD LOGS
+
+Command:
+
+kubectl logs pod-name
+
+Explanation:
+Pod ke andar application ke logs show karta hai.
+
+
+==================================================
+PART 3: SERVICES AND NETWORKING (21–30)
+==================================================
+
+21. CREATE CLUSTERIP SERVICE
+
+File: service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-service
+spec:
+  type: ClusterIP
+  selector:
+    app: fastapi-ai
+  ports:
+    - port: 80
+      targetPort: 8000
+
+Command:
+
+kubectl apply -f service.yaml
+
+Explanation:
+Cluster ke andar FastAPI Pods ko internal network se accessible banata hai.
+
+22. CREATE NODEPORT SERVICE
+
+File: nodeport.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-nodeport
+spec:
+  type: NodePort
+  selector:
+    app: fastapi-ai
+  ports:
+    - port: 80
+      targetPort: 8000
+      nodePort: 30080
+
+Explanation:
+Node ke port 30080 ke through application access kar sakte hain, subject to cluster networking configuration.
+
+23. CREATE LOADBALANCER SERVICE
+
+File: loadbalancer.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: fastapi-ai
+  ports:
+    - port: 80
+      targetPort: 8000
+
+Explanation:
+Cloud Kubernetes environment mein external load balancer provision kar sakta hai.
+
+24. CHECK SERVICE DETAILS
+
+Command:
+
+kubectl describe service fastapi-service
+
+Explanation:
+Service ke endpoints, ports aur selector check karta hai.
+
+25. PORT FORWARDING
+
+Command:
+
+kubectl port-forward service/fastapi-service 8000:80
+
+Explanation:
+Local machine ke port 8000 se Kubernetes Service access kar sakte hain.
+
+URL:
+
+http://localhost:8000
+
+26. CHECK POD IP
+
+Command:
+
+kubectl get pods -o wide
+
+Explanation:
+Pod ka internal IP address show karta hai.
+
+27. CHECK ENDPOINTS
+
+Command:
+
+kubectl get endpoints fastapi-service
+
+Explanation:
+Service ke backend Pod IP addresses show karta hai.
+
+28. CREATE NAMESPACE
+
+Command:
+
+kubectl create namespace ai-project
+
+Explanation:
+AI project ke resources ko separate namespace mein organize karta hai.
+
+29. DEPLOY APPLICATION IN NAMESPACE
+
+Command:
+
+kubectl apply -f deployment.yaml -n ai-project
+
+Explanation:
+Deployment ko ai-project namespace mein create karta hai.
+
+30. GET NAMESPACE PODS
+
+Command:
+
+kubectl get pods -n ai-project
+
+Explanation:
+Specified namespace ke Pods show karta hai.
+
+
+==================================================
+PART 4: CONFIGURATION AND STORAGE (31–40)
+==================================================
+
+31. CREATE CONFIGMAP
+
+Command:
+
+kubectl create configmap ai-config 
+  --from-literal=APP_ENV=production
+
+Explanation:
+Non-sensitive application configuration store karta hai.
+
+32. VIEW CONFIGMAP
+
+Command:
+
+kubectl get configmaps
+
+Explanation:
+Available ConfigMaps show karta hai.
+
+33. USE CONFIGMAP IN POD
+
+File: configmap-pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-pod
+spec:
+  containers:
+    - name: app
+      image: python:3.12-slim
+      command: ["python", "-c", "import time; time.sleep(3600)"]
+      env:
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: ai-config
+              key: APP_ENV
+
+Explanation:
+ConfigMap ki value container ke environment variable mein available hoti hai.
+
+34. CREATE SECRET
+
+Command:
+
+kubectl create secret generic ai-secret 
+  --from-literal=API_KEY=your-secret-key
+
+Explanation:
+Sensitive configuration jaise API keys ko Kubernetes Secret mein store karta hai.
+
+Production mein encryption at rest, restricted RBAC aur external secret management bhi configure karein.
+
+35. VIEW SECRET
+
+Command:
+
+kubectl get secrets
+
+Explanation:
+Available Secrets ke names aur types show karta hai. Secret values display nahi karta.
+
+36. USE SECRET IN DEPLOYMENT
+
+File: secret-deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-secret-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-secret-app
+  template:
+    metadata:
+      labels:
+        app: ai-secret-app
+    spec:
+      containers:
+        - name: app
+          image: python:3.12-slim
+          command: ["python", "-c", "import time; time.sleep(3600)"]
+          env:
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: API_KEY
+
+Explanation:
+Kubernetes Secret ki API key container ke environment variable mein inject hoti hai.
+
+37. CREATE PERSISTENT VOLUME CLAIM
+
+File: pvc.yaml
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ai-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
+Command:
+
+kubectl apply -f pvc.yaml
+
+Explanation:
+Application ke persistent data storage ke liye PVC request create karta hai.
+
+38. CHECK PVC
+
+Command:
+
+kubectl get pvc
+
+Explanation:
+Persistent Volume Claims ka status show karta hai.
+
+39. MOUNT PVC IN POD
+
+File: storage-pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ai-storage-pod
+spec:
+  containers:
+    - name: app
+      image: python:3.12-slim
+      command: ["python", "-c", "import time; time.sleep(3600)"]
+      volumeMounts:
+        - name: storage
+          mountPath: /app/data
+  volumes:
+    - name: storage
+      persistentVolumeClaim:
+        claimName: ai-storage
+
+Explanation:
+PVC ko container ke /app/data folder ke saath connect karta hai.
+
+40. CHECK STORAGE RESOURCES
+
+Command:
+
+kubectl get pv,pvc
+
+Explanation:
+Cluster ke Persistent Volumes aur Persistent Volume Claims show karta hai.
+
+
+==================================================
+PART 5: INTERMEDIATE KUBERNETES FOR AI ENGINEERS (41–50)
+==================================================
+
+41. CREATE HORIZONTAL POD AUTOSCALER
+
+Command:
+
+kubectl autoscale deployment fastapi-ai 
+  --cpu-percent=70 
+  --min=2 
+  --max=10
+
+Explanation:
+CPU utilization 70% target ke around maintain karne ke liye Pods automatically scale karta hai.
+
+Note:
+Cluster mein Metrics Server aur resource requests configured hone chahiye.
+
+42. CHECK HPA STATUS
+
+Command:
+
+kubectl get hpa
+
+Explanation:
+Horizontal Pod Autoscaler ka scaling status show karta hai.
+
+43. CREATE RESOURCE REQUESTS AND LIMITS
+
+Deployment YAML snippet:
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+Explanation:
+Container ko minimum scheduling resources aur maximum resource limits define karta hai.
+
+AI workloads mein GPU aur memory requirements bhi consider karni hoti hain.
+
+44. CREATE LIVENESS PROBE
+
+Deployment YAML snippet:
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: 8000
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+Explanation:
+Application healthy hai ya nahi check karta hai. Failure par Kubernetes container restart kar sakta hai.
+
+45. CREATE READINESS PROBE
+
+Deployment YAML snippet:
+
+readinessProbe:
+  httpGet:
+    path: /health
+    port: 8000
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+Explanation:
+Application traffic receive karne ke liye ready hai ya nahi check karta hai.
+
+46. CREATE JOB
+
+File: job.yaml
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ai-data-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: data-processing
+          image: python:3.12-slim
+          command:
+            - python
+            - -c
+            - "print('AI data processing completed')"
+      restartPolicy: Never
+  backoffLimit: 2
+
+Command:
+
+kubectl apply -f job.yaml
+
+Explanation:
+One-time AI data processing ya batch task execute karne ke liye Job use hota hai.
+
+47. CREATE CRONJOB
+
+File: cronjob.yaml
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ai-training-schedule
+spec:
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: training
+              image: python:3.12-slim
+              command:
+                - python
+                - -c
+                - "print('Scheduled AI task')"
+          restartPolicy: Never
+
+Explanation:
+CronJob scheduled tasks run karta hai. Example: Daily model evaluation ya data processing.
+
+48. CREATE INGRESS
+
+File: ingress.yaml
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ai-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: ai.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: fastapi-service
+                port:
+                  number: 80
+
+Command:
+
+kubectl apply -f ingress.yaml
+
+Explanation:
+Ingress HTTP/HTTPS traffic ko correct Kubernetes Service tak route karta hai.
+
+Note:
+Ingress controller aur DNS/hosts configuration required hai.
+
+49. CREATE GPU RESOURCE CONFIGURATION
+
+Deployment YAML snippet:
+
+resources:
+  limits:
+    nvidia.com/gpu: 1
+
+Explanation:
+AI/ML model inference ya training ke liye GPU resource request karta hai.
+
+Requirements:
+- NVIDIA GPU worker node
+- NVIDIA drivers
+- NVIDIA Container Toolkit
+- NVIDIA Kubernetes Device Plugin
+
+50. DEPLOY A COMPLETE AI FASTAPI APPLICATION
+
+Project Structure:
+
+ai-kubernetes/
+│
+├── deployment.yaml
+├── service.yaml
+└── main.py
+
+File: main.py
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "Kubernetes AI App Running"}
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
+
+File: deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-fastapi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ai-fastapi
+  template:
+    metadata:
+      labels:
+        app: ai-fastapi
+    spec:
+      containers:
+        - name: fastapi
+          image: ai-fastapi:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+
+File: service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-fastapi-service
+spec:
+  type: ClusterIP
+  selector:
+    app: ai-fastapi
+  ports:
+    - port: 80
+      targetPort: 8000
+
+BUILD DOCKER IMAGE:
+
+docker build -t ai-fastapi:v1 .
+
+DEPLOY APPLICATION:
+
+kubectl apply -f deployment.yaml
+
+kubectl apply -f service.yaml
+
+CHECK PODS:
+
+kubectl get pods
+
+CHECK SERVICES:
+
+kubectl get services
+
+ACCESS APPLICATION:
+
+kubectl port-forward service/ai-fastapi-service 8000:80
+
+URL:
+
+http://localhost:8000
+
+SWAGGER:
+
+http://localhost:8000/docs
+
+Explanation:
+Ye complete example FastAPI application ko Kubernetes Deployment aur Service ke through run karta hai.
+
+Important:
+Local cluster jaise Minikube mein image ko cluster ke andar load karna pad sakta hai. Remote clusters mein image ko registry par push karke accessible tag use karein.
+
+
+==================================================
+BONUS: 15 IMPORTANT KUBECTL COMMANDS
+==================================================
+
+1. Get all resources:
+kubectl get all
+
+2. Get Pods:
+kubectl get pods
+
+3. Describe Pod:
+kubectl describe pod pod-name
+
+4. View logs:
+kubectl logs pod-name
+
+5. Follow logs:
+kubectl logs -f pod-name
+
+6. Execute inside Pod:
+kubectl exec -it pod-name -- sh
+
+7. Apply YAML:
+kubectl apply -f file.yaml
+
+8. Delete YAML resources:
+kubectl delete -f file.yaml
+
+9. Scale deployment:
+kubectl scale deployment app --replicas=5
+
+10. Check rollout:
+kubectl rollout status deployment/app
+
+11. Rollback:
+kubectl rollout undo deployment/app
+
+12. Get namespaces:
+kubectl get ns
+
+13. Get events:
+kubectl get events --sort-by=.metadata.creationTimestamp
+
+14. Check resource usage:
+kubectl top pods
+
+15. Check nodes:
+kubectl get nodes -o wide
+
+
+==================================================
+BONUS: 5 PRACTICAL KUBERNETES PROJECTS FOR AI ENGINEERS
+==================================================
+
+PROJECT 1: FASTAPI DEPLOYMENT
+
+Technology:
+FastAPI + Docker + Kubernetes.
+
+Concepts:
+Pods, Deployments, Services.
+
+PROJECT 2: LANGGRAPH AGENT DEPLOYMENT
+
+Technology:
+LangGraph + FastAPI + Docker + Kubernetes.
+
+Concepts:
+Deployment, ConfigMap, Secret, Scaling.
+
+PROJECT 3: RAG APPLICATION
+
+Technology:
+FastAPI + Qdrant + Kubernetes.
+
+Concepts:
+Services, PVC, Deployments, Networking.
+
+PROJECT 4: ML MODEL INFERENCE
+
+Technology:
+Python + FastAPI + ML Model + Kubernetes.
+
+Concepts:
+Resource Limits, Readiness Probe, Liveness Probe, Autoscaling.
+
+PROJECT 5: GPU-BASED AI DEPLOYMENT
+
+Technology:
+PyTorch + NVIDIA GPU + Kubernetes.
+
+Concepts:
+GPU Scheduling, Resource Requests, Deployment, Monitoring.
+
+
+==================================================
+5-DAY KUBERNETES STUDY PLAN
+==================================================
+
+DAY 1:
+Concepts 1–10
+Practice: Basic kubectl commands.
+
+DAY 2:
+Concepts 11–20
+Practice: Pods and Deployments.
+
+DAY 3:
+Concepts 21–30
+Practice: Services and Networking.
+
+DAY 4:
+Concepts 31–40
+Practice: ConfigMaps, Secrets and Storage.
+
+DAY 5:
+Concepts 41–50
+Practice: Autoscaling, Probes, Jobs and AI Deployment.
+
+
+==================================================
+IMPORTANT KUBERNETES INTERVIEW QUESTIONS
+==================================================
+
+1. What is Kubernetes?
+2. What is the difference between Docker and Kubernetes?
+3. What is a Pod?
+4. What is a Deployment?
+5. What is a ReplicaSet?
+6. What is a Service?
+7. What is ClusterIP?
+8. What is NodePort?
+9. What is LoadBalancer?
+10. What is Ingress?
+11. What is ConfigMap?
+12. What is Secret?
+13. What is Persistent Volume?
+14. What is Persistent Volume Claim?
+15. What is Horizontal Pod Autoscaler?
+16. What is Liveness Probe?
+17. What is Readiness Probe?
+18. What is a Namespace?
+19. What is a Kubernetes Job?
+20. What is a CronJob?
+21. How does Kubernetes manage failed Pods?
+22. How do you deploy FastAPI on Kubernetes?
+23. How do you deploy an LLM inference application?
+24. How do you configure GPU resources?
+25. How do you scale an AI application?
+
+
+==================================================
+OFFICIAL KUBERNETES LEARNING RESOURCES
+==================================================
+
+1. Kubernetes Documentation:
+https://kubernetes.io/docs/home/
+
+2. Kubernetes Tutorials:
+https://kubernetes.io/docs/tutorials/
+
+3. kubectl Reference:
+https://kubernetes.io/docs/reference/kubectl/
+
+4. Kubernetes Concepts:
+https://kubernetes.io/docs/concepts/
+
+5. Minikube:
+https://minikube.sigs.k8s.io/docs/
+
+
+==================================================
+FINAL AI ENGINEER PREPARATION ADVICE
+==================================================
+
+Focus on these 15 important concepts:
+
+1. Pods
+2. Deployments
+3. ReplicaSets
+4. Services
+5. ConfigMaps
+6. Secrets
+7. Persistent Volumes
+8. Persistent Volume Claims
+9. Ingress
+10. Namespaces
+11. Horizontal Pod Autoscaler
+12. Resource Requests and Limits
+13. Liveness Probes
+14. Readiness Probes
+15. GPU Scheduling
+
+FINAL GOAL:
+
+Build and deploy these 3 projects:
+
+1. Dockerized FastAPI Application on Kubernetes.
+2. LangGraph Agent with Kubernetes Deployment.
+3. RAG Application using FastAPI + Qdrant + Kubernetes.
+
+CONSISTENCY BEATS TALENT!
