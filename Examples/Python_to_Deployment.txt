@@ -1,0 +1,2086 @@
+# AI Engineering Practice: 150 Problems & Solutions
+Sections: Python Functions (1-25) | Python Exceptions (26-50) | Docker (51-75) | FastAPI (76-100) | Kubernetes (101-125) | RAG API Integrations (126-150)
+
+---
+# PART 1: PYTHON FUNCTIONS (1-25)
+
+### 1. Clean text before embedding
+**Scenario:** Scraped web docs contain extra whitespace and HTML tags.
+```python
+import re
+
+def clean_text(text: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
+print(clean_text("<p>Hello   <b>world</b></p>"))  # Hello world
+```
+
+### 2. Chunk text with overlap
+**Scenario:** Split long documents for a RAG pipeline.
+```python
+def chunk_text(text: str, size: int = 500, overlap: int = 50) -> list[str]:
+    if overlap >= size:
+        raise ValueError("overlap must be < size")
+    chunks, step = [], size - overlap
+    for i in range(0, len(text), step):
+        chunks.append(text[i:i + size])
+        if i + size >= len(text):
+            break
+    return chunks
+```
+
+### 3. Batch generator for API calls
+**Scenario:** Embedding API accepts max 100 texts per request.
+```python
+from typing import Iterable, Iterator
+
+def batched(items: list, n: int) -> Iterator[list]:
+    for i in range(0, len(items), n):
+        yield items[i:i + n]
+
+for batch in batched(list(range(250)), 100):
+    print(len(batch))  # 100, 100, 50
+```
+
+### 4. Cosine similarity
+**Scenario:** Compare two embedding vectors without numpy.
+```python
+import math
+
+def cosine(a: list[float], b: list[float]) -> float:
+    dot = sum(x * y for x, y in zip(a, b))
+    na = math.sqrt(sum(x * x for x in a))
+    nb = math.sqrt(sum(y * y for y in b))
+    return dot / (na * nb) if na and nb else 0.0
+```
+
+### 5. Rough token estimator
+**Scenario:** Quickly estimate prompt cost before calling the LLM.
+```python
+def estimate_tokens(text: str) -> int:
+    return max(1, len(text) // 4)  # ~4 chars per token for English
+```
+
+### 6. Normalize vectors (L2)
+**Scenario:** Vector DB expects unit-length vectors.
+```python
+import numpy as np
+
+def l2_normalize(v: list[float]) -> list[float]:
+    arr = np.array(v, dtype=float)
+    norm = np.linalg.norm(arr)
+    return (arr / norm).tolist() if norm else arr.tolist()
+```
+
+### 7. Top-k similar documents
+**Scenario:** Brute-force retrieval for a small corpus.
+```python
+import numpy as np
+
+def top_k(query: np.ndarray, matrix: np.ndarray, k: int = 3) -> list[tuple[int, float]]:
+    sims = matrix @ query / (np.linalg.norm(matrix, axis=1) * np.linalg.norm(query))
+    idx = np.argsort(-sims)[:k]
+    return [(int(i), float(sims[i])) for i in idx]
+```
+
+### 8. Deduplicate documents by hash
+**Scenario:** Same PDF was ingested twice.
+```python
+import hashlib
+
+def dedupe(docs: list[str]) -> list[str]:
+    seen, out = set(), []
+    for d in docs:
+        h = hashlib.sha256(d.strip().lower().encode()).hexdigest()
+        if h not in seen:
+            seen.add(h)
+            out.append(d)
+    return out
+```
+
+### 9. Flatten nested metadata
+**Scenario:** Vector DB only allows flat metadata.
+```python
+def flatten(d: dict, parent: str = "", sep: str = ".") -> dict:
+    out = {}
+    for k, v in d.items():
+        key = f"{parent}{sep}{k}" if parent else k
+        if isinstance(v, dict):
+            out.update(flatten(v, key, sep))
+        else:
+            out[key] = v
+    return out
+
+print(flatten({"doc": {"author": "A", "page": 2}}))  # {'doc.author': 'A', 'doc.page': 2}
+```
+
+### 10. Prompt template builder
+**Scenario:** Build a RAG prompt from retrieved chunks.
+```python
+def build_prompt(question: str, contexts: list[str]) -> str:
+    ctx = "\n\n".join(f"[{i+1}] {c}" for i, c in enumerate(contexts))
+    return (
+        "Answer using only the context below. If unsure, say 'I don't know'.\n\n"
+        f"Context:\n{ctx}\n\nQuestion: {question}\nAnswer:"
+    )
+```
+
+### 11. Retry decorator
+**Scenario:** LLM API fails randomly with 5xx.
+```python
+import time, functools
+
+def retry(times: int = 3, delay: float = 1.0):
+    def deco(fn):
+        @functools.wraps(fn)
+        def wrapper(*a, **kw):
+            for attempt in range(1, times + 1):
+                try:
+                    return fn(*a, **kw)
+                except Exception:
+                    if attempt == times:
+                        raise
+                    time.sleep(delay * attempt)
+        return wrapper
+    return deco
+```
+
+### 12. Timing decorator
+**Scenario:** Measure latency of retrieval vs generation.
+```python
+import time, functools
+
+def timed(fn):
+    @functools.wraps(fn)
+    def wrapper(*a, **kw):
+        t = time.perf_counter()
+        try:
+            return fn(*a, **kw)
+        finally:
+            print(f"{fn.__name__} took {(time.perf_counter()-t)*1000:.1f} ms")
+    return wrapper
+```
+
+### 13. Cache repeated embeddings
+**Scenario:** Same queries are embedded again and again.
+```python
+from functools import lru_cache
+
+@lru_cache(maxsize=1024)
+def embed_cached(text: str) -> tuple[float, ...]:
+    return tuple(fake_embed(text))  # lists are unhashable/mutable; return tuple
+
+def fake_embed(text: str) -> list[float]:
+    return [float(len(text)), 1.0]
+```
+
+### 14. Merge default and override config
+**Scenario:** Model config with environment overrides.
+```python
+def merge_config(default: dict, override: dict) -> dict:
+    out = default.copy()
+    for k, v in override.items():
+        if isinstance(v, dict) and isinstance(out.get(k), dict):
+            out[k] = merge_config(out[k], v)
+        else:
+            out[k] = v
+    return out
+```
+
+### 15. Extract JSON from LLM output
+**Scenario:** The model wraps JSON in markdown fences.
+```python
+import json, re
+
+def extract_json(text: str) -> dict:
+    m = re.search(r"```(?:json)?\s*(.*?)```", text, re.S)
+    payload = m.group(1) if m else text
+    return json.loads(payload.strip())
+
+print(extract_json('```json\n{"a": 1}\n```'))
+```
+
+### 16. Redact PII before sending to LLM
+**Scenario:** Compliance requires masking emails and phone numbers.
+```python
+import re
+
+EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+PHONE = re.compile(r"\+?\d[\d\s-]{8,}\d")
+
+def redact(text: str) -> str:
+    text = EMAIL.sub("[EMAIL]", text)
+    return PHONE.sub("[PHONE]", text)
+```
+
+### 17. Sliding window for chat history
+**Scenario:** Keep chat context under a token budget.
+```python
+def trim_history(messages: list[dict], max_tokens: int = 2000) -> list[dict]:
+    total, kept = 0, []
+    for m in reversed(messages):
+        t = len(m["content"]) // 4
+        if total + t > max_tokens:
+            break
+        kept.append(m)
+        total += t
+    return list(reversed(kept))
+```
+
+### 18. Typed settings from env
+**Scenario:** Load API keys and model names from the environment.
+```python
+import os
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Settings:
+    api_key: str
+    model: str = "gpt-4o-mini"
+    top_k: int = 4
+
+def load_settings() -> Settings:
+    return Settings(
+        api_key=os.environ["API_KEY"],
+        model=os.getenv("MODEL", "gpt-4o-mini"),
+        top_k=int(os.getenv("TOP_K", "4")),
+    )
+```
+
+### 19. Rolling average latency
+**Scenario:** Monitor the last N request latencies.
+```python
+from collections import deque
+
+class RollingAvg:
+    def __init__(self, n: int = 100):
+        self.q = deque(maxlen=n)
+    def add(self, x: float) -> float:
+        self.q.append(x)
+        return sum(self.q) / len(self.q)
+```
+
+### 20. Group chunks by source document
+**Scenario:** Display retrieved chunks grouped by file.
+```python
+from collections import defaultdict
+
+def group_by_source(chunks: list[dict]) -> dict[str, list[str]]:
+    out = defaultdict(list)
+    for c in chunks:
+        out[c["source"]].append(c["text"])
+    return dict(out)
+```
+
+### 21. Validate embedding dimensions
+**Scenario:** Wrong model produces 768-dim vectors but the index expects 1536.
+```python
+def validate_dim(vectors: list[list[float]], expected: int) -> None:
+    for i, v in enumerate(vectors):
+        if len(v) != expected:
+            raise ValueError(f"Vector {i} has dim {len(v)}, expected {expected}")
+```
+
+### 22. Simple rate limiter
+**Scenario:** Max 5 calls per second to an LLM API.
+```python
+import time
+
+class RateLimiter:
+    def __init__(self, per_sec: int):
+        self.interval = 1 / per_sec
+        self.last = 0.0
+    def wait(self):
+        now = time.monotonic()
+        sleep = self.last + self.interval - now
+        if sleep > 0:
+            time.sleep(sleep)
+        self.last = time.monotonic()
+```
+
+### 23. Stream tokens with a generator
+**Scenario:** Simulate token streaming to the UI.
+```python
+import time
+
+def stream_tokens(text: str):
+    for word in text.split():
+        yield word + " "
+        time.sleep(0.05)
+
+for tok in stream_tokens("Hello from the model"):
+    print(tok, end="", flush=True)
+```
+
+### 24. Async parallel embeddings
+**Scenario:** Embed many batches concurrently.
+```python
+import asyncio
+
+async def embed_batch(batch: list[str]) -> list[list[float]]:
+    await asyncio.sleep(0.1)  # replace with real API call
+    return [[len(t)] for t in batch]
+
+async def embed_all(batches: list[list[str]]):
+    results = await asyncio.gather(*(embed_batch(b) for b in batches))
+    return [v for r in results for v in r]
+
+print(asyncio.run(embed_all([["a", "bb"], ["ccc"]])))
+```
+
+### 25. Reciprocal Rank Fusion
+**Scenario:** Combine keyword and vector search rankings.
+```python
+def rrf(rankings: list[list[str]], k: int = 60) -> list[str]:
+    scores: dict[str, float] = {}
+    for ranking in rankings:
+        for rank, doc in enumerate(ranking, 1):
+            scores[doc] = scores.get(doc, 0) + 1 / (k + rank)
+    return sorted(scores, key=scores.get, reverse=True)
+
+print(rrf([["a", "b", "c"], ["c", "a", "d"]]))
+```
+
+---
+# PART 2: PYTHON EXCEPTIONS (26-50)
+
+### 26. Custom exception hierarchy
+**Scenario:** Distinguish retrieval, LLM, and validation failures.
+```python
+class AppError(Exception):
+    """Base error for the AI service."""
+
+class RetrievalError(AppError): ...
+class LLMError(AppError): ...
+class InvalidInputError(AppError): ...
+
+try:
+    raise RetrievalError("Vector DB unreachable")
+except AppError as e:
+    print(f"{type(e).__name__}: {e}")
+```
+
+### 27. try / except / else / finally
+**Scenario:** Load a prompt file and always log completion.
+```python
+def load_prompt(path: str) -> str:
+    try:
+        f = open(path, encoding="utf-8")
+    except FileNotFoundError:
+        return "default prompt"
+    else:
+        with f:
+            return f.read()
+    finally:
+        print("load_prompt finished")
+```
+
+### 28. Handle invalid JSON from LLM
+**Scenario:** Model returns malformed JSON.
+```python
+import json
+
+def safe_parse(text: str, default=None):
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as e:
+        print(f"Bad JSON at pos {e.pos}: {e.msg}")
+        return default
+```
+
+### 29. Exponential backoff on rate limit
+**Scenario:** API returns 429 Too Many Requests.
+```python
+import time, random
+
+class RateLimitError(Exception): ...
+
+def call_with_backoff(fn, retries=5):
+    for i in range(retries):
+        try:
+            return fn()
+        except RateLimitError:
+            if i == retries - 1:
+                raise
+            time.sleep(2 ** i + random.random())
+```
+
+### 30. HTTP timeout handling
+**Scenario:** The embedding API hangs.
+```python
+import httpx
+
+def post_embed(url: str, payload: dict) -> dict:
+    try:
+        r = httpx.post(url, json=payload, timeout=10.0)
+        r.raise_for_status()
+        return r.json()
+    except httpx.TimeoutException:
+        raise TimeoutError("Embedding service timed out")
+    except httpx.HTTPStatusError as e:
+        raise RuntimeError(f"HTTP {e.response.status_code}") from e
+```
+
+### 31. Exception chaining with `raise from`
+**Scenario:** Preserve the root cause when wrapping errors.
+```python
+class RetrievalError(Exception): ...
+
+def search(q):
+    try:
+        return {}["missing"]
+    except KeyError as e:
+        raise RetrievalError(f"Search failed for {q!r}") from e
+```
+
+### 32. Context manager for cleanup
+**Scenario:** Always close the DB connection.
+```python
+from contextlib import contextmanager
+
+@contextmanager
+def db_connection():
+    conn = {"open": True}
+    try:
+        yield conn
+    finally:
+        conn["open"] = False
+        print("connection closed")
+
+with db_connection() as c:
+    print(c)
+```
+
+### 33. Validate user input
+**Scenario:** Reject empty or too-long questions.
+```python
+def validate_question(q: str, max_len: int = 1000) -> str:
+    if not q or not q.strip():
+        raise ValueError("Question cannot be empty")
+    if len(q) > max_len:
+        raise ValueError(f"Question exceeds {max_len} characters")
+    return q.strip()
+```
+
+### 34. Missing config key
+**Scenario:** A required env var is not set.
+```python
+import os
+
+def require_env(name: str) -> str:
+    try:
+        return os.environ[name]
+    except KeyError:
+        raise RuntimeError(f"Missing required env var: {name}") from None
+```
+
+### 35. Handle empty retrieval
+**Scenario:** No chunks match the question.
+```python
+class NoContextFound(Exception): ...
+
+def get_context(results: list[str]) -> str:
+    if not results:
+        raise NoContextFound("No relevant documents found")
+    return "\n".join(results)
+
+try:
+    get_context([])
+except NoContextFound:
+    print("I couldn't find an answer in the knowledge base.")
+```
+
+### 36. Fallback model on failure
+**Scenario:** The primary LLM is down; use a cheaper backup.
+```python
+def generate(prompt: str, primary, fallback) -> str:
+    try:
+        return primary(prompt)
+    except Exception as e:
+        print(f"Primary failed: {e}; using fallback")
+        return fallback(prompt)
+```
+
+### 37. Pydantic validation errors
+**Scenario:** Validate the structured LLM output.
+```python
+from pydantic import BaseModel, ValidationError
+
+class Answer(BaseModel):
+    answer: str
+    confidence: float
+
+try:
+    Answer(answer="Paris", confidence="high")
+except ValidationError as e:
+    print(e.errors()[0]["msg"])
+```
+
+### 38. Catch multiple exceptions
+**Scenario:** Different handling for file vs permission errors.
+```python
+def read_doc(path):
+    try:
+        return open(path).read()
+    except (FileNotFoundError, IsADirectoryError):
+        return ""
+    except PermissionError:
+        raise RuntimeError("No permission to read document")
+```
+
+### 39. ExceptionGroup for partial batch failure (Python 3.11+)
+**Scenario:** Some documents fail during bulk ingestion.
+```python
+def ingest_all(docs):
+    errors = []
+    for d in docs:
+        try:
+            if not d:
+                raise ValueError("empty doc")
+        except Exception as e:
+            errors.append(e)
+    if errors:
+        raise ExceptionGroup("Ingestion failures", errors)
+
+try:
+    ingest_all(["a", "", ""])
+except* ValueError as eg:
+    print(f"{len(eg.exceptions)} docs failed")
+```
+
+### 40. Log full traceback
+**Scenario:** Debug production failures.
+```python
+import logging
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger("rag")
+
+try:
+    1 / 0
+except ZeroDivisionError:
+    log.exception("Unexpected error during scoring")
+```
+
+### 41. Simple circuit breaker
+**Scenario:** Stop calling a failing LLM provider for 30 seconds.
+```python
+import time
+
+class CircuitBreaker:
+    def __init__(self, threshold=3, cooldown=30):
+        self.fails, self.threshold, self.cooldown, self.opened = 0, threshold, cooldown, 0.0
+    def call(self, fn):
+        if self.fails >= self.threshold and time.time() - self.opened < self.cooldown:
+            raise RuntimeError("Circuit open")
+        try:
+            r = fn()
+            self.fails = 0
+            return r
+        except Exception:
+            self.fails += 1
+            self.opened = time.time()
+            raise
+```
+
+### 42. Missing model weights
+**Scenario:** The container starts without a mounted model.
+```python
+from pathlib import Path
+
+def load_model(path: str):
+    p = Path(path)
+    if not p.exists():
+        raise FileNotFoundError(f"Model not found at {p.resolve()}. Mount the volume.")
+    return p.read_bytes()
+```
+
+### 43. Async timeout
+**Scenario:** Cancel an LLM call after 15 seconds.
+```python
+import asyncio
+
+async def slow_llm():
+    await asyncio.sleep(60)
+
+async def main():
+    try:
+        await asyncio.wait_for(slow_llm(), timeout=15)
+    except asyncio.TimeoutError:
+        print("LLM call timed out")
+
+asyncio.run(main())
+```
+
+### 44. gather with return_exceptions
+**Scenario:** One failing request shouldn't kill the others.
+```python
+import asyncio
+
+async def job(i):
+    if i == 2:
+        raise ValueError("bad")
+    return i
+
+async def main():
+    res = await asyncio.gather(*(job(i) for i in range(4)), return_exceptions=True)
+    ok = [r for r in res if not isinstance(r, Exception)]
+    print(ok)  # [0, 1, 3]
+
+asyncio.run(main())
+```
+
+### 45. Context length exceeded
+**Scenario:** The prompt is too large for the model.
+```python
+class ContextTooLong(Exception): ...
+
+def check_tokens(prompt: str, limit: int = 8000):
+    tokens = len(prompt) // 4
+    if tokens > limit:
+        raise ContextTooLong(f"{tokens} tokens > limit {limit}")
+```
+
+### 46. Safe metric calculation
+**Scenario:** Precision when there are zero predictions.
+```python
+def precision(tp: int, fp: int) -> float:
+    try:
+        return tp / (tp + fp)
+    except ZeroDivisionError:
+        return 0.0
+```
+
+### 47. assert vs raise
+**Scenario:** Never use `assert` for user validation (it is stripped with `python -O`).
+```python
+# Bad
+def bad(top_k):
+    assert top_k > 0
+
+# Good
+def good(top_k: int):
+    if top_k <= 0:
+        raise ValueError("top_k must be positive")
+```
+
+### 48. Map exceptions to HTTP codes
+**Scenario:** Return meaningful status codes from the API.
+```python
+STATUS_MAP = {ValueError: 400, PermissionError: 403, TimeoutError: 504}
+
+def to_status(exc: Exception) -> int:
+    for cls, code in STATUS_MAP.items():
+        if isinstance(exc, cls):
+            return code
+    return 500
+```
+
+### 49. Dead-letter queue for failed jobs
+**Scenario:** Failed ingestion jobs must be reviewed later.
+```python
+dead_letters: list[dict] = []
+
+def process(job: dict):
+    try:
+        if "text" not in job:
+            raise KeyError("text")
+    except Exception as e:
+        dead_letters.append({"job": job, "error": repr(e)})
+```
+
+### 50. Graceful shutdown on SIGTERM
+**Scenario:** Kubernetes sends SIGTERM; finish the current job first.
+```python
+import signal, time
+
+running = True
+
+def handle(sig, frame):
+    global running
+    print("SIGTERM received, finishing current work...")
+    running = False
+
+signal.signal(signal.SIGTERM, handle)
+signal.signal(signal.SIGINT, handle)
+
+while running:
+    time.sleep(1)  # process job
+print("Shutdown clean")
+```
+
+---
+# PART 3: DOCKER (51-75)
+
+### 51. Basic FastAPI Dockerfile
+**Scenario:** Containerize an inference API.
+```dockerfile
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+EXPOSE 8000
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+### 52. Smaller images with env flags
+**Scenario:** Avoid .pyc files and buffered logs.
+```dockerfile
+FROM python:3.11-slim
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
+WORKDIR /app
+```
+
+### 53. Multi-stage build
+**Scenario:** Keep build tools out of the final image.
+```dockerfile
+FROM python:3.11-slim AS builder
+WORKDIR /build
+COPY requirements.txt .
+RUN pip install --prefix=/install -r requirements.txt
+
+FROM python:3.11-slim
+COPY --from=builder /install /usr/local
+WORKDIR /app
+COPY . .
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+### 54. Run as non-root
+**Scenario:** Security review requires an unprivileged user.
+```dockerfile
+FROM python:3.11-slim
+RUN useradd -m appuser
+WORKDIR /app
+COPY --chown=appuser:appuser . .
+USER appuser
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]
+```
+
+### 55. .dockerignore
+**Scenario:** The build context is huge because of datasets and venvs.
+```
+.git
+__pycache__/
+*.pyc
+.venv/
+data/
+*.ipynb
+.env
+models/*.bin
+```
+
+### 56. Layer caching
+**Scenario:** Every code change reinstalls dependencies.
+```dockerfile
+# Copy requirements first, install, THEN copy code
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+```
+
+### 57. ARG vs ENV
+**Scenario:** Choose a model name at build time and runtime.
+```dockerfile
+ARG PYTHON_VERSION=3.11
+FROM python:${PYTHON_VERSION}-slim
+ARG MODEL_NAME=all-MiniLM-L6-v2
+ENV MODEL_NAME=${MODEL_NAME}
+```
+```bash
+docker build --build-arg MODEL_NAME=bge-small -t rag-api .
+docker run -e MODEL_NAME=bge-base rag-api
+```
+
+### 58. HEALTHCHECK
+**Scenario:** Detect a hung API.
+```dockerfile
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+  CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')" || exit 1
+```
+
+### 59. Compose: API + Qdrant
+**Scenario:** Local RAG stack.
+```yaml
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      QDRANT_URL: http://qdrant:6333
+    depends_on: [qdrant]
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports: ["6333:6333"]
+```
+
+### 60. Compose: add Redis cache
+**Scenario:** Cache LLM responses.
+```yaml
+services:
+  api:
+    build: .
+    environment:
+      REDIS_URL: redis://redis:6379/0
+  redis:
+    image: redis:7-alpine
+```
+
+### 61. Persist vector DB data
+**Scenario:** Data is lost when the container restarts.
+```yaml
+services:
+  qdrant:
+    image: qdrant/qdrant
+    volumes:
+      - qdrant_data:/qdrant/storage
+volumes:
+  qdrant_data:
+```
+
+### 62. GPU container
+**Scenario:** Run a local embedding model on GPU.
+```bash
+docker run --gpus all -p 8000:8000 my-embed-api
+```
+```yaml
+services:
+  api:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+```
+
+### 63. Pre-download model at build time
+**Scenario:** Avoid a slow cold start.
+```dockerfile
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
+```
+
+### 64. Use env_file
+**Scenario:** Keep secrets out of the compose file.
+```yaml
+services:
+  api:
+    build: .
+    env_file: .env
+```
+```
+# .env (never commit)
+OPENAI_API_KEY=sk-xxxx
+```
+
+### 65. depends_on with healthcheck
+**Scenario:** The API starts before Postgres is ready.
+```yaml
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment: { POSTGRES_PASSWORD: pass }
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+```
+
+### 66. Container networking
+**Scenario:** The API cannot reach the DB at localhost.
+```text
+Inside compose, use the SERVICE NAME as host:
+  postgresql://user:pass@db:5432/rag     # correct
+  postgresql://user:pass@localhost:5432  # wrong (localhost = the api container itself)
+```
+
+### 67. Debug with logs
+**Scenario:** The container exits immediately.
+```bash
+docker ps -a
+docker logs --tail 100 -f <container>
+docker compose logs -f api
+```
+
+### 68. Resource limits
+**Scenario:** The model container eats all RAM.
+```bash
+docker run --memory=4g --cpus=2 rag-api
+```
+```yaml
+services:
+  api:
+    deploy:
+      resources:
+        limits: { cpus: "2", memory: 4G }
+```
+
+### 69. pgvector database
+**Scenario:** Use Postgres for embeddings.
+```yaml
+services:
+  pg:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: rag
+      POSTGRES_USER: rag
+      POSTGRES_PASSWORD: secret
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+volumes:
+  pgdata:
+```
+
+### 70. Separate worker service
+**Scenario:** Run ingestion in the background using the same image.
+```yaml
+services:
+  api:
+    build: .
+    command: uvicorn main:app --host 0.0.0.0
+  worker:
+    build: .
+    command: python worker.py
+    depends_on: [redis]
+  redis:
+    image: redis:7-alpine
+```
+
+### 71. Private PyPI index
+**Scenario:** Install internal packages during the build.
+```dockerfile
+ARG PIP_INDEX_URL
+RUN pip install --index-url ${PIP_INDEX_URL} -r requirements.txt
+```
+```bash
+docker build --build-arg PIP_INDEX_URL=https://pypi.company.com/simple -t app .
+```
+
+### 72. Debug inside a running container
+**Scenario:** Inspect files and env vars.
+```bash
+docker exec -it <container> /bin/bash
+docker exec <container> env | grep MODEL
+docker exec <container> python -c "import torch; print(torch.cuda.is_available())"
+```
+
+### 73. Clean disk space
+**Scenario:** Dev machine is full of old images.
+```bash
+docker system df
+docker image prune -a
+docker builder prune
+docker volume prune
+```
+
+### 74. Tag and push to a registry
+**Scenario:** Ship the image to Kubernetes.
+```bash
+docker build -t myrepo/rag-api:1.0.0 .
+docker tag myrepo/rag-api:1.0.0 myrepo/rag-api:latest
+docker login
+docker push myrepo/rag-api:1.0.0
+```
+
+### 75. Read-only root filesystem
+**Scenario:** Harden the production container.
+```bash
+docker run --read-only --tmpfs /tmp -p 8000:8000 rag-api
+```
+```yaml
+services:
+  api:
+    read_only: true
+    tmpfs: [/tmp]
+```
+
+---
+# PART 4: FASTAPI (76-100)
+
+### 76. Hello health endpoint
+**Scenario:** Kubernetes needs a probe target.
+```python
+from fastapi import FastAPI
+app = FastAPI(title="RAG API")
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+```
+
+### 77. Request/response models
+**Scenario:** Typed `/ask` endpoint.
+```python
+from pydantic import BaseModel, Field
+
+class AskRequest(BaseModel):
+    question: str = Field(min_length=3, max_length=1000)
+    top_k: int = Field(4, ge=1, le=20)
+
+class AskResponse(BaseModel):
+    answer: str
+    sources: list[str]
+
+@app.post("/ask", response_model=AskResponse)
+def ask(req: AskRequest):
+    return AskResponse(answer=f"Echo: {req.question}", sources=[])
+```
+
+### 78. Query parameters
+**Scenario:** Search with pagination.
+```python
+@app.get("/search")
+def search(q: str, limit: int = 10, offset: int = 0):
+    return {"q": q, "limit": limit, "offset": offset}
+```
+
+### 79. Path parameters
+**Scenario:** Fetch a document by ID.
+```python
+@app.get("/documents/{doc_id}")
+def get_doc(doc_id: int):
+    return {"doc_id": doc_id}
+```
+
+### 80. HTTPException
+**Scenario:** Return 404 for an unknown document.
+```python
+from fastapi import HTTPException
+
+DOCS = {1: "Doc one"}
+
+@app.get("/docs-store/{doc_id}")
+def read(doc_id: int):
+    if doc_id not in DOCS:
+        raise HTTPException(status_code=404, detail="Document not found")
+    return {"text": DOCS[doc_id]}
+```
+
+### 81. Dependency injection for the vector client
+**Scenario:** Share one client across routes.
+```python
+from fastapi import Depends
+
+class VectorStore:
+    def search(self, q: str, k: int): return []
+
+_store = VectorStore()
+
+def get_store() -> VectorStore:
+    return _store
+
+@app.get("/retrieve")
+def retrieve(q: str, store: VectorStore = Depends(get_store)):
+    return store.search(q, 4)
+```
+
+### 82. Lifespan: load model once
+**Scenario:** Don't reload the model per request.
+```python
+from contextlib import asynccontextmanager
+from fastapi import FastAPI
+
+models = {}
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    models["embedder"] = lambda t: [float(len(t))]  # load real model here
+    yield
+    models.clear()
+
+app = FastAPI(lifespan=lifespan)
+```
+
+### 83. API key authentication
+**Scenario:** Protect the endpoint with a header key.
+```python
+import os
+from fastapi import Header, HTTPException, Depends
+
+def verify_key(x_api_key: str = Header(...)):
+    if x_api_key != os.getenv("SERVICE_API_KEY"):
+        raise HTTPException(401, "Invalid API key")
+
+@app.post("/secure-ask", dependencies=[Depends(verify_key)])
+def secure_ask(req: AskRequest):
+    return {"ok": True}
+```
+
+### 84. CORS
+**Scenario:** The web frontend is blocked by the browser.
+```python
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://myapp.com"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+```
+
+### 85. Request timing middleware
+**Scenario:** Add an `X-Process-Time` header.
+```python
+import time
+from fastapi import Request
+
+@app.middleware("http")
+async def timing(request: Request, call_next):
+    t = time.perf_counter()
+    response = await call_next(request)
+    response.headers["X-Process-Time"] = f"{time.perf_counter()-t:.4f}"
+    return response
+```
+
+### 86. Streaming LLM response (SSE-like)
+**Scenario:** Show tokens as they are generated.
+```python
+import asyncio
+from fastapi.responses import StreamingResponse
+
+async def token_gen(text: str):
+    for w in text.split():
+        yield f"data: {w}\n\n"
+        await asyncio.sleep(0.05)
+
+@app.get("/stream")
+async def stream(q: str):
+    return StreamingResponse(token_gen(f"Answer to {q}"), media_type="text/event-stream")
+```
+
+### 87. File upload for ingestion
+**Scenario:** Upload a text file to index.
+```python
+from fastapi import UploadFile, File
+
+@app.post("/ingest")
+async def ingest(file: UploadFile = File(...)):
+    content = (await file.read()).decode("utf-8")
+    return {"filename": file.filename, "chars": len(content)}
+```
+
+### 88. Background task
+**Scenario:** Return immediately and embed in the background.
+```python
+from fastapi import BackgroundTasks
+
+def embed_and_store(text: str):
+    ...  # slow work
+
+@app.post("/ingest-async")
+def ingest_async(text: str, bg: BackgroundTasks):
+    bg.add_task(embed_and_store, text)
+    return {"status": "queued"}
+```
+
+### 89. Global exception handler
+**Scenario:** Return consistent JSON errors.
+```python
+from fastapi import Request
+from fastapi.responses import JSONResponse
+
+class RetrievalError(Exception): ...
+
+@app.exception_handler(RetrievalError)
+async def retrieval_handler(request: Request, exc: RetrievalError):
+    return JSONResponse(status_code=503, content={"error": "retrieval_failed", "detail": str(exc)})
+```
+
+### 90. Async endpoint with httpx
+**Scenario:** Call an external LLM without blocking.
+```python
+import httpx
+
+@app.post("/llm")
+async def llm(prompt: str):
+    async with httpx.AsyncClient(timeout=30) as client:
+        r = await client.post("https://api.example.com/v1/generate", json={"prompt": prompt})
+        r.raise_for_status()
+        return r.json()
+```
+
+### 91. Settings with pydantic-settings
+**Scenario:** Centralized config from environment.
+```python
+from pydantic_settings import BaseSettings
+from functools import lru_cache
+
+class Settings(BaseSettings):
+    openai_api_key: str
+    qdrant_url: str = "http://localhost:6333"
+    model: str = "gpt-4o-mini"
+
+@lru_cache
+def get_settings() -> Settings:
+    return Settings()
+```
+
+### 92. Router organization
+**Scenario:** Split a growing app into modules.
+```python
+# routers/rag.py
+from fastapi import APIRouter
+router = APIRouter(prefix="/rag", tags=["rag"])
+
+@router.get("/ping")
+def ping(): return {"pong": True}
+
+# main.py
+# from routers.rag import router
+# app.include_router(router)
+```
+
+### 93. Validate with enums
+**Scenario:** Restrict the model choice.
+```python
+from enum import Enum
+
+class ModelName(str, Enum):
+    small = "small"
+    large = "large"
+
+@app.get("/generate/{model}")
+def generate(model: ModelName):
+    return {"model": model.value}
+```
+
+### 94. Custom validator
+**Scenario:** Reject prompts with banned content.
+```python
+from pydantic import BaseModel, field_validator
+
+class Prompt(BaseModel):
+    text: str
+
+    @field_validator("text")
+    @classmethod
+    def no_secrets(cls, v: str):
+        if "password" in v.lower():
+            raise ValueError("Prompt contains sensitive keyword")
+        return v
+```
+
+### 95. Response caching with a dict
+**Scenario:** Avoid repeated LLM calls for the same question.
+```python
+cache: dict[str, str] = {}
+
+@app.get("/cached-ask")
+def cached_ask(q: str):
+    if q in cache:
+        return {"answer": cache[q], "cached": True}
+    answer = f"Answer: {q}"  # call LLM here
+    cache[q] = answer
+    return {"answer": answer, "cached": False}
+```
+
+### 96. Rate limit per client (simple)
+**Scenario:** Max 5 requests per minute per IP.
+```python
+import time
+from collections import defaultdict, deque
+from fastapi import Request, HTTPException
+
+hits = defaultdict(deque)
+
+def limiter(request: Request):
+    ip, now = request.client.host, time.time()
+    q = hits[ip]
+    while q and now - q[0] > 60:
+        q.popleft()
+    if len(q) >= 5:
+        raise HTTPException(429, "Too many requests")
+    q.append(now)
+
+@app.get("/limited", dependencies=[Depends(limiter)])
+def limited(): return {"ok": True}
+```
+
+### 97. Structured logging with request ID
+**Scenario:** Trace one request across logs.
+```python
+import uuid, logging
+from fastapi import Request
+
+log = logging.getLogger("api")
+
+@app.middleware("http")
+async def request_id(request: Request, call_next):
+    rid = str(uuid.uuid4())
+    log.info("request_id=%s path=%s", rid, request.url.path)
+    response = await call_next(request)
+    response.headers["X-Request-ID"] = rid
+    return response
+```
+
+### 98. Test with TestClient
+**Scenario:** Unit test the endpoint.
+```python
+from fastapi.testclient import TestClient
+
+client = TestClient(app)
+
+def test_health():
+    r = client.get("/health")
+    assert r.status_code == 200
+    assert r.json() == {"status": "ok"}
+```
+
+### 99. Readiness vs liveness
+**Scenario:** Kubernetes should send traffic only when the model is loaded.
+```python
+@app.get("/livez")
+def livez(): return {"alive": True}
+
+@app.get("/readyz")
+def readyz():
+    if "embedder" not in models:
+        raise HTTPException(503, "Model not loaded")
+    return {"ready": True}
+```
+
+### 100. Run with multiple workers
+**Scenario:** Use multiple CPU cores in production.
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
+# or via gunicorn
+gunicorn main:app -k uvicorn.workers.UvicornWorker -w 4 -b 0.0.0.0:8000
+```
+> Note: each worker loads its own copy of the model. Watch the memory.
+
+---
+# PART 5: KUBERNETES (101-125)
+
+### 101. Basic Deployment
+**Scenario:** Deploy the RAG API with 2 replicas.
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: rag-api }
+  template:
+    metadata:
+      labels: { app: rag-api }
+    spec:
+      containers:
+        - name: api
+          image: myrepo/rag-api:1.0.0
+          ports:
+            - containerPort: 8000
+```
+
+### 102. ClusterIP Service
+**Scenario:** Expose the API inside the cluster.
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-api
+spec:
+  selector: { app: rag-api }
+  ports:
+    - port: 80
+      targetPort: 8000
+```
+
+### 103. Namespace
+**Scenario:** Isolate the AI workloads.
+```bash
+kubectl create namespace ai
+kubectl config set-context --current --namespace=ai
+```
+
+### 104. ConfigMap for non-secret config
+**Scenario:** Model name and top-k.
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rag-config
+data:
+  MODEL: gpt-4o-mini
+  TOP_K: "4"
+```
+```yaml
+# in container spec
+envFrom:
+  - configMapRef: { name: rag-config }
+```
+
+### 105. Secret for API keys
+**Scenario:** Store the OpenAI key securely.
+```bash
+kubectl create secret generic llm-secret --from-literal=OPENAI_API_KEY=sk-xxxx
+```
+```yaml
+env:
+  - name: OPENAI_API_KEY
+    valueFrom:
+      secretKeyRef: { name: llm-secret, key: OPENAI_API_KEY }
+```
+
+### 106. Liveness and readiness probes
+**Scenario:** Route traffic only to ready pods.
+```yaml
+livenessProbe:
+  httpGet: { path: /livez, port: 8000 }
+  initialDelaySeconds: 10
+  periodSeconds: 10
+readinessProbe:
+  httpGet: { path: /readyz, port: 8000 }
+  initialDelaySeconds: 20
+  periodSeconds: 5
+```
+
+### 107. Resource requests and limits
+**Scenario:** The embedding model needs predictable memory.
+```yaml
+resources:
+  requests: { cpu: "500m", memory: "1Gi" }
+  limits:   { cpu: "2",    memory: "4Gi" }
+```
+
+### 108. Startup probe for slow model loading
+**Scenario:** Model load takes 90 seconds.
+```yaml
+startupProbe:
+  httpGet: { path: /readyz, port: 8000 }
+  failureThreshold: 30
+  periodSeconds: 5
+```
+
+### 109. Horizontal Pod Autoscaler
+**Scenario:** Scale on CPU load.
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rag-api-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: rag-api
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: { type: Utilization, averageUtilization: 70 }
+```
+
+### 110. Ingress
+**Scenario:** Expose the API on a domain.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rag-ingress
+spec:
+  rules:
+    - host: rag.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rag-api
+                port: { number: 80 }
+```
+
+### 111. PersistentVolumeClaim for vector DB
+**Scenario:** Qdrant needs durable storage.
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qdrant-pvc
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests: { storage: 20Gi }
+```
+
+### 112. StatefulSet for the vector DB
+**Scenario:** Stable identity and storage.
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: qdrant
+spec:
+  serviceName: qdrant
+  replicas: 1
+  selector:
+    matchLabels: { app: qdrant }
+  template:
+    metadata:
+      labels: { app: qdrant }
+    spec:
+      containers:
+        - name: qdrant
+          image: qdrant/qdrant
+          volumeMounts:
+            - { name: data, mountPath: /qdrant/storage }
+  volumeClaimTemplates:
+    - metadata: { name: data }
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources: { requests: { storage: 20Gi } }
+```
+
+### 113. Service discovery via DNS
+**Scenario:** The API needs the Qdrant address.
+```yaml
+env:
+  - name: QDRANT_URL
+    value: http://qdrant.ai.svc.cluster.local:6333
+```
+
+### 114. Rolling update strategy
+**Scenario:** Deploy a new model version without downtime.
+```yaml
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+```
+
+### 115. Rollback
+**Scenario:** The new image broke the answers.
+```bash
+kubectl rollout status deployment/rag-api
+kubectl rollout history deployment/rag-api
+kubectl rollout undo deployment/rag-api
+```
+
+### 116. Debug a crashing pod
+**Scenario:** Pod status is CrashLoopBackOff.
+```bash
+kubectl get pods
+kubectl describe pod <pod>
+kubectl logs <pod> --previous
+kubectl exec -it <pod> -- /bin/sh
+```
+
+### 117. CronJob for nightly re-indexing
+**Scenario:** Rebuild embeddings every night at 2 AM.
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: reindex
+spec:
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: reindex
+              image: myrepo/rag-api:1.0.0
+              command: ["python", "reindex.py"]
+```
+
+### 118. One-off Job for ingestion
+**Scenario:** Bulk-load documents once.
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ingest-once
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: ingest
+          image: myrepo/rag-api:1.0.0
+          command: ["python", "ingest.py"]
+```
+
+### 119. GPU scheduling
+**Scenario:** Run a local LLM on a GPU node.
+```yaml
+resources:
+  limits:
+    nvidia.com/gpu: 1
+```
+
+### 120. Node selector and tolerations
+**Scenario:** Pin the model to GPU nodes.
+```yaml
+nodeSelector:
+  accelerator: nvidia-t4
+tolerations:
+  - key: "nvidia.com/gpu"
+    operator: "Exists"
+    effect: "NoSchedule"
+```
+
+### 121. Mount a ConfigMap as a file
+**Scenario:** Ship the prompt template as a file.
+```yaml
+volumes:
+  - name: prompts
+    configMap: { name: prompt-templates }
+containers:
+  - name: api
+    volumeMounts:
+      - { name: prompts, mountPath: /app/prompts }
+```
+
+### 122. Image pull secret
+**Scenario:** Pull from a private registry.
+```bash
+kubectl create secret docker-registry regcred \
+  --docker-server=registry.example.com --docker-username=me --docker-password=xxx
+```
+```yaml
+spec:
+  imagePullSecrets:
+    - name: regcred
+```
+
+### 123. NetworkPolicy
+**Scenario:** Only the API may talk to the vector DB.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: qdrant-allow-api
+spec:
+  podSelector:
+    matchLabels: { app: qdrant }
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: { app: rag-api }
+```
+
+### 124. Port-forward for local testing
+**Scenario:** Test the in-cluster API from the laptop.
+```bash
+kubectl port-forward svc/rag-api 8000:80
+curl http://localhost:8000/health
+```
+
+### 125. Pod Disruption Budget
+**Scenario:** Keep at least 1 pod during node maintenance.
+```yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: rag-api-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels: { app: rag-api }
+```
+
+---
+# PART 6: RAG API INTEGRATIONS (126-150)
+
+> Install: `pip install openai anthropic qdrant-client chromadb pinecone pgvector psycopg[binary] httpx sentence-transformers rank-bm25 fastapi uvicorn`
+> Always load keys from environment variables, never hardcode them.
+
+### 126. OpenAI embeddings
+**Scenario:** Convert chunks to vectors.
+```python
+from openai import OpenAI
+client = OpenAI()  # reads OPENAI_API_KEY
+
+def embed(texts: list[str]) -> list[list[float]]:
+    r = client.embeddings.create(model="text-embedding-3-small", input=texts)
+    return [d.embedding for d in r.data]
+```
+
+### 127. Local embeddings with sentence-transformers
+**Scenario:** No external API; keep data private.
+```python
+from sentence_transformers import SentenceTransformer
+model = SentenceTransformer("all-MiniLM-L6-v2")
+
+def embed_local(texts: list[str]):
+    return model.encode(texts, normalize_embeddings=True).tolist()
+```
+
+### 128. Qdrant: create collection and upsert
+**Scenario:** Store chunk vectors with metadata.
+```python
+from qdrant_client import QdrantClient
+from qdrant_client.models import VectorParams, Distance, PointStruct
+
+q = QdrantClient(url="http://localhost:6333")
+q.recreate_collection("docs", vectors_config=VectorParams(size=384, distance=Distance.COSINE))
+
+def upsert(chunks: list[str], vectors: list[list[float]], source: str):
+    points = [
+        PointStruct(id=i, vector=v, payload={"text": c, "source": source})
+        for i, (c, v) in enumerate(zip(chunks, vectors))
+    ]
+    q.upsert("docs", points=points)
+```
+
+### 129. Qdrant: search
+**Scenario:** Retrieve the top-k chunks.
+```python
+def search(query_vec: list[float], k: int = 4):
+    hits = q.query_points("docs", query=query_vec, limit=k).points
+    return [{"text": h.payload["text"], "source": h.payload["source"], "score": h.score} for h in hits]
+```
+
+### 130. Qdrant: metadata filter
+**Scenario:** Search only within one document.
+```python
+from qdrant_client.models import Filter, FieldCondition, MatchValue
+
+def search_in_source(query_vec, source: str, k=4):
+    flt = Filter(must=[FieldCondition(key="source", match=MatchValue(value=source))])
+    return q.query_points("docs", query=query_vec, query_filter=flt, limit=k).points
+```
+
+### 131. ChromaDB quickstart
+**Scenario:** Zero-setup local vector store.
+```python
+import chromadb
+client = chromadb.PersistentClient(path="./chroma")
+col = client.get_or_create_collection("docs")
+
+col.add(ids=["1", "2"], documents=["Cats purr.", "Dogs bark."], metadatas=[{"s": "a"}, {"s": "b"}])
+res = col.query(query_texts=["Which animal barks?"], n_results=1)
+print(res["documents"])
+```
+
+### 132. Pinecone upsert and query
+**Scenario:** Managed vector DB.
+```python
+import os
+from pinecone import Pinecone
+
+pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
+index = pc.Index("docs")
+
+index.upsert(vectors=[{"id": "1", "values": [0.1] * 384, "metadata": {"text": "hello"}}])
+res = index.query(vector=[0.1] * 384, top_k=3, include_metadata=True)
+print([m.metadata["text"] for m in res.matches])
+```
+
+### 133. pgvector with psycopg
+**Scenario:** Use existing Postgres.
+```python
+import psycopg
+
+with psycopg.connect("postgresql://rag:secret@localhost:5432/rag") as conn:
+    conn.execute("CREATE EXTENSION IF NOT EXISTS vector")
+    conn.execute("CREATE TABLE IF NOT EXISTS chunks (id serial PRIMARY KEY, text text, embedding vector(384))")
+    vec = "[" + ",".join(["0.1"] * 384) + "]"
+    conn.execute("INSERT INTO chunks (text, embedding) VALUES (%s, %s::vector)", ("hello", vec))
+    rows = conn.execute(
+        "SELECT text FROM chunks ORDER BY embedding <=> %s::vector LIMIT 3", (vec,)
+    ).fetchall()
+    print(rows)
+```
+
+### 134. Call an LLM with retrieved context (Anthropic)
+**Scenario:** Generate a grounded answer.
+```python
+import anthropic
+claude = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY
+
+def answer(question: str, contexts: list[str]) -> str:
+    ctx = "\n\n".join(f"[{i+1}] {c}" for i, c in enumerate(contexts))
+    msg = claude.messages.create(
+        model="claude-sonnet-5-5",
+        max_tokens=500,
+        system="Answer only from the provided context. Cite sources like [1]. Say 'I don't know' if missing.",
+        messages=[{"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {question}"}],
+    )
+    return msg.content[0].text
+```
+
+### 135. Call an LLM (OpenAI chat completions)
+**Scenario:** Same flow with OpenAI.
+```python
+def answer_openai(question: str, contexts: list[str]) -> str:
+    ctx = "\n\n".join(contexts)
+    r = client.chat.completions.create(
+        model="gpt-4o-mini",
+        temperature=0,
+        messages=[
+            {"role": "system", "content": "Answer only from the context."},
+            {"role": "user", "content": f"Context:\n{ctx}\n\nQuestion: {question}"},
+        ],
+    )
+    return r.choices[0].message.content
+```
+
+### 136. End-to-end RAG endpoint
+**Scenario:** Combine embed, retrieve, generate in FastAPI.
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Ask(BaseModel):
+    question: str
+    top_k: int = 4
+
+@app.post("/rag")
+def rag(req: Ask):
+    qvec = embed_local([req.question])[0]
+    hits = search(qvec, req.top_k)
+    if not hits:
+        return {"answer": "No relevant context found.", "sources": []}
+    ans = answer(req.question, [h["text"] for h in hits])
+    return {"answer": ans, "sources": [h["source"] for h in hits]}
+```
+
+### 137. Streaming answers from Anthropic
+**Scenario:** Lower perceived latency.
+```python
+from fastapi.responses import StreamingResponse
+
+def stream_answer(question: str, ctx: str):
+    with claude.messages.stream(
+        model="claude-sonnet-5-5", max_tokens=500,
+        messages=[{"role": "user", "content": f"{ctx}\n\n{question}"}],
+    ) as s:
+        for text in s.text_stream:
+            yield f"data: {text}\n\n"
+
+@app.get("/rag-stream")
+def rag_stream(q: str):
+    return StreamingResponse(stream_answer(q, "context here"), media_type="text/event-stream")
+```
+
+### 138. Score threshold to avoid weak context
+**Scenario:** Drop low-similarity chunks.
+```python
+def filter_hits(hits: list[dict], min_score: float = 0.35) -> list[dict]:
+    return [h for h in hits if h["score"] >= min_score]
+```
+
+### 139. Hybrid search (BM25 + vector) with RRF
+**Scenario:** Keyword-heavy queries (IDs, error codes) fail in pure vector search.
+```python
+from rank_bm25 import BM25Okapi
+
+corpus = ["error E42 disk full", "how to reset password", "disk cleanup guide"]
+bm25 = BM25Okapi([d.split() for d in corpus])
+
+def bm25_rank(query: str, k=3) -> list[str]:
+    scores = bm25.get_scores(query.split())
+    return [corpus[i] for i in sorted(range(len(corpus)), key=lambda i: -scores[i])[:k]]
+
+def hybrid(query: str, vector_ranked: list[str]) -> list[str]:
+    return rrf([bm25_rank(query), vector_ranked])  # rrf from problem 25
+```
+
+### 140. Rerank with Cohere API (via httpx)
+**Scenario:** Improve the ordering of the top 20 hits.
+```python
+import os, httpx
+
+def rerank(query: str, docs: list[str], top_n: int = 4) -> list[str]:
+    r = httpx.post(
+        "https://api.cohere.com/v2/rerank",
+        headers={"Authorization": f"Bearer {os.environ['COHERE_API_KEY']}"},
+        json={"model": "rerank-v3.5", "query": query, "documents": docs, "top_n": top_n},
+        timeout=20,
+    )
+    r.raise_for_status()
+    return [docs[x["index"]] for x in r.json()["results"]]
+```
+
+### 141. Cross-encoder rerank locally
+**Scenario:** No external API for reranking.
+```python
+from sentence_transformers import CrossEncoder
+ce = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+
+def local_rerank(query: str, docs: list[str], top_n=4):
+    scores = ce.predict([(query, d) for d in docs])
+    ranked = sorted(zip(docs, scores), key=lambda x: -x[1])
+    return [d for d, _ in ranked[:top_n]]
+```
+
+### 142. Query rewriting
+**Scenario:** Follow-up like "what about pricing?" lacks context.
+```python
+def rewrite_query(history: list[str], question: str) -> str:
+    prompt = (
+        "Rewrite the last question as a standalone search query.\n"
+        f"History: {history[-4:]}\nQuestion: {question}\nStandalone query:"
+    )
+    r = claude.messages.create(model="claude-sonnet-5-5", max_tokens=60,
+                               messages=[{"role": "user", "content": prompt}])
+    return r.content[0].text.strip()
+```
+
+### 143. Structured JSON answer with citations
+**Scenario:** The frontend needs machine-readable output.
+```python
+import json
+
+def answer_json(question: str, chunks: list[dict]) -> dict:
+    ctx = "\n".join(f"[{i}] {c['text']}" for i, c in enumerate(chunks))
+    prompt = (
+        f"Context:\n{ctx}\n\nQuestion: {question}\n"
+        'Return ONLY JSON: {"answer": str, "cited_ids": [int]}'
+    )
+    r = claude.messages.create(model="claude-sonnet-5-5", max_tokens=400,
+                               messages=[{"role": "user", "content": prompt}])
+    return json.loads(r.content[0].text)
+```
+
+### 144. Ingestion pipeline (load, chunk, embed, store)
+**Scenario:** Index a folder of .txt files.
+```python
+from pathlib import Path
+
+def ingest_folder(folder: str):
+    for path in Path(folder).glob("*.txt"):
+        text = clean_text(path.read_text(encoding="utf-8"))   # problem 1
+        chunks = chunk_text(text, 500, 50)                    # problem 2
+        vectors = embed_local(chunks)
+        upsert(chunks, vectors, source=path.name)             # problem 128
+        print(f"Indexed {path.name}: {len(chunks)} chunks")
+```
+
+### 145. Idempotent ingestion with content hash IDs
+**Scenario:** Re-running ingestion must not duplicate chunks.
+```python
+import hashlib, uuid
+
+def chunk_id(source: str, text: str) -> str:
+    h = hashlib.sha256(f"{source}:{text}".encode()).hexdigest()
+    return str(uuid.UUID(h[:32]))  # deterministic UUID, valid for Qdrant
+```
+
+### 146. Cache RAG answers in Redis
+**Scenario:** Same questions repeat; save cost.
+```python
+import redis, json, hashlib
+
+r = redis.Redis.from_url("redis://localhost:6379/0")
+
+def cached_rag(question: str, fn, ttl: int = 3600):
+    key = "rag:" + hashlib.sha256(question.lower().strip().encode()).hexdigest()
+    if (hit := r.get(key)):
+        return json.loads(hit)
+    result = fn(question)
+    r.setex(key, ttl, json.dumps(result))
+    return result
+```
+
+### 147. Retry and timeout around LLM calls
+**Scenario:** Make the RAG API resilient.
+```python
+import time
+import anthropic
+
+def safe_generate(prompt: str, retries: int = 3) -> str:
+    for i in range(retries):
+        try:
+            r = claude.messages.create(model="claude-sonnet-5-5", max_tokens=500,
+                                       messages=[{"role": "user", "content": prompt}], timeout=30)
+            return r.content[0].text
+        except (anthropic.RateLimitError, anthropic.APIConnectionError, anthropic.APITimeoutError):
+            if i == retries - 1:
+                raise
+            time.sleep(2 ** i)
+```
+
+### 148. Simple retrieval evaluation (hit rate and MRR)
+**Scenario:** Measure whether retrieval finds the right doc.
+```python
+def evaluate(test_set: list[dict], retrieve_fn, k=4):
+    hits, rr = 0, 0.0
+    for t in test_set:  # {"question": str, "expected_source": str}
+        results = [h["source"] for h in retrieve_fn(t["question"], k)]
+        if t["expected_source"] in results:
+            hits += 1
+            rr += 1 / (results.index(t["expected_source"]) + 1)
+    n = len(test_set)
+    return {"hit_rate": hits / n, "mrr": rr / n}
+```
+
+### 149. Webhook-triggered re-ingestion
+**Scenario:** The CMS notifies the API when a page changes.
+```python
+from fastapi import BackgroundTasks, Header, HTTPException
+import hmac, hashlib, os
+
+@app.post("/webhook/content-updated")
+async def content_updated(payload: dict, bg: BackgroundTasks, x_signature: str = Header(...)):
+    expected = hmac.new(os.environ["WEBHOOK_SECRET"].encode(),
+                        str(payload).encode(), hashlib.sha256).hexdigest()
+    if not hmac.compare_digest(x_signature, expected):
+        raise HTTPException(401, "Bad signature")
+    bg.add_task(ingest_folder, payload["folder"])
+    return {"status": "reindex queued"}
+```
+
+### 150. Full RAG service with fallback and logging
+**Scenario:** Production-style endpoint tying it all together.
+```python
+import logging
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
+
+log = logging.getLogger("rag")
+app = FastAPI()
+
+class Ask(BaseModel):
+    question: str = Field(min_length=3, max_length=1000)
+    top_k: int = Field(4, ge=1, le=10)
+
+@app.post("/v1/ask")
+def ask(req: Ask):
+    try:
+        qvec = embed_local([req.question])[0]
+        hits = filter_hits(search(qvec, req.top_k * 3))
+    except Exception:
+        log.exception("retrieval failed")
+        raise HTTPException(503, "Retrieval unavailable")
+
+    if not hits:
+        return {"answer": "I don't know based on the available documents.", "sources": []}
+
+    docs = local_rerank(req.question, [h["text"] for h in hits], req.top_k)
+    try:
+        ans = safe_generate(
+            "Answer only from context and cite as [n].\n\nContext:\n"
+            + "\n".join(f"[{i+1}] {d}" for i, d in enumerate(docs))
+            + f"\n\nQuestion: {req.question}"
+        )
+    except Exception:
+        log.exception("generation failed")
+        raise HTTPException(502, "LLM unavailable")
+
+    log.info("question=%r hits=%d", req.question, len(docs))
+    return {"answer": ans, "sources": sorted({h["source"] for h in hits})}
+```
+
+---
+**End of 150 problems.** Tip: practice by hiding the solution, writing your own, then comparing. Combine #128-#136 into a working project.

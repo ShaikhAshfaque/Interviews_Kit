@@ -1,0 +1,800 @@
+# DOCKER – 50 PRACTICAL CODES FOR AI ENGINEERS
+## SIMPLE TO INTERMEDIATE | HINGLISH
+
+==================================================
+PART 1: DOCKER BASIC COMMANDS (1–10)
+==================================================
+
+1. CHECK DOCKER VERSION
+
+Command:
+
+docker --version
+
+Explanation:
+Docker installed hai ya nahi aur kaunsa version installed hai, ye check karta hai.
+
+2. CHECK DOCKER INFORMATION
+
+Command:
+
+docker info
+
+Explanation:
+Docker Engine, containers, images aur system configuration ki information deta hai.
+
+3. DOWNLOAD DOCKER IMAGE
+
+Command:
+
+docker pull python:3.12-slim
+
+Explanation:
+Docker Hub se Python 3.12 slim image download karta hai.
+
+4. SHOW DOCKER IMAGES
+
+Command:
+
+docker images
+
+Explanation:
+System mein available Docker images ki list show karta hai.
+
+5. RUN A CONTAINER
+
+Command:
+
+docker run hello-world
+
+Explanation:
+Hello-world image se first Docker container run karta hai.
+
+6. RUN PYTHON CONTAINER
+
+Command:
+
+docker run -it python:3.12-slim python
+
+Explanation:
+Python container ke andar interactive Python terminal open karta hai.
+
+7. LIST RUNNING CONTAINERS
+
+Command:
+
+docker ps
+
+Explanation:
+Currently running containers ki list show karta hai.
+
+8. LIST ALL CONTAINERS
+
+Command:
+
+docker ps -a
+
+Explanation:
+Running aur stopped dono containers show karta hai.
+
+9. STOP A CONTAINER
+
+Command:
+
+docker stop container_id
+
+Explanation:
+Running container ko stop karta hai.
+
+10. REMOVE A CONTAINER
+
+Command:
+
+docker rm container_id
+
+Explanation:
+Stopped container ko remove karta hai.
+
+==================================================
+PART 2: DOCKER IMAGE MANAGEMENT (11–20)
+==================================================
+
+11. BUILD DOCKER IMAGE
+
+Command:
+
+docker build -t my-ai-app .
+
+Explanation:
+Current directory ke Dockerfile se my-ai-app image build karta hai.
+
+12. RUN IMAGE WITH CUSTOM NAME
+
+Command:
+
+docker run --name ai-container my-ai-app
+
+Explanation:
+Image se ai-container naam ka container create aur run karta hai.
+
+13. RUN CONTAINER IN BACKGROUND
+
+Command:
+
+docker run -d --name ai-app my-ai-app
+
+Explanation:
+-d ka matlab detached mode. Container background mein run hota hai.
+
+14. DELETE DOCKER IMAGE
+
+Command:
+
+docker rmi my-ai-app
+
+Explanation:
+Docker image delete karta hai. Image kisi existing container mein use nahi honi chahiye.
+
+15. RENAME DOCKER IMAGE
+
+Command:
+
+docker tag my-ai-app my-ai-app:v1
+
+Explanation:
+Image ko ek version tag deta hai.
+
+16. VIEW IMAGE DETAILS
+
+Command:
+
+docker inspect my-ai-app
+
+Explanation:
+Image ya container ki detailed configuration show karta hai.
+
+17. VIEW CONTAINER LOGS
+
+Command:
+
+docker logs ai-container
+
+Explanation:
+Container ke andar application ke logs check karta hai.
+
+18. FOLLOW LIVE LOGS
+
+Command:
+
+docker logs -f ai-container
+
+Explanation:
+Application ke live logs continuously display karta hai.
+
+19. EXECUTE COMMAND INSIDE CONTAINER
+
+Command:
+
+docker exec -it ai-container bash
+
+Explanation:
+Running container ke andar interactive terminal open karta hai.
+
+20. REMOVE UNUSED DOCKER RESOURCES
+
+Command:
+
+docker system prune
+
+Explanation:
+Unused containers, networks aur build cache clean karne mein help karta hai. Run karne se pehle cleanup impact check karein.
+
+==================================================
+PART 3: DOCKERFILE PRACTICAL CODES (21–30)
+==================================================
+
+21. CREATE A BASIC DOCKERFILE
+
+File: Dockerfile
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY app.py .
+
+CMD ["python", "app.py"]
+
+Explanation:
+Python image use hoti hai, working directory set hoti hai aur app.py execute hoti hai.
+
+22. DOCKERFILE WITH REQUIREMENTS
+
+File: Dockerfile
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["python", "app.py"]
+
+Explanation:
+Python dependencies install karke application run karta hai.
+
+23. DOCKERFILE FOR FASTAPI
+
+File: Dockerfile
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+Explanation:
+FastAPI application container ke port 8000 par run hoti hai.
+
+24. CREATE requirements.txt
+
+File: requirements.txt
+
+fastapi
+uvicorn[standard]
+pydantic
+langchain
+langgraph
+langchain-openai
+
+Explanation:
+Project ki Python dependencies ek file mein maintain hoti hain.
+
+25. CREATE SIMPLE FASTAPI APP
+
+File: main.py
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "AI App Running"}
+
+@app.get("/predict")
+def predict():
+    return {"prediction": "AI Response"}
+
+Explanation:
+Ye simple FastAPI application hai jise Docker ke andar run kar sakte hain.
+
+26. BUILD FASTAPI IMAGE
+
+Command:
+
+docker build -t fastapi-ai .
+
+Explanation:
+Current project ke Dockerfile se FastAPI image create hoti hai.
+
+27. RUN FASTAPI CONTAINER
+
+Command:
+
+docker run -d -p 8000:8000 --name fastapi-container fastapi-ai
+
+Explanation:
+Container ka port 8000 host ke port 8000 se connect karta hai.
+
+28. ACCESS FASTAPI APPLICATION
+
+URL:
+
+http://localhost:8000
+
+Swagger Documentation:
+
+http://localhost:8000/docs
+
+Explanation:
+Browser se Dockerized FastAPI application access kar sakte hain.
+
+29. CREATE DOCKERIGNORE FILE
+
+File: .dockerignore
+
+.venv/
+__pycache__/
+*.pyc
+.git/
+.env
+.ipynb_checkpoints/
+node_modules/
+
+Explanation:
+Unnecessary files Docker build context mein include hone se bachata hai.
+
+30. USE ENVIRONMENT VARIABLES
+
+Command:
+
+docker run -d 
+  -p 8000:8000 
+  -e APP_ENV=production 
+  --name ai-container 
+  fastapi-ai
+
+Explanation:
+Environment variable container ko runtime par pass karta hai.
+
+==================================================
+PART 4: DOCKER VOLUMES AND NETWORKING (31–40)
+==================================================
+
+31. CREATE A DOCKER VOLUME
+
+Command:
+
+docker volume create ai-data
+
+Explanation:
+Persistent data storage ke liye Docker volume create karta hai.
+
+32. LIST DOCKER VOLUMES
+
+Command:
+
+docker volume ls
+
+Explanation:
+Available Docker volumes ki list show karta hai.
+
+33. INSPECT A VOLUME
+
+Command:
+
+docker volume inspect ai-data
+
+Explanation:
+Volume ki detailed information show karta hai.
+
+34. MOUNT VOLUME IN CONTAINER
+
+Command:
+
+docker run -d 
+  --name ai-storage 
+  -v ai-data:/app/data 
+  python:3.12-slim 
+  sleep infinity
+
+Explanation:
+Container ke /app/data folder ko persistent Docker volume se connect karta hai.
+
+35. REMOVE DOCKER VOLUME
+
+Command:
+
+docker volume rm ai-data
+
+Explanation:
+Unused volume delete karta hai. Volume kisi container se attached nahi hona chahiye.
+
+36. CREATE DOCKER NETWORK
+
+Command:
+
+docker network create ai-network
+
+Explanation:
+Multiple containers ko communicate karne ke liye custom network create karta hai.
+
+37. LIST DOCKER NETWORKS
+
+Command:
+
+docker network ls
+
+Explanation:
+Docker ke available networks show karta hai.
+
+38. RUN CONTAINER ON CUSTOM NETWORK
+
+Command:
+
+docker run -d 
+  --name ai-backend 
+  --network ai-network 
+  fastapi-ai
+
+Explanation:
+FastAPI container ko ai-network se connect karta hai.
+
+39. INSPECT NETWORK
+
+Command:
+
+docker network inspect ai-network
+
+Explanation:
+Network se connected containers aur network configuration check karta hai.
+
+40. CONNECT CONTAINER TO NETWORK
+
+Command:
+
+docker network connect ai-network ai-container
+
+Explanation:
+Existing container ko additional Docker network se connect karta hai.
+
+==================================================
+PART 5: DOCKER COMPOSE AND AI DEPLOYMENT (41–50)
+==================================================
+
+41. BASIC DOCKER COMPOSE FILE
+
+File: compose.yaml
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+
+Command:
+
+docker compose up
+
+Explanation:
+Docker Compose ek configuration se application service build aur run karta hai.
+
+42. RUN DOCKER COMPOSE IN BACKGROUND
+
+Command:
+
+docker compose up -d
+
+Explanation:
+Compose services background mein start hoti hain.
+
+43. STOP DOCKER COMPOSE
+
+Command:
+
+docker compose down
+
+Explanation:
+Compose application ke containers aur default network remove karta hai.
+
+44. VIEW COMPOSE LOGS
+
+Command:
+
+docker compose logs -f
+
+Explanation:
+Compose services ke live logs display karta hai.
+
+45. FASTAPI + POSTGRESQL DOCKER COMPOSE
+
+File: compose.yaml
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://aiuser:password@db:5432/aidb
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: aiuser
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: aidb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+Explanation:
+FastAPI aur PostgreSQL ko ek Compose application mein run karta hai.
+
+Production mein strong password aur secrets management use karein.
+
+46. FASTAPI + REDIS DOCKER COMPOSE
+
+File: compose.yaml
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+
+Explanation:
+Redis ko caching, session management aur background workflows ke liye use kar sakte hain.
+
+47. FASTAPI + QDRANT VECTOR DATABASE
+
+File: compose.yaml
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - qdrant
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  qdrant_data:
+
+Explanation:
+AI Engineer RAG application mein Qdrant vector database use kar sakta hai.
+
+48. MULTI-SERVICE AI APPLICATION
+
+File: compose.yaml
+
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - qdrant
+
+  redis:
+    image: redis:7-alpine
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  qdrant_data:
+
+Explanation:
+Backend, Redis aur Qdrant ek single Docker Compose application mein run hote hain.
+
+49. MULTI-STAGE DOCKER BUILD
+
+File: Dockerfile
+
+FROM python:3.12-slim AS builder
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY --from=builder /install /usr/local
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+Explanation:
+Multi-stage build dependencies ko separate build stage mein install karta hai. Isse final image ko cleaner aur potentially smaller banaya ja sakta hai.
+
+50. DOCKERIZE A RAG APPLICATION
+
+Project Structure:
+
+rag-ai/
+│
+├── Dockerfile
+├── compose.yaml
+├── requirements.txt
+├── main.py
+└── .dockerignore
+
+File: requirements.txt
+
+fastapi
+uvicorn[standard]
+langchain
+langchain-openai
+langchain-qdrant
+qdrant-client
+
+File: main.py
+
+from fastapi import FastAPI
+from langchain_openai import ChatOpenAI
+
+app = FastAPI()
+
+llm = ChatOpenAI(
+    model="gpt-4.1-mini",
+    temperature=0
+)
+
+@app.get("/")
+def home():
+    return {"message": "RAG AI Application Running"}
+
+@app.get("/ask")
+def ask(question: str):
+    response = llm.invoke(question)
+
+    return {
+        "question": question,
+        "answer": response.content
+    }
+
+File: Dockerfile
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+File: compose.yaml
+
+services:
+  rag-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    depends_on:
+      - qdrant
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  qdrant_data:
+
+File: .env
+
+OPENAI_API_KEY=your_api_key_here
+
+Run Commands:
+
+docker compose up --build -d
+
+docker compose ps
+
+docker compose logs -f
+
+Test URL:
+
+http://localhost:8000
+
+Swagger:
+
+http://localhost:8000/docs
+
+Explanation:
+Ye AI application ko Dockerize karta hai aur Qdrant vector database ke saath connect karta hai.
+
+Note:
+Is example mein /ask endpoint direct LLM call karta hai; actual RAG ke liye document ingestion, embeddings aur vector retrieval implement karna hoga.
+
+.env ko GitHub par push mat karna.
+
+
+==================================================
+BONUS: IMPORTANT DOCKER COMMANDS FOR INTERVIEWS
+==================================================
+
+1. Build image:
+docker build -t app .
+
+2. Run container:
+docker run -d -p 8000:8000 app
+
+3. Check containers:
+docker ps -a
+
+4. View logs:
+docker logs container_id
+
+5. Enter container:
+docker exec -it container_id bash
+
+6. Stop container:
+docker stop container_id
+
+7. Remove container:
+docker rm container_id
+
+8. Remove image:
+docker rmi image_name
+
+9. Start Compose:
+docker compose up -d
+
+10. Stop Compose:
+docker compose down
+
+==================================================
+AI ENGINEER DOCKER LEARNING CHECKLIST
+==================================================
+
+[ ] Docker Images
+[ ] Docker Containers
+[ ] Dockerfile
+[ ] Docker Build
+[ ] Docker Run
+[ ] Docker Volumes
+[ ] Docker Networks
+[ ] Environment Variables
+[ ] Docker Compose
+[ ] Multi-stage Build
+[ ] FastAPI Deployment
+[ ] PostgreSQL Integration
+[ ] Redis Integration
+[ ] Qdrant Integration
+[ ] RAG Application Deployment
+[ ] Container Logs
+[ ] Debugging
+[ ] Production Deployment
+[ ] Docker Security
+[ ] Container Optimization
+
+FINAL GOAL:
+
+Build and deploy these 3 projects:
+
+1. Dockerized FastAPI AI Application.
+2. Dockerized LangGraph Agent with Redis.
+3. Dockerized RAG Application with FastAPI + Qdrant + PostgreSQL.
+
+Consistency Beats Talent!
